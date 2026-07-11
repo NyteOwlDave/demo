@@ -1,11 +1,44 @@
 <style>
-html,body,canvas {
+@import url("http://dave-tower/app/jarvis/style/every-page.css");
+</style>
+
+<style>
+html { text-align : center; }
+html, body, canvas {
     box-sizing : border-box;
     border  : none;
     margin  : 0;
     padding : 0;
 }
+canvas {
+    z-index : 500;
+}
 </style>
+
+<script>
+; iwm = Object.keys( window ).sort()
+</script>
+
+<script>
+; prolog = {}
+; prolog . title = ( `VB Turtle Demo #001` )
+</script>
+
+<script>
+; cls =()=> console.clear()
+; agn =()=> location.reload()
+</script>
+
+<script>
+; doc = document
+; doc . title = ( prolog . title )
+</script>
+
+<script src="http://dave-tower/app/norma/api/prolog-charlie.js"></script>
+<script src="http://dave-omega/chachi/api/karlita-editor.js"></script>
+<script src="http://dave-omega/chachi/api/karlita-extender.js"></script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
 <script>
 vb_source = ( `
@@ -36,6 +69,8 @@ function blurt( s ) {
     console.log( s );
 }
 </script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
 <script>
 GraphicsWindow = {};
@@ -100,6 +135,8 @@ ops.PenSize = function( w ) {
 
 </script>
 
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
 <script>
 
 Colors = {};
@@ -132,6 +169,8 @@ ops.rgba = function( r, g, b, a ) {
 } ) ( Colors );
 
 </script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
 <script>
 
@@ -206,6 +245,8 @@ ops.Normal = function( coords={} ) {
 
 </script>
 
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
 <script>
 Turtle = {};
 
@@ -218,16 +259,22 @@ ops.decal = ( `🐢` );
 ops.surface  = GW.surface;
 ops.graphics = GW.graphics;
 
+ops.Drawing = ( false );
+
 ops.Angle = 0;
 
 ops.X = 0;
 ops.Y = 0;
 
+ops.Vertices = [];
+
 ops.inspect = function() {
+    const jsx =( o )=> JSON.stringify( o );
     const _a = [ "Angle", ops.Angle ];
     const _x = [ "X", ops.X ];
     const _y = [ "Y", ops.Y ];
-    const _t = [ _a, _x, _y ];
+    const _v = [ "Vertices", jsx( ops.Vertices ) ];
+    const _t = [ _a, _x, _y, _v ];
     const c = console;
     c.groupCollapsed( "Turtle 🐢 State" );
     c.table( _t );
@@ -239,19 +286,24 @@ ops.Position = function() {
 };
 
 ops.PenUp = function() {
-    const gfx = ops.graphics;
-    gfx.lineTo( ops.X, ops.Y );
+    ops.Drawing = false;
 };
 
 ops.PenDown = function() {
-    const gfx = ops.graphics;
-    gfx.moveTo( ops.X, ops.Y );
+    ops.Drawing = true;
 };
 
 ops.Move = function( dist ) {
-    let x, y;
     if ( dist ) {
         const gfx = ops.graphics;
+        let x = ops.X;
+        let y = ops.Y;
+        if ( (! ops.Drawing ) && ( ops.Vertices.length < 1 ) ) {
+            gfx.moveTo( x, y );
+        } else {
+            gfx.lineTo( x, y );
+        }
+        ops.Vertices.push( { x, y } );
         const t = Vector2.Rad( ops.Angle );
         const r = ( dist );
         x = ( ops.X  += ( r * Math.cos( t ) ) );
@@ -273,23 +325,29 @@ ops.Turn = function( deg ) {
 ops.CreateFigure = function() {
     const gfx = ops.graphics;
     gfx.beginPath();
+    ops.Vertices = [];
+    blurt( `Starting Figure ...` );
 };
 
 ops.FillFigure = function() {
     const gfx = ops.graphics;
     gfx.closePath();
-    gfx.stroke();
+    gfx.fill();
+    blurt( `Painting Figure Interior` );
 }
 
 ops.OutlineFigure = function() {
     const gfx = ops.graphics;
     gfx.closePath();
-    gfx.fill();
+    gfx.stroke();
+    blurt( `Drawing Figure Outline` );
 }
 
 } ) ( Turtle );
 
 </script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
 <script>
 js_source = ( `
@@ -314,6 +372,39 @@ for ( N = 1; N <= 100; N += 1 ) {
 ` );
 </script>
 
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+<script>
+function debug_demo() {
+    // JavaScript code By NyteOwl Dave
+    GW = GraphicsWindow;
+    GW.Background( "mintcream" );
+    Turtle.X = GW.Width / 2;
+    Turtle.Y = GW.Height / 2 - 30;
+    for ( let N = 1; N <= 100; N += 1 ) {
+        Turtle.PenUp()
+        Turtle.Move( N * 1.1 )
+        Turtle.Turn( 360 / 20 )
+        Turtle.PenDown()
+        Turtle.CreateFigure()
+        for ( let M; M < 7; M += 1 ) {
+            Turtle.Move( N / 3 )
+            Turtle.Turn( 360 / 6 )
+        }
+        GW.BrushColor( Colors.Random() )
+        Turtle.FillFigure()
+    }
+}
+</script>
+
+
+----------------------------------------------------------------
+
+<div center>
+  <img src="./turtle.png" title="Turtle Graphics Demo" onclick="run(event)"/>
+</div>
+
+----------------------------------------------------------------
+
 <script>
 function main( event ) {
     try {
@@ -325,9 +416,13 @@ function main( event ) {
 }
 </script>
 
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
 <script>
 addEventListener( "load", main );
 </script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
 <script>
 function crashed( e, mt, silent  ) {
@@ -343,17 +438,8 @@ function crashed( e, mt, silent  ) {
 crashed.mute = false;
 </script>
 
-<style>
-@import url("http://dave-tower/app/jarvis/style/every-page.css");
-html { text-align : center; }
-canvas {
-    z-index : 500;
-}
-</style>
 
-<div center>
-  <img src="./turtle.png" title="Turtle Graphics Demo" onclick="run(event)"/>
-</div>
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
 <script>
 function scan_gw_keys() {
@@ -365,9 +451,15 @@ function scan_gw_keys() {
 <script>
 function run( event ) {
     try {
-        GW = GraphicsWindow;
-        GW.Zoom();
-        exec( js_source );
+        if ( event.ctrlKey ) {
+            dot.home();
+        } else if ( event.altKey ) {
+            debug_demo();
+        } else {
+            GW = GraphicsWindow;
+            GW.Zoom();
+            exec( js_source );
+        }
     } catch( e ) {
         crashed( e );
     }
@@ -429,6 +521,72 @@ function macro( cmd ) {
     }
     return false;
 }
+</script>
+
+<script>
+function dot( filename ) {
+    try {
+        const p = ( dot.provider );
+        const s = ( dot.splitter );
+        const k = ( str( filename ) || ( "rockets.php" ) );
+        const u = ( [ p, s, k, ] . join( "/" ) );
+        dot.visit( u );
+    } catch ( e ) {
+        crashed ( e );
+    }
+}
+</script>
+
+<script>
+dot.retext   = ( null === localStorage );
+dot.provider = ( `http://dave-omega` );
+dot.splitter = ( `ramdrive/dot` );
+dot.options  = ( `left=10,top=10,width=800,height=680` );
+dot.address  = ( `http://dave-omega/demo/vb/turtle-001.html` );
+</script>
+
+<script>
+dot.visit = function( url ) {
+    if ( dot.retext ) {
+        dot.click( url );
+    } else {
+        dot.popup( url );
+    }
+};
+</script>
+
+<script>
+dot.click = function( url ) {
+    try {
+        const d = document;
+        const a = d.createElement( "A" );
+        a . href = ( url );
+        a . click();
+    } catch ( e ) {
+        crashed ( e );
+    }
+};
+</script>
+
+<script>
+dot.popup = function( url ) {
+    try {
+        // throw new Error( "OOOOPS!!!" );
+        window.open( url, url, dot.options );
+    } catch ( e ) {
+        crashed ( e );
+    }
+};
+</script>
+
+<script>
+dot.home = function() {
+    try {
+        dot.visit( dot.address );
+    } catch ( e ) {
+        crashed ( e );
+    }
+};
 </script>
 
 
