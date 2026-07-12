@@ -25,8 +25,15 @@ html, body, canvas {
     margin  : 0;
     padding : 0;
 }
+body {
+    margin-bottom : 42vh;
+}
 canvas {
     z-index : 500;
+}
+fieldset {
+    margin-left  : 10px;
+    margin-right : 10px;
 }
 </style>
 
@@ -417,15 +424,36 @@ function debug_demo() {
 </div>
 
 <hr>
+<fieldset>
+<legend> Editor </legend>
+<section id="editor_section" center>
+ <textarea id="sce" class="siox" wrap="off"></textarea>
+</section>
+</fieldset>
+
+<hr>
+<script>
+function init_surface() {
+    GW = GraphicsWindow;
+    GW.Background( "gold" );
+}
+</script>
+
 <script>
 function main( event ) {
     try {
-        GW = GraphicsWindow;
-        GW.Background( "gold" );
+        init_surface();
+        if ( "function" === typeof init_editor ) {
+            init_editor( sce );
+            sce.title =
+            sce.store_key =
+            sce.storekey = ( main.storekey );
+        }
     } catch( e ) {
         crashed( e );
     }
 }
+main.storekey = ( `vb-turtle-demo-001.json` );
 </script>
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
@@ -465,11 +493,19 @@ function run( event ) {
         if ( event.ctrlKey ) {
             dot.home();
         } else if ( event.altKey ) {
-            debug_demo();
+            if ( event.shiftKey ) {
+                sce.value = vb_source;
+            } else {
+                sce.value = js_source;
+            }
         } else {
-            GW = GraphicsWindow;
-            GW.Zoom();
-            exec( js_source );
+            if ( event.shiftKey ) {
+                debug_demo();
+            } else {
+                GW = GraphicsWindow;
+                GW.Zoom();
+                exec( js_source );
+            }
         }
     } catch( e ) {
         crashed( e );
