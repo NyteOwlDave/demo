@@ -378,16 +378,16 @@ GW = GraphicsWindow;
 GW.Background( "mintcream" );
 Turtle.X = GW.Width / 2;
 Turtle.Y = GW.Height / 2 - 30;
-for ( N = 1; N <= 100; N += 1 ) {
+for ( let N = 1; N <= 100; N += 1 ) {
     Turtle.PenUp()
     Turtle.Move(N * 1.1)
     Turtle.Turn(360 / 20)
     Turtle.PenDown()
     Turtle.CreateFigure()
-    For M = 1 To 6
+    for ( let M = 1; M <= 6; M += 1 ) {
         Turtle.Move(N / 3)
         Turtle.Turn(360 / 6)
-    Next
+    }
     GW.BrushColor( Colors.Random() )
     Turtle.FillFigure()
 }
