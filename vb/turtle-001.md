@@ -73,8 +73,10 @@ Next
 
 <script>
 function blurt( s ) {
+    if ( blurt.muted ) { return; }
     console.log( s );
 }
+; blurt.muted = ( true )
 </script>
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
@@ -91,7 +93,11 @@ boo = ( doc . body );
 
 canvas = doc.getElementById( id );
 
-ops.Size = function( w, h ) {
+ops.Size = function( w, h, unzoom ) {
+    if ( unzoom ) {
+        canvas.style.width  = "";
+        canvas.style.height = "";
+    };
     ops.Width  = ( canvas.width  = w );
     ops.Height = ( canvas.height = h );
     blurt( `Surface Size : ${w} x ${h}` );
@@ -101,9 +107,9 @@ if (! canvas ) {
     canvas = doc.createElement( "canvas" );
     canvas.id = id;
     boo.appendChild( canvas );
-    ops.surface = canvas;
+    ops.Surface = canvas;
     ops.Size( 500, 500 );
-    ops.graphics = ( gfx = canvas.getContext( "2d" ) );
+    ops.Graphics = ( gfx = canvas.getContext( "2d" ) );
 } else {
     ops.Size( canvas.width, canvas.height );
 }
@@ -151,25 +157,25 @@ Colors = {};
 ( ops => {
 
 ops.Random = function() {
-    const r = ops.irnd( 255 );
-    const g = ops.irnd( 255 );
-    const b = ops.irnd( 255 );
-    const c = ops.rgb( r, g, b );
+    const r = ops.IRnd( 255 );
+    const g = ops.IRnd( 255 );
+    const b = ops.IRnd( 255 );
+    const c = ops.RGB( r, g, b );
     blurt( `Random Color : ${c}`);
     return ( c );
 };
 
-ops.irnd = function( n ) {
+ops.IRnd = function( n ) {
     n = Math.trunc( n );
     const k = Math.random() * n;
     return Math.round( k );
 };
 
-ops.rgb = function( r, g, b ) {
+ops.RGB = function( r, g, b ) {
     return ( `rgb(${r},${g},${b})` );
 };
 
-ops.rgba = function( r, g, b, a ) {
+ops.RGBA = function( r, g, b, a ) {
     return ( `rgba(${r},${g},${b},${a})` );
 };
 
@@ -263,8 +269,8 @@ const GW = ( ops.window = GraphicsWindow );
 
 ops.decal = ( `🐢` );
 
-ops.surface  = GW.surface;
-ops.graphics = GW.graphics;
+ops.Surface  = GW.Surface;
+ops.Graphics = GW.Graphics;
 
 ops.Drawing = ( false );
 
@@ -302,7 +308,7 @@ ops.PenDown = function() {
 
 ops.Move = function( dist ) {
     if ( dist ) {
-        const gfx = ops.graphics;
+        const gfx = ops.Graphics;
         let x = ops.X;
         let y = ops.Y;
         if ( (! ops.Drawing ) && ( ops.Vertices.length < 1 ) ) {
@@ -321,7 +327,7 @@ ops.Move = function( dist ) {
 };
 
 ops.Turn = function( deg ) {
-    const gfx = ops.graphics;
+    const gfx = ops.Graphics;
     if ( deg ) {
         ops.Angle += deg;
         blurt( `New Angle : ${ops.Angle}°` ); // U+00B0 = deg
@@ -330,21 +336,21 @@ ops.Turn = function( deg ) {
 };
 
 ops.CreateFigure = function() {
-    const gfx = ops.graphics;
+    const gfx = ops.Graphics;
     gfx.beginPath();
     ops.Vertices = [];
     blurt( `Starting Figure ...` );
 };
 
 ops.FillFigure = function() {
-    const gfx = ops.graphics;
+    const gfx = ops.Graphics;
     gfx.closePath();
     gfx.fill();
     blurt( `Painting Figure Interior` );
 }
 
 ops.OutlineFigure = function() {
-    const gfx = ops.graphics;
+    const gfx = ops.Graphics;
     gfx.closePath();
     gfx.stroke();
     blurt( `Drawing Figure Outline` );
@@ -360,17 +366,17 @@ ops.OutlineFigure = function() {
 js_source = ( `
 // JavaScript code By NyteOwl Dave
 GW = GraphicsWindow;
-GW.Background( "mintcream" );
+GW.Background( Colors.RGB( 182, 182, 255 ) );
 Turtle.X = GW.Width / 2;
 Turtle.Y = GW.Height / 2 - 30;
-for ( let N = 1; N <= 100; N += 1 ) {
+for ( let N = 1; N <= 110; N += 1 ) {
     Turtle.PenUp()
-    Turtle.Move(N * 1.1)
+    Turtle.Move(N * 0.84)
     Turtle.Turn(360 / 20)
     Turtle.PenDown()
     Turtle.CreateFigure()
     for ( let M = 1; M <= 6; M += 1 ) {
-        Turtle.Move(N / 3)
+        Turtle.Move(N / 4)
         Turtle.Turn(360 / 6)
     }
     GW.BrushColor( Colors.Random() )
@@ -378,31 +384,6 @@ for ( let N = 1; N <= 100; N += 1 ) {
 }
 ` );
 </script>
-
-<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-<script>
-function debug_demo() {
-    // JavaScript code By NyteOwl Dave
-    GW = GraphicsWindow;
-    GW.Background( "mintcream" );
-    Turtle.X = GW.Width / 2;
-    Turtle.Y = GW.Height / 2 - 30;
-    for ( let N = 1; N <= 100; N += 1 ) {
-        Turtle.PenUp()
-        Turtle.Move( N * 1.1 )
-        Turtle.Turn( 360 / 20 )
-        Turtle.PenDown()
-        Turtle.CreateFigure()
-        for ( let M; M < 7; M += 1 ) {
-            Turtle.Move( N / 3 )
-            Turtle.Turn( 360 / 6 )
-        }
-        GW.BrushColor( Colors.Random() )
-        Turtle.FillFigure()
-    }
-}
-</script>
-
 
 ----------------------------------------------------------------
 
@@ -425,6 +406,14 @@ function debug_demo() {
 function init_surface() {
     GW = GraphicsWindow;
     GW.Background( "gold" );
+    GW.Surface.onclick = function( e ) {
+        if ( GW.Width === 500 ) {
+            GW.Zoom();
+        } else {
+            GW.Size( 500, 500, true );
+        }
+        GW.Background( "gold" );
+    };
 }
 </script>
 
@@ -490,10 +479,8 @@ function run( event ) {
             }
         } else {
             if ( event.shiftKey ) {
-                debug_demo();
+                exec( sce.value );
             } else {
-                GW = GraphicsWindow;
-                GW.Zoom();
                 exec( js_source );
             }
         }
