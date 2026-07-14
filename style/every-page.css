@@ -1,0 +1,166 @@
+
+/* 
+
+# Every Page's Style
+
+> ( `every-page.css` )
+
+
+*/
+
+@import url("./plain.css");
+
+@import url("./rt/plain.css");
+@import url("./tilly/every-page.css");
+@import url("./tilly/every-page-todo.css");
+@import url("./jefr/just/rainbow.css");
+
+/* TEMPORARY HACK */
+@import url("http://dave-legacy/jefr/style/just/active-header.css");
+
+[center] ,
+*.center {
+    text-align : center;
+}
+
+[left] ,
+*.left {
+    float   : left;
+    margin-left : 1.0em
+}
+
+[right] ,
+*.right {
+    float   : right;
+    margin-right : 1.5em
+}
+
+[row] ,
+*.row {
+    box-sizing : border-box;
+    display    : inline-block;
+    border     : none;
+    background : transparent;
+    color      : inherit;
+}
+
+[wide] ,
+*.wide {
+    width : calc( 100vw - 100px );
+}
+
+[onclick] ,
+*.clickable {
+    cursor : pointer;
+}
+
+img[logo] ,
+*.logo {
+    display : inline-block;
+    width : 80px;
+}
+
+pre, li, td { font-family : monospace; }
+
+fieldset {
+    box-sizing : border-box;
+    border : 1px dashed rgba( 255, 215, 0, 0.4242 );
+    border-radius : 3ch;
+    padding : 2.5ch;
+}
+
+#footer_input {
+    display    : inline-block;
+    box-sizing : border-box;
+    width      : calc( 100vw - 14ch );
+    border-radius : 5px;
+    border        : none;
+    margin        : none;
+    padding       : 2px;
+    padding-left  : 15px;
+    padding-right : 15px;
+    font : 11pt monospace;
+}
+
+/*
+
+# Original Locations for Styles (Legacy)
+
+[css-001]:
+<http://dave-legacy/rt/style/plain.css>
+"ReText Plain Style"
+
+[css-002]:
+<http://dave-legacy/~/style/every-page.css>
+"Tilly Every Page Style"
+
+[css-003]:
+<http://dave-legacy/~/style/every-page-todo.css>
+"Tilly Every Page To-Do Style"
+
+> [plain.css][css-001]
+> [every-page.css][css-002]
+> [every-page-todo.css][css-003]
+
+*/
+
+/*
+
+# Sync Notes ~ IMPORTANT!
+
+----------------------------------------------------------------
+
+### Remember to sync all changes with server copies!
+
+----------------------------------------------------------------
+
+> I'm not using waypoints, so there are multiple copies of
+> these styles in various sub-folders --- __ESPECIALLY__
+> the `server` subfolder hierarchy.
+
+----------------------------------------------------------------
+
+> LAST UPDATED ~ 2026-JUL-12
+
+----------------------------------------------------------------
+
+> Primary ~ `demo` Repository
+
+----------------------------------------------------------------
+
+# Change Log
+
+----------------------------------------------------------------
+
+## July 2026
+
+| When | Host   |  Relative Path    | Cloud Sync |
+|------|--------|-------------------|------------|
+| 13th | GitHub | NyteOwlDave/repo  | yes        |
+
+----------------------------------------------------------------
+
+## May 2026
+
+| When | Host   |  Relative Path | Cloud Sync |
+|------|--------|----------------|------------|
+| 26nd | Legacy | JEFR Root      | no         |
+| 22nd | Legacy | JEFR Root      | no         |
+
+----------------------------------------------------------------
+
+## April 2026
+
+| When | Host   |  Relative Path | Cloud Sync |
+|------|--------|----------------|------------|
+| 3rd  | Legacy | JEFR Root      | no         |
+
+----------------------------------------------------------------
+
+> [Explore](./)
+
+----------------------------------------------------------------
+
+*/
+
+

@@ -1,0 +1,43 @@
+
+/*
+
+# Rainbow Animation
+
+> ( `rainbow.css` )
+
+*/
+
+@keyframes rainbow {
+    0%   { color : red;    }
+    10%  { color : green;  }
+    20%  { color : yellow; }
+    30%  { color : gold;   }
+    40%  { color : lime;   }
+    50%  { color : green;  }
+    60%  { color : blue;   }
+    70%  { color : azure;  }
+    80%  { color : white;  }
+    90%  { color : black;  }
+    100% { color : red;    }
+}
+
+
+/* 
+
+# Example Usage
+
+```
+
+(style)
+.rainbow h3 {
+    animation : linear 2s rainbow infinite;
+}
+(/style)
+
+(div class="rainbow")
+  (h3) Colorful Header (/h3)
+(/div)
+
+```
+
+*/

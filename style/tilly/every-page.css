@@ -1,0 +1,236 @@
+
+/*
+
+# Every Page's Theme
+
+## Tilly Version
+
+> ( `every-page.css` )
+
+*/
+
+
+/*
+@import url("http://dave-legacy/rt/style/plain.css");
+@import url("http://dave-legacy/~/style/font/noto-mono.css");
+*/
+
+
+.todo:before {
+    content : "[🚧]";
+    padding-right : 0.8ch;
+}
+
+.swapped {
+    box-shadow : 0 0 2ch red;
+}
+
+.preview {
+    overflow : scroll;
+    height   : 400px;
+}
+
+.palette {
+    overflow   : scroll;
+    display    : inline-block;
+    text-align : center;
+    width  : calc( 16 * 24px + 33px );
+    height : calc( 16 * 24px + 33px );
+    border : 1px dashed gold;
+    background : black;
+    box-sizing : border-box;
+    padding    : 4px;
+    margin     : 16px;
+    margin-left : calc( 50vw - 210px );
+}
+
+.color {
+    display : inline-block;
+    width   : 18px;
+    height  : 20px;
+    margin  : 2px;
+    border  : 1px solid gold;
+    background : white;
+}
+
+
+.settings ,
+.menu {
+    text-align : center;
+    margin     : 1ch;
+    padding    : 1ch;
+}
+
+
+.siox {
+    width  : 84%;
+    height : 12ch;
+}
+
+.zeddicus {
+    display    : inline-block;
+    max-width  : 42%;
+    max-height : 40vh;
+}
+
+
+h1, h2, h3,
+h4, h5, h6 {
+    color : gold;
+}
+
+
+blockquote * {
+    color : lemonchiffon;
+    text-shadow : 1px 1px 3px navy;
+}
+
+pre {
+    overflow : scroll;
+}
+
+
+textarea, pre, 
+code, var {
+    font-family : monospace;
+    font-size : large;
+}
+
+textarea, pre {
+    padding       : 1ch;
+    padding-left  : 1.4ch;
+    padding-right : 1.4ch;
+    color      : mintcream;
+    background : midnightblue;
+}
+
+
+code, var {
+    padding       : 1px;
+    padding-left  : 2px;
+    padding-right : 2px;
+    color : gold;
+}
+
+
+table {
+    display : inline-block;
+    border : 1px dashed rgba( 255, 142, 19, 0.5 );
+    width  : 84vw;
+    margin-left : calc( 8vw - 14px );
+    background : #CC64;
+    border-collapse: collapse;
+}
+
+tbody tr:nth-child(odd) {
+    background : #CC64;
+}
+
+tbody tr:nth-child(even) {
+    background : #CC67;
+}
+
+thead tr {
+    background : #DD6C;
+    color      : navy;
+}
+
+th, td {
+    padding       : 4px;
+    padding-left  : 9px;
+    padding-right : 9px;
+    white-space   : nowrap;
+}
+
+th {
+    color : #118C;
+}
+
+td {
+    color : mintcream;
+    text-shadow : 1px 1px 3px black;
+}
+
+td:last-child {
+    width : 90%;
+}
+
+tr, th, td {
+    border : none;
+}
+
+blockquote { text-align : center; }
+
+
+.center, [center] {
+    text-align : center;
+}
+
+.hide, [hide] {
+    display : none;
+}
+
+#button_tray ,
+#messages {
+    display : inline-block;
+}
+
+footer div {
+    display : inline-block;
+}
+
+details script {
+    display : block;
+    visiblity : visible;
+}
+
+details ,
+details script {
+    margin : 4ch;
+}
+
+pre, p, ul, ul li {
+    text-align : left;
+}
+
+pre,
+ul, ul li,
+code, var {
+    font-family : "Noto Mono", monospace;
+    font-size  : inherit !important;
+}
+
+blockquote p {
+    text-align : center;
+    font-size  : inherit !important;
+}
+
+img {
+    background : transparent !important;
+}
+
+img[onclick] {
+    display : inline-block;
+    cursor  : pointer;
+    border-radius : 42px !important;
+}
+
+img[onclick]:hover {
+    box-shadow : 0 0 24px gold;
+    transform  : scale( 1.2 );
+}
+
+summary {
+    font       : 20pt sans-serif;
+    cursor     : pointer;
+    text-align : center;
+    width      : 100%;
+    color      : gold;
+}
+
+summary:hover {
+    color : black;
+    text-shadow : 0px 0px 5px gold;
+}
+
+
