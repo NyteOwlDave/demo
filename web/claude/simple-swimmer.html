@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Simple Swimmer — K Moerman 2026 (WebGL port)</title>
+<!--
+https://github.com/oonap0oo/QB64-projects/blob/main/own_shape.bas
+https://claude.ai/public/artifacts/b998dabc-2bbe-4741-a581-6172513a6d3f
+https://claude.ai/chat/c432ee7e-1dd0-4b50-9fe1-05808af08622
+-->
+<style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: #000;
+    overflow: hidden;
+    height: 100%;
+  }
+  #wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100vw;
+  }
+  canvas {
+    display: block;
+    background: #000;
+    image-rendering: auto;
+    box-shadow: 0 0 40px rgba(0,0,0,0.8);
+  }
+  #info {
+    position: fixed;
+    bottom: 8px;
+    left: 12px;
+    color: #666;
+    font: 12px/1.4 monospace;
+    pointer-events: none;
+    user-select: none;
+  }
+</style>
+</head>
+<body>
+<div id="wrap">
+  <canvas id="glcanvas" width="1000" height="900"></canvas>
+</div>
+<div id="info">Simple Swimmer &mdash; K Moerman 2026 &middot; WebGL port, inspired by yuruyurau</div>
+
+<script>
+// ---------------------------------------------------------------------
+// Port of "Simple swimmer" (QB64) to WebGL.
+//
+// Original used: SCREEN _NEWIMAGE(1000, 900, 32) + WINDOW SCREEN(-1,-1)-(1,1)
+// That maps logical coords x,y in [-1,1] directly onto the screen, with
+// y increasing upward, and WITHOUT correcting for the 1000x900 aspect
+// ratio (so the image is slightly stretched horizontally).
+//
+// WebGL clip space is x,y in [-1,1] with y increasing upward, and by
+// default also does NOT correct for a non-square viewport. That means
+// the original coordinate math can be fed straight into gl_Position
+// with no transform at all, and we get the same stretch "for free".
+// ---------------------------------------------------------------------
+
+const NPOINTS = 3000; // matches STEP 1/2999 -> a = 0 .. 1 in 3000 steps
+const DT = Math.PI / 600; // matches "FOR t = 0 TO 2*PI STEP PI/600"
+
+const canvas = document.getElementById('glcanvas');
+const gl = canvas.getContext('webgl');
+if (!gl) {
+  document.body.innerHTML = '<p style="color:#fff;font-family:sans-serif;padding:2em">WebGL is not available in this browser.</p>';
+  throw new Error('No WebGL context');
+}
+
+// --- shaders ---------------------------------------------------------
+const vsSource = `
+  attribute vec2 aPosition;
+  attribute vec3 aColor;
+  varying vec3 vColor;
+  void main() {
+    gl_Position = vec4(aPosition, 0.0, 1.0);
+    vColor = aColor;
+  }
+`;
+
+const fsSource = `
+  precision mediump float;
+  varying vec3 vColor;
+  void main() {
+    gl_FragColor = vec4(vColor, 1.0);
+  }
+`;
+
+function compileShader(type, src) {
+  const sh = gl.createShader(type);
+  gl.shaderSource(sh, src);
+  gl.compileShader(sh);
+  if (!gl.getShaderParameter(sh, gl.COMPILE_STATUS)) {
+    throw new Error('Shader compile error: ' + gl.getShaderInfoLog(sh));
+  }
+  return sh;
+}
+
+const program = gl.createProgram();
+gl.attachShader(program, compileShader(gl.VERTEX_SHADER, vsSource));
+gl.attachShader(program, compileShader(gl.FRAGMENT_SHADER, fsSource));
+gl.linkProgram(program);
+if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
+  throw new Error('Program link error: ' + gl.getProgramInfoLog(program));
+}
+gl.useProgram(program);
+
+const aPositionLoc = gl.getAttribLocation(program, 'aPosition');
+const aColorLoc = gl.getAttribLocation(program, 'aColor');
+
+const positionBuffer = gl.createBuffer();
+const colorBuffer = gl.createBuffer();
+
+const positions = new Float32Array(NPOINTS * 2);
+const colors = new Float32Array(NPOINTS * 3);
+
+gl.enable(gl.BLEND);
+gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+
+// clamp helper, matching QB64's _RGB32 clamping of out-of-range components
+function clamp255(v) {
+  if (v < 0) return 0;
+  if (v > 255) return 255;
+  return v;
+}
+
+let t = 0;
+
+function computeFrame(t) {
+  for (let i = 0; i < NPOINTS; i++) {
+    const a = i / (NPOINTS - 1); // 0 .. 1 inclusive, matches STEP 1/2999
+
+    const at = 2 * a * Math.PI - 8 * t;
+    const b = Math.sin(450 * a) * (0.7 + Math.sin(930 * a)); // main shape of body
+    const e = 2 * a * Math.exp(-a * 8);                       // envelope applied to body
+    const l = 1.5 * (0.7 - a) * (1 - (b * b) / 8) + t;        // shape along length
+    const w = e * b - Math.sin(at) / 12 + 0.75;               // shape across width
+
+    const x = w * Math.cos(l); // polar -> rectangular
+    const y = w * Math.sin(l);
+
+    const col = 128 + 127 * Math.cos(4 * b - a * 6); // color across width of body
+
+    positions[i * 2] = x;
+    positions[i * 2 + 1] = y;
+
+    // _RGB32(col%, 255, 1-col%)  (component values 0..255 -> normalize to 0..1)
+    colors[i * 3] = clamp255(col) / 255;
+    colors[i * 3 + 1] = 1.0; // 255 / 255
+    colors[i * 3 + 2] = clamp255(1 - col) / 255;
+  }
+}
+
+function drawFrame() {
+  computeFrame(t);
+
+  gl.viewport(0, 0, canvas.width, canvas.height);
+  gl.clearColor(0, 0, 0, 1); // CLS -> black
+  gl.clear(gl.COLOR_BUFFER_BIT);
+
+  gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+  gl.bufferData(gl.ARRAY_BUFFER, positions, gl.DYNAMIC_DRAW);
+  gl.enableVertexAttribArray(aPositionLoc);
+  gl.vertexAttribPointer(aPositionLoc, 2, gl.FLOAT, false, 0, 0);
+
+  gl.bindBuffer(gl.ARRAY_BUFFER, colorBuffer);
+  gl.bufferData(gl.ARRAY_BUFFER, colors, gl.DYNAMIC_DRAW);
+  gl.enableVertexAttribArray(aColorLoc);
+  gl.vertexAttribPointer(aColorLoc, 3, gl.FLOAT, false, 0, 0);
+
+  gl.drawArrays(gl.LINE_STRIP, 0, NPOINTS);
+
+  // advance t exactly like "FOR t = 0 TO 2*PI STEP PI/600 ... NEXT t" looping forever
+  t += DT;
+  if (t > 2 * Math.PI) t -= 2 * Math.PI;
+}
+
+// --- main loop, throttled toward 60fps like _LIMIT 60 -----------------
+let lastTime = 0;
+const FRAME_MS = 1000 / 60;
+
+function tick(now) {
+  requestAnimationFrame(tick);
+  if (now - lastTime < FRAME_MS - 1) return;
+  lastTime = now;
+  drawFrame();
+}
+requestAnimationFrame(tick);
+</script>
+</body>
+</html>
