@@ -1,0 +1,145 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<style type="text/css">
+td, th { border: 1px solid #c3c3c3; padding: 0 3px 0 3px; }
+table { border-collapse: collapse; }
+img { max-width: 100%; }
+</style>
+<meta name="generator" content="ReText 7.2.3">
+<title>turtle-graph</title>
+<style type="text/css">
+</style>
+
+<script>
+MathJax = {
+  options: {
+    renderActions: {
+      find: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+  }
+};
+</script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script></head>
+<body>
+<style>
+@import url("http://dave-tower/app/jarvis/style/every-page.css");
+</style>
+<script>
+; iwm = Object.keys( window ).sort()
+</script>
+
+<script>
+; prolog = {}
+; prolog . title = ( `Turtle Graph Plotter` )
+</script>
+
+<script>
+; cls =()=> console.clear()
+; agn =()=> location.reload()
+</script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<hr>
+<h1><a href="http://dave-tower/demo/web/turtle/turtle-graph.html">Turtle Graph</a></h1>
+<h2><a href="https://grapher.mathpix.com/" title="MathPix 3D Graph">Math Waveform Plotter</a></h2>
+<blockquote>
+<p>( <code>Tower Edition</code> )</p>
+</blockquote>
+<hr>
+<h2>Equation 1</h2>
+<p>
+<script type="math/tex; mode=display">
+y = 5 \sum_{k=0}^{12} { \frac {1} {k+1} sin((4k+1)x) }
+</script>
+</p>
+<hr>
+<h2>Equation 2</h2>
+<p>
+<script type="math/tex; mode=display">
+y = 6 \sum_{k=1}^{12} { \frac {1} {2k+1} sin((2k+1)x) }
+</script>
+</p>
+<hr>
+<h2>Equation 3</h2>
+<p>
+<script type="math/tex; mode=display">
+y = \sum_{k=0}^6 { \frac {2} {2k+1} sin((2k+1)x) }
+</script>
+</p>
+<hr>
+<h2>Equation 4</h2>
+<p>
+<script type="math/tex; mode=display">
+y = 15(sin(x-30)+sin(0.9(x-30)))
+</script>
+</p>
+<hr>
+<h2>Equation 5</h2>
+<p>
+<script type="math/tex; mode=display">
+y = 5sin(x)-sin(5x)
+</script>
+</p>
+<hr>
+<h2>Equation 6</h2>
+<p>
+<script type="math/tex; mode=display">
+y = \sum_{n=1}^{7} { \frac {1.5} {\sqrt{n}} sin(nx) }
+</script>
+</p>
+<hr>
+<h1>Purpose</h1>
+<p>These are some equations I copied from a FB video. The video
+animated the function plots and provided sound effects.</p>
+<p>While I won't bother with either of those two enhancements, I
+do plan to convert these equation to JS and use my Turtle API
+to plot them.</p>
+<p>At present, the Turtle API remains embedded in <code>turtle-001.md</code>,
+so it will need to be extracted first.</p>
+<p>The <code>Archimedes Lab</code> group on FB is the source. I used my
+<code>MathJax</code> app to code the <code>Latex</code>. Links to both are included
+in the <code>References</code> section.</p>
+<hr>
+<h1><a href="https://raindrop.io/" title="Raindrop Bookmarks">References</a></h1>
+<blockquote>
+<p><a href="http://dave-legacy/math/latex/mathjax-test.html" title="MathJax Editor">MathJax</a>
+<a href="https://grapher.mathpix.com/" title="MathPix 3D Graph">MathPix 3D</a>
+<a href="http://dave-legacy/math/toolkit/area-solver.html" title="Area Solver">Area Solver</a>
+<a href="https://www.facebook.com/ArchimedesLab" title="Archimedes Lab ~ FB Group">Archimedes Lab</a>
+<a href="https://www.facebook.com/ArchimedesLab" title="Archimedes Lab ~ FB Group">Sciences Photo Gallery</a></p>
+</blockquote>
+<hr>
+<h1><a href="http://dave-ryzen/nav/" title="Sulu Navigator ~ Ryzen Edition">Navigation</a></h1>
+<blockquote>
+<p><a href="./tree.php">Folder Tree</a>
+<a href="./">File Sytem</a></p>
+</blockquote>
+<hr>
+<script>
+;
+; doc = document
+; doc . title = ( prolog . title )
+;
+</script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+</body>
+</html>

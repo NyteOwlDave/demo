@@ -33,10 +33,17 @@ https://claude.ai/chat/c432ee7e-1dd0-4b50-9fe1-05808af08622
     position: fixed;
     bottom: 8px;
     left: 12px;
-    color: #666;
+    color: #777;
     font: 12px/1.4 monospace;
     pointer-events: none;
     user-select: none;
+  }
+  #info a {
+     position : fixed;
+     display  : inline-block;
+     right    : 2ch;
+     x-index  : 999999;
+     cursor   : hand;
   }
 </style>
 </head>
@@ -44,7 +51,10 @@ https://claude.ai/chat/c432ee7e-1dd0-4b50-9fe1-05808af08622
 <div id="wrap">
   <canvas id="glcanvas" width="1000" height="900"></canvas>
 </div>
-<div id="info">Simple Swimmer &mdash; K Moerman 2026 &middot; WebGL port, inspired by yuruyurau</div>
+<div id="info">
+  <span>Simple Swimmer &mdash; K Moerman 2026 &middot; WebGL port, inspired by yuruyurau</span>
+  <a href="http://dave-tower/">Dave's Demos ~ Tower Edition</a>
+</div>
 
 <script>
 // ---------------------------------------------------------------------

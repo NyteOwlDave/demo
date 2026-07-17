@@ -9,10 +9,28 @@
 ;
 </script>
 
+[me]: <http://dave-tower/demo/demo-checklist.html>
+
+[tower]:     <http://dave-tower/>
+[t-demo]:    <http://dave-tower/demo/>
+[t-web]:     <http://dave-tower/demo/web/>
+[t-claude]:  <http://dave-tower/demo/web/claude/>
+[t-swimmer]: <http://dave-tower/demo/web/claude/simple-swimmer.html>
 
 ----------------------------------------------------------------
 
-# Demo `✅` Checklists
+### Featured Demo ~ Kurt's Swimmer
+
+----------------------------------------------------------------
+
+- [Tower Demos][t-demo]
+    - [Web Demos][t-web]
+        - [Claude Demos][t-claude]
+            - [Quiverbloom][t-swimmer]
+
+----------------------------------------------------------------
+
+# [Demo `✅` Checklists][me]
 
 ----------------------------------------------------------------
 
@@ -142,6 +160,7 @@ http://dave-legacy/~/style/font/noto-mono.css
 > [`🗃️ c64`](./)
 > [`🗃️ classic`](./)
 
+----------------------------------------------------------------
 
 > [`🗃️ fusion`](./)
 > [`🗃️ gw-basic`](./)
@@ -149,6 +168,7 @@ http://dave-legacy/~/style/font/noto-mono.css
 > [`🗃️ qb`](./)
 > [`🗃️ qb64`](./)
 
+----------------------------------------------------------------
 
 > [`🗃️ qb64pe`](./)
 > [`🗃️ qbjs`](./)
@@ -156,15 +176,20 @@ http://dave-legacy/~/style/font/noto-mono.css
 > [`🗃️ ti-99`](./)
 > [`🗃️ trs-80`](./)
 
+----------------------------------------------------------------
 
 > [`🗃️ vb`](./)
 > [`🗃️ vintage`](./)
 > [`🗃️ webqb`](./)
 > [`🗃️ zx`](./)
 
+----------------------------------------------------------------
+
 ## `🌐` Web
 
 > [`🗃️ web`](./)
+
+----------------------------------------------------------------
 
 ## `❇️` Support
 
