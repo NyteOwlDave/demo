@@ -22,11 +22,19 @@
 ;
 </script>
 
+<script>
+;
+; params = new URISearchParams( location.search )
+;
+</script>
+
 ----------------------------------------------------------------
 
 # [Explore](https://dropbox.com)
 
 ----------------------------------------------------------------
+
+- [Cairo Graphics](https://www.cairographics.org/)
 
 - [Folder Tree](./tree.php)
 - [File System](./)
@@ -38,5 +46,21 @@
 ; doc = document
 ; doc . title = ( prolog . title )
 ;
+</script>
+
+<script>
+function main( event ) {
+    try {
+        alert ( typeof params )
+    } catch ( e ) {
+        alert ( e )
+        throw ( e )
+    }
+}
+alert( 123 );
+</script>
+
+<script>
+addEventListener( "load", main );
 </script>
 
