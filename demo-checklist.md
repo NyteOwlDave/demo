@@ -3,9 +3,26 @@
 </style>
 
 <script>
+: iwm = Object.keys( window ).sort()
+</script>
+
+<script>
 ;
 ; prolog = {}
 ; prolog . title = ( "Demo ✅ Checklists" )
+;
+</script>
+
+<script>
+;
+; cls =()=> console.clear()
+; agn =()=> location.reload()
+;
+</script>
+
+<script>
+;
+; params = new URISearchParams( location.search )
 ;
 </script>
 
