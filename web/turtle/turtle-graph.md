@@ -1,6 +1,15 @@
+<head>
+  <link rel="icon" href="favicon.ico" />
+</head>
+
 <style>
 @import url("http://dave-tower/app/jarvis/style/every-page.css");
 </style>
+
+<style>
+@import url("./style/turtle-graphics.css");
+</style>
+
 <script>
 ; iwm = Object.keys( window ).sort()
 </script>
@@ -15,6 +24,14 @@
 ; agn =()=> location.reload()
 </script>
 
+<script>
+; doc = document
+; doc . title = ( prolog . title )
+</script>
+
+<script src="http://dave-tower/app/norma/api/prolog-charlie.js"></script>
+<script src="http://dave-omega/chachi/api/karlita-editor.js"></script>
+<script src="http://dave-omega/chachi/api/karlita-extender.js"></script>
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
@@ -76,6 +93,26 @@
 
 ----------------------------------------------------------------
 
+<div center>
+  <img src="./turtle.png" title="Turtle Graphics Demo" onclick="run(event)"/>
+</div>
+
+----------------------------------------------------------------
+
+<fieldset>
+<legend> Editor </legend>
+<section id="editor_section" center>
+ <textarea id="sce" class="siox" wrap="off"></textarea>
+</section>
+</fieldset>
+
+
+----------------------------------------------------------------
+
+<canvas id="canvas"></canvas>
+
+----------------------------------------------------------------
+
 ## Equation 1
 
 $$
@@ -133,8 +170,11 @@ While I won't bother with either of those two enhancements, I
 do plan to convert these equation to JS and use my Turtle API
 to plot them.
 
-At present, the Turtle API remains embedded in `turtle-001.md`,
-so it will need to be extracted first.
+The Turtle Graphics API has been extracted from the Turtle
+Demo. It's located in the `api` folder. The filename is
+`turtle-graphics.js`. It's being imported into this app already.
+All that remains is to write the app-specific logic that uses
+the turtle to draw wave-form plots.
 
 The `Archimedes Lab` group on FB is the source. I used my
 `MathJax` app to code the `Latex`. Links to both are included
@@ -168,3 +208,352 @@ in the `References` section.
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
+<script>
+function init_surface() {
+    canvas.width = 500;
+    GW = GraphicsWindow;
+    GW.Background( "gold" );
+    GW.Surface.onclick = function( e ) {
+        if ( GW.Width === 500 ) {
+            GW.Zoom();
+        } else {
+            GW.Size( 500, 500, true );
+        }
+        GW.Background( "gold" );
+    };
+}
+</script>
+
+<script>
+function main( event ) {
+    try {
+        init_surface();
+        if ( "function" === typeof init_editor ) {
+            init_editor( sce );
+            sce.title =
+            sce.store_key =
+            sce.storekey = ( main.storekey );
+        }
+    } catch( e ) {
+        crashed( e );
+    }
+}
+main.storekey = ( `vb-turtle-demo-001.json` );
+</script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script>
+addEventListener( "load", main );
+</script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script>
+function blurt( s ) {
+    if ( blurt.muted ) { return; }
+    console.log( s );
+}
+; blurt.muted = ( true )
+</script>
+
+<script>
+function crashed( e, mt, silent  ) {
+    if (! silent ) {
+        console.error( e );
+    }
+    if (! crashed.mute ) {
+        window.alert( e );
+    }
+    if ( mt ) { throw ( e ); }
+    return ( e );
+}
+crashed.mute = false;
+</script>
+
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script>
+function scan_gw_keys() {
+    RS = "\n";
+    alert ( Object.keys( GW ).sort().join( RS ) );
+}
+</script>
+
+<script>
+function run( event ) {
+    try {
+        if ( event.ctrlKey ) {
+            dot.home();
+        } else if ( event.altKey ) {
+            if ( event.shiftKey ) {
+                sce.value = vb_source;
+            } else {
+                sce.value = js_source;
+            }
+        } else {
+            if ( event.shiftKey ) {
+                exec( sce.value );
+            } else {
+                exec( js_source );
+            }
+        }
+    } catch( e ) {
+        crashed( e );
+    }
+}
+</script>
+
+<script>
+function perform( event ) {
+    const str =( s )=> ( String( s || "" ).trim() );
+    try {
+        let js;
+        const ge = event.target;
+        switch ( ge.nodeName ) {
+        case "INPUT" : case "TEXTAREA" :
+            js = ge.value;
+            break;
+        case "CODE" : case "PRE" :
+            js = ge.innerText;
+            break;
+        default :
+            throw new TypeError( `Wrong gadget type` );
+        }
+        if (! str( js ) ) { return; };
+        run( js );
+    } catch( e ) {
+        crashed( e );
+    }
+}
+</script>
+
+<script>
+function run( js ) {
+    const str =( s )=> ( String( s || "" ).trim() );
+    try {
+        const cmd = str( js );
+        if (! cmd ) { return; }
+        if ( macro( cmd ) ) { return; }
+        run . prior = String( run . input || "" );
+        run . input = String( js );
+        run . error = ( "" );
+        run . output = window.eval( run . input );
+        return ( run . output );
+    } catch( e ) {
+        console . error( e );
+        run . error = ( e.message );
+        run . output =  ( "" );
+        return ( e );
+    }
+}
+</script>
+
+<script>
+function macro( cmd ) {
+    const str =( s )=> ( String( s || "" ).trim() );
+    try {
+        console.warn( "Macro interpreter is incomplete" );
+    } catch( e ) {
+        crashed( e );
+    }
+    return false;
+}
+</script>
+
+<script>
+function dot( filename ) {
+    try {
+        const p = ( dot.provider );
+        const s = ( dot.splitter );
+        const k = ( str( filename ) || ( "rockets.php" ) );
+        const u = ( [ p, s, k, ] . join( "/" ) );
+        dot.visit( u );
+    } catch ( e ) {
+        crashed ( e );
+    }
+}
+</script>
+
+<script>
+dot.retext   = ( null === localStorage );
+dot.provider = ( `http://dave-omega` );
+dot.splitter = ( `ramdrive/dot` );
+dot.options  = ( `left=10,top=10,width=800,height=680` );
+dot.address  = ( `http://dave-omega/demo/vb/turtle-001.html` );
+</script>
+
+<script>
+dot.visit = function( url ) {
+    if ( dot.retext ) {
+        dot.click( url );
+    } else {
+        dot.popup( url );
+    }
+};
+</script>
+
+<script>
+dot.click = function( url ) {
+    try {
+        const d = document;
+        const a = d.createElement( "A" );
+        a . href = ( url );
+        a . click();
+    } catch ( e ) {
+        crashed ( e );
+    }
+};
+</script>
+
+<script>
+dot.popup = function( url ) {
+    try {
+        // throw new Error( "OOOOPS!!!" );
+        window.open( url, url, dot.options );
+    } catch ( e ) {
+        crashed ( e );
+    }
+};
+</script>
+
+<script>
+dot.home = function() {
+    try {
+        dot.visit( dot.address );
+    } catch ( e ) {
+        crashed ( e );
+    }
+};
+</script>
+
+<script>
+cos =( t )=> Math.cos( t );
+sin =( t )=> Math.sin( t );
+min =( a, b )=> Math.min( a, b );
+max =( a, b )=> Math.max( a, b );
+</script>
+
+<script>
+function fn1( x ) {
+    let sum = 0;
+    for ( let k = 0; k < 13; k += 1 ) {
+        const a = 1 / ( k + 1 );
+        const b = sin( ( 4*k + 1 ) * x );
+        sum += ( a * b );
+    }
+    return ( 5 * sum );
+}
+</script>
+
+<script>
+function eq1() {
+    const points = plot( 0, 30, fn1 );
+    render( points );
+}
+</script>
+
+<script>
+function eq2( x ) {
+}
+function eq3( x ) {
+}
+function eq4( x ) {
+}
+function eq5( x ) {
+}
+function eq6( x ) {
+}
+</script>
+
+<script>
+function _plot( x, count, fn ) {
+    const points = [];
+    while ( count-- > 0 ) {
+        y = ( fn( x++ ) );
+        points.push( [ x, y ] );
+    }
+    console.table( points );
+    return ( points );
+}
+</script>
+
+<script>
+function _render( points ) {
+    const GW  = GraphicsWindow;
+    const gfx = GW.Graphics;
+    let minX = Infinity;
+    let minY = Infinity;
+    let maxX = -Infinity;
+    let maxY = -Infinity;
+    let x, y;
+    points.forEach(
+        pt => {
+            x = pt[ 0 ];
+            y = pt[ 1 ];
+            minX = min( minX, x );
+            minY = min( minY, y );
+            maxX = max( minX, x );
+            maxY = max( minY, y );
+        }
+    );
+    const dx = maxX - minX;
+    const dy = maxY - minY;
+    const k = render.scale;
+    const w = 0.95 * k * ( dx / GW.Width  );
+    const h = 0.95 * k * ( dy / GW.Height );
+    const cx = w / 2 + render.offsetX;
+    const cy = h / 2 + render.offsetY;
+    const ox = minX;
+    const oy = dy / 2;
+    gfx.lineWidth = render.lineWidth;
+    gfx.lineStyle = render.lineStyle;
+    gfx.beginPath();
+    let first = true;
+    const draw =( pt )=> {
+        x = cx + ( pt[0] - ox ) * w;
+        y = cy + ( pt[1] + oy ) * h;
+        if ( first ) {
+            gfx.moveTo( x, y );
+        } else {
+            gfx.lineTo( x, y );
+            gfx.stroke();
+        }
+    }
+    points.forEach( draw );
+}
+</script>
+
+<script>
+function plot( x, count, fn ) {
+    try {
+        return _plot( x, count, fn )
+    } catch ( e ) {
+        crashed( e );
+    }
+}
+</script>
+
+<script>
+function render( points ) {
+    try {
+        _render( points )
+    } catch ( e ) {
+        crashed( e );
+    }
+}
+;
+; render.scale = 1
+; render.offsetX = 0
+; render.offsetY = 0
+; render.lineWidth = 2;
+; render.lineStyle = "black";
+;
+</script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script src="./api/turtle-graphics.js"></script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
