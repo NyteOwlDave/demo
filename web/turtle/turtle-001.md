@@ -1,3 +1,7 @@
+<head>
+  <link rel="icon" href="favicon.ico" />
+</head>
+
 <style>
 @import url("http://dave-tower/app/jarvis/style/every-page.css");
 </style>
