@@ -55,6 +55,10 @@
 <https://www.facebook.com/ArchimedesLab>
 "Archimedes Lab ~ FB Group"
 
+[eanim]:
+<https://www.facebook.com/profile.php?id=61578305660118>
+"Eanimation Group ~ Facebook"
+
 [sciences-kl]:
 <https://www.facebook.com/profile.php?id=100063887943843&sk=photos>
 "Sciences KL Math Photo Gallery"
@@ -76,6 +80,10 @@
 [area-solver]:
 <http://dave-legacy/math/toolkit/area-solver.html>
 "Area Solver"
+
+[tessala]:
+<https://rnorlund.github.io/tessala/>
+"Tesselation Studio"
 
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
@@ -187,8 +195,12 @@ in the `References` section.
 > [MathJax][mathjax]
 > [MathPix 3D][mathpix]
 > [Area Solver][area-solver]
-> [Archimedes Lab][archimedes-lab]
+
+> [Tessala Studio][tessala]
+
 > [Sciences Photo Gallery][archimedes-lab]
+> [Eanimation Group][eanim]
+> [Archimedes Lab][archimedes-lab]
 
 ----------------------------------------------------------------
 
