@@ -1,0 +1,259 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<style type="text/css">
+td, th { border: 1px solid #c3c3c3; padding: 0 3px 0 3px; }
+table { border-collapse: collapse; }
+img { max-width: 100%; }
+</style>
+<meta name="generator" content="ReText 7.2.3">
+<title>poincare-disc</title>
+<style type="text/css">
+</style>
+</head>
+<body>
+<script>
+; iwm = Object.keys( window ).sort()
+</script>
+
+<script>
+; doc =  document;
+; doc . title = ( `&deg;` )
+</script>
+
+<script>
+; str =( o )=> String( s || "" ).trim()
+; arr =( o )=> Array.from( o || [] )
+; unq =( o )=> ( new Set ( o || [] ) )
+; dct =(   )=> ( new Map() )
+</script>
+
+<script>
+; ole =( q, e )=>    ( e.querySelector   ( q ) )
+; ale =( q, e )=> arr( e.querySelectorAll( q ) )
+; one =( q )=> ole( q, doc )
+; all =( q )=> ale( q, doc )
+</script>
+
+<script>
+; elx =( t )=> doc.createElement ( t )
+; gid =( i )=> doc.getElementById( t )
+</script>
+
+<script>
+
+SW = 800
+SH = 800
+
+</script>
+<script>
+
+// https://developer.mozilla.org/en-US/docs/Web/API/ImageData
+function PixMap( w, h ) {
+    const o = new ImageData( w, h );
+    return ( o );
+};
+
+</script>
+<script>
+
+function Screen( w, h ) {
+   Screen.map = PixMap( w, h );
+};
+
+</script>
+<script>
+
+Screen.present = function( x, y ) {
+  const map = Screen.map;
+    let srf = one( "CANVAS" );
+    if (! srf ) {
+        srf = elx( "CANVAS" );
+        doc . body . appendChild ( srf );
+    }
+    Screen.resize( srf );
+  const gfx = srf.getContext( "2d" );
+    const w = map.width;
+    const h = map.height;
+    gfx.putImageData( map, 0, 0 );
+};
+
+</script>
+<script>
+
+Screen.resize = function( srf ) {
+    const st = srf.style;
+    st.width    = "100vw";
+    st.heighgt  = "100vh";
+    st.position = "fixed";
+    const rc    = srf.getBoundingClientRect();
+    srf.width   = rc.width;
+    srf.height  = rc.height;
+};
+
+</script>
+<script>
+
+function Abs( x ) {
+    return Math.abs( x );
+}
+
+function Floor( x ) {
+    return Math.floor( x );
+}
+
+function Square( x ) {
+    return ( x * x );
+}
+
+function Min( a, b ) {
+    return Math.min( a, b );
+}
+
+function DotSelf( a, b ) {
+    return ( a * a + b * b );
+}
+
+// Hack for Fractional '%' Modulus from JavaScript
+function FloatMod( a, b ) {
+    return ( a % b );
+}
+
+</script>
+<script>
+
+function SetPixel( x, y, c ) {
+  const map = Screen.map;
+    const row = ( y * SW );
+    const ofs = ( x + row ) * 4;
+    map.data[ 0 + ofs ] = c.r;
+    map.data[ 1 + ofs ] = c.g;
+    map.data[ 2 + ofs ] = c.b;
+    map.data[ 3 + ofs ] = 255;
+}
+
+</script>
+<script>
+
+function _RGB( r, g, b ) {
+    return { r, g, b };
+};
+
+</script>
+<script>
+
+const C_DISK  = _RGB( 255, 255, 255 );
+const C_BGND  = _RGB( 30, 30, 30 );
+const C_GRID  = _RGB( 0, 0, 0 );
+const C_LIGHT = _RGB( 220, 220, 240 );
+const C_DARK  = _RGB( 80, 80, 242 );
+
+function RenderPoincareDisk( SW, SH ) {
+
+    const GRID_SIZE = 0.2;
+
+    // Define thickness for grid lines
+    const lineWidth = 0.01;
+
+    // Determine the center and radius of the disk on screen
+    const centerX = SW / 2;
+    const centerY = SH / 2;
+
+    // 95% of screen size to fit nicely
+    const radius = Min( SW, SH ) / 2 * 0.95;
+
+    // Loop through every pixel on the screen
+    for ( let y = 0; y < SH; y += 1 ) {
+
+            for ( let x = 0; x < SW; x += 1 ) {
+
+            // Step 1: Translate pixel to disk-centered
+            // coordinates ( u, v )
+            u = ( x - centerX ) / radius;
+            v = ( centerY - y ) / radius;   // +Y = UP
+
+            disk_radius_squared = DotSelf( u, v );
+
+            // Step 2: Check if pixel is inside the Poincaré
+            // disk boundary
+            if ( disk_radius_squared >= 1.0 ) {
+                // Outside the disk boundary
+                SetPixel( x, y, C_BGND );
+                continue;
+            }
+
+            // Step 3: Map disk coordinates ( u, v )
+            // to Upper Half-Plane ( x, y )
+            denominator = DotSelf( u, 1.0 - v );
+
+            // Guard against division by zero exactly at the
+            // top boundary edge
+            if (! denominator ) {
+                SetPixel( x, y, C_BGND );
+                continue;
+            }
+
+                        const scale = 1 / denominator;
+
+            hyperX = scale * ( 2.0 * u );
+            hyperY = scale * ( 1.0 - disk_radius_squared );
+
+            // Step 4: Generate a visual pattern (Checkerboard)
+            // Use modulo math (are close to a grid line?)
+            modX = ( Abs( hyperX ) % GRID_SIZE );
+            modY = ( Abs( hyperY ) % GRID_SIZE );
+
+                        const t1 = ( modX < lineWidth );
+                        const t2 = ( modY < lineWidth );
+
+            if ( t1 || t2 ) {
+                SetPixel( x, y, C_GRID );
+            } else {
+                // Alternating checkerboard color pattern
+                // for depth perception
+                cellX = Floor( hyperX / GRID_SIZE );
+                cellY = Floor( hyperY / GRID_SIZE );
+                if ( ( cellX + cellY ) % 2 ) {
+                        SetPixel( x, y, C_LIGHT );
+                } else {
+                        SetPixel( x, y, C_DARK );
+                }
+            }
+        }
+    }
+}
+
+</script>
+
+<script>
+function test01() {
+    Screen( SW, SW );
+    RenderPoincareDisk( SW, SH );
+    Screen.present();
+}
+</script>
+
+<script>
+function main( event ) {
+    try {
+        test01();
+    } catch ( e ) {
+        crashed ( e )
+    }
+}
+</script>
+
+<script>
+addEventListener( "load", main );
+</script>
+
+<script>
+function crashed( e ) {
+    alert ( e );
+    throw ( e );
+}
+</script>
+
+</body>
+</html>

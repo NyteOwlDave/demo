@@ -73,6 +73,14 @@ https://www.facebook.com/groups/313919979559265
 
 ----------------------------------------------------------------
 
+## [Mathematicians](https://en.wikipedia.org/wiki/List_of_mathematical_artists)
+
+```hal
+https://en.wikipedia.org/wiki/M._C._Escher
+```
+
+----------------------------------------------------------------
+
 ## [Reference Sites](https://app.raindrop.io/my/46171960)
 
 ```hal
