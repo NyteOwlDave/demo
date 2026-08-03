@@ -8,18 +8,34 @@ SH = 800: CY = SH \ 2
 Screen _NewImage( SW, SH, 32 )
 
 
-// Define constants and parameters
-constant POWER = 8.0              // Standard power for Mandelbulb detail
-constant MAX_ITERATIONS = 64
-constant BAILOUT = 4.0
+' Define constants and parameters
+MAX_ITERATIONS = 64
+BAILOUT = 4.0
 
-Function Mandelbrot3D()
+' Standard power for Mandelbulb detail
+POWER = 8.0
 
-' Iterate through a 3D voxel grid (X, Y, Z)
+ Iterate through a 3D voxel grid (X, Y, Z)
 Sub DrawGrid ()
+    for x = 0 to VW - 1
+        for y = 0 to VH - 1
+            for z = 0 to VD - 1
+                DrawVoxel( x, y, z )
+            next z
+        next y
+    next x
+End Sub
+
+Sub Vector( x, y, z, v() )
+    v(1) = x
+    v(2) = y
+    v(3) = z
 End Sub
 
 Sub DrawVoxel (x, y, z)
+
+    Dim C(3) as Single
+    Dim Z(3) as Single
 
     Vector x, y, z, C()          ' Constant coordinate in 3D space
     Vector 0.0, 0.0, 0.0, Z()    ' Initial value
@@ -27,38 +43,60 @@ Sub DrawVoxel (x, y, z)
     iteration = 0
     is_bounded = true
 
-    while iteration < MAX_ITERATIONS do
+    WHILE ( iteration < MAX_ITERATIONS )
+
         ' 1. Convert Cartesian coordinates
-        ' (Zx, Zy, Zz) to spherical (r, theta, phi)
+        '    (Zx, Zy, Zz) to Spherical (r, theta, phi)
         r = VecLen( Z )
-        if r > BAILOUT then
-            is_bounded := false
-            break
-        end if
 
-        theta := atan2(sqrt(Z.x * Z.x + Z.y * Z.y), Z.z)
-        phi := atan2(Z.y, Z.x)
+        IF ( r > BAILOUT ) THEN
+            is_bounded = false
+            EXIT WHILE
+        END IF
 
-        // 2. Scale and rotate angles by POWER, raise radius to POWER
-        zr := r ^ POWER
-        theta := theta * POWER
-        phi := phi * POWER
+        theta = _ATAN2( SQR ( Z(1) * Z(1) + Z(2) * Z(2) ), Z(3) )
+        phi   = _ATAN2( Z(2), Z(3) )
+
+        ' 2. Scale and rotate angles by POWER
+        '    raise radius to POWER
+        zr    = r ^ POWER
+        theta = theta * POWER
+        phi   = phi * POWER
 
         // 3. Convert back to Cartesian coordinates
-        Z.x := zr * sin(theta) * cos(phi)
-        Z.y := zr * sin(theta) * sin(phi)
-        Z.z := zr * cos(theta)
+        Z(1) = zr * Sin( theta ) * Cos( phi )
+        Z(2) = zr * Sin( theta ) * Sin( phi )
+        Z(3) = zr * Cos( theta )
 
         // 4. Add constant C
-        Z := Z + C
-        iteration := iteration + 1
-    end while
+        VecAdd Z(), C(), Z()
+        iteration = iteration + 1
+
+    WEND
 
     if is_bounded then
-        plot_voxel(C, color_from(iteration))
+        PlotVoxel C, ColorFrom( iteration )
     end if
-end for
 
+End Sub
+
+' Plot Voxel
+Sub PlotVoxel (v(), c )
+    ' TODO ...
+End Sub
+
+' Color from Iteration Count
+Function ColorFrom( iteration )
+    ' TODO ...
+End Function
+
+' Vector 3D Length
+Function VecLen( v() )
+    x = v(1)
+    y = v(2)
+    z = v(3)
+    return SQR ( x*x + y*y + z*z )
+End Function
 
 ' Fill Rectangle
 Sub FillRect( x, y, w, h, c )
@@ -70,6 +108,6 @@ End Sub
 ' Background Fill
 Sub Background( r, g, b )
 	c = _RGB( r, g, b )
-  FillRect( 0, 0, SW, SH, c )
+	LINE ( 0, 0 )-( SW, SH ), c, BF
 End Sub
 
