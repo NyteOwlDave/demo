@@ -1,3 +1,10 @@
+<style>
+html, body {
+    margin  : 0;
+    padding : 0;
+    border  : 0;
+}
+</style>
 
 <script>
 ; iwm = Object.keys( window ).sort()
@@ -5,7 +12,7 @@
 
 <script>
 ; doc =  document;
-; doc . title = ( `Poincare Disc` )
+; doc . title = ( `Mandelbulb` )
 </script>
 
 <script>
@@ -30,25 +37,41 @@
 <script src="./scalar.js"></script>
 <script src="./vector.js"></script>
 <script src="./rgba.js"></script>
+<script src="./geom-2d.js"></script>
+<script src="./geom-3d.js"></script>
 <script src="./pixmap.js"></script>
-
-<script src="poincare-disc.js"></script>
+<script src="./mandelbulb.js"></script>
 
 <script>
-function test01() {
-    C_NAVY = _RGB( 20, 20, 64 );
-    SW = 600; SH = 600;
-	Screen( SW, SW );
-    Background( C_NAVY );
-	RenderPoincareDisk( SW, SH );
-	Screen.present();
+function init_demo() {
+    Screen();
+    const C_BGND = _RGB( 20, 20, 64 );
+    Background( C_BGND );
+    Screen.fill( C_BGND );
+    FractalPalette = RandomPalette( 64 );
+}
+</script>
+
+<script>
+function ShowPalette( colors ) {
+    const C_GOLD = _RGB( 255, 215, 20 );
+    const columns = Ceiling( Sqrt( colors.length ) );
+    for ( let i = 0; i < colors.length; i += 1 ) {
+        const row = Floor( i / columns );
+        const col = ( i % columns );
+        const x = 20 + col * 36;
+        const y = 20 + row * 36;
+        FillRect( x, y, 28, 28, colors[ i ] );
+        DrawRect( x-2, y-2, 32, 32, C_GOLD );
+    }
 }
 </script>
 
 <script>
 function main( event ) {
 	try {
-		test01();
+        init_demo();
+        ShowPalette( FractalPalette );
 	} catch ( e ) {
 		crashed ( e )
 	}

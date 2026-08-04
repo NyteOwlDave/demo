@@ -1,0 +1,100 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<style type="text/css">
+td, th { border: 1px solid #c3c3c3; padding: 0 3px 0 3px; }
+table { border-collapse: collapse; }
+img { max-width: 100%; }
+</style>
+<meta name="generator" content="ReText 7.2.3">
+<title>pixmap-menu</title>
+<style type="text/css">
+</style>
+</head>
+<body>
+<style>
+@import url("http://dave-legacy/jefr/style/every-page.css");
+</style>
+
+<hr>
+<h1><a href="https://dropbox.com">Explore</a></h1>
+<hr>
+<h1>Pages</h1>
+<blockquote>
+<p><a href="./mandelbulb.html">Mandelbulb</a>
+<a href="./poincare-disc.html">Poincare Disc</a>
+<a href="./pixmap.html">Pixel Map</a></p>
+</blockquote>
+<hr>
+<h1>References</h1>
+<blockquote>
+<p><a href="https://www.cairographics.org/">Cairo Graphics</a></p>
+</blockquote>
+<hr>
+<h1>Navigation</h1>
+<blockquote>
+<p><a href="./tree.php">Folder Tree</a>
+<a href="./">File System</a></p>
+</blockquote>
+<hr>
+<h1>API Modules</h1>
+<h2>Generic</h2>
+<ul>
+<li>scalar.js</li>
+<li>vector.js</li>
+<li>rgba.js</li>
+<li>geom-2d.js</li>
+<li>geom-3d.js</li>
+<li>geom-4d.js</li>
+<li>pixmap.js</li>
+</ul>
+<h2>Specific</h2>
+<ul>
+<li>poincare-disc.js</li>
+<li>mandelbulb.js</li>
+</ul>
+<hr>
+<script>
+; iwm = Object.keys( window ).sort()
+</script>
+
+<script>
+; prolog = {}
+; prolog . title = ( `Explore` )
+</script>
+
+<script>
+; cls =()=> console.clear()
+; agn =()=> location.reload()
+</script>
+
+<script>
+; doc = document
+</script>
+
+<script>
+function main( event ) {
+    try {
+            doc . title = ( prolog . title );
+    } catch ( e ) {
+        alert ( e )
+        throw ( e )
+    }
+}
+</script>
+
+<script>
+addEventListener( "load", main );
+</script>
+
+<script>
+function params() {
+        return (
+            new URISearchParams( location.search )
+        );
+}
+</script>
+
+</body>
+</html>

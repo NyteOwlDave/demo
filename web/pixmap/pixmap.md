@@ -1,3 +1,10 @@
+<style>
+html, body {
+    margin  : 0;
+    padding : 0;
+    border  : 0;
+}
+</style>
 
 <script>
 ; iwm = Object.keys( window ).sort()
@@ -5,7 +12,7 @@
 
 <script>
 ; doc =  document;
-; doc . title = ( `Poincare Disc` )
+; doc . title = ( `Pixel Map` )
 </script>
 
 <script>
@@ -30,17 +37,35 @@
 <script src="./scalar.js"></script>
 <script src="./vector.js"></script>
 <script src="./rgba.js"></script>
+<script src="./geom-2d.js"></script>
 <script src="./pixmap.js"></script>
 
-<script src="poincare-disc.js"></script>
+<script>
+function RandomColor() {
+    return RandomRGB();
+}
+</script>
+
+<script>
+function RandomPixels( density ) {
+    const map = Screen.map;
+    const area = ( map.width * map.height );
+    Screen.fill( _RGB( 20, 20, 64 ) );
+    let count = Floor( density * area );
+    while ( count-- > 0 ) {
+        const c = RandomColor();
+        const pt = RandomPoint( 0, 0, SW, SH );
+        SetPixel( pt.x, pt.y, c );
+    }
+}
+</script>
 
 <script>
 function test01() {
-    C_NAVY = _RGB( 20, 20, 64 );
     SW = 600; SH = 600;
 	Screen( SW, SW );
-    Background( C_NAVY );
-	RenderPoincareDisk( SW, SH );
+    Background( _RGB( 20, 20, 64 ) );
+	RandomPixels( 0.3 );
 	Screen.present();
 }
 </script>

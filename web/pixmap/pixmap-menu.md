@@ -8,10 +8,21 @@
 
 ----------------------------------------------------------------
 
-> [Cairo Graphics](https://www.cairographics.org/)
+# Pages
 
+> [Mandelbulb](./mandelbulb.html)
 > [Poincare Disc](./poincare-disc.html)
 > [Pixel Map](./pixmap.html)
+
+----------------------------------------------------------------
+
+# References
+
+> [Cairo Graphics](https://www.cairographics.org/)
+
+----------------------------------------------------------------
+
+# Navigation
 
 > [Folder Tree](./tree.php)
 > [File System](./)

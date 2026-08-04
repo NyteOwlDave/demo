@@ -53,6 +53,7 @@
 ## Workspaces
 
 - [`claude`](./claude/)
+- [`pixmap`](./pixmap/)
 - [`turtle`](./turtle/)
 
 ----------------------------------------------------------------
@@ -69,6 +70,8 @@
 ## Navigation
 
 > [Demo Checklist](./../demo-checklist.html)
+
+> [Pixmap Menu](./pixmap/pixmap-menu.html)
 
 > [Folder Tree](./tree.php)
 > [File System](./)
