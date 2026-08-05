@@ -1,10 +1,14 @@
-<style>
-@import url("http://dave-legacy/jefr/style/every-page.css");
-</style>
+<head> <link rel="icon" href="favicon.ico" /> </head>
+
+[cairo]:    <https://www.cairographics.org/>
+[sulu]:     <http://dave-ryzen/nav/sulu.html>
+[raindrop]: <https://app.raindrop.io/my/45357558>
+
+[me]: <http://dave-omega/demo/web/pixmap/pixmap-menu.html>
 
 ----------------------------------------------------------------
 
-# [Explore](https://dropbox.com)
+# [Pixel Map Menu][me]
 
 ----------------------------------------------------------------
 
@@ -16,13 +20,14 @@
 
 ----------------------------------------------------------------
 
-# References
+# [References][raindrop]
 
-> [Cairo Graphics](https://www.cairographics.org/)
+> [Cairo Graphics][cairo]
+> [Drop Box](https://dropbox.com)
 
 ----------------------------------------------------------------
 
-# Navigation
+# [Navigation][sulu]
 
 > [Folder Tree](./tree.php)
 > [File System](./)
@@ -33,20 +38,26 @@
 
 ## Generic
 
-- scalar.js
-- vector.js
-- rgba.js
-- geom-2d.js
-- geom-3d.js
-- geom-4d.js
-- pixmap.js
+- [`scalar.js`](./scalr.js)
+- [`vector.js`](./vector.js)
+- [`rgba.js`](./rgba.js)
+- [`geom-2d.js`](./geom-2d.js)
+- [`geom-3d.js`](./geom-3d.js)
+- [`geom-4d.js`](./geom-4d.js)
+- [`pixmap.js`](./pixmap.js)
 
 ## Specific
 
-- poincare-disc.js
-- mandelbulb.js
+- [`poincare-disc.js`](./poincare-disc.js)
+- [`mandelbulb.js`](./mandelbulb.js)
 
 ----------------------------------------------------------------
+
+<style>
+@import url("./../../style/every-page.css");
+</style>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
 <script>
 ; iwm = Object.keys( window ).sort()
@@ -66,10 +77,12 @@
 ; doc = document
 </script>
 
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
 <script>
 function main( event ) {
     try {
-			doc . title = ( prolog . title );
+		doc . title = ( prolog . title );
     } catch ( e ) {
         alert ( e )
         throw ( e )
@@ -81,12 +94,15 @@ function main( event ) {
 addEventListener( "load", main );
 </script>
 
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
 <script>
 function params() {
-		return (
-			new URISearchParams( location.search )
-		);
+	return (
+		new URISearchParams( location.search )
+	);
 }
 </script>
 
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 

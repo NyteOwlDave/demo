@@ -13,12 +13,9 @@ img { max-width: 100%; }
 </style>
 </head>
 <body>
-<style>
-@import url("http://dave-legacy/jefr/style/every-page.css");
-</style>
-
+<p><head> <link rel="icon" href="favicon.ico" /> </head></p>
 <hr>
-<h1><a href="https://dropbox.com">Explore</a></h1>
+<h1><a href="http://dave-omega/demo/web/pixmap/pixmap-menu.html">Pixel Map Menu</a></h1>
 <hr>
 <h1>Pages</h1>
 <blockquote>
@@ -27,12 +24,13 @@ img { max-width: 100%; }
 <a href="./pixmap.html">Pixel Map</a></p>
 </blockquote>
 <hr>
-<h1>References</h1>
+<h1><a href="https://app.raindrop.io/my/45357558">References</a></h1>
 <blockquote>
-<p><a href="https://www.cairographics.org/">Cairo Graphics</a></p>
+<p><a href="https://www.cairographics.org/">Cairo Graphics</a>
+<a href="https://dropbox.com">Drop Box</a></p>
 </blockquote>
 <hr>
-<h1>Navigation</h1>
+<h1><a href="http://dave-ryzen/nav/sulu.html">Navigation</a></h1>
 <blockquote>
 <p><a href="./tree.php">Folder Tree</a>
 <a href="./">File System</a></p>
@@ -41,20 +39,26 @@ img { max-width: 100%; }
 <h1>API Modules</h1>
 <h2>Generic</h2>
 <ul>
-<li>scalar.js</li>
-<li>vector.js</li>
-<li>rgba.js</li>
-<li>geom-2d.js</li>
-<li>geom-3d.js</li>
-<li>geom-4d.js</li>
-<li>pixmap.js</li>
+<li><a href="./scalr.js"><code>scalar.js</code></a></li>
+<li><a href="./vector.js"><code>vector.js</code></a></li>
+<li><a href="./rgba.js"><code>rgba.js</code></a></li>
+<li><a href="./geom-2d.js"><code>geom-2d.js</code></a></li>
+<li><a href="./geom-3d.js"><code>geom-3d.js</code></a></li>
+<li><a href="./geom-4d.js"><code>geom-4d.js</code></a></li>
+<li><a href="./pixmap.js"><code>pixmap.js</code></a></li>
 </ul>
 <h2>Specific</h2>
 <ul>
-<li>poincare-disc.js</li>
-<li>mandelbulb.js</li>
+<li><a href="./poincare-disc.js"><code>poincare-disc.js</code></a></li>
+<li><a href="./mandelbulb.js"><code>mandelbulb.js</code></a></li>
 </ul>
 <hr>
+<style>
+@import url("./../../style/every-page.css");
+</style>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
 <script>
 ; iwm = Object.keys( window ).sort()
 </script>
@@ -73,10 +77,12 @@ img { max-width: 100%; }
 ; doc = document
 </script>
 
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
 <script>
 function main( event ) {
     try {
-            doc . title = ( prolog . title );
+        doc . title = ( prolog . title );
     } catch ( e ) {
         alert ( e )
         throw ( e )
@@ -88,13 +94,17 @@ function main( event ) {
 addEventListener( "load", main );
 </script>
 
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
 <script>
 function params() {
-        return (
-            new URISearchParams( location.search )
-        );
+    return (
+        new URISearchParams( location.search )
+    );
 }
 </script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
 </body>
 </html>
