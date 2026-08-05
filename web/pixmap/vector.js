@@ -50,6 +50,58 @@ function Vec4( x, y, z, w ) {
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+function VecCopy( vi, vo ) {
+	vo = ( vo || {} );
+	vo.x = vi.x;
+	vo.y = vi.y;
+	return ( vo );
+}
+
+function VecCopy3( vi, vo ) {
+	vo = ( vo || {} );
+	vo.x = vi.x;
+	vo.y = vi.y;
+	vo.z = vi.z;
+	return ( vo );
+}
+
+function VecCopy4( vi, vo ) {
+	vo = ( vo || {} );
+	vo.x = vi.x;
+	vo.y = vi.y;
+	vo.z = vi.z;
+	vo.w = vi.w;
+	return ( vo );
+}
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+function VecWrite( x, y, vo ) {
+	vo = ( vo || {} );
+	vo.x = x;
+	vo.y = y;
+	return ( vo );
+}
+
+function VecWrite3( x, y, z, vo ) {
+	vo = ( vo || {} );
+	vo.x = x;
+	vo.y = y;
+	vo.z = z;
+	return ( vo );
+}
+
+function VecWrite4( x, y, z, w, vo ) {
+	vo = ( vo || {} );
+	vo.x = x;
+	vo.y = y;
+	vo.z = z;
+	vo.w = w;
+	return ( vo );
+}
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 function VecDot( va, vb ) {
     const xx = va.x * vb.x;
     const yy = va.y * vb.y;
@@ -80,10 +132,11 @@ function VecPerp( va, vb ) {
 }
 
 function VecCross3( va, vb, vo ) {
-    const x = va.y * vb.z - va.z * vb.y;
-    const y = va.z * vb.x - va.x * vb.z;
-    const z = va.x * vb.y - va.y * vb.x;
-    return Vec3( x, y, z );
+	vo = ( vo || {} );
+    vo.x = va.y * vb.z - va.z * vb.y;
+    vo.y = va.z * vb.x - va.x * vb.z;
+    vo.z = va.x * vb.y - va.y * vb.x;
+    return ( vo );
 }
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -103,179 +156,218 @@ function VecLen4( v ) {
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 function VecScale( vi, k, vo ) {
+	vo = ( vo || {} );
     vo.x = vi.x * k;
     vo.y = vi.y * k;
+	return ( vo );
 }
 
 function VecScale3( vi, k, vo ) {
+	vo = ( vo || {} );
     vo.x = vi.x * k;
     vo.y = vi.y * k;
     vo.z = vi.z * k;
+	return ( vo );
 }
 
 function VecScale4( vi, k, vo ) {
+	vo = ( vo || {} );
     vo.x = vi.x * k;
     vo.y = vi.y * k;
     vo.z = vi.z * k;
     vo.w = vi.w * k;
+	return ( vo );
 }
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 function VecAdd( va, vb, vo ) {
+	vo = ( vo || {} );
     vo.x = va.x + vb.x;
     vo.y = va.y + vb.y;
+	return ( vo );
 }
 
 function VecAdd3( va, vb, vo ) {
+	vo = ( vo || {} );
     vo.x = va.x + vb.x;
     vo.y = va.y + vb.y;
     vo.z = va.z + vb.z;
+	return ( vo );
 }
 
 function VecAdd4( va, vb, vo ) {
+	vo = ( vo || {} );
     vo.x = va.x + vb.x;
     vo.y = va.y + vb.y;
     vo.z = va.z + vb.z;
     vo.w = va.w + vb.w;
+	return ( vo );
 }
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 function VecSub( va, vb, vo ) {
+	vo = ( vo || {} );
     vo.x = va.x - vb.x;
     vo.y = va.y - vb.y;
+	return ( vo );
 }
 
 function VecSub3( va, vb, vo ) {
+	vo = ( vo || {} );
     vo.x = va.x - vb.x;
     vo.y = va.y - vb.y;
     vo.z = va.z - vb.z;
+	return ( vo );
 }
 
 function VecSub4( va, vb, vo ) {
+	vo = ( vo || {} );
     vo.x = va.x - vb.x;
     vo.y = va.y - vb.y;
     vo.z = va.z - vb.z;
     vo.w = va.w - vb.w;
+	return ( vo );
 }
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 function VecMul( va, vb, vo ) {
+	vo = ( vo || {} );
     vo.x = va.x * vb.x;
     vo.y = va.y * vb.y;
+	return ( vo );
 }
 
 function VecMul3( va, vb, vo ) {
+	vo = ( vo || {} );
     vo.x = va.x * vb.x;
     vo.y = va.y * vb.y;
     vo.z = va.z * vb.z;
+	return ( vo );
 }
 
 function VecMul4( va, vb, vo ) {
+	vo = ( vo || {} );
     vo.x = va.x * vb.x;
     vo.y = va.y * vb.y;
     vo.z = va.z * vb.z;
     vo.w = va.w * vb.w;
+	return ( vo );
 }
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 function VecNorm( vi, vo ) {
+	vo = ( vo || {} );
     const w = DotSelf( vi.x, vi.y );
     if ( w < 1e-14 ) {
-        Vec( 1, 0, vo );
+		VecWrite( 1, 0, vo );
     } else {
-        const k = 1 / Sqr( w );
-        Vec( vi.x * k, vi.y * k, vo );
+		VecScale( vi, 1 / Sqrt( w ), vo );
     }
+	return ( vo );
 }
 
 function VecNorm3( vi, vo ) {
+	vo = ( vo || {} );
     const w = DotSelf3( vi.x, vi.y, vi.z );
     if ( w < 1e-14 ) {
-        Vec3( 1, 0, 0, vo );
+		VecWrite3( 1, 0, 0, vo );
     } else {
-        const k = 1 / Sqr( w );
-        Vec3( vi.x * k, vi.y * k, vi.z * k, vo );
+		VecScale3( vi, 1 / Sqrt( w ), vo );
     }
+	return ( vo );
 }
 
 function VecNorm4( vi, vo ) {
+	vo = ( vo || {} );
     const w = DotSelf4( vi.x, vi.y, vi.z, vi.w );
     if ( w < 1e-14 ) {
-        Vec4( 1, 0, 0, 0, vo );
+		VecWrite4( 1, 0, 0, 0, vo );
     } else {
-        const k = 1 / Sqr( w );
-        Vec4(
-              vi.x * k
-            , vi.y * k
-            , vi.z * k
-            , vi.w * k
-            , vo
-        );
+		VecScale4( vi, 1 / Sqrt( w ), vo );
     }
+	return ( vo );
 }
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 function VecLerp( va, vb, t, vo ) {
+	vo = ( vo || {} );
     vo.x = Lerp( va.x, t, vb.x );
     vo.y = Lerp( va.y, t, vb.y );
+	return ( vo );
 }
 
 function VecLerp3( va, vb, t, vo ) {
+	vo = ( vo || {} );
     vo.x = Lerp( va.x, t, vb.x );
     vo.y = Lerp( va.y, t, vb.y );
     vo.z = Lerp( va.z, t, vb.z );
+	return ( vo );
 }
 
 function VecLerp4( va, vb, t, vo ) {
+	vo = ( vo || {} );
     vo.x = Lerp( va.x, t, vb.x );
     vo.y = Lerp( va.y, t, vb.y );
     vo.z = Lerp( va.z, t, vb.z );
     vo.w = Lerp( va.w, t, vb.w );
+	return ( vo );
 }
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 function VecProject( vi, n, t, vo ) {
+	vo = ( vo || {} );
     vo.x = Project( vi.x, n, t );
     vo.y = Project( vi.y, n, t );
+	return ( vo );
 }
 
 function VecProject3( vi, n, t, vo ) {
+	vo = ( vo || {} );
     vo.x = Project( vi.x, n, t );
     vo.y = Project( vi.y, n, t );
     vo.z = Project( vi.z, n, t );
+	return ( vo );
 }
 
 function VecProject4( vi, n, t, vo ) {
+	vo = ( vo || {} );
     vo.x = Project( vi.x, n, t );
     vo.y = Project( vi.y, n, t );
     vo.z = Project( vi.z, n, t );
     vo.w = Project( vi.w, n, t );
+	return ( vo );
 }
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 function VecCombine( va, ta, vb, tb, vo ) {
+	vo = ( vo || {} );
     vo.x = Combine( va.x, ta, vb.x, tb );
     vo.y = Combine( va.y, ta, vb.y, tb );
+	return ( vo );
 }
 
 function VecCombine3( va, ta, vb, tb, vo ) {
+	vo = ( vo || {} );
     vo.x = Combine( va.x, ta, vb.x, tb );
     vo.y = Combine( va.y, ta, vb.y, tb );
     vo.z = Combine( va.z, ta, vb.z, tb );
+	return ( vo );
 }
 
 function VecCombine4( va, ta, vb, tb, vo ) {
+	vo = ( vo || {} );
     vo.x = Combine( va.x, ta, vb.x, tb );
     vo.y = Combine( va.y, ta, vb.y, tb );
     vo.z = Combine( va.z, ta, vb.z, tb );
     vo.w = Combine( va.w, ta, vb.w, tb );
+	return ( vo );
 }
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -283,6 +375,8 @@ function VecCombine4( va, ta, vb, tb, vo ) {
 VectorOps = {
     RandomVec , RandomVec3, RandomVec4
 ,   Vec , Vec3, Vec4
+,   VecWrite , VecWrite3, VecWrite4
+,   VecCopy , VecCopy3, VecCopy4
 ,   VecDot, VecDot3, VecDot4
 ,   VecPerp, VecCross3
 ,   VecLen, VecLen3, VecLen4

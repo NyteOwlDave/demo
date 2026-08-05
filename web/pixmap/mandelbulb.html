@@ -31,6 +31,12 @@ html, body {
 </script>
 
 <script>
+; mem =( o )=> Object.keys( o || window ).sort()
+; dir =( o )=> mem( o || localStorage   || {} )
+; tmp =( o )=> mem( o || sessionStorage || {} )
+</script>
+
+<script>
 ; str =( o )=> String( s || "" ).trim()
 ; arr =( o )=> Array.from( o || [] )
 ; unq =( o )=> ( new Set ( o || [] ) )
@@ -49,6 +55,28 @@ html, body {
 ; gid =( i )=> doc.getElementById( t )
 </script>
 
+<script>
+; jst =( o )=> JSON.stringify( o, null, 2 )
+; jsc =( o )=> JSON.stringify( o )
+; jso =( t )=> JSON.parse( t )
+; jsp =( t )=> jst( jso( t ) )
+; jsk =( o )=> jst( mem( o ) )
+</script>
+
+<script>
+function scan( o ) {
+    if ( o instanceof Object ) {
+        if (! Array.isArray( o ) ) {
+            o = mem( o );
+        }
+        o = o.join( "\n" );
+    } else {
+        o = String( o )
+    }
+    window.alert( o );
+}
+</script>
+
 <script src="./scalar.js"></script>
 <script src="./vector.js"></script>
 <script src="./rgba.js"></script>
@@ -56,16 +84,6 @@ html, body {
 <script src="./geom-3d.js"></script>
 <script src="./pixmap.js"></script>
 <script src="./mandelbulb.js"></script>
-
-<script>
-function init_demo() {
-    Screen();
-    const C_BGND = _RGB( 20, 20, 64 );
-    Background( C_BGND );
-    Screen.fill( C_BGND );
-    FractalPalette = RandomPalette( 64 );
-}
-</script>
 
 <script>
 function ShowPalette( colors ) {
@@ -83,14 +101,84 @@ function ShowPalette( colors ) {
 </script>
 
 <script>
+function DrawProgress( y, ratio ) {
+    const C_GOLD = _RGB( 255, 215, 20 );
+    const C_NAVY = _RGB(  20,  20, 64 );
+        const sz = Screen.size();
+        const w = sz.w;
+        const h = sz.h;
+        let margin = 16;
+        let wc = w - 2 * margin;
+        let hc = 32;
+        let x  = margin;
+        y = h - ( y + hc + margin );
+        if ( ratio > 0 ) {
+            let dx = Median( Floor( ratio * wc ), 0, wc );
+            FillRect( x, y, dx, hc, C_GOLD );
+        } else {
+            FillRect( x, y, wc, hc, C_NAVY );
+        }
+        DrawRect( x-2, y-2, wc + 4, hc + 4, C_GOLD );
+}
+</script>
+
+<script>
+function UpdateProgress( rx=0, ry=0 ) {
+    DrawProgress(  2, rx );
+    DrawProgress( 42, ry );
+}
+</script>
+
+<script>
+function tracer_test() {
+    if ( main.stop ) {
+            tracer_test.stop();
+            return;
+    }
+    if ( ty >= SH ) { return; }
+    if ( tx >= SW ) {
+            ty += 1;
+            tx = 0;
+    }
+    const rx = tx / SW;
+    const ry = ty / SH;
+    UpdateProgress( rx, ry );
+    tx += 1;
+}
+; tx = 0
+; ty = 0
+tracer_test.reset = function() {
+    tx = 0;
+    ty = 0;
+    UpdateProgress();
+}
+tracer_test.start = function() {
+    tracer_test.stop();
+    tracer_test.reset();
+    main.stop = false;
+    main.timer = setInterval( tracer_test, 1 );
+}
+tracer_test.stop = function() {
+    main.stop = true;
+    let id = main.timer;
+    if ( id === null ) { return; }
+    clearInterval( id );
+    main.timer = null;
+}
+</script>
+
+<script>
 function main( event ) {
     try {
         init_demo();
-        ShowPalette( FractalPalette );
+                run_demo()
+                // tracer_test.start();
+        // ShowPalette( FractalPalette );
     } catch ( e ) {
         crashed ( e )
     }
 }
+; main.timer = null
 </script>
 
 <script>
@@ -101,6 +189,38 @@ addEventListener( "load", main );
 function crashed( e ) {
     alert ( e );
     throw ( e );
+}
+</script>
+
+<script>
+function init_demo() {
+    Screen( 400, 400 );
+    const C_BGND = _RGB( 20, 20, 64 );
+    const C_GRAY = _RGB( 10, 10, 10 );
+    Background( C_BGND );
+    Screen.fill( C_GRAY );
+        Screen.present();
+    FractalPalette = RandomPalette( 64 );
+        UpdateProgress( 0, 0 );
+}
+</script>
+
+<script>
+function run_demo() {
+    const ScreenResolution = Screen.map_size();
+    const CameraPosition = {};
+    Vec3( 1, 1, 1, CameraPosition )
+    const MaxDistance = 4;
+    const MaxRaySteps = 8;
+    const HitThreshold = 0.001;
+    RenderMandelbulb(
+          CameraPosition
+        , ScreenResolution
+        , MaxDistance
+        , MaxRaySteps
+        , HitThreshold
+    );
+    Screen.present();
 }
 </script>
 

@@ -3,6 +3,20 @@
     mandelbulb.js
 */
 
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+FractalPalette = [
+  [ 128, 128, 128 ]
+, [ 128, 128, 255 ]
+, [ 128, 255, 128 ]
+, [ 128, 255, 255 ]
+, [ 255, 128, 128 ]
+, [ 255, 128, 255 ]
+, [ 255, 255, 128 ]
+, [ 255, 255, 255 ]
+];
+
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 /*
@@ -25,17 +39,25 @@ function RenderMandelbulb(
 , HitThreshold
 ) {
 
+	const RayDirection= {};
+
     const vw = ScreenResolution.w;
     const vh = ScreenResolution.h;
 
-    for ( let y=0; y < vw; y += 1 ) {
+	const cx  = vw / 2;
+	const cy  = vh / 2;
 
-        for ( let x=0; x < vh; x += 1 ) {
+    for ( let y=0; y < vh; y += 1 ) {
+
+        for ( let x=0; x < vw; x += 1 ) {
+
+			UpdateProgress( (x+1) / vw, (y+1) / vh );
 
             // Calculate ray direction for this pixel
             CalculateRayDirection(
-                x, y, vw, vh,
-                CameraPosition, RayDirection
+                x, y, cx, cy
+                , CameraPosition
+				, RayDirection
             );
 
             // March Ray to Determine Color
@@ -58,6 +80,22 @@ function RenderMandelbulb(
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+function CalculateRayDirection(
+  x , y
+, cx, cy
+, CameraPosition
+, RayDirection
+) {
+	const scale = 1 / Min( cx, cy );
+	x = ( x - cx + 0.5 ) * scale;
+	y = ( y - cy + 0.5 ) * scale;
+	const v1 = Vec3( x, y, 1 );
+	const v2 = VecSub3( v1, CameraPosition );
+	VecNorm3( v2, RayDirection );
+}
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 function MarchRay(
   RayDirection
 , MaxDistance
@@ -65,6 +103,8 @@ function MarchRay(
 , HitThreshold
 , CameraPosition
 ) {
+
+	const C_BGND = _RGB( 84, 84, 32 );
 
     const SurfaceNormal = {};
     const CurrentPosition = {};
@@ -138,88 +178,7 @@ function MarchRay(
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-function ComputeShading(
-  Position
-, Normal
-, Iterations
-) {
-
-    const v1 = {};
-    const v2 = {};
-
-    const LightDirection = {};
-
-    const FinalColor = {};
-    const BaseColor = {};
-
-    Vec3( 1.0, 1.0, -1.0, v1 );
-    VecSub3( v1, Position, v2 );
-    VecNorm3( v2, LightDirection );
-
-    // Simple Diffuse Shading ( Lambertian )
-    DiffuseIntensity = VecDot3(
-          Normal
-        , LightDirection
-    );
-
-    if ( 0 >= DiffuseIntensity ) {
-        return _RGB( 0, 0, 0 );
-    }
-
-    // Escape-time color mapping mixed with lighting
-    MapIterationsToColor(
-          Iterations
-        , BaseColor
-    );
-
-    ScaleRGB( BaseColor, DiffuseIntensity, FinalColor );
-
-    return FinalColor;
-}
-
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-function MapIterationsToColor(
-    Iterations
-) {
-    let pal = FractalPalette;
-    function rgb( entry ) {
-        return _RGBA( entry[ 0 ], entry[ 1 ], entry[ 2 ] );
-    }
-    if ( Array.isArray( pal[ 0 ] ) ) {
-        pal = FractalPalette = pal.map( rgb );
-    }
-    const ratio = Median( Iterations / 64, 0.0, 1.0 );
-    const index = Floor( ratio * pal.length );
-    return pal[ index ];
-}
-
-FractalPalette = [
-  [ 128, 128, 128 ]
-, [ 128, 128, 255 ]
-, [ 128, 255, 128 ]
-, [ 128, 255, 255 ]
-, [ 255, 128, 128 ]
-, [ 255, 128, 255 ]
-, [ 255, 255, 128 ]
-, [ 255, 255, 255 ]
-];
-
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-function CalculateRayDirection(
-  x , y
-, vw, vh
-, CameraPosition
-, RayDirection
-) {
-    // TODO ...
-    const dx = Ca
-}
-
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-/* 
+/*
 
 IN:
 
@@ -236,16 +195,19 @@ OUT:
 
 function EstimateFractalDistance( PositionC, result ) {
 
-    VecCopy3( PositionC, VectorZ );
+	const VectorZ = {};
 
-    let Derivative_dr = 1.0;    // Running derivative tracker
-    let Radius_r = 0.0;
-    let Power_n = 8.0;          // Standard Mandelbulb order
+    const Power_n = 8.0; // Standard Mandelbulb order
+    const MaxFractalIterations = 64;
 
-    let MaxFractalIterations = 64;
+    let Derivative_dr = 1.0;  // Running derivative tracker
+
+	let st, ct, sp, cp, dd;
+    let Radius_r;
+	let ScaledRadius, Theta, Phi;
     let TotalIterationsRun;
 
-    TotalIterationsRun = 0
+    VecCopy3( PositionC, VectorZ );
 
     for ( let i=0; i < MaxFractalIterations; i += 1 ) {
 
@@ -259,21 +221,22 @@ function EstimateFractalDistance( PositionC, result ) {
         }
 
         // Cartesian => Spherical
-        let Theta = ACos  ( VectorZ.y / Radius_r );
-        let Phi   = Atan2 ( VectorZ.x, VectorZ.z );
+        Theta = ACos  ( VectorZ.y / Radius_r );
+        Phi   = ATan2 ( VectorZ.x, VectorZ.z );
 
         // Update the derivative tracker
+		dd = Pow( Radius_r, ( Power_n - 1.0 ) );
         Derivative_dr = (
-            Pow( Radius_r, ( Power_n - 1.0 ) )
-        ) * Power_n * Derivative_dr + 1.0;
+            dd * Power_n * Derivative_dr + 1.0
+        );
 
         // Scale the radius and multiply the spherical angles
-        let ScaledRadius = Pow( Radius_r, Power_n );
+        ScaledRadius = Pow( Radius_r, Power_n );
         Theta = ( Theta * Power_n );
         Phi   = ( Phi   * Power_n );
 
-        let st = Sin( Theta ), sp = Sin( Phi );
-        let ct = Cos( Theta ), cp = Cos( Phi );
+        st = Sin( Theta ); sp = Sin( Phi );
+        ct = Cos( Theta ); cp = Cos( Phi );
 
         // Spherical => Cartesian
         // ( VectorZ = Z^n + C )
@@ -313,10 +276,10 @@ function CalculateNormal( Position, Normal ) {
     // For EstimateFractalDistance
     const result = {};
 
-    const v1 = {}, v2 = {};
+    let v1 = {}, v2 = {};
 
-    Vec3( Position.x + Epsilon, Position.y, Position.z, v1 );
-    Vec3( Position.x - Epsilon, Position.y, Position.z, v2 );
+    v1 = Vec3( Position.x + Epsilon, Position.y, Position.z );
+    v2 = Vec3( Position.x - Epsilon, Position.y, Position.z );
 
     // Sample distances slightly offset on each axis
     EstimateFractalDistance( v1, result );
@@ -324,16 +287,16 @@ function CalculateNormal( Position, Normal ) {
     EstimateFractalDistance( v2, result );
     DistanceX2 = result.DistanceEstimate;
 
-    Vec3( Position.x, Position.y + Epsilon, Position.z, v1 );
-    Vec3( Position.x, Position.y - Epsilon, Position.z, v2 );
+    v1 = Vec3( Position.x, Position.y + Epsilon, Position.z );
+    v2 = Vec3( Position.x, Position.y - Epsilon, Position.z );
 
     EstimateFractalDistance( v1, result );
     DistanceY1 = result.DistanceEstimate;
     EstimateFractalDistance( v2, result );
     DistanceY2 = result.DistanceEstimate;
 
-    Vec3( Position.x, Position.y, Position.z + Epsilon, v1 );
-    Vec3( Position.x, Position.y, Position.z - Epsilon, v2 );
+    v1 = Vec3( Position.x, Position.y, Position.z + Epsilon );
+    v2 = Vec3( Position.x, Position.y, Position.z - Epsilon );
 
     EstimateFractalDistance( v1, result );
     DistanceZ1 = result.DistanceEstimate;
@@ -341,15 +304,68 @@ function CalculateNormal( Position, Normal ) {
     DistanceZ2 = result.DistanceEstimate;
 
     // Compute gradient vector
-    Vec3(
+    v1 = Vec3(
         DistanceX1 - DistanceX2,
         DistanceY1 - DistanceY2,
-        DistanceZ1 - DistanceZ2,
-        v1
+        DistanceZ1 - DistanceZ2
     );
 
     VecNorm3( v1, Normal );
 }
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+function ComputeShading(
+  Position
+, Normal
+, Iterations
+) {
+
+    const v1 = Vec3( 1.0, 1.0, -1.0 );
+    const v2 = VecSub3( v1, Position );
+
+    const LightDirection = VecNorm3( v2 );
+
+    // Simple Diffuse Shading ( Lambertian )
+    const DiffuseIntensity = VecDot3(
+          Normal
+        , LightDirection
+    );
+
+	// No Diffuse Light?
+    if ( 0 >= DiffuseIntensity ) {
+        return _RGB( 0, 0, 0 );
+    }
+
+    // Escape-time color mapping mixed with lighting
+	const BaseColor = MapIterationsToColor(
+  		Iterations
+    );
+
+	// Account for Diffusion
+    return ScaleRGB( BaseColor, DiffuseIntensity );
+
+}
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+function MapIterationsToColor(
+    Iterations
+) {
+    let pal = FractalPalette;
+    function rgb( entry ) {
+        return _RGB( entry[ 0 ], entry[ 1 ], entry[ 2 ] );
+    }
+	// If Palette isn't Initialized
+	// convert Table to Array of RGB Objects
+    if ( Array.isArray( pal[ 0 ] ) ) {
+        pal = FractalPalette = pal.map( rgb );
+    }
+    const ratio = Median( Iterations / 64, 0.0, 1.0 );
+    const index = Floor( ratio * pal.length );
+    return ( pal[ index ] );
+}
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 

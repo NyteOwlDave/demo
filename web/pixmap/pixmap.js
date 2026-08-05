@@ -64,6 +64,20 @@ Screen.resize = function( srf ) {
     return ( srf );
 };
 
+Screen.size = function() {
+		const srf = Screen.surface();
+		const w = srf.width;
+		const h = srf.height;
+		return Size( w, h ); 	// geom-2d.js
+};
+
+Screen.map_size = function() {
+		const map = Screen.map;
+		const w = map.width;
+		const h = map.height;
+		return Size( w, h ); 	// geom-2d.js
+};
+
 Screen.color = function( r, g, b ) {
     function byte( n ) {
         n = Floor( n );
