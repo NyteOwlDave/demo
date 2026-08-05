@@ -31,9 +31,9 @@ function toggle_screen() {
 }
 
 function prepare_editor( ed ) {
-    editor.wrap = "off";
-    editor.spellcheck = false;
-    editor.classList.add( "siox" );
+    ed.wrap = "off";
+    ed.spellcheck = false;
+    ed.classList.add( "siox" );
 }
 
 function prepare_editors() {

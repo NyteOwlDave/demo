@@ -137,11 +137,15 @@
 <script src="./geom-2d.js"></script>
 <script src="./pixmap.js"></script>
 
+<script src="./app/pixmap-notes.js"></script>
+
 <script>
 function main( event ) {
 	try {
-		// test01();
         doc . title = ( `Pixel Map Notes` );
+		prepare_editors();
+		prepare_screen();
+		hide_screen()
 	} catch ( e ) {
 		crashed ( e )
 	}
