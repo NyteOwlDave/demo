@@ -17,6 +17,7 @@
 > [Mandelbulb](./mandelbulb.html)
 > [Poincare Disc](./poincare-disc.html)
 > [Pixel Map](./pixmap.html)
+> [Pixel Map Notes](./pixmap-notes.html)
 
 ----------------------------------------------------------------
 

@@ -12,7 +12,6 @@ html, body {
 
 <script>
 ; doc =  document;
-; doc . title = ( `Pixel Map` )
 </script>
 
 <script>
@@ -40,40 +39,13 @@ html, body {
 <script src="./geom-2d.js"></script>
 <script src="./pixmap.js"></script>
 
-<script>
-function RandomColor() {
-    return RandomRGB();
-}
-</script>
-
-<script>
-function RandomPixels( density ) {
-    const map = Screen.map;
-    const area = ( map.width * map.height );
-    Screen.fill( _RGB( 20, 20, 64 ) );
-    let count = Floor( density * area );
-    while ( count-- > 0 ) {
-        const c = RandomColor();
-        const pt = RandomPoint( 0, 0, SW, SH );
-        SetPixel( pt.x, pt.y, c );
-    }
-}
-</script>
-
-<script>
-function test01() {
-    SW = 600; SH = 600;
-	Screen( SW, SW );
-    Background( _RGB( 20, 20, 64 ) );
-	RandomPixels( 0.3 );
-	Screen.present();
-}
-</script>
+<script src="./app/pixmap-test-01.js"></script>
 
 <script>
 function main( event ) {
 	try {
-		test01();
+		doc . title = ( `Pixel Map Demo` );
+        test_01();
 	} catch ( e ) {
 		crashed ( e )
 	}

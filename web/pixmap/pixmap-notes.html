@@ -1,0 +1,143 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<style type="text/css">
+td, th { border: 1px solid #c3c3c3; padding: 0 3px 0 3px; }
+table { border-collapse: collapse; }
+img { max-width: 100%; }
+</style>
+<meta name="generator" content="ReText 7.2.3">
+<title>pixmap-notes</title>
+<style type="text/css">
+</style>
+</head>
+<body>
+<p><head> <link rel="icon" href="favicon.ico" /> </head></p>
+<hr>
+<h1><a href="http://dave-omega/demo/web/pixmap/pixmap-notes.html">Pixel Map Notes</a></h1>
+<hr>
+<h1>Components</h1>
+<ul>
+<li>Core Ops</li>
+<li>Scalar Ops</li>
+<li>Vector Ops</li>
+<li>Geometry 2D</li>
+<li>Geometry 3D</li>
+<li>Geometry 4D</li>
+<li>RGB Color</li>
+<li>Pixel Map</li>
+</ul>
+<hr>
+<h1>Core Ops</h1>
+<hr>
+<h1>Scalar Ops</h1>
+<hr>
+<h1>Vector Ops</h1>
+<hr>
+<h1>Geometry 2D</h1>
+<hr>
+<h1>Geometry 3D</h1>
+<hr>
+<h1>Geometry 4D</h1>
+<hr>
+<h1>RGB Color</h1>
+<hr>
+<h1>Pixel Map</h1>
+<hr>
+<h1><a href="http://dave-ryzen/nav/sulu.html">Navigation</a></h1>
+<blockquote>
+<p><a href="./pixmap-menu.html">Pixel Map Menu</a></p>
+<p><a href="./tree.php">Folder Tree</a>
+<a href="./">File System</a></p>
+</blockquote>
+<hr>
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script>
+; iwm = Object.keys( window ).sort()
+</script>
+
+<script>
+; doc =  document;
+; doc . title = ( `Pixel Map` )
+</script>
+
+<script>
+; str =( o )=> String( s || "" ).trim()
+; arr =( o )=> Array.from( o || [] )
+; unq =( o )=> ( new Set ( o || [] ) )
+; dct =(   )=> ( new Map() )
+</script>
+
+<script>
+; ole =( q, e )=>    ( e.querySelector   ( q ) )
+; ale =( q, e )=> arr( e.querySelectorAll( q ) )
+; one =( q )=> ole( q, doc )
+; all =( q )=> ale( q, doc )
+</script>
+
+<script>
+; elx =( t )=> doc.createElement ( t )
+; gid =( i )=> doc.getElementById( t )
+</script>
+
+<script src="./scalar.js"></script>
+<script src="./vector.js"></script>
+<script src="./rgba.js"></script>
+<script src="./geom-2d.js"></script>
+<script src="./pixmap.js"></script>
+
+<script>
+function RandomColor() {
+    return RandomRGB();
+}
+</script>
+
+<script>
+function RandomPixels( density ) {
+    const map = Screen.map;
+    const area = ( map.width * map.height );
+    Screen.fill( _RGB( 20, 20, 64 ) );
+    let count = Floor( density * area );
+    while ( count-- > 0 ) {
+        const c = RandomColor();
+        const pt = RandomPoint( 0, 0, SW, SH );
+        SetPixel( pt.x, pt.y, c );
+    }
+}
+</script>
+
+<script>
+function test01() {
+    SW = 600; SH = 600;
+    Screen( SW, SW );
+    Background( _RGB( 20, 20, 64 ) );
+    RandomPixels( 0.3 );
+    Screen.present();
+}
+</script>
+
+<script>
+function main( event ) {
+    try {
+        test01();
+    } catch ( e ) {
+        crashed ( e )
+    }
+}
+</script>
+
+<script>
+addEventListener( "load", main );
+</script>
+
+<script>
+function crashed( e ) {
+    alert ( e );
+    throw ( e );
+}
+</script>
+
+</body>
+</html>
