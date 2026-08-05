@@ -65,7 +65,7 @@
 
 <script>
 ; prolog = {}
-; prolog . title = ( `Explore` )
+; prolog . title = ( `Pixel Map Menu` )
 </script>
 
 <script>
