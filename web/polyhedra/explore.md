@@ -17,7 +17,7 @@
 
 # [`💖` Featured][luminous]
 
-> [`🎺` Gabriel's Horn](./gabriel-horn.html)
+> [`⚽` Goldberg Notes](./goldberg.html)
 
 ----------------------------------------------------------------
 
