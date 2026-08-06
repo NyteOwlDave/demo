@@ -1,10 +1,25 @@
 
 /* geom-2d.js */
 
+
 function RandomPoint( x, y, w, h ) {
     x += Floor( w * Random() );
     y += Floor( h * Random() );
     return Point( x, y );
+}
+
+function RandomSize( wlo, hlo, whi, hhi ) {
+    const w = wlo + Floor( whi - wlo );
+    const h = hlo + Floor( hhi - hlo );
+    return Size( w, h );
+}
+
+function RandomRect( xhi, yhi, whi, hhi ) {
+    const x = Floor( xhi * Random() );
+    const y = Floor( yhi * Random() );
+    const w = Floor( whi * Random() );
+    const h = Floor( hhi * Random() );
+    return Rect( x, y, w, h );
 }
 
 function Point( x, y ) {
@@ -51,4 +66,16 @@ function PointList( points ) {
     points = ( points || [] );
     return { points };
 }
+
+
+Geom2dOps = {
+  RandomPoint
+, RandomSize
+, RandomRect
+, Point, Size, Rect
+, LineSeg
+, Circle, Ellipse
+, Trigon, Triangle
+, Ray, Poly, PointList
+};
 

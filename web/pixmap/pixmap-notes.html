@@ -17,33 +17,105 @@ img { max-width: 100%; }
 <hr>
 <h1><a href="http://dave-omega/demo/web/pixmap/pixmap-notes.html">Pixel Map Notes</a></h1>
 <hr>
+<header id="header">
+ <div id="messages"></div>
+</header>
+
+<footer id="footer">
+  <input wide id="footer_input" onchange="perform(event)"/>
+</footer>
+
+<hr>
 <h1>Components</h1>
 <ul>
-<li>Core Ops</li>
-<li>Scalar Ops</li>
-<li>Vector Ops</li>
-<li>Geometry 2D</li>
-<li>Geometry 3D</li>
-<li>Geometry 4D</li>
-<li>RGB Color</li>
-<li>Pixel Map</li>
+<li>Core Operations</li>
+<li>Scalar Operations</li>
+<li>Vector Operations</li>
+<li>Geometry 2D Operations</li>
+<li>Geometry 3D Operations</li>
+<li>Geometry 4D Operations</li>
+<li>RGB Color Operations</li>
+<li>Screen Operations</li>
+<li>Pixel Map Operations</li>
+<li>Pixel Map Operation Extras</li>
 </ul>
 <hr>
-<h1>Core Ops</h1>
+<h1>Core Operations</h1>
+<div center>
+  <h3><code>CoreOps</code></h3>
+  <textarea id="core-ops-editor"></textarea>
+</div>
+
 <hr>
-<h1>Scalar Ops</h1>
+<h1>Scalar Operations</h1>
+<div center>
+  <h3><code>ScalarOps</code></h3>
+  <textarea id="scalar-ops-editor"></textarea>
+</div>
+
 <hr>
-<h1>Vector Ops</h1>
+<h1>Vector Operations</h1>
+<div center>
+  <h3><code>VectorOps</code></h3>
+  <textarea id="vector-ops-editor"></textarea>
+</div>
+
 <hr>
-<h1>Geometry 2D</h1>
+<h1>Geometry 2D Operations</h1>
+<div center>
+  <h3><code>Geom2dOps</code></h3>
+  <textarea id="geom-2d-editor"></textarea>
+</div>
+
 <hr>
-<h1>Geometry 3D</h1>
+<h1>Geometry 3D Operations</h1>
+<div center>
+  <h3><code>Geom3dOps</code></h3>
+  <textarea id="geom-3d-editor"></textarea>
+</div>
+
 <hr>
-<h1>Geometry 4D</h1>
+<h1>Geometry 4D Operations</h1>
+<div center>
+  <h3><code>Geom4dOps</code></h3>
+  <textarea id="geom-4d-editor"></textarea>
+</div>
+
 <hr>
-<h1>RGB Color</h1>
+<h1>RGB Color Operations</h1>
+<div center>
+  <h3><code>RGBOps</code></h3>
+  <textarea id="rgb-editor"></textarea>
+</div>
+
 <hr>
-<h1>Pixel Map</h1>
+<h1>Screen Operations</h1>
+<div center>
+  <h3><code>Screen</code></h3>
+  <textarea id="screen-editor"></textarea>
+</div>
+
+<hr>
+<h1>Pixel Map Operations</h1>
+<div center>
+  <h3><code>PixMapOps</code></h3>
+  <textarea id="pixmap-editor"></textarea>
+</div>
+
+<hr>
+<h1>Pixel Map Operation Extras</h1>
+<div center>
+  <h3><code>PixMapExtras</code></h3>
+  <textarea id="extras-editor"></textarea>
+</div>
+
+<hr>
+<h1><a href="https://app.raindrop.io/my/45357558">References</a></h1>
+<blockquote>
+<p><a href="https://jsoncrack.com/editor">JSON Crack</a>
+<a href="https://www.cairographics.org/">Cairo Graphics</a>
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/ImageData">ImageData ~ MDN</a></p>
+</blockquote>
 <hr>
 <h1><a href="http://dave-ryzen/nav/sulu.html">Navigation</a></h1>
 <blockquote>
@@ -52,6 +124,10 @@ img { max-width: 100%; }
 <a href="./">File System</a></p>
 </blockquote>
 <hr>
+<style>
+@import url("./../../style/every-page.css");
+</style>
+
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
 <script>
@@ -60,68 +136,27 @@ img { max-width: 100%; }
 
 <script>
 ; doc =  document;
-; doc . title = ( `Pixel Map` )
 </script>
 
-<script>
-; str =( o )=> String( s || "" ).trim()
-; arr =( o )=> Array.from( o || [] )
-; unq =( o )=> ( new Set ( o || [] ) )
-; dct =(   )=> ( new Map() )
-</script>
-
-<script>
-; ole =( q, e )=>    ( e.querySelector   ( q ) )
-; ale =( q, e )=> arr( e.querySelectorAll( q ) )
-; one =( q )=> ole( q, doc )
-; all =( q )=> ale( q, doc )
-</script>
-
-<script>
-; elx =( t )=> doc.createElement ( t )
-; gid =( i )=> doc.getElementById( t )
-</script>
-
+<script src="./core-ops.js"></script>
 <script src="./scalar.js"></script>
 <script src="./vector.js"></script>
 <script src="./rgba.js"></script>
 <script src="./geom-2d.js"></script>
+<script src="./geom-3d.js"></script>
+<script src="./geom-4d.js"></script>
 <script src="./pixmap.js"></script>
 
-<script>
-function RandomColor() {
-    return RandomRGB();
-}
-</script>
-
-<script>
-function RandomPixels( density ) {
-    const map = Screen.map;
-    const area = ( map.width * map.height );
-    Screen.fill( _RGB( 20, 20, 64 ) );
-    let count = Floor( density * area );
-    while ( count-- > 0 ) {
-        const c = RandomColor();
-        const pt = RandomPoint( 0, 0, SW, SH );
-        SetPixel( pt.x, pt.y, c );
-    }
-}
-</script>
-
-<script>
-function test01() {
-    SW = 600; SH = 600;
-    Screen( SW, SW );
-    Background( _RGB( 20, 20, 64 ) );
-    RandomPixels( 0.3 );
-    Screen.present();
-}
-</script>
+<script src="./app/pixmap-notes.js"></script>
 
 <script>
 function main( event ) {
     try {
-        test01();
+        doc . title = ( `Pixel Map Notes` );
+        // prepare_editors();
+        // prepare_screen();
+        // hide_screen()
+        populate_editors();
     } catch ( e ) {
         crashed ( e )
     }

@@ -30,6 +30,9 @@
 
 # [Navigation][sulu]
 
+> [Web Menu](./../web-menu.html)
+> [Demo Menu](./../../demo-menu.html)
+
 > [Folder Tree](./tree.php)
 > [File System](./)
 
@@ -39,7 +42,7 @@
 
 ## Generic
 
-- [`scalar.js`](./scalr.js)
+- [`scalar.js`](./scalar.js)
 - [`vector.js`](./vector.js)
 - [`rgba.js`](./rgba.js)
 - [`geom-2d.js`](./geom-2d.js)

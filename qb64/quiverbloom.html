@@ -49,8 +49,8 @@ MathOps = { cos, sin, hypot };
 <script>
 create_surface = function( w, h ) {
     const ce = doc . createElement( "CANVAS" );
-    ce . width  = ( w || 320 );
-    ce . height = ( h || 320 );
+    SURF.W = ce . width  = ( w || 320 );
+    SURF.H = ce . height = ( h || 320 );
     return ( ce );
 };
 </script>
@@ -98,8 +98,8 @@ rect = function( gfx, x, y, w, h, style ) {
 </script>
 
 <script>
-pset = function( gfx, xr, yr, style ) {
-    rect( gfx, x, y, x+1, y+1, style );
+pset = function( gfx, x, y, style ) {
+    rect( gfx, x, y, 1, 1, style );
 };
 </script>
 
@@ -126,10 +126,14 @@ GraphicsOps = { rect, pset, background };
 <script>
 render_bloom = function( angle, canvas ) {
     const gfx = canvas.getContext( "2d" );
+    const cx = 0.5 * canvas.width;
+    const cy = 0.5 * canvas.height;
+    const scale = 1;
     background( gfx, "black" );
     let x, y, k, c, e, d, p, q, r;
     let xp, yp, xr, yr;
-    let col, cr, cg, cb, rgb;
+    let col, cr, cg, cb;
+    let t = bloom.angle;
     for ( x=0; x <= 12000; x += 0.5 ) {
         y  = (x/235);
         k  = (4+sin(x/11+8*t))*cos(x/14);
@@ -147,6 +151,8 @@ render_bloom = function( angle, canvas ) {
         cr  = (255);
         cg  = (col+155);
         cb  = (255-col);
+        xr  = cx + ( scale * xr );
+        yr  = cy + ( scale * yr );
         pset( gfx, xr, yr, rgb( cr, cg, cb ) );
     }
 };
@@ -206,6 +212,7 @@ function main( event ) {
         init_ui();
         init_io();
         init_demo();
+        bloom.start();
     } catch ( e ) {
         alert ( e );
         throw ( e );
@@ -245,6 +252,7 @@ function init_demo() {
         srf . id = ( SURF . ID );
         doc . body . appendChild( srf );
     };
+    bloom.angle = 0;
     console.debug( `Init Demo` );
 }
 </script>

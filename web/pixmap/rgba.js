@@ -29,6 +29,14 @@ function RandomRGBA() {
     return _RGBA( r, g, b, a );
 }
 
+function RandomPalette( count ) {
+    const colors = [];
+    while ( count-- > 0 ) {
+        colors.push( RandomRGB() );
+    }
+    return colors;
+}
+
 function ScaleRGB( c, scale ) {
     function byte( n ) {
         n = Floor( n );
@@ -40,11 +48,13 @@ function ScaleRGB( c, scale ) {
     return _RGB( r, g, b );
 }
 
-function RandomPalette( count ) {
-    const colors = [];
-    while ( count-- > 0 ) {
-        colors.push( RandomRGB() );
-    }
-    return colors;
-}
+
+RGBOps = {
+  _RGB
+, _RGBA
+, RandomRGB
+, RandomRGBA
+, RandomPalette
+, ScaleRGB
+};
 

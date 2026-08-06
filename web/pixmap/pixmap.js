@@ -15,6 +15,7 @@
 SW = 800;
 SH = 800;
 
+
 // https://developer.mozilla.org/en-US/docs/Web/API/ImageData
 function PixMap( w, h ) {
 	const o = new ImageData( w, h );
@@ -54,6 +55,9 @@ Screen.resize = function( srf ) {
 	st.width    = "100vw";
 	st.height   = "100vh";
 	st.position = "fixed";
+    st.left     = "0";
+    st.top      = "0";
+    st.zIndex   = "10000";
 	const rc    = srf.getBoundingClientRect();
     if ( rc.width != srf.width ) {
     	srf.width   = rc.width;
@@ -87,6 +91,14 @@ Screen.color = function( r, g, b ) {
     g = byte( g );
     b = byte( b );
     return ( `rgb(${r},${g},${b})` );
+};
+
+
+Screen.style = function( c ) {
+    if ( c instanceof Object ) {
+        return Screen.color( c.r, c.g, c.b );
+    }
+    return ( c );
 };
 
 Screen.fill = function( c ) {
@@ -129,14 +141,14 @@ function SetPixel( x, y, c ) {
 
 function FillRect( x, y, w, h, c ) {
     const gfx = Screen.graphics();
-    gfx.fillStyle = Screen.color( c.r, c.g, c.b );
+    gfx.fillStyle = Screen.style( c );
     gfx.fillRect( x, y, w, h );
     return ( gfx );
 }
 
 function DrawRect( x, y, w, h, c ) {
     const gfx = Screen.graphics();
-    gfx.strokeStyle = Screen.color( c.r, c.g, c.b );
+    gfx.strokeStyle = Screen.style( c );
     gfx.beginPath();
     gfx.rect( x, y, w, h );
     gfx.stroke();
@@ -150,4 +162,35 @@ function Background( c ) {
     return FillRect( 0, 0, sw, sh, c );
 }
 
+
+PixMapNames = ( `
+SW
+SH
+PixMap
+SetPixel
+FillRect
+DrawRect
+Background
+Screen
+Screen.surface
+Screen.graphics
+Screen.present
+Screen.resize
+Screen.size
+Screen.map_size
+Screen.color
+Screen.style
+Screen.fill
+` );
+
+
+PixMapOps = {
+  PixMap
+, PixMapNames
+, SetPixel
+, FillRect
+, DrawRect
+, Background
+, Screen
+};
 

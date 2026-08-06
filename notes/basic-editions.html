@@ -1,0 +1,126 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<style type="text/css">
+td, th { border: 1px solid #c3c3c3; padding: 0 3px 0 3px; }
+table { border-collapse: collapse; }
+img { max-width: 100%; }
+</style>
+<meta name="generator" content="ReText 7.2.3">
+<title>basic-editions</title>
+<style type="text/css">
+</style>
+</head>
+<body>
+<hr>
+<h1>BASIC Editions</h1>
+<hr>
+<pre><code class="language-hal">
+https://freebasic.net/
+
+</code></pre>
+<hr>
+<h1>Edition List</h1>
+<div center>
+<section id="droplist_section">
+  <select id="edition_droplist"></select>
+</section>
+</div>
+
+<hr>
+<h1>Downloads</h1>
+<blockquote>
+<p><a href="./basic-editions-latest.json">JSON Edition List</a></p>
+</blockquote>
+<hr>
+<h1>RAM Disk Menu</h1>
+<blockquote>
+<p><a href="http://dave-tower/ramdisk/basic/basic-editions.html">Tower Edition</a></p>
+</blockquote>
+<hr>
+<style>
+@import url("./../style/every-page.css");
+</style>
+
+<script>
+; doc = document
+; doc . title = ( `BASIC Editions` )
+</script>
+
+<script>
+; elx =( t )=> ( doc.createElement( t ) )
+</script>
+
+<script>
+function main( event ) {
+    try {
+        populate_editions();
+    } catch ( e ) {
+        alert ( e );
+        throw ( e );
+    }
+}
+</script>
+
+<script>
+addEventListener( "load", main );
+</script>
+
+<script updated="2026-AUG-06">
+editions = [
+  "anywhere",
+  "apple",
+  "atari",
+  "b256",
+  "b3d",
+  "baby",
+  "c64",
+  "gw",
+  "qbjs",
+  "vintage",
+  "fusion",
+  "pc",
+  "qbasic",
+  "qb45",
+  "qb64",
+  "qb64pe",
+  "spectrum",
+  "ti99",
+  "trs80",
+  "vb",
+  "vbscript",
+  "vbnet",
+  "vbsmall",
+  "webqb",
+  "zx"
+];
+</script>
+
+<script>
+function populate_droplist( items, owner ) {
+    items.forEach( ( s ) => {
+        const ce = elx( "OPTION" );
+        owner.appendChild( ce );
+        ce . textContent = (
+            ce.value = ( s )
+        );
+    } );
+}
+</script>
+
+<script>
+function populate_editions() {
+    try {
+        const owner = edition_droplist;
+        const items = editions;
+        populate_droplist( items, owner );
+    } catch ( e ) {
+        console.error( e );
+        alert ( e );
+    }
+}
+</script>
+
+</body>
+</html>

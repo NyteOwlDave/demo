@@ -53,3 +53,19 @@ function PointList3( points ) {
     return { points };
 }
 
+
+Geom3dOps = {
+  RandomPoint3
+, Point3
+, Size3
+, LineSeg3
+, Ray3
+, Plane
+, Cuboid
+, Ellipsoid
+, Sphere
+, Patch
+, Poly3
+, PointList3
+};
+

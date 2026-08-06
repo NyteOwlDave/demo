@@ -1,6 +1,7 @@
 
 /* geom-4d.js */
 
+
 function RandomPoint4( x, y, z, w, dx, dy, dz, dw) {
     x += Floor( dx * Random() );
     y += Floor( dy * Random() );
@@ -33,4 +34,14 @@ function PointList4( points ) {
     points = ( points || [] );
     return { points };
 }
+
+
+Geom4dOps = {
+  RandomPoint4
+, Point4, Size4
+, LineSeg4
+, HyperCube
+, HyperEllipe
+, PointList4
+};
 

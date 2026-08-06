@@ -232,7 +232,6 @@ intention of __porting__ this to __another language__.
 - Prepare Sprite Frame
 - Create Explosion
 
-
 ----------------------------------------------------------------
 
 ## Sprite Engine State

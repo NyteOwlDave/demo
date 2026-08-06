@@ -1,0 +1,895 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<style type="text/css">
+td, th { border: 1px solid #c3c3c3; padding: 0 3px 0 3px; }
+table { border-collapse: collapse; }
+img { max-width: 100%; }
+</style>
+<meta name="generator" content="ReText 7.2.3">
+<title>explode-notes</title>
+<style type="text/css">
+</style>
+</head>
+<body>
+<p><head> <link rel="icon" href="favicon.ico" /> </head></p>
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<hr>
+<h1><a href="http://dave-omega/demo/web/explode/explode-notes.html">Explosion Demo</a></h1>
+<p>This demo was inspired by <strong>Shawn Hargreaves</strong>, author of
+The <a href="https://liballeg.org/"><code>Allegro Game Library</code></a> for <code>DJGPP</code>.</p>
+<p><a href="https://www.delorie.com/djgpp/"><code>DJGPP</code></a> is a <code>C++ Compiler</code> by <strong>DJ Delorie</strong>.</p>
+<hr>
+<h2>Draw Frame</h2>
+<pre><code class="language-javascript">
+let frame = -1
+
+function draw() {
+    if ( frame &lt; 0 ) { return; }
+    if ( frame &gt;= Sprites.EXPLODE_FRAMES ) {
+        frame = 0;
+    }
+    const pal = htmlFirePalette.color;
+    Sprites.drawFrame( idCanvas, frame++, 10, 10, pal );
+}
+
+</code></pre>
+<hr>
+<h2>Main Method</h2>
+<pre><code class="language-javascript">
+function main() {
+    Sprites.createFrames();
+    Sprites.createExplosions();
+    messages.textContent = 'Enjoy!';
+    frame = 0;
+    window.setInterval( draw, 20 );
+}
+
+</code></pre>
+<hr>
+<h2>Sprite Rendering</h2>
+<pre><code class="language-javascript">
+const Sprites = {
+    EXPLODE_SIZE     : 80  ,
+    EXPLODE_HOTSPOTS : 64  ,
+    EXPLODE_FRAMES   : 64  ,
+    EXPLODE_COLORS   : 256 ,
+    frame : [] ,
+    color : [] ,
+    // [x] Decomposed
+    createFrames : ( () =&gt; {
+        const ops = Sprites;
+        const frames = ops.EXPLODE_FRAMES;
+        const size   = ops.EXPLODE_SIZE;
+        const pixels = size * size;
+        const create = ( ( n ) =&gt; {
+            if ( n &lt; 1 ) { return; }
+            ops.frame.push( new Uint8Array( pixels ) );
+            create( n - 1 );
+        } );
+        create( frames );
+        console.log( `Created ${spr.EXPLODE_FRAMES} frames` );
+    } ),
+    // [x] Decomposed
+    gettext : ( ( i, x, y ) =&gt; {
+        const ops = Sprites;
+        const w = ops.EXPLODE_SIZE;
+        return ( ops.frame[ i ][ y*w + x ] );
+    } ),
+    // [x] Decomposed
+    puttexel : ( ( i, x, y, c ) =&gt; {
+        const ops = Sprites;
+        const w = ops.EXPLODE_SIZE;
+        return ( ops.frame[ i ][ y*w + x ] = c );
+    } ),
+    // [x] Decomposed
+    createExplosions : ( () =&gt; {
+        const ops = Sprites;
+        // Pixel read/write methods
+        const get = ops.gettexel;
+        const put = ops.puttexel;
+        // Random Value
+        const rnd =()=&gt; Math.random();
+        // Frame count
+        const frames = ops.EXPLODE_FRAMES;
+        // Frame size (width and height)
+        const size = ops.EXPLODE_SIZE;
+        // Center of frame
+        const ctr = ( size &gt;&gt; 1 );
+        // Number of hot spots
+        const HOTSPOTS = ops.EXPLODE_HOTSPOTS;
+        const hot = [];
+        // Create a new hot spot
+        const newSpot = function( c ) {
+            return {
+                x  : ( c + 12 * rnd() - 6 ) ,
+                y  : ( c + 12 * rnd() - 6 ) ,
+                xc : ( rnd() - 0.5 ) ,
+                yc : ( rnd() - 0.5 )
+            }
+        };
+        // Initialize Hotspot map
+        for ( let spot = 0; spot &lt; HOTSPOTS; spot += 1 ) {
+            let f = newSpot( ctr );
+            // console.log( JSON.stringify( f ) );
+            hot.push( f );
+        }
+        // For each sprite (animation frame)
+        for ( let frame = 0; frame &lt; frames; frame += 1 ) {
+            // Calculate axis and rise
+            const axis = frames &gt;&gt; 2;
+            const rise = 128 / axis;
+            // Color delta @ the hotspot
+            let dc = ( frame &lt; axis )
+                ? ( frame * rise )
+                : ( frames - frame + 8 );
+            // For each hotspot
+            for ( let spot = 0; spot &lt; HOTSPOTS; spot += 1 ) {
+                // Get centerpoint for this hotspot
+                let hot_x = Math.floor( hot[ spot ].x );
+                let hot_y = Math.floor( hot[ spot ].y );
+                // We'll scan horizontally from -6 to +6 pixels from hot_x
+                for ( let x = -6; x &lt;= 6; x += 1 ) {
+                    // Offset horizontally from hotspot center
+                    let xx = hot_x + x;
+                    // We'll scan vertically from -6 to +6 pixels from hot_y
+                    for ( let y=-6; y &lt;= 6; y += 1 ) {
+                        // Offset vertically from hotspot center
+                        let yy = hot_y + y;
+                        // If pixel is within the sprite
+                        if ( ( xx &gt;= 0   ) &amp;&amp;
+                             ( yy &gt;= 0   ) &amp;&amp;
+                             ( xx &lt; size ) &amp;&amp;
+                             ( yy&lt;size   ) ) {
+                            // Get the falloff shift factor
+                            let falloff_shift = Math.floor(
+                                ( Math.abs ( x ) + Math.abs( y ) ) / 3
+                            )
+                            // Read pixel at (xx,yy) for this frame
+                            //  and adjust color according to
+                            //  color delta and falloff shift factor.
+                            let pel = (
+                                 get( frame, xx, yy )
+                              + ( dc &gt;&gt; falloff_shift )
+                            );
+                            // Clamp Palette Index
+                            pel = ( ( pel &gt; 255 ) ? 255 : pel );
+                            // Write new Color
+                            put( frame, xx, yy, pel );
+                        }
+                    }
+                }
+                // Move the hotspot ( for the next frame )
+                hot[ spot ].x += hot[ spot ].xc;
+                hot[ spot ].y += hot[ spot ].yc;
+            }
+        }
+    } ),
+    // [x] Decomposed
+    drawFrame : function( canvas, i, u, v, palette ) {
+        const ops = Sprites;
+        const frames = ops.EXPLODE_FRAMES;
+        const size   = ops.EXPLODE_SIZE;
+        if ( ( i&lt;0 ) || ( i &gt; frames ) ) { return; }
+        const gfx = canvas.getContext( '2d' );
+        const get = ops.getpixel;
+        const put = function( p, q, c ) {
+            gfx.beginPath()
+            gfx.fillStyle = (
+                ( c ) ? ( palette[ c ] ) : ( 'black' )
+            );
+            gfx.fillRect(p,q,1,1)
+        };
+        for ( let y = 0; y &lt; size; y += 1 ) {
+            for ( let x = 0; x &lt; size; x += 1 ) {
+                put( u+x, v+y, get( i, x, y ) );
+            }
+        }
+    }
+};
+
+</code></pre>
+<hr>
+<h1>Decomposition</h1>
+<p>The source code above comprises a <strong>complete working system</strong>.</p>
+<p>The only missing part is the <code>HTML</code> and <code>CSS</code>, which are mere
+window dressing for the <strong>presentation</strong> of the algorithm.</p>
+<p>My next goal here is to pick apart the pieces, with the
+intention of <strong>porting</strong> this to <strong>another language</strong>.</p>
+<hr>
+<h2>Decomposed Sections</h2>
+<ul>
+<li>Sprite Engine State</li>
+<li>Draw Canvas Pixel</li>
+<li>Draw Canvas Pixel Raw</li>
+<li>Read Sprite Texel</li>
+<li>Write Sprite Texel</li>
+<li>Read Palette Color</li>
+<li>Write Palette Color</li>
+<li>Write Palette RGB Color</li>
+<li>Compose RGB Color</li>
+<li>Prepare Fire Palette</li>
+<li>Draw Sprite Frame</li>
+<li>Create Hotspot</li>
+<li>Prepare Hotspot Array</li>
+<li>Create Sprite Buffers</li>
+<li>Prepare Sprite Frame</li>
+<li>Create Explosion</li>
+</ul>
+<hr>
+<h2>Sprite Engine State</h2>
+<pre><code class="language-javascript">
+Sprites = {
+    EXPLODE_SIZE     : 80  ,
+    EXPLODE_HOTSPOTS : 64  ,
+    EXPLODE_FRAMES   : 64  ,
+    EXPLODE_COLORS   : 256 ,
+    frame : [] ,
+    color : [] ,
+};
+
+</code></pre>
+<h3>Properties</h3>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>EXPLODE_SIZE</td>
+<td>Integer</td>
+<td>Sprite Width and Height</td>
+</tr>
+<tr>
+<td>EXPLODE_HOTSPOTS</td>
+<td>Integer</td>
+<td>Number of Hotspots</td>
+</tr>
+<tr>
+<td>EXPLODE_FRAMES</td>
+<td>Integer</td>
+<td>Number of Sprite Frames</td>
+</tr>
+<tr>
+<td>EXPLODE_COLORS</td>
+<td>Integer</td>
+<td>Number of Palette Colors</td>
+</tr>
+<tr>
+<td>frame</td>
+<td>Array of Uint8Array</td>
+<td>Sprite Frame Buffers</td>
+</tr>
+<tr>
+<td>color</td>
+<td>Array of RGB Color</td>
+<td>Palette Color Buffer</td>
+</tr>
+</tbody>
+</table>
+<h3>Description</h3>
+<p>The <code>Sprites</code> object contains <strong>global state</strong> for the 
+<strong>Sprite Engine</strong>.</p>
+<hr>
+<h2>Draw Canvas Pixel</h2>
+<pre><code class="language-javascript">
+function draw_pixel( x, y, c, gfx ) {
+    gfx.beginPath();
+    gfx.fillStyle = read_color( c );
+    gfx.fillRect( x, y, 1, 1 );
+};
+
+</code></pre>
+<h3>Arguments</h3>
+<table>
+<thead>
+<tr>
+<th>Arg</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>x</td>
+<td>Pixel's Horizontal Coordinate</td>
+</tr>
+<tr>
+<td>y</td>
+<td>Pixel's Vertical Coordinate</td>
+</tr>
+<tr>
+<td>c</td>
+<td>Pixel's Palette Color Index</td>
+</tr>
+<tr>
+<td>gfx</td>
+<td>Canvas 2D Rendering Context</td>
+</tr>
+</tbody>
+</table>
+<h3>Description</h3>
+<p>Draws a single <strong>Pixel</strong> to a <strong>Canvas</strong>, using 
+a <strong>Palette Color Index</strong>.</p>
+<hr>
+<h2>Draw Canvas Pixel Raw</h2>
+<pre><code class="language-javascript">
+function draw_pixel_raw( x, y, style, gfx ) {
+    gfx.beginPath();
+    gfx.fillStyle = style;
+    gfx.fillRect( x, y, 1, 1 );
+};
+
+</code></pre>
+<h3>Arguments</h3>
+<table>
+<thead>
+<tr>
+<th>Arg</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>x</td>
+<td>Pixel's Horizontal Coordinate</td>
+</tr>
+<tr>
+<td>y</td>
+<td>Pixel's Vertical Coordinate</td>
+</tr>
+<tr>
+<td>style</td>
+<td>Pixel's CSS Fill Style</td>
+</tr>
+<tr>
+<td>gfx</td>
+<td>Canvas 2D Rendering Context</td>
+</tr>
+</tbody>
+</table>
+<h3>Description</h3>
+<p>Draws a single <strong>Pixel</strong> to a <strong>Canvas</strong>, using 
+a <strong>CSS Style</strong>.</p>
+<hr>
+<h2>Read Sprite Texel</h2>
+<pre><code class="language-javascript">
+function read_texel( u, v, i ) {
+    const ops = Sprites;
+    const w = ops.EXPLODE_SIZE;
+    return( ops.frame[ i ][ w * v + u ] );
+};
+
+</code></pre>
+<h3>Arguments</h3>
+<table>
+<thead>
+<tr>
+<th>Arg</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>u</td>
+<td>Texel's Horizontal Coordinate</td>
+</tr>
+<tr>
+<td>v</td>
+<td>Texel's Vertical Coordinate</td>
+</tr>
+<tr>
+<td>i</td>
+<td>Sprite's Frame Buffer Index</td>
+</tr>
+</tbody>
+</table>
+<h3>Description</h3>
+<p>Reads a single <strong>Texel</strong> from any <strong>Sprite Frame Buffer</strong>.</p>
+<hr>
+<h2>Write Sprite Texel</h2>
+<pre><code class="language-javascript">
+function write_texel( u, v, c, i ) {
+    const ops = Sprites;
+    const w = ops.EXPLODE_SIZE;
+    return ( ops.frame[ i ][ w * v + u ] = c );
+};
+
+</code></pre>
+<h3>Arguments</h3>
+<table>
+<thead>
+<tr>
+<th>Arg</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>u</td>
+<td>Texel's Horizontal Coordinate</td>
+</tr>
+<tr>
+<td>v</td>
+<td>Texel's Vertical Coordinate</td>
+</tr>
+<tr>
+<td>c</td>
+<td>Texel's Palette Color Index</td>
+</tr>
+<tr>
+<td>i</td>
+<td>Sprite's Frame Buffer Index</td>
+</tr>
+</tbody>
+</table>
+<h3>Description</h3>
+<p>Writes a single <strong>Texel</strong> to any <strong>Sprite Frame Buffer</strong>.</p>
+<hr>
+<h2>Read Palette Color</h2>
+<pre><code class="language-javascript">
+function read_color( c ) {
+    const ops   = Sprites;
+    const color = ops.color;
+    c = ( c % color.length );
+    return ( ( c &gt; 0 ) ? color[ c ] : &quot;black&quot; );
+}
+
+</code></pre>
+<h3>Arguments</h3>
+<table>
+<thead>
+<tr>
+<th>Arg</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>c</td>
+<td>Color's Palette Index</td>
+</tr>
+</tbody>
+</table>
+<h3>Description</h3>
+<p>Reads a single <strong>Color</strong> from the <strong>Color Palette</strong>.</p>
+<p><strong>Colors</strong> are <strong>CSS Styles</strong> in <code>rgb()</code> format.</p>
+<hr>
+<h2>Write Palette Color</h2>
+<pre><code class="language-javascript">
+function write_color( c, style ) {
+    const ops   = Sprites;
+    const color = ops.color;
+    c = ( c % color.length );
+    if ( c &gt; 0 ) {
+        return ( color[ c ] = style );
+    }
+    console.warn( `Color Index is Out of Range`, i );
+}
+
+</code></pre>
+<h3>Arguments</h3>
+<table>
+<thead>
+<tr>
+<th>Arg</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>c</td>
+<td>Color's Palette Index</td>
+</tr>
+<tr>
+<td>style</td>
+<td>Color's CSS Style</td>
+</tr>
+</tbody>
+</table>
+<h3>Description</h3>
+<p>Writes a single <strong>Color</strong> to the <strong>Color Palette</strong>.</p>
+<p><strong>Colors</strong> are <strong>CSS Styles</strong> in <code>rgb()</code> format.</p>
+<hr>
+<h2>Write Palette RGB Color</h2>
+<pre><code class="language-javascript">
+function write_rgb( c, r, g, b ) {
+    return write_color( c, compose_rgb( r, g, b ) );
+}
+
+</code></pre>
+<h3>Arguments</h3>
+<table>
+<thead>
+<tr>
+<th>Arg</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>c</td>
+<td>Color's Palette Index</td>
+</tr>
+<tr>
+<td>r</td>
+<td>Color's Red Component</td>
+</tr>
+<tr>
+<td>g</td>
+<td>Color's Green Component</td>
+</tr>
+<tr>
+<td>b</td>
+<td>Color's Blue Component</td>
+</tr>
+</tbody>
+</table>
+<h3>Description</h3>
+<p>Writes a single <strong>Color</strong> to the <strong>Color Palette</strong>.</p>
+<p><code>RGB</code> Components are converted to <strong>CSS Styles</strong> in <code>rgb()</code>
+format.</p>
+<hr>
+<h2>Compose RGB Color</h2>
+<pre><code class="language-javascript">
+function compose_rgb( r, g, b ) {
+    function byte( n ) {
+        n = ( parseInt( n ) || 0 );
+        return Math.min( Math.max( n, 0, 255 ) );
+    }
+    r = byte( r );
+    g = byte( g );
+    b = byte( b );
+    return ( `rgb(${r},${g},${b})` );
+}
+
+</code></pre>
+<h3>Arguments</h3>
+<table>
+<thead>
+<tr>
+<th>Arg</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>r</td>
+<td>Color's Red Component</td>
+</tr>
+<tr>
+<td>g</td>
+<td>Color's Green Component</td>
+</tr>
+<tr>
+<td>b</td>
+<td>Color's Blue Component</td>
+</tr>
+</tbody>
+</table>
+<h3>Description</h3>
+<p>Converts <code>RGB</code> Components to <strong>CSS Styles</strong> in <code>rgb()</code> format.</p>
+<hr>
+<h2>Prepare Fire Palette</h2>
+<pre><code class="language-javascript">
+function prepare_fire_palette( count ) {
+    // TODO ...
+}
+
+</code></pre>
+<h3>Arguments</h3>
+<table>
+<thead>
+<tr>
+<th>Arg</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>count</td>
+<td>Number of Palette Entries</td>
+</tr>
+</tbody>
+</table>
+<h3>Description</h3>
+<p>Prepares a <strong>Palette</strong> using <strong>Fire-like Colors</strong>.</p>
+<hr>
+<h2>Draw Sprite Frame</h2>
+<pre><code class="language-javascript">
+function draw_frame( index, x, y, canvas ) {
+    const ops  = Sprites;
+    const size = ops.EXPLODE_SIZE;
+    if ( ( index &gt;= frames ) || ( index &lt; 0 ) ) {
+        console.warn( `Frame Index is Out of Range`, index );
+        return;
+    }
+    const gfx = canvas.getContext( '2d' );
+    for ( let j = 0; j &lt; size; j += 1 ) {
+        for ( let i = 0; i &lt; size; i += 1 ) {
+            draw_pixel(
+                ( x+i ) ,
+                ( y+j ) ,
+                read_texel( i, j, index ) ,
+                gfx
+            );
+        }
+    }
+};
+
+</code></pre>
+<h3>Arguments</h3>
+<table>
+<thead>
+<tr>
+<th>Arg</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>index</td>
+<td>Sprite's Frame Index</td>
+</tr>
+<tr>
+<td>x</td>
+<td>Horizontal Target Coordinate</td>
+</tr>
+<tr>
+<td>y</td>
+<td>Vertical Target Coordinate</td>
+</tr>
+<tr>
+<td>canvas</td>
+<td>Reference to Target HTML Canvas</td>
+</tr>
+</tbody>
+</table>
+<h3>Description</h3>
+<p>Draws a single <strong>Sprite Frame</strong> to the <strong>Canvas</strong>.</p>
+<hr>
+<h2>Create Hotspot</h2>
+<pre><code class="language-javascript">
+function create_hotspot( center ) {
+    const rnd =()=&gt; Math.random();
+    return {
+        x  : ( center + 12 * rnd() - 6 ) ,
+        y  : ( center + 12 * rnd() - 6 ) ,
+        xc : ( rnd() - 0.5 ) ,
+        yc : ( rnd() - 0.5 )
+    }
+}
+
+</code></pre>
+<h3>Arguments</h3>
+<table>
+<thead>
+<tr>
+<th>Arg</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>center</td>
+<td>Horizontal and Vertical Center</td>
+</tr>
+</tbody>
+</table>
+<h3>Description</h3>
+<p>Creates and initializes a <strong>Hotspot</strong> object.</p>
+<hr>
+<h2>Prepare Hotspot Array</h2>
+<pre><code class="language-javascript">
+function prepare_hotspots() {
+    const ops   = Sprites;
+    const count = ops.EXPLODE_HOTSPOTS;
+    const size  = ops.EXPLODE_SIZE;
+    const center = ( size &gt;&gt; 1 );
+    const hot = [];
+    for ( let spot = 0; spot &lt; count; spot += 1 ) {
+        const o = create_hotspot( center );
+        hot.push( o );
+    }
+    return ( hot );
+}
+
+</code></pre>
+<h3>Arguments</h3>
+<table>
+<thead>
+<tr>
+<th>Arg</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>n/a</td>
+<td>n/a</td>
+</tr>
+</tbody>
+</table>
+<h3>Description</h3>
+<p>Prepares an array of explosion <strong>Hotspot</strong> objects.</p>
+<p>These are <i>temporary</i> constructs. They're used during the
+creation of <strong>Explosion Sprite Images</strong>. Once this is finished,
+these objects are discarded.</p>
+<hr>
+<h2>Create Sprite Buffers</h2>
+<pre><code class="language-javascript">
+function create_sprite_buffers() {
+    const ops = Sprites;
+    const size   = ops.EXPLODE_SIZE;
+    const texels = size * size;
+    const create = ( ( n ) =&gt; {
+        if ( n &lt; 1 ) { return; }
+        ops.frame.push( new Uint8Array( texels ) );
+        create( n - 1 );
+    } );
+    ops.frame = [];
+    let n = ops.EXPLODE_FRAMES;
+    create( n );
+    n = ops.frame.length;
+    console.log( `Created ${s} frames` );
+}
+
+</code></pre>
+<h3>Arguments</h3>
+<table>
+<thead>
+<tr>
+<th>Arg</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>n/a</td>
+<td>n/a</td>
+</tr>
+</tbody>
+</table>
+<h3>Description</h3>
+<p>Creates an empty <strong>Texel</strong> buffer for each <strong>Sprite Frame</strong>.</p>
+<hr>
+<h2>Prepare Sprite Frame</h2>
+<pre><code class="language-javascript">
+function prepare_sprite_frame( index, hot, axis, rise ) {
+    const ops = Sprites;
+    const size = ops.EXPLODE_SIZE;
+    const dc = (
+          ( index &lt; axis )
+        ? ( index * rise )
+        : ( ops.frame.length - index + 8 )
+    );
+    const read =( x, y )=&gt; {
+        read_texel( x, y, index );
+    }
+    const write =( x, y, c )=&gt; {
+        write_texel( x, y, c, index );
+    }
+    const shift =( x, y )=&gt; {
+        return Math.floor(
+            ( Math.abs( x ) + Math.abs( y ) ) / 3
+        );
+    }
+    for ( let spot = 0; spot &lt; hot.length; spot += 1 ) {
+        const hot_x = Math.floor( hot[ spot ].x );
+        const hot_y = Math.floor( hot[ spot ].y );
+        for ( let x = -6; x &lt;= 6; x += 1 ) {
+            const xx = hot_x + x;
+            if ( xx &lt;  0    ) { continue; }
+            if ( xx &gt;= size ) { break;    }
+            for ( let y = -6; y &lt;= 6; y += 1 ) {
+                const yy = hot_y + y;
+                if ( yy &lt;  0    ) { continue; }
+                if ( yy &gt;= size ) { break;    }
+                const texel = Math.min(
+                     255 ,
+                     read( xx, yy )
+                  + ( dc &gt;&gt; shift( x, y ) )
+                );
+                write( xx, yy, texel );
+            }
+        }
+        hot[ spot ].x += hot[ spot ].xc;
+        hot[ spot ].y += hot[ spot ].yc;
+    }
+}
+
+</code></pre>
+<h3>Arguments</h3>
+<table>
+<thead>
+<tr>
+<th>Arg</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>pending</td>
+<td>pending</td>
+</tr>
+</tbody>
+</table>
+<h3>Description</h3>
+<ul>
+<li>( <code>pending</code> )</li>
+</ul>
+<hr>
+<h2>Create Explosion</h2>
+<pre><code class="language-javascript">
+function create_explosion() {
+    const ops = Sprites;
+    const frames = ops.EXPLODE_FRAMES;
+    const axis = frames &gt;&gt; 2;
+    const rise = 128 / axis;
+    const hot = prepare_hot_spots();
+    create_sprite_buffers();
+    for ( let i = 0; i &lt; frames; i += 1 ) {
+        prepare_sprite_frame( i, hot, axis, rise );
+    }
+}
+
+</code></pre>
+<h3>Arguments</h3>
+<table>
+<thead>
+<tr>
+<th>Arg</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>pending</td>
+<td>pending</td>
+</tr>
+</tbody>
+</table>
+<h3>Description</h3>
+<ul>
+<li>( <code>pending</code> )</li>
+</ul>
+<hr>
+<style>
+@import url("./../../style/every-page.css");
+</style>
+
+<style>
+pre {
+    box-sizing : border-box;
+    max-width  : calc( 100vw - 64px );
+}
+</style>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script>
+; iwm = Object.keys( window ).sort()
+</script>
+
+<script>
+; prolog = {}
+; prolog . title = ( `Explosion Demo` )
+</script>
+
+<script>
+; cls =()=> console.clear()
+; agn =()=> location.reload()
+</script>
+
+<script>
+; doc = document
+; doc . title = ( prolog.title )
+</script>
+
+</body>
+</html>

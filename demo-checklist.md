@@ -68,7 +68,8 @@
 ### `🥁` Basic `🃏` Icons `❔` Pending
 
 - [`❔`] `🥁 apple`
-- [`❔`] `🥁 atari`
+- [`❔`] `🥁 b256`
+- [`❔`] `🥁 b3d`
 - [`❔`] `🥁 baby`
 - [`❔`] `🥁 c64`
 - [`❔`] `🥁 classic`
@@ -78,6 +79,8 @@
 
 ### `🥁` Basic `🃏` Icons `✅` Complete
 
+- [`✅`] `🥁 atari`
+- [`✅`] `🥁 free`
 - [`✅`] `🥁 fusion`
 - [`✅`] `🥁 pc-basic`
 - [`✅`] `🥁 qb`

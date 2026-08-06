@@ -1,5 +1,8 @@
 <head> <link rel="icon" href="./favicon.ico" /> </head>
 
+[qb64-notes]:
+<http://dave-omega/demo/notes/qb64-notes.html>
+
 ----------------------------------------------------------------
 
 # Mandelbrot 3D
@@ -94,6 +97,7 @@ function mtx_rotate( x, y, z, m ) {
 
 > [Gemini Chat][gemini-chat]
 > [Euclidean Space][euclidean]
+> [QB64 Notes][qb64-notes]
 
 ----------------------------------------------------------------
 

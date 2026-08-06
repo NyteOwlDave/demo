@@ -69,9 +69,11 @@
 
 ## Navigation
 
-> [Demo Checklist](./../demo-checklist.html)
 
 > [Pixmap Menu](./pixmap/pixmap-menu.html)
+> [Demo Menu](./../demo-menu.html)
+
+> [Demo Checklist](./../demo-checklist.html)
 
 > [Folder Tree](./tree.php)
 > [File System](./)
