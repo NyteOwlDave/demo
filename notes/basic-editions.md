@@ -57,6 +57,8 @@ https://qbjs.org
 https://segaretro.org/BASIC_Level_III_A
 https://smallbasic-publicwebsite.azurewebsites.net/
 https://tarjan.itch.io/thoreaubasic
+https://visionbasic.net/
+https://www.bbcbasic.co.uk/bbcsdl/index.html
 https://www.brilorsoftware.com/fb/pages/home.html
 https://www.parallax.com/education/programming-languages/pbasic
 https://www.playbasic.com/
@@ -174,8 +176,9 @@ edition.names = [
   "gw", "pbasic", "pc", "pure", "play",
   "qbasic", "qb45", "qb64", "qb64pe", "qbjs",
   "sega", "spectrum",
-  "ti99", "trs80",
-  "vb", "vbscript", "vbnet", "vbsmall", "vintage",
+  "thoreau",  "ti99", "trs80",
+  "vb", "vbscript", "vbnet", "vbsmall",
+  "vintage", "vision",
   "webqb", "zx"
 ];
 </script>
