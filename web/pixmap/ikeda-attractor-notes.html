@@ -1,0 +1,328 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<style type="text/css">
+td, th { border: 1px solid #c3c3c3; padding: 0 3px 0 3px; }
+table { border-collapse: collapse; }
+img { max-width: 100%; }
+</style>
+<meta name="generator" content="ReText 7.2.3">
+<title>ikeda-attractor-notes</title>
+<style type="text/css">
+</style>
+</head>
+<body>
+<style>
+@import url("./../../style/every-page.css");
+</style>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<hr>
+<h1><a href="http://dave-omega/demo/web/pixmap/ikeda-attractor-notes.html" title="Omega Edition">Ikeda Attractor Notes</a></h1>
+<hr>
+<h2>Comment Section</h2>
+<pre><code class="language-basic">
+'
+' NyteOwlDave ~ 2026-AUG-06
+' Inspired by Equations in Motion
+' https://www.facebook.com/equationsinmotion
+' Platform : QB64 Phoenix
+' Dedicated to the BASIC Programming &quot;Gang&quot;
+'
+
+</code></pre>
+<div center index="0">
+    <button onclick="on_edit(event)">Edit</button>
+    <button onclick="on_view(event)">View</button>
+</div>
+
+<hr>
+<h2>Shares Section</h2>
+<pre><code class="language-basic">
+_Title &quot;Ikeda Attractor&quot;
+
+Dim Shared C_MIDNIGHT
+Dim Shared C_GOLD
+Dim Shared U0#
+Dim Shared UNOW#
+Dim Shared INC#
+Dim Shared DOTS_PER_FRAME%
+Dim Shared TOTAL_FRAMES%
+Dim Shared THIS_FRAME%
+Dim Shared SW
+Dim Shared SH
+Dim Shared CX
+Dim Shared CY
+
+</code></pre>
+<div center index="1">
+    <button onclick="on_edit(event)">Edit</button>
+    <button onclick="on_view(event)">View</button>
+</div>
+
+<hr>
+<h2>Screen Setup</h2>
+<pre><code class="language-basic">
+SW = 800: CX = SW \ 2
+SH = 800: CY = SH \ 2
+
+Screen _NewImage(SW, SH, 32)
+
+</code></pre>
+<div center index="2">
+    <button onclick="on_edit(event)">Edit</button>
+    <button onclick="on_view(event)">View</button>
+</div>
+
+<hr>
+<h2>Color Setup</h2>
+<pre><code class="language-basic">
+C_GOLD = _RGB(255, 215, 0)
+C_MIDNIGHT = _RGB(20, 20, 64)
+
+</code></pre>
+<div center index="3">
+    <button onclick="on_edit(event)">Edit</button>
+    <button onclick="on_view(event)">View</button>
+</div>
+
+<hr>
+<h2>Animation Setup</h2>
+<pre><code class="language-basic">
+DOTS_PER_FRAME% = 1750
+TOTAL_FRAMES% = 350
+THIS_FRAME% = 0
+
+U0# = 0.7
+U1# = 0.92
+UX# = U1# - U0#
+
+UNOW# = U0#
+INC# = UX# / TOTAL_FRAMES%
+
+</code></pre>
+<div center index="4">
+    <button onclick="on_edit(event)">Edit</button>
+    <button onclick="on_view(event)">View</button>
+</div>
+
+<hr>
+<h2>Animation Loop</h2>
+<pre><code class="language-basic">
+Background C_GOLD
+
+Do
+    _Limit 60
+    Render
+    If InKey$ = Chr$(27) Then
+        Exit Do
+    End If
+Loop
+
+End
+
+</code></pre>
+<div center index="5">
+    <button onclick="on_edit(event)">Edit</button>
+    <button onclick="on_view(event)">View</button>
+</div>
+
+<hr>
+<h2>Theta Subroutine</h2>
+<pre><code class="language-basic">
+' Angle for Next Pattern Point
+Function Theta (xn, yn)
+    n = 1 + xn * xn + yn * yn
+    Theta = (0.4 - 6 / n)
+End Function
+
+</code></pre>
+<div center index="6">
+    <button onclick="on_edit(event)">Edit</button>
+    <button onclick="on_view(event)">View</button>
+</div>
+
+<hr>
+<h2>Advance Subroutine</h2>
+<pre><code class="language-basic">
+' Advance to the Next Pattern Point
+Sub Advance (u, pt())
+    xn = pt(1)
+    yn = pt(2)
+    t = Theta(xn, yn)
+    ct = Cos(t)
+    st = Sin(t)
+    pt(1) = u * (xn * ct - yn * st) + 1
+    pt(2) = u * (xn * st + yn * ct)
+End Sub
+
+</code></pre>
+<div center index="7">
+    <button onclick="on_edit(event)">Edit</button>
+    <button onclick="on_view(event)">View</button>
+</div>
+
+<hr>
+<h2>Render Subroutine</h2>
+<pre><code class="language-basic">
+' Render a Single Frame
+Sub Render ()
+    If (THIS_FRAME% &gt;= TOTAL_FRAMES%) Then
+        THIS_FRAME% = 0
+        UNOW# = U0#
+        Background C_GOLD
+    Else
+        THIS_FRAME% = THIS_FRAME% + 1
+        UNOW# = UNOW# + INC#
+        u = Round(UNOW#, 3)
+        Locate 2, 2
+        Print &quot; U = &quot;; u; &quot; &quot;
+        Locate 4, 2
+        Print &quot; Frame = &quot;; THIS_FRAME%; &quot; &quot;
+    End If
+    Dim pt(2)
+    pt(1) = 0.1: pt(2) = 0.1
+    For i = 1 To DOTS_PER_FRAME%
+        Advance UNOW#, pt()
+        x = 200 * pt(1): y = 200 * pt(2)
+        PSet (CX + x - 140, CY - y - 100), C_MIDNIGHT
+    Next i
+End Sub
+
+</code></pre>
+<div center index="8">
+    <button onclick="on_edit(event)">Edit</button>
+    <button onclick="on_view(event)">View</button>
+</div>
+
+<hr>
+<h2>Background Subroutine</h2>
+<pre><code class="language-basic">
+Sub Background (c)
+    Line (1, 1)-(SW - 1, SH - 1), c, BF
+End Sub
+
+</code></pre>
+<div center index="9">
+    <button onclick="on_edit(event)">Edit</button>
+    <button onclick="on_view(event)">View</button>
+</div>
+
+<hr>
+<h2>Round Function</h2>
+<pre><code class="language-basic">
+Function Round (n!, digits%)
+    k% = 10 ^ digits%
+    n! = Int(n! * k% + 0.5)
+    Round = n! / k%
+End Function
+
+</code></pre>
+<div center index="10">
+    <button onclick="on_edit(event)">Edit</button>
+    <button onclick="on_view(event)">View</button>
+</div>
+
+<hr>
+<h2>RandomPoint Subroutine</h2>
+<pre><code class="language-basic">
+' Used During Testing &amp; Debugging
+Sub RandomPoint (pt())
+    pt(1) = Rnd * SW - CX
+    pt(2) = Rnd * SH - CY
+End Sub
+
+</code></pre>
+<div center index="11">
+    <button onclick="on_edit(event)">Edit</button>
+    <button onclick="on_view(event)">View</button>
+</div>
+
+<hr>
+<header id="header">
+  <div id="messages"></div>
+</header>
+
+<footer id="footer">
+  <input wide id="footer_input" onchange="perform(event)" />
+</footer>
+
+<hr>
+<script>
+; iwm = Object.keys( window ).sort()
+</script>
+
+<script>
+; doc = document
+</script>
+
+<script>
+; cls =()=> console.clear()
+; agn =()=> location.reload()
+</script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script src="./core-ops.js"></script>
+<script src="./scalar.js"></script>
+<script src="./vector.js"></script>
+<script src="./geom-2d.js"></script>
+<script src="./rgba.js"></script>
+<script src="./pixmap.js"></script>
+
+<script src="./app/pixmap-app.js"></script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script>
+function main( event ) {
+    try {
+        doc . title = ( `Ikeda Attractor Notes` );
+        message( "Ready for Action!" );
+    } catch ( e ) {
+        crashed ( e );
+    }
+}
+</script>
+
+<script>
+addEventListener( "load", main );
+</script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script>
+function get_viewer( event ) {
+    const sender = event.target;
+    const parent = sender.parentElement;
+    const i = parent.getAttribute( "index" );
+    const m = all( "PRE" );
+    const viewer = ( m[ i ] );
+    if ( viewer ) { return ( viewer ); }
+    throw new Error( `No Viewer at Index : ${i}` );
+}
+</script>
+
+<script>
+function on_edit( event ) {
+    try {
+        mine( event );
+        const viewer = get_viewer( event );
+        const cc = viewer.innerText.length;
+        const s = ( `Character Count : ${cc}` );
+    } catch ( e ) {
+        crashed ( e );
+    }
+}
+</script>
+
+<script>
+function on_view( event ) {
+    on_edit( event );
+}
+</script>
+
+</body>
+</html>

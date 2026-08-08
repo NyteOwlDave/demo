@@ -194,7 +194,7 @@ function init_demo() {
 function run_demo() {
 	const ScreenResolution = Screen.map_size();
 	const CameraPosition = {};
-	Vec3( 1, 1, 1, CameraPosition )
+	Vec3( 1, 5, 5, CameraPosition )
 	const MaxDistance = 4;
 	const MaxRaySteps = 8;
 	const HitThreshold = 0.001;
