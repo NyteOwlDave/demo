@@ -1,9 +1,21 @@
 
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
 [xojo]:
 <https://xojo.com>
 "Xojo IDE"
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+[basix]:
+<https://www.facebook.com/groups/basicxgame/>
+"BASIX Facebook Group"
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+[editions-wiki]:
+<https://en.wikipedia.org/wiki/List_of_BASIC_dialects>
+"BASIC Edition Wiki"
 
 [basic-wiki]:
 <https://en.wikipedia.org/wiki/BASIC>
@@ -35,6 +47,10 @@
 <http://dave-omega/demo/notes/qb64-notes.html>
 "Omega Edition"
 
+[ramdisk-tower]:
+<http://dave-tower/ramdisk/basic/basic-editions.html>
+"Tower Edition" 
+
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
 [me]:
@@ -46,6 +62,8 @@
 # [BASIC Editions][me]
 
 ----------------------------------------------------------------
+
+## HAL Links
 
 ```hal
 
@@ -68,7 +86,71 @@ https://www.purebasic.com
 
 ----------------------------------------------------------------
 
-# Edition List
+## NAV Links
+
+```nav
+
++ Title := Free BASIC
+@ https://freebasic.net
+| Name := free
+
++ Title := Small BASIC
+@ https://marketplace.visualstudio.com/items?itemName=ModernVBNET.sVBInstaller
+| Name := vbsmall
+
++ Title := Small Basic 2
+@ https://smallbasic-publicwebsite.azurewebsites.net/
+| Name := vbsmall2
+
++ Title := QB64
+@ https://qb64.com
+| Name := qb64
+
++ Title := QB64 Phoenix
+@ https://qb64phoenix.com
+| Name := qb64pe
+
++ Title := QBJS
+@ https://qbjs.org
+| Name := qbjs
+
++ Title := Sega Level III
+@ https://segaretro.org/BASIC_Level_III_A
+| Name := sega
+
++ Title := Thoreau BASIC
+@ https://tarjan.itch.io/thoreaubasic
+| Name := thoreau
+
++ Title := Vision BASIC
+@ https://visionbasic.net/
+| Name := vision
+
++ Title := BBC BASIC
+@ https://www.bbcbasic.co.uk/bbcsdl/index.html
+| Name := bbc
+
++ Title := ?
+@ https://www.brilorsoftware.com/fb/pages/home.html
+| Name := ?
+
++ Title := P BASIC
+@ https://www.parallax.com/education/programming-languages/pbasic
+| Name := pbasic
+
++ Title := Play BASIC
+@ https://www.playbasic.com/
+| Name := play
+
++ Title := Pure BASIC
+@ https://www.purebasic.com
+| Name := pure
+
+```
+
+----------------------------------------------------------------
+
+# [Edition List][editions-wiki]
 
 <div center>
 <section id="droplist_section">
@@ -105,9 +187,15 @@ https://www.purebasic.com
 
 ----------------------------------------------------------------
 
+# Groups
+
+> ["BASIX Facebook Group][basix]
+
+----------------------------------------------------------------
+
 # RAM Disk Menu
 
-> [Tower Edition](http://dave-tower/ramdisk/basic/basic-editions.html)
+> [Tower Edition][ramdisk-tower]
 
 ----------------------------------------------------------------
 

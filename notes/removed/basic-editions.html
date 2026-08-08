@@ -19,93 +19,19 @@ img { max-width: 100%; }
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
-<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-
-<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-
 <hr>
 <h1><a href="http://dave-omega/demo/notes/basic-editions.html" title="Omega Edition">BASIC Editions</a></h1>
 <hr>
-<h2>HAL Links</h2>
 <pre><code class="language-hal">
-https://freebasic.net
-https://marketplace.visualstudio.com/items?itemName=ModernVBNET.sVBInstaller
+https://qbjs.org
 https://qb64.com
 https://qb64phoenix.com
-https://qbjs.org
-https://segaretro.org/BASIC_Level_III_A
-https://smallbasic-publicwebsite.azurewebsites.net/
-https://tarjan.itch.io/thoreaubasic
-https://visionbasic.net/
-https://www.bbcbasic.co.uk/bbcsdl/index.html
-https://www.brilorsoftware.com/fb/pages/home.html
+https://freebasic.net
 https://www.parallax.com/education/programming-languages/pbasic
-https://www.playbasic.com/
-https://www.purebasic.com
 
 </code></pre>
 <hr>
-<h2>NAV Links</h2>
-<pre><code class="language-nav">
-+ Title := Free BASIC
-@ https://freebasic.net
-| Name := free
-
-+ Title := Small BASIC
-@ https://marketplace.visualstudio.com/items?itemName=ModernVBNET.sVBInstaller
-| Name := vbsmall
-
-+ Title := Small Basic 2
-@ https://smallbasic-publicwebsite.azurewebsites.net/
-| Name := vbsmall2
-
-+ Title := QB64
-@ https://qb64.com
-| Name := qb64
-
-+ Title := QB64 Phoenix
-@ https://qb64phoenix.com
-| Name := qb64pe
-
-+ Title := QBJS
-@ https://qbjs.org
-| Name := qbjs
-
-+ Title := Sega Level III
-@ https://segaretro.org/BASIC_Level_III_A
-| Name := sega
-
-+ Title := Thoreau BASIC
-@ https://tarjan.itch.io/thoreaubasic
-| Name := thoreau
-
-+ Title := Vision BASIC
-@ https://visionbasic.net/
-| Name := vision
-
-+ Title := BBC BASIC
-@ https://www.bbcbasic.co.uk/bbcsdl/index.html
-| Name := bbc
-
-+ Title := ?
-@ https://www.brilorsoftware.com/fb/pages/home.html
-| Name := ?
-
-+ Title := P BASIC
-@ https://www.parallax.com/education/programming-languages/pbasic
-| Name := pbasic
-
-+ Title := Play BASIC
-@ https://www.playbasic.com/
-| Name := play
-
-+ Title := Pure BASIC
-@ https://www.purebasic.com
-| Name := pure
-
-</code></pre>
-<hr>
-<h1><a href="https://en.wikipedia.org/wiki/List_of_BASIC_dialects" title="BASIC Edition Wiki">Edition List</a></h1>
+<h1>Edition List</h1>
 <div center>
 <section id="droplist_section">
   <select id="edition_droplist"></select>
@@ -132,28 +58,13 @@ https://www.purebasic.com
 <a href="https://qb64phoenix.com/qb64wiki/index.php/Main_Page" title="QB64 Phoenix Wiki">QB64 Phoenix Wiki</a>
 <a href="https://en.wikipedia.org/wiki/QuickBASIC" title="QB45 Wiki">QB45 Wiki</a>
 <a href="https://en.wikipedia.org/wiki/QBasic" title="QBasic Wiki">QBasic Wiki</a>
-<a href="http://dave-legacy/app/pc-basic/docs/source/documentation.html" title="PC Basic Manual">PC Basic Manual</a>
-<a href="https://xojo.com" title="Xojo IDE">Xojo IDE</a></p>
-</blockquote>
-<hr>
-<h1>Groups</h1>
-<blockquote>
-<p><a href="https://www.facebook.com/groups/basicxgame/" title="BASIX Facebook Group">"BASIX Facebook Group</a></p>
+<a href="http://dave-legacy/app/pc-basic/docs/source/documentation.html" title="PC Basic Manual">PC Basic Manual</a></p>
 </blockquote>
 <hr>
 <h1>RAM Disk Menu</h1>
 <blockquote>
-<p><a href="http://dave-tower/ramdisk/basic/basic-editions.html" title="Tower Edition">Tower Edition</a></p>
+<p><a href="http://dave-tower/ramdisk/basic/basic-editions.html">Tower Edition</a></p>
 </blockquote>
-<hr>
-<header id="header">
- <div id="messages"></div>
-</header>
-
-<footer id="footer">
-  <input wide id="footer_input" onchange="perform(event)"/>
-</footer>
-
 <hr>
 <style>
 @import url("./../style/every-page.css");
@@ -203,17 +114,34 @@ edition.index = dct();
 
 <script updated="2026-AUG-06">
 edition.names = [
-  "anywhere", "apple", "atari",
-  "b256", "b3d", "baby", "bazz", "bbc",
-  "c64", "classic",
-  "free", "fusion", "future",
-  "gw", "pbasic", "pc", "pure", "play",
-  "qbasic", "qb45", "qb64", "qb64pe", "qbjs",
-  "sega", "spectrum",
-  "thoreau",  "ti99", "trs80",
-  "vb", "vbscript", "vbnet", "vbsmall",
-  "vintage", "vision",
-  "webqb", "zx"
+  "anywhere",
+  "apple",
+  "atari",
+  "b256",
+  "b3d",
+  "baby",
+  "c64",
+  "classic",
+  "free",
+  "fusion",
+  "gw",
+  "pbasic",
+  "pc",
+  "qbasic",
+  "qb45",
+  "qb64",
+  "qb64pe",
+  "qbjs",
+  "spectrum",
+  "ti99",
+  "trs80",
+  "vb",
+  "vbscript",
+  "vbnet",
+  "vbsmall",
+  "vintage",
+  "webqb",
+  "zx"
 ];
 </script>
 
@@ -291,8 +219,6 @@ function populate_droplist( items, owner ) {
             ce.value = ( s )
         );
     } );
-    const n = ( items.length );
-    messages.textContent = ( `Total Versions : ${n}` );
 }
 </script>
 
