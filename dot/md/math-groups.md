@@ -56,7 +56,7 @@
 
 ----------------------------------------------------------------
 
-## Groups
+## Pages
 
 ```hal
 https://www.facebook.com/Math1089.9801
@@ -64,12 +64,44 @@ https://www.facebook.com/robolsmath
 https://www.facebook.com/augustomens
 https://www.facebook.com/mritunjaylectureslive
 https://www.facebook.com/emmelactutorials
+https://www.facebook.com/nadia.satya.2025
 https://www.facebook.com/calculusfb
-https://www.facebook.com/profile.php?id=61577495012914
-https://www.facebook.com/groups/1028939680547653/
-https://www.facebook.com/groups/391950357895182/
+https://www.facebook.com/organicgeo
+```
+
+### Extractor
+
+- `(s) => basename(s)`
+
+----------------------------------------------------------------
+
+## Groups
+
+```hal
+https://www.facebook.com/groups/1028939680547653
+https://www.facebook.com/groups/391950357895182
 https://www.facebook.com/groups/313919979559265
 ```
+
+### Extractor
+
+- `(s) => basename(s)`
+
+----------------------------------------------------------------
+
+## Profiles
+
+```hal
+https://www.facebook.com/profile.php?id=61574894202180
+https://www.facebook.com/profile.php?id=100071240078399
+https://www.facebook.com/profile.php?id=61559211226057
+https://www.facebook.com/profile.php?id=61577495012914
+https://www.facebook.com/profile.php?id=61572097319913
+```
+
+### Extractor
+
+- `(s) => param(s,"id")`
 
 ----------------------------------------------------------------
 
@@ -79,6 +111,10 @@ https://www.facebook.com/groups/313919979559265
 https://en.wikipedia.org/wiki/M._C._Escher
 ```
 
+### Extractor
+
+- `(s) => basename(s)`
+
 ----------------------------------------------------------------
 
 ## [Reference Sites](https://app.raindrop.io/my/46171960)
@@ -87,6 +123,10 @@ https://en.wikipedia.org/wiki/M._C._Escher
 http://dave-tower/math/physics/physics-101.html
 https://app.raindrop.io/my/46171960
 ```
+
+### Extractor
+
+- `(s) => basename(s)`
 
 ----------------------------------------------------------------
 
@@ -121,17 +161,33 @@ https://www.youtube.com/@BriTheMathGuy
 https://www.youtube.com/@BlackBoard114
 ```
 
+### Extractor
+
+- `(s) => chop(s,"@")`
+
 ----------------------------------------------------------------
 
 ## [3P Tools](https://www.desmos.com/calculator)
 
 ```hal
-https://www.desmos.com/calculator
-https://mathnotepad.com/
-https://rnorlund.github.io/tessala/
-https://snicker02.github.io/Strata/
-https://www.cairographics.org/
+https://mathnotepad.com
+https://www.cairographics.org
 ```
+### Extractor
+
+- `(s) => hostname(s)`
+
+----------------------------------------------------------------
+
+```hal
+https://www.desmos.com/calculator
+https://rnorlund.github.io/tessala
+https://snicker02.github.io/Strata
+```
+
+### Extractor
+
+- `(s) => basename(s)`
 
 ----------------------------------------------------------------
 
@@ -140,6 +196,10 @@ https://www.cairographics.org/
 ```hal
 http://dave-legacy/math/latex/mathjax.html
 ```
+
+### Extractor
+
+- `(s) => basename(s)`
 
 ----------------------------------------------------------------
 
@@ -164,6 +224,10 @@ https://read.amazon.com/?asin=B0138NBHBG
 https://read.amazon.com/?asin=B07DM96DJ8
 https://read.amazon.com/?asin=B071JXYDDB
 ```
+
+### Extractor
+
+- `(s) => param(s,"asin")`
 
 ----------------------------------------------------------------
 

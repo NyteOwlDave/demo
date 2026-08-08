@@ -1,4 +1,8 @@
 
+[xojo]:
+<https://xojo.com>
+"Xojo IDE"
+
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
 [basic-wiki]:
@@ -45,11 +49,18 @@
 
 ```hal
 
-https://qbjs.org
+https://freebasic.net
+https://marketplace.visualstudio.com/items?itemName=ModernVBNET.sVBInstaller
 https://qb64.com
 https://qb64phoenix.com
-https://freebasic.net
+https://qbjs.org
+https://segaretro.org/BASIC_Level_III_A
+https://smallbasic-publicwebsite.azurewebsites.net/
+https://tarjan.itch.io/thoreaubasic
+https://www.brilorsoftware.com/fb/pages/home.html
 https://www.parallax.com/education/programming-languages/pbasic
+https://www.playbasic.com/
+https://www.purebasic.com
 
 ```
 
@@ -62,7 +73,6 @@ https://www.parallax.com/education/programming-languages/pbasic
   <select id="edition_droplist"></select>
 </section>
 </div>
-
 
 ----------------------------------------------------------------
 
@@ -89,12 +99,23 @@ https://www.parallax.com/education/programming-languages/pbasic
 > [QB45 Wiki][qb45-wiki]
 > [QBasic Wiki][qbasic-wiki]
 > [PC Basic Manual][pc-help]
+> [Xojo IDE][xojo]
 
 ----------------------------------------------------------------
 
 # RAM Disk Menu
 
 > [Tower Edition](http://dave-tower/ramdisk/basic/basic-editions.html)
+
+----------------------------------------------------------------
+
+<header id="header">
+ <div id="messages"></div>
+</header>
+
+<footer id="footer">
+  <input wide id="footer_input" onchange="perform(event)"/>
+</footer>
 
 ----------------------------------------------------------------
 
@@ -146,34 +167,16 @@ edition.index = dct();
 
 <script updated="2026-AUG-06">
 edition.names = [
-  "anywhere",
-  "apple",
-  "atari",
-  "b256",
-  "b3d",
-  "baby",
-  "c64",
-  "classic",
-  "free",
-  "fusion",
-  "gw",
-  "pbasic",
-  "pc",
-  "qbasic",
-  "qb45",
-  "qb64",
-  "qb64pe",
-  "qbjs",
-  "spectrum",
-  "ti99",
-  "trs80",
-  "vb",
-  "vbscript",
-  "vbnet",
-  "vbsmall",
-  "vintage",
-  "webqb",
-  "zx"
+  "anywhere", "apple", "atari",
+  "b256", "b3d", "baby", "bazz", "bbc",
+  "c64", "classic",
+  "free", "fusion", "future",
+  "gw", "pbasic", "pc", "pure", "play",
+  "qbasic", "qb45", "qb64", "qb64pe", "qbjs",
+  "sega", "spectrum",
+  "ti99", "trs80",
+  "vb", "vbscript", "vbnet", "vbsmall", "vintage",
+  "webqb", "zx"
 ];
 </script>
 
@@ -251,6 +254,8 @@ function populate_droplist( items, owner ) {
             ce.value = ( s )
         );
     } );
+	const n = ( items.length );
+	messages.textContent = ( `Total Versions : ${n}` );
 }
 </script>
 

@@ -50,22 +50,59 @@ img { max-width: 100%; }
 <hr>
 <h1>To-Do Addresses ( <code>HAL</code> )</h1>
 <hr>
-<h2>Groups</h2>
+<h2>Pages</h2>
 <pre><code class="language-hal">https://www.facebook.com/Math1089.9801
 https://www.facebook.com/robolsmath
 https://www.facebook.com/augustomens
 https://www.facebook.com/mritunjaylectureslive
 https://www.facebook.com/emmelactutorials
-https://www.facebook.com/profile.php?id=61577495012914
-https://www.facebook.com/groups/1028939680547653/
-https://www.facebook.com/groups/391950357895182/
+https://www.facebook.com/nadia.satya.2025
+https://www.facebook.com/calculusfb
+https://www.facebook.com/organicgeo
+</code></pre>
+<h3>Extractor</h3>
+<ul>
+<li><code>(s) =&gt; basename(s)</code></li>
+</ul>
+<hr>
+<h2>Groups</h2>
+<pre><code class="language-hal">https://www.facebook.com/groups/1028939680547653
+https://www.facebook.com/groups/391950357895182
 https://www.facebook.com/groups/313919979559265
 </code></pre>
+<h3>Extractor</h3>
+<ul>
+<li><code>(s) =&gt; basename(s)</code></li>
+</ul>
+<hr>
+<h2>Profiles</h2>
+<pre><code class="language-hal">https://www.facebook.com/profile.php?id=61574894202180
+https://www.facebook.com/profile.php?id=100071240078399
+https://www.facebook.com/profile.php?id=61559211226057
+https://www.facebook.com/profile.php?id=61577495012914
+https://www.facebook.com/profile.php?id=61572097319913
+</code></pre>
+<h3>Extractor</h3>
+<ul>
+<li><code>(s) =&gt; param(s,"id")</code></li>
+</ul>
+<hr>
+<h2><a href="https://en.wikipedia.org/wiki/List_of_mathematical_artists">Mathematicians</a></h2>
+<pre><code class="language-hal">https://en.wikipedia.org/wiki/M._C._Escher
+</code></pre>
+<h3>Extractor</h3>
+<ul>
+<li><code>(s) =&gt; basename(s)</code></li>
+</ul>
 <hr>
 <h2><a href="https://app.raindrop.io/my/46171960">Reference Sites</a></h2>
 <pre><code class="language-hal">http://dave-tower/math/physics/physics-101.html
 https://app.raindrop.io/my/46171960
 </code></pre>
+<h3>Extractor</h3>
+<ul>
+<li><code>(s) =&gt; basename(s)</code></li>
+</ul>
 <hr>
 <h2><a href="https://www.youtube.com">Video Channels</a></h2>
 <pre><code class="language-hal">https://www.youtube.com/@thepathintegrator
@@ -95,18 +132,36 @@ https://www.youtube.com/@blackpenredpen
 https://www.youtube.com/@BriTheMathGuy
 https://www.youtube.com/@BlackBoard114
 </code></pre>
+<h3>Extractor</h3>
+<ul>
+<li><code>(s) =&gt; chop(s,"@")</code></li>
+</ul>
 <hr>
 <h2><a href="https://www.desmos.com/calculator">3P Tools</a></h2>
-<pre><code class="language-hal">https://www.desmos.com/calculator
-https://mathnotepad.com/
-https://rnorlund.github.io/tessala/
-https://snicker02.github.io/Strata/
-https://www.cairographics.org/
+<pre><code class="language-hal">https://mathnotepad.com
+https://www.cairographics.org
 </code></pre>
+<h3>Extractor</h3>
+<ul>
+<li><code>(s) =&gt; hostname(s)</code></li>
+</ul>
+<hr>
+<pre><code class="language-hal">https://www.desmos.com/calculator
+https://rnorlund.github.io/tessala
+https://snicker02.github.io/Strata
+</code></pre>
+<h3>Extractor</h3>
+<ul>
+<li><code>(s) =&gt; basename(s)</code></li>
+</ul>
 <hr>
 <h2><a href="http://dave-legacy/math/latex/mathjax.html">NCS Tools</a></h2>
 <pre><code class="language-hal">http://dave-legacy/math/latex/mathjax.html
 </code></pre>
+<h3>Extractor</h3>
+<ul>
+<li><code>(s) =&gt; basename(s)</code></li>
+</ul>
 <hr>
 <h2><a href="https://read.amazon.com/">Books</a></h2>
 <pre><code class="language-hal">https://read.amazon.com/?asin=B0CGJHP8ZN
@@ -127,6 +182,10 @@ https://read.amazon.com/?asin=B0138NBHBG
 https://read.amazon.com/?asin=B07DM96DJ8
 https://read.amazon.com/?asin=B071JXYDDB
 </code></pre>
+<h3>Extractor</h3>
+<ul>
+<li><code>(s) =&gt; param(s,"asin")</code></li>
+</ul>
 <hr>
 <h1>To-Do Titles ( <code>HTL</code> )</h1>
 <hr>
