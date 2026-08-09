@@ -294,6 +294,35 @@ End Sub
 
 ----------------------------------------------------------------
 
+# Remarks
+
+This app has some rather unique and powerful features. For
+example, it can __Save__ all __Viewers__ or all __Editors__ as
+plain text documents.
+
+Just invoke:
+
+- `save_viewer_doc`
+- `save_editor_doc`
+
+It also supports `seeker` for __Spelunking__ global members.
+
+The `gideon` accessor should be extracted into a separate
+__API Module__. It manages __Gadget__ operations.
+
+All of the __Pixel Map API Modules__ are linked to this page.
+This was done for experimenting.
+
+Also, there are a large number of __Gem Modules__ linked to
+this page.
+
+Just invoke:
+
+- `inspect.scripts`
+- `inspect.gems`
+
+----------------------------------------------------------------
+
 <header id="header">
   <div id="messages"></div>
 </header>
@@ -304,23 +333,20 @@ End Sub
 
 ----------------------------------------------------------------
 
-<script>
+
+<script gem="iwm.js" id="iwm.js">
 ; iwm = Object.keys( window ).sort()
 </script>
 
-<script>
+<script gem="doc.js" id="doc.js">
 ; doc = document
 </script>
 
-<script>
+<script gem="debug.js" id="debug.js">
 ; cls =()=> console.clear()
 ; agn =()=> location.reload()
 </script>
 
-<script>
-; ged =( o )=> ( o instanceof HTMLTextAreaElement )
-; gvw =( o )=> ( o instanceof HTMLTPreElement )
-</script>
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
@@ -335,7 +361,7 @@ End Sub
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
-<script>
+<script id="main.js">
 function main( event ) {
     try {
         doc . title = ( `Ikeda Attractor Notes` );
@@ -346,13 +372,13 @@ function main( event ) {
 }
 </script>
 
-<script>
+<script id="page-load.js">
 addEventListener( "load", main );
 </script>
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
-<script>
+<script gem="app-events.js" id="get-viewer.js">
 function get_viewer( event ) {
     const sender = event.target;
     const parent = sender.parentElement;
@@ -364,7 +390,7 @@ function get_viewer( event ) {
 }
 </script>
 
-<script>
+<script gem="app-events.js" id="on-edit.js">
 function on_edit( event ) {
     try {
         mine( event );
@@ -378,7 +404,7 @@ function on_edit( event ) {
 }
 </script>
 
-<script>
+<script gem="app-events.js" id="on-view.js">
 function on_view( event ) {
     try {
         mine( event );
@@ -392,7 +418,7 @@ function on_view( event ) {
 }
 </script>
 
-<script>
+<script gem="get-buddy-editor.js" id="get-buddy-editor.js">
 function get_buddy_editor( viewer ) {
     let ed  = viewer.nextElementSibling;
     if (! ged( ed ) ) {
@@ -422,11 +448,11 @@ function get_buddy_editor( viewer ) {
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
-<script>
+<script gem="gideon.js" id="gideon.js">
 gideon = {};
 </script>
 
-<script>
+<script gem="gideon.js" id="gideon-show.js">
 gideon.show = function( ge ) {
     ge = resolve( ge );
     const cl = ge.classList;
@@ -435,7 +461,7 @@ gideon.show = function( ge ) {
 };
 </script>
 
-<script>
+<script gem="gideon.js" id="gideon-hide.js">
 gideon.hide = function( ge ) {
     ge = resolve( ge );
     const cl = ge.classList;
@@ -444,7 +470,7 @@ gideon.hide = function( ge ) {
 };
 </script>
 
-<script>
+<script gem="gideon.js" id="gideon-toggle.js">
 gideon.toggle = function( ge ) {
     ge = resolve( ge );
     const cl = ge.classList;
@@ -457,7 +483,7 @@ gideon.toggle = function( ge ) {
 };
 </script>
 
-<script>
+<script gem="gideon.js" id="gideon-code-blocks.js">
 gideon.code_blocks = function( lang ) {
     lang = ( str( lang ) || "basic" );
     const cname = ( `language-${lang}` );
@@ -466,14 +492,14 @@ gideon.code_blocks = function( lang ) {
 };
 </script>
 
-<script>
+<script gem="gideon.js" id="gideon-code-block.js">
 gideon.code_block = function( lang, index ) {
     const m = gideon.code_blocks( lang );
     return ( m[ index ] );
 };
 </script>
 
-<script>
+<script gem="gideon.js" id="gideon-code-doc.js">
 gideon.code_doc = function( lang ) {
     const m = gideon.code_blocks( lang );
     const v = m.map( ge => str( ge.innerText ) );
@@ -481,7 +507,7 @@ gideon.code_doc = function( lang ) {
 };
 </script>
 
-<script>
+<script gem="gideon.js" id="gideon-viewer-doc.js">
 gideon.viewer_doc = function() {
     const m = all( "PRE" );
     const v = m.map( ge => str( ge.innerText ) );
@@ -489,7 +515,7 @@ gideon.viewer_doc = function() {
 };
 </script>
 
-<script>
+<script gem="gideon.js" id="gideon-editor-doc.js">
 gideon.editor_doc = function() {
     const m = all( "TEXTAREA" );
     const v = m.map( ge => str( ge.value ) );
@@ -497,7 +523,7 @@ gideon.editor_doc = function() {
 };
 </script>
 
-<script>
+<script gem="gideon.js" id="gideon-code-hints.js">
 gideon.code_hints = function( lang ) {
     const m = gideon.code_blocks( lang );
     const v = m.map( ge => str( ge.innerText ) );
@@ -513,7 +539,7 @@ gideon.code_hints = function( lang ) {
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
-<script>
+<script gem="save-viewer-doc.js" id="save-viewer-doc.js">
 function save_viewer_doc() {
     try {
         const k = "ikeda-viewers.md";
@@ -525,7 +551,7 @@ function save_viewer_doc() {
 }
 </script>
 
-<script>
+<script gem="save-editor-doc.js" id="save-editor-doc.js">
 function save_editor_doc() {
     try {
         const k = "ikeda-editors.md";
@@ -537,7 +563,10 @@ function save_editor_doc() {
 }
 </script>
 
-<script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script gem="seeker.js" id="seeker.js">
 function seeker( rex ) {
     const our =( k )=> (! iwm.includes( k ) );
     let m = mem().filter( our );
@@ -545,8 +574,51 @@ function seeker( rex ) {
 }
 </script>
 
-<script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script gem="incomplete.js" id="incomplete.js">
 function incomplete( s ) {
     message( `The "${s}" feature is incomplete` );
 }
 </script>
+
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script gem="inspect.js" id="inspect.js">
+function inspect( o, title ) {
+    title = str( title ) || "Items";
+    const c = console;
+    c.clear();
+    c.groupCollapsed( `%c${title}`, "font-size: 16pt" );
+    c.table( pcl( o ) );
+    c.groupEnd();
+}
+</script>
+
+<script gem="inspect.js" id="inspect-scripts.js">
+inspect.scripts = function() {
+    const m = all( "SCRIPT" );
+    let v = m.map( ge => (
+        ge.id || ge.src
+    ) );
+    v = v.filter( s => s ).sort();
+    inspect( v, "Script Modules" );
+};
+</script>
+
+<script gem="inspect.js" id="inspect-gems.js">
+inspect.gems = function() {
+    const m = all( "SCRIPT[gem]" );
+    let v = m.map( ge => (
+        ge.id || ge.getAttribute( "gem" )
+    ) );
+    v = arr( unq( v ) );
+    v = v.filter( s => s ).sort();
+    inspect( v, "Embedded Gem Modules" );
+};
+</script>
+
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
