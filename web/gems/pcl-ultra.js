@@ -1,59 +1,49 @@
 
 /*
-    pixmap-app.js
+
+# PCL Ultra Gem
+
+> ( `pcl-ultra.js` )
+
 */
 
+; mem =( o )=> Object.keys( o || window ).sort()
+; dir =( o )=> mem( o || localStorage || {} )
+; tmp =( o )=> mem( o || sessionStorage || {} )
 
-function perform( event ) {
-    perform.lite( event );
-}
+; str =( s )=> String( s || "" ).trim()
+; arr =( o )=> Array.from( o || [] )
+; unq =( o )=> ( new Set( o || [] ) )
 
-perform.lite = function( event ) {
-    const ops = perform;
-    try {
-        ops.event = mine( event );
-        const sender = event.target;
-        console.log(
-            window.eval( sender.value )
-        );
-    } catch ( e ) {
-        crashed ( e );
+; gid =( i )=> doc.getElementById( i )
+; elx =( t )=> doc.createElement ( t )
+
+; gad =( o )=> ( o instanceof HTMLElement )
+; iob =( o )=> ( o instanceof Object )
+; iar =( o )=> Array.isArray( o )
+
+; ale =( q, o )=> arr( o.querySelectorAll( q ) )
+; ole =( q, o )=>    ( o.querySelector   ( q ) )
+; all =( q )=> ale( q, doc )
+; one =( q )=> ole( q, doc )
+
+
+function resolve( o ) {
+    if ( o ) {
+        if ( gad( o ) ) {
+            return ( o );
+        }
+        if ( o = gid( o ) ) {
+            return ( o );
+        }
     }
-};
-
-function message( s, silent ) {
-    s = str( s );
-    if (! s ) { return; }
-    if (! silent ) {
-        console.log( s );
-    }
-    messages.textContent = ( s );
-    return ( s );
-}
-
-function crashed( e ) {
-    let s;
-    if ( e instanceof Error ) {
-        s = e.message;
-    } else {
-        s = e;
-        e = new Error( s );
-    }
-    console.error( e );
-    message( s, true );
-}
-
-function mine( event ) {
-    const ev = event;
-    ev.preventDefault();
-    ev.stopPropagation();
-    return ( ev );
+    return ( null );
 }
 
 function pclx( s, u, s, d ) {
     let m = pcl( s );
     if ( u ) {
-        m = Array.from( new Set( m ) );
+        m = arr( unq( m ) );
     }
     if ( s ) {
         m = m.sort();
@@ -76,12 +66,12 @@ function pcl( s ) {
 }
 
 pcl.prepare = function( o ) {
-    if ( o instanceof Object ) {
-        if (! Array.isArray( o ) ) {
-            if ( o instanceof HTMLElement ) {
+    if ( iob( o ) ) {
+        if (! iar( o ) ) {
+            if ( gad( o ) ) {
                 return pcl.read( o );
             } else {
-                o = Object.keys( o || {} ).sort();
+                o = mem( o || {} );
             }
         }
         return o.join( "\n" );
@@ -105,9 +95,7 @@ pcl.read = function( ge ) {
     default         : return pcl( ge.innerHTML );
     }
     function options( owner ) {
-        const m = Array.from(
-            owner.querySelectorAll( "OPTION" )
-        );
+        const m = ale( "OPTION", owner );
         return (
             ( m )
             . map(
@@ -120,9 +108,7 @@ pcl.read = function( ge ) {
         );
     }
     function items( owner ) {
-        const m = Array.from(
-            owner.querySelectorAll( "OPTION" )
-        );
+        const m = ale( "LI", owner );
         return (
             ( m )
             . map( ge => str( ge.textContent ) )
@@ -195,15 +181,5 @@ function filter( s, rex ) {
     return ( m );
 }
 
-function resolve( o ) {
-    if ( o ) {
-        if ( o instanceof HTMLElement ) {
-            return ( o );
-        }
-        if ( o = gid( o ) ) {
-            return ( o );
-        }
-    }
-    return ( null );
-}
+
 

@@ -5,6 +5,10 @@
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
+[sulu]: <http://dave-ryzen/nav/sulu.html>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
 [me]:
 <http://dave-omega/demo/web/pixmap/ikeda-attractor-notes.html>
 "Omega Edition"
@@ -281,6 +285,15 @@ End Sub
 
 ----------------------------------------------------------------
 
+# [Navigation][sulu]
+
+> [Web Menu](./../web-menu.html)
+
+> [Folder Tree](./tree.php)
+> [File System](./)
+
+----------------------------------------------------------------
+
 <header id="header">
   <div id="messages"></div>
 </header>
@@ -302,6 +315,11 @@ End Sub
 <script>
 ; cls =()=> console.clear()
 ; agn =()=> location.reload()
+</script>
+
+<script>
+; ged =( o )=> ( o instanceof HTMLTextAreaElement )
+; gvw =( o )=> ( o instanceof HTMLTPreElement )
 </script>
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
@@ -351,8 +369,9 @@ function on_edit( event ) {
     try {
         mine( event );
         const viewer = get_viewer( event );
-        const cc = viewer.innerText.length;
-        const s = ( `Character Count : ${cc}` );
+        const buddy  = get_buddy_editor( viewer );
+        gideon.show( buddy  );
+        gideon.hide( viewer );
     } catch ( e ) {
         crashed ( e );
     }
@@ -361,7 +380,173 @@ function on_edit( event ) {
 
 <script>
 function on_view( event ) {
-    on_edit( event );
+    try {
+        mine( event );
+        const viewer = get_viewer( event );
+        const buddy  = get_buddy_editor( viewer );
+        gideon.hide( buddy  );
+        gideon.show( viewer );
+    } catch ( e ) {
+        crashed ( e );
+    }
 }
 </script>
 
+<script>
+function get_buddy_editor( viewer ) {
+    let ed  = viewer.nextElementSibling;
+    if (! ged( ed ) ) {
+        ed = elx( "TEXTAREA" );
+        ed . viewer = viewer;
+        ed . value = viewer . innerText;
+        ed . classList . add( "siox" );
+        ed . wrap = "off";
+        ed . spellcheck = false;
+        viewer.insertAdjacentElement( "afterend", ed );
+    }
+    return ( ed );
+}
+</script>
+
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<!-- [[ Gems ]] -->
+<script src="./../gems/stateful.js"></script>
+<script src="./../gems/doc-read-write.js"></script>
+<script src="./../gems/sulu.js"></script>
+<script src="./../gems/pcl-ultra.js"></script>
+<script src="./../gems/riccola-lite.js"></script>
+<script src="./../gems/interpreter-lite.js"></script>
+
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script>
+gideon = {};
+</script>
+
+<script>
+gideon.show = function( ge ) {
+    ge = resolve( ge );
+    const cl = ge.classList;
+    cl.remove( "hide" );
+    return ( ge );
+};
+</script>
+
+<script>
+gideon.hide = function( ge ) {
+    ge = resolve( ge );
+    const cl = ge.classList;
+    cl.add( "hide" );
+    return ( ge );
+};
+</script>
+
+<script>
+gideon.toggle = function( ge ) {
+    ge = resolve( ge );
+    const cl = ge.classList;
+    if ( cl.contains( "hide" ) ) {
+        cl.remove( "hide" );
+    } else {
+        cl.add( "hide" );
+    }
+    return ( ge );
+};
+</script>
+
+<script>
+gideon.code_blocks = function( lang ) {
+    lang = ( str( lang ) || "basic" );
+    const cname = ( `language-${lang}` );
+    const q = ( `code[class="${cname}"]` );
+    return all( q );
+};
+</script>
+
+<script>
+gideon.code_block = function( lang, index ) {
+    const m = gideon.code_blocks( lang );
+    return ( m[ index ] );
+};
+</script>
+
+<script>
+gideon.code_doc = function( lang ) {
+    const m = gideon.code_blocks( lang );
+    const v = m.map( ge => str( ge.innerText ) );
+    return ( v.join( "\n\n" ) );
+};
+</script>
+
+<script>
+gideon.viewer_doc = function() {
+    const m = all( "PRE" );
+    const v = m.map( ge => str( ge.innerText ) );
+    return ( v.join( "\n\n" ) );
+};
+</script>
+
+<script>
+gideon.editor_doc = function() {
+    const m = all( "TEXTAREA" );
+    const v = m.map( ge => str( ge.value ) );
+    return ( v.join( "\n\n" ) );
+};
+</script>
+
+<script>
+gideon.code_hints = function( lang ) {
+    const m = gideon.code_blocks( lang );
+    const v = m.map( ge => str( ge.innerText ) );
+    function hint( s ) {
+        s = s.slice( 0, 36 );
+        if ( s.length < 36 ) { return ( s ); }
+        return ( `${s} ...` );
+    }
+    return ( v.map( hint ) );
+};
+</script>
+
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script>
+function save_viewer_doc() {
+    try {
+        const k = "ikeda-viewers.md";
+        const v = gideon.viewer_doc();
+        riccola( k, v );
+    } catch ( e ) {
+        crashed ( e );
+    }
+}
+</script>
+
+<script>
+function save_editor_doc() {
+    try {
+        const k = "ikeda-editors.md";
+        const v = gideon.editor_doc();
+        riccola( k, v );
+    } catch ( e ) {
+        crashed ( e );
+    }
+}
+</script>
+
+<script>
+function seeker( rex ) {
+    const our =( k )=> (! iwm.includes( k ) );
+    let m = mem().filter( our );
+    return filter( m, rex );
+}
+</script>
+
+<script>
+function incomplete( s ) {
+    message( `The "${s}" feature is incomplete` );
+}
+</script>

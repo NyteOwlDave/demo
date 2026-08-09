@@ -49,7 +49,7 @@
 
 [ramdisk-tower]:
 <http://dave-tower/ramdisk/basic/basic-editions.html>
-"Tower Edition" 
+"Tower Edition"
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
@@ -68,10 +68,12 @@
 ```hal
 
 https://freebasic.net
+https://github.com/logiclrd/QBX
 https://marketplace.visualstudio.com/items?itemName=ModernVBNET.sVBInstaller
 https://qb64.com
 https://qb64phoenix.com
 https://qbjs.org
+https://robhagemans.github.io/pcbasic/doc/2.0/
 https://segaretro.org/BASIC_Level_III_A
 https://smallbasic-publicwebsite.azurewebsites.net/
 https://tarjan.itch.io/thoreaubasic
@@ -90,61 +92,73 @@ https://www.purebasic.com
 
 ```nav
 
-+ Title := Free BASIC
-@ https://freebasic.net
-| Name := free
++ B4X
+@ https://www.b4x.com/
+| Folder := b4x
 
-+ Title := Small BASIC
-@ https://marketplace.visualstudio.com/items?itemName=ModernVBNET.sVBInstaller
-| Name := vbsmall
-
-+ Title := Small Basic 2
-@ https://smallbasic-publicwebsite.azurewebsites.net/
-| Name := vbsmall2
-
-+ Title := QB64
-@ https://qb64.com
-| Name := qb64
-
-+ Title := QB64 Phoenix
-@ https://qb64phoenix.com
-| Name := qb64pe
-
-+ Title := QBJS
-@ https://qbjs.org
-| Name := qbjs
-
-+ Title := Sega Level III
-@ https://segaretro.org/BASIC_Level_III_A
-| Name := sega
-
-+ Title := Thoreau BASIC
-@ https://tarjan.itch.io/thoreaubasic
-| Name := thoreau
-
-+ Title := Vision BASIC
-@ https://visionbasic.net/
-| Name := vision
-
-+ Title := BBC BASIC
++ BBC BASIC
 @ https://www.bbcbasic.co.uk/bbcsdl/index.html
-| Name := bbc
+| Folder := bbc
 
-+ Title := ?
++ Free BASIC
+@ https://freebasic.net
+| Folder := free
+
++ Future BASIC
 @ https://www.brilorsoftware.com/fb/pages/home.html
-| Name := ?
+| Folder := future
 
-+ Title := P BASIC
++ PBASIC
 @ https://www.parallax.com/education/programming-languages/pbasic
-| Name := pbasic
+| Folder := pbasic
 
-+ Title := Play BASIC
++ PC Basic
+@ https://robhagemans.github.io/pcbasic/doc/2.0/
+| Folder := pc
+
++ Play Basic
 @ https://www.playbasic.com/
-| Name := play
+| Folder := play
 
-+ Title := Pure BASIC
++ Pure Basic
 @ https://www.purebasic.com
-| Name := pure
+| Folder := pure
+
++ QB64
+@ https://qb64.com
+| Folder := qb64
+
++ QB64 Phoenix
+@ https://qb64phoenix.com
+| Folder := qb64pe
+
++ QBJS
+@ https://qbjs.org
+| Folder := qbjs
+
++ QBX
+@ https://github.com/logiclrd/QBX
+| Folder := qbx
+
++ Sega Level III
+@ https://segaretro.org/BASIC_Level_III_A
+| Folder := sega
+
++ Small Basic
+@ https://marketplace.visualstudio.com/items?itemName=ModernVBNET.sVBInstaller
+| Folder := vbsmall
+
++ Small Basic 2
+@ https://smallbasic-publicwebsite.azurewebsites.net/
+| Folder := vbsmall2
+
++ Thoreau BASIC
+@ https://tarjan.itch.io/thoreaubasic
+| Folder := thoreau
+
++ Vision BASIC
+@ https://visionbasic.net/
+| Folder := vision
 
 ```
 
@@ -156,6 +170,12 @@ https://www.purebasic.com
 <section id="droplist_section">
   <select id="edition_droplist"></select>
 </section>
+</div>
+
+----------------------------------------------------------------
+
+<div center>
+ <button action="visit.edition()" onclick="action(event)">Visit</button>
 </div>
 
 ----------------------------------------------------------------
@@ -184,6 +204,7 @@ https://www.purebasic.com
 > [QBasic Wiki][qbasic-wiki]
 > [PC Basic Manual][pc-help]
 > [Xojo IDE][xojo]
+> [Code Beautify](https://beautifier.io/)
 
 ----------------------------------------------------------------
 
@@ -196,6 +217,15 @@ https://www.purebasic.com
 # RAM Disk Menu
 
 > [Tower Edition][ramdisk-tower]
+
+----------------------------------------------------------------
+
+# [Navigation][sulu]
+
+> [Demo Menu](./../demo-menu.html)
+
+> [Folder Tree](./tree.php)
+> [File System](./)
 
 ----------------------------------------------------------------
 
@@ -218,19 +248,10 @@ https://www.purebasic.com
 ; doc . title = ( `BASIC Editions` )
 </script>
 
-<script>
-; str =( s )=> String( s || "" ).trim()
-; arr =( o )=> Array.from( o || [] )
-; unq =( o )=> ( new Set( o || [] ) )
-; dct =(   )=> ( new Map() )
-</script>
 
-<script>
-; elx =( t )=> ( doc.createElement ( t ) )
-; gid =( i )=> ( doc.getElementById( i ) )
-</script>
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
-<script>
+<script id="main.js">
 function main( event ) {
     try {
         populate_editions();
@@ -241,29 +262,46 @@ function main( event ) {
 }
 </script>
 
-<script>
+<script id="page-load.js">
 addEventListener( "load", main );
 </script>
 
+
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
-<script>
+<!-- [[ Gems ]] -->
+<script src="./../web/gems/core-ops.js"></script>
+<script src="./../web/gems/stateful.js"></script>
+<script src="./../web/gems/doc-read-write.js"></script>
+<script src="./../web/gems/sulu.js"></script>
+<script src="./../web/gems/pcl-ultra.js"></script>
+<script src="./../web/gems/riccola-lite.js"></script>
+<script src="./../web/gems/interpreter-lite.js"></script>
+
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script api="edition.js" id="edition.js">
 edition = {};
 </script>
 
-<script>
+<script api="edition.js" id="edition-index.js">
 edition.index = dct();
 </script>
 
-<script updated="2026-AUG-06">
+<script api="edition.js" id="edition-titles.js">
+edition.titles = dct();
+</script>
+
+<script api="edition.js" id="edition-names.js" updated="2026-AUG-06" original="editions.json">
 edition.names = [
-  "anywhere", "apple", "atari",
-  "b256", "b3d", "baby", "bazz", "bbc",
+  "amiga", "anywhere", "apple", "atari",
+  "b256", "b3d", "b4x", "baby", "bazz", "bbc",
   "c64", "classic",
   "free", "fusion", "future",
   "gw", "pbasic", "pc", "pure", "play",
   "qbasic", "qb45", "qb64", "qb64pe", "qbjs",
-  "sega", "spectrum",
+  "qbx", "sedai", "sega", "spectrum",
   "thoreau",  "ti99", "trs80",
   "vb", "vbscript", "vbnet", "vbsmall",
   "vintage", "vision",
@@ -271,21 +309,29 @@ edition.names = [
 ];
 </script>
 
-<script>
+<script api="edition.js" id="edition-write-link.js">
+edition.write_link = function( name, address ) {
+    const index = edition.index;
+    index.set( name, address );
+    return { name , address };
+};
+</script>
+
+<script api="edition.js" id="edition-read-link.js">
 edition.read_link = function( name ) {
     const index = edition.index;
     return str( index.get( name ) );
 };
 </script>
 
-<script>
-edition.read_entry = function( name ) {
-    const address = edition.read_link( name );
-    return { name , address }
+<script api="edition.js" id="edition-read-title.js">
+edition.read_title = function( name ) {
+    const index = edition.titles;
+    return str( index.get( name ) );
 };
 </script>
 
-<script>
+<script api="edition.js" id="edition-read-names.js">
 edition.read_names = function() {
     const ops = edition;
     const index = ops.index;
@@ -297,7 +343,14 @@ edition.read_names = function() {
 };
 </script>
 
-<script>
+<script api="edition.js" id="edition-read-entry.js">
+edition.read_entry = function( name ) {
+    const address = edition.read_link( name );
+    return { name , address }
+};
+</script>
+
+<script api="edition.js" id="edition-read-entries.js">
 edition.read_entries = function( rex ) {
     const ops = edition;
     const index = ops.index;
@@ -319,15 +372,7 @@ edition.read_entries = function( rex ) {
 };
 </script>
 
-<script>
-edition.write_link = function( name, address ) {
-    const index = edition.index;
-    index.set( name, address );
-    return { name , address };
-};
-</script>
-
-<script>
+<script api="edition.js" id="edition-make-entry.js">
 edition.make_entry = function( name, address ) {
     return { name , address };
 };
@@ -335,7 +380,7 @@ edition.make_entry = function( name, address ) {
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
-<script>
+<script id="populate-droplist.js">
 function populate_droplist( items, owner ) {
     items.forEach( ( s ) => {
         edition.write_link( s, "" );
@@ -346,13 +391,14 @@ function populate_droplist( items, owner ) {
         );
     } );
 	const n = ( items.length );
-	messages.textContent = ( `Total Versions : ${n}` );
+	message( `Total Versions : ${n}` );
 }
 </script>
 
+
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
-<script>
+<script id="populate-editions.js">
 function populate_editions() {
     try {
         const owner = edition_droplist;
@@ -366,9 +412,10 @@ function populate_editions() {
 }
 </script>
 
+
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
-<script>
+<script id="populate-links.js">
 function populate_links() {
     const id = "link_table";
     const owner = gid( "table_section" );
@@ -383,7 +430,10 @@ function populate_links() {
     let re = he.insertRow();
     let ce = elx( "TH" );
     re.appendChild( ce );
-    ce.textContent = "Name";
+    ce.textContent = "Folder";
+    ce = elx( "TH" );
+    re.appendChild( ce );
+    ce.textContent = "Title";
     ce = elx( "TH" );
     re.appendChild( ce );
     ce.textContent = "Address";
@@ -396,6 +446,8 @@ function populate_links() {
             ce = re.insertCell();
             ce . textContent = entry.name;
             ce = re.insertCell();
+            ce . textContent = str( entry.title ) || "?";
+            ce = re.insertCell();
             ce . textContent = str( entry.address ) || "?";
         }
     );
@@ -403,4 +455,136 @@ function populate_links() {
 }
 </script>
 
+
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script gem="dict.js" id="read-map-keys.js">
+function read_map_keys( map ) {
+    const keys = ( new Set() );
+    for ( let key of map.keys() ) {
+        keys.add( key);
+    }
+    return Array.from( Keys ).sort();
+}
+</script>
+
+<script gem="dict.js" id="read-map-values.js">
+function read_map_values( map ) {
+    const values = [];
+    const keys = read_map_keys( map );
+    keys.forEach(
+        ( key ) => (
+            values.push( str( map.get( key ) ) )
+        )
+    );
+    return ( values );
+}
+</script>
+
+<script gem="dict.js" id="read-map-entries.js">
+function read_map_entries( map ) {
+    const entries = [];
+    const keys = read_map_keys( map );
+    let value;
+    keys.forEach(
+        ( key ) => {
+            value = str( map.get( key ) );
+            entries.push( [ key, value ]  );
+        }
+    );
+    return ( entries );
+}
+</script>
+
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script gem="visit.js" id="visit.js">
+function visit( url ) {
+    const ops = visit;
+    url = str( url );
+    if (! url ) {
+        console.warn( "Ignored Empty URL" );
+        return;
+    }
+    if ( null === localStorage ) {
+        const a = elx( "A" );
+        a . href = ( url );
+        a . click();
+    } else {
+        const o = ops.options;
+        const w = window;
+        w.open( url, url, o );
+    }
+}
+</script>
+
+<script gem="visit.js" id="visit-options.js">
+; visit.options = ( `left=10,top=10,width=800,height=680` )
+</script>
+
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script id="visit-edition.js">
+visit.edition = function() {
+    try {
+        const name = read_edition_name();
+        visit( "./../" + name + "/" );
+    } catch ( e ) {
+        crashed ( e );
+    }
+};
+</script>
+
+<script id="read-edition-name.js">
+function read_edition_name() {
+    const owner = edition_droplist;
+    return ( owner.value );
+}
+</script>
+
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script id="action.js">
+function action( event ) {
+    const ops = action;
+    try {
+        ops.event = mine( event );
+        const sender = event.target;
+        const js = sender.getAttribute( "action" );
+        const result = window.eval( js );
+        console.log( result );
+    } catch ( e ) {
+        crashed ( e );
+    }
+}
+</script>
+
+<script>
+function crashed( e ) {
+    console.error( e );
+    window.alert( e );
+}
+</script>
+
+<script>
+function incomplete( s ) {
+    message( `The "${s}" feature is incomplete` );
+}
+</script>
+
+<script>
+function message( s, silent ) {
+    s = str( s );
+    if (! s ) { return; }
+    if (! silent ) {
+        console.log( s );
+    }
+    message.textContent = ( s );
+    return ( s );
+}
+</script>
+
+
