@@ -296,6 +296,11 @@ End Sub
 
 # Remarks
 
+__Key Concept__ : Viewer / Editor pairs. Each Viewer has an
+associated buddy Editor. Only one is visible at any given time.
+The intent is for these Editors to be used for porting BASIC
+source code to JavaScript.
+
 This app has some rather unique and powerful features. For
 example, it can __Save__ all __Viewers__ or all __Editors__ as
 plain text documents.
@@ -320,6 +325,11 @@ Just invoke:
 
 - `inspect.scripts`
 - `inspect.gems`
+
+As an aside: I've been working in parallel on this and the
+__Basic Editions__ page in the `notes` folder. That one offers
+editable / persistable tables that can also be saved as HTML
+files.
 
 ----------------------------------------------------------------
 
@@ -350,6 +360,7 @@ Just invoke:
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
+<!-- [[ Graphics Goodies ]] -->
 <script src="./core-ops.js"></script>
 <script src="./scalar.js"></script>
 <script src="./vector.js"></script>
@@ -357,6 +368,21 @@ Just invoke:
 <script src="./rgba.js"></script>
 <script src="./pixmap.js"></script>
 
+<script src="./app/pixmap-app.js"></script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<!-- [[ Gems ]] -->
+<script src="./../gems/stateful.js"></script>
+<script src="./../gems/doc-read-write.js"></script>
+<script src="./../gems/sulu.js"></script>
+<script src="./../gems/pcl-ultra.js"></script>
+<script src="./../gems/riccola-lite.js"></script>
+<script src="./../gems/interpreter-lite.js"></script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<!-- [[ Application Plumbing ]] -->
 <script src="./app/pixmap-app.js"></script>
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
@@ -433,18 +459,6 @@ function get_buddy_editor( viewer ) {
     return ( ed );
 }
 </script>
-
-
-<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-
-<!-- [[ Gems ]] -->
-<script src="./../gems/stateful.js"></script>
-<script src="./../gems/doc-read-write.js"></script>
-<script src="./../gems/sulu.js"></script>
-<script src="./../gems/pcl-ultra.js"></script>
-<script src="./../gems/riccola-lite.js"></script>
-<script src="./../gems/interpreter-lite.js"></script>
-
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 

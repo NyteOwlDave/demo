@@ -29,6 +29,7 @@ img { max-width: 100%; }
 <h2>HAL Links</h2>
 <pre><code class="language-hal">
 https://freebasic.net
+https://github.com/fritzone/berrybasic
 https://github.com/logiclrd/QBX
 https://marketplace.visualstudio.com/items?itemName=ModernVBNET.sVBInstaller
 https://qb64.com
@@ -52,6 +53,10 @@ https://www.purebasic.com
 + B4X
 @ https://www.b4x.com/
 | Folder := b4x
+
++ Berry BASIC
+@ https://github.com/fritzone/berrybasic
+| Folder := berry
 
 + BBC BASIC
 @ https://www.bbcbasic.co.uk/bbcsdl/index.html
@@ -236,7 +241,7 @@ edition.titles = dct();
 <script api="edition.js" id="edition-names.js" updated="2026-AUG-06" original="editions.json">
 edition.names = [
   "amiga", "anywhere", "apple", "atari",
-  "b256", "b3d", "b4x", "baby", "bazz", "bbc",
+  "b256", "b3d", "b4x", "baby", "bazz", "berry", "bbc",
   "c64", "classic",
   "free", "fusion", "future",
   "gw", "pbasic", "pc", "pure", "play",
@@ -465,8 +470,7 @@ function visit( url ) {
 visit.edition = function() {
     try {
         const name = read_edition_name();
-        const address = edition.read_link( name );
-        visit( "./" + address + "/" );
+        visit( "./../" + name + "/" );
     } catch ( e ) {
         crashed ( e );
     }
@@ -497,6 +501,8 @@ function action( event ) {
 }
 </script>
 
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
 <script>
 function crashed( e ) {
     console.error( e );
@@ -521,6 +527,159 @@ function message( s, silent ) {
     return ( s );
 }
 </script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script>
+function minnie( event ) {
+    const ge = event.target;
+    if (! gad( ge ) ) { return; }
+    if ( ge.nodeName === "TH" ) {
+        return minnie.th( event );
+    }
+}
+</script>
+
+<script>
+addEventListener( "click", minnie );
+</script>
+
+<script>
+minnie.th = function( event ) {
+    const th = event.target;
+    const re = th.parentElement;
+    if (! re ) { return; }
+    const he = re.parentElement;
+    if (! he ) { return; }
+    const te = he.parentElement;
+    if (! te ) { return; }
+    mine( event );
+    if ( event.metaKey ) { return; }
+    if ( event.ctrlKey ) {
+        if ( event.shiftKey ) {
+            recover_table( te );
+            return;
+        } else if ( event.altKey ) {
+            save_table( te );
+            return;
+        } else {
+            preserve_table( te );
+            return;
+        }
+    }
+    toggle_table_edit_node( te );
+}
+</script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script>
+function input_gadget_id( gadget ) {
+    let s = gadget.id;
+    let m = ( `Filename (id)?` );
+    s = str( window.prompt( m , s ) );
+    if (! s ) { return null; }
+    return ( gadget.id = s );
+}
+</script>
+
+<script>
+function get_gadget_id( gadget ) {
+    let s = str( gadget.id );
+    if ( s ) {
+        return ( gadget.id = s );
+    }
+    return input_gadget_id( gadget );
+}
+</script>
+
+<script>
+function get_storage() {
+    const stg = localStorage;
+    if ( null === stg ) {
+        message( `Store is Unavailable` );
+    }
+    return ( stg );
+}
+</script>
+
+<script>
+function preserve_table( table ) {
+    const stg = get_storage();
+    if (! stg ) { return; }
+    const k = get_gadget_id( table );
+    if (! k ) { return; }
+    const v = table.innerHTML;
+    stg.setItem( k, v );
+    message( `Wrote "${k}" to Store` );
+}
+</script>
+
+<script>
+function recover_table( table ) {
+    const stg = get_storage();
+    if (! stg ) { return; }
+    const k = get_gadget_id( table );
+    if (! k ) { return; }
+    const v = stg.getItem( k );
+    if ( null === v ) {
+        message( `No Entry for Key : "${k}"` );
+        return;
+    }
+    table.innerHTML = str( v );
+    message( `Read "${k}" from Store` );
+}
+</script>
+
+<script>
+function save_table( gadget ) {
+    const k = get_gadget_id( table );
+    if (! k ) { return; }
+    const v = table.outerHTML;
+    riccola( k, v );
+}
+</script>
+
+<script>
+function toggle_table_edit_node( te ) {
+    const m = ale( "TD", te );
+    if ( te.editable ) {
+        te.editable = false;
+        canedit( m, false );
+    } else {
+        te.editable = true;
+        canedit( m, true );
+    }
+}
+</script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script>
+function canedit( o, en=1 ) {
+    if ( iar( o ) ) {
+        o.forEach( ce => canedit( ce, en ) );
+        return;
+    }
+    if ( gad( o ) ) {
+        const CE = "contenteditable";
+        if ( en ) {
+            o.setAttribute( CE, "true" );
+        } else {
+            o.removeAttribute( CE );
+        }
+        return;
+    }
+    if ( isa( "string", o ) ) {
+        return canedit( all( o ), en );
+    }
+    throw new TypeError(
+        `Expected : String, Array, or Gadget`
+    );
+}
+</script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
 </body>
 </html>
