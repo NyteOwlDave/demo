@@ -53,6 +53,25 @@
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
+[sulu]:          <http://dave-ryzen/nav/sulu.html>
+[raindrop]:      <https://app.raindrop.io/my/45357558>
+[ideaflip]:      <https://ideaflip.com/>
+[tick-tock]:     <https://ticktick.com/webapp/#p/6a6189f08f08e12a68f5ad59/tasks/6a618a082b7e4a380534b38a>
+[ramdisk-omega]: <http://dave-omega/ramdisk/ramdisk-menu.html>
+
+[papa-parse]:    <https://www.papaparse.com/>
+[jimbo]:         <http://dave-omega/app/jarvis/toolkit/ncs/jimbo/jimbo-menu.html>
+
+[mark-ed]:       <https://markdowneditor.org/>
+
+[short-url]:     <https://tiny.cc/>
+[daves-notes]:   <http://tiny.cc/daves-notes>
+[jimbo-cloud]:   <http://tiny.cc/ncs-jimbo>
+[clip-db]:       <http://tiny.cc/ncs-clip-db>
+[luminous]:      <http://tiny.cc/jarvis-snipper-101>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
 [me]:
 <http://dave-omega/demo/notes/basic-editions.html>
 "Omega Edition"
@@ -67,23 +86,54 @@
 
 ```hal
 
+http://www.vintage-basic.net
+https://basic256.org
+https://basicanywheremachine.neocities.org/bam-ide
+https://basicfusion.org
+https://classicbasic.org
+https://eahumada.github.io/AtariOnline/basic/basic-mame.html
+https://ekbass.github.io/BazzBasic
+https://en.softonic.com/downloads/vbscript
 https://freebasic.net
+https://fuse-emulator.sourceforge.net
 https://github.com/fritzone/berrybasic
 https://github.com/logiclrd/QBX
-https://marketplace.visualstudio.com/items?itemName=ModernVBNET.sVBInstaller
+https://github.com/camauri/SedaiBasic2
+https://github.com/ZXDunny
+https://gotbasic.com/amiga.html
+https://gotbasic.com/apple.html
+https://gotbasic.com/gw-basic.html
+https://gotbasic.com/vb.html
+https://microsoft-visual-basic.en.softonic.com
+https://qbasic.com
 https://qb64.com
 https://qb64phoenix.com
 https://qbjs.org
-https://robhagemans.github.io/pcbasic/doc/2.0/
+https://robhagemans.github.io/pcbasic/doc/2.0
 https://segaretro.org/BASIC_Level_III_A
-https://smallbasic-publicwebsite.azurewebsites.net/
+https://smallbasic-publicwebsite.azurewebsites.net
+https://sourceforge.net/projects/ti99basic
+https://stigc.dk/c64/basic
 https://tarjan.itch.io/thoreaubasic
-https://visionbasic.net/
+https://threedbasic.wixsite.com/3d-basic
+https://vetusware.com/download/qb4.5%204.5/?id=5422
+https://visionbasic.net
+https://webqb.org
+https://www.b4x.com
 https://www.bbcbasic.co.uk/bbcsdl/index.html
 https://www.brilorsoftware.com/fb/pages/home.html
 https://www.parallax.com/education/programming-languages/pbasic
-https://www.playbasic.com/
+https://www.playbasic.com
 https://www.purebasic.com
+https://www.trs-80.org/level-2-basic.html
+
+```
+
+### Not Added to Table
+
+```hal
+
+https://github.com/eddavis2/Tiny-Basic
 
 ```
 
@@ -93,17 +143,57 @@ https://www.purebasic.com
 
 ```nav
 
++ 3D Basic
+@ https://threedbasic.wixsite.com/3d-basic
+| Folder := b3d
+
++ Amiga Basic
+@ https://gotbasic.com/amiga.html
+| Folder := amiga
+
++ AppleSoft Basic
+@ https://gotbasic.com/apple.html
+| Folder := apple
+
++ Atari Basic
+@ https://eahumada.github.io/AtariOnline/basic/basic-mame.html
+| Folder := atari
+
 + B4X
-@ https://www.b4x.com/
+@ https://www.b4x.com
 | Folder := b4x
+
++ Basic 256
+@ https://basic256.org
+| Folder := b256
+
++ Basic Anywhere
+@ https://basicanywheremachine.neocities.org/bam-ide
+| Folder := anywhere
+
++ Basic Fusion
+@ https://basicfusion.org
+| Folder := fusion
+
++ Bazz Basic
+@ https://ekbass.github.io/BazzBasic
+| Folder := bazz
+
++ BBC BASIC
+@ https://www.bbcbasic.co.uk/bbcsdl/index.html
+| Folder := bbc
 
 + Berry BASIC
 @ https://github.com/fritzone/berrybasic
 | Folder := berry
 
-+ BBC BASIC
-@ https://www.bbcbasic.co.uk/bbcsdl/index.html
-| Folder := bbc
++ C64 Basic
+@ https://stigc.dk/c64/basic
+| Folder := c64
+
++ Classic Basic
+@ https://classicbasic.org
+| Folder := classic
 
 + Free BASIC
 @ https://freebasic.net
@@ -112,6 +202,10 @@ https://www.purebasic.com
 + Future BASIC
 @ https://www.brilorsoftware.com/fb/pages/home.html
 | Folder := future
+
++ GW Basic
+@ https://gotbasic.com/gw-basic.html
+| Folder := gw
 
 + PBASIC
 @ https://www.parallax.com/education/programming-languages/pbasic
@@ -129,6 +223,14 @@ https://www.purebasic.com
 @ https://www.purebasic.com
 | Folder := pure
 
++ QBasic
+@ https://qbasic.com
+| Folder := qbasic
+
++ QB 4.5
+@ https://vetusware.com/download/qb4.5%204.5/?id=5422
+| Folder := qb45
+
 + QB64
 @ https://qb64.com
 | Folder := qb64
@@ -145,25 +247,65 @@ https://www.purebasic.com
 @ https://github.com/logiclrd/QBX
 | Folder := qbx
 
++ Sedai Basic
+@ https://github.com/camauri/SedaiBasic2
+| Folder := sedai
+
 + Sega Level III
 @ https://segaretro.org/BASIC_Level_III_A
 | Folder := sega
 
 + Small Basic
-@ https://marketplace.visualstudio.com/items?itemName=ModernVBNET.sVBInstaller
-| Folder := vbsmall
-
-+ Small Basic 2
 @ https://smallbasic-publicwebsite.azurewebsites.net/
 | Folder := vbsmall2
+
++ Spectrum Basic
+@ https://github.com/ZXDunny
+| Folder := spectrum
+
++ TI-99/4A
+@ https://sourceforge.net/projects/ti99basic
+| Folder := ti99
+
++ Tiny Basic
+@ https://github.com/eddavis2/Tiny-Basic
+| tiny
 
 + Thoreau BASIC
 @ https://tarjan.itch.io/thoreaubasic
 | Folder := thoreau
 
++ TRS-80
+@ https://www.trs-80.org/level-2-basic.html
+| Folder := trs80
+
++ VB Classic
+@ https://microsoft-visual-basic.en.softonic.com
+| Folder := vb
+
++ VB .Net
+@ https://gotbasic.com/vb.html
+| Folder := vbnet
+
++ VB Script
+@ https://en.softonic.com/downloads/vbscript
+| Folder := vbscript
+
++ Vintage Basic
+@ http://www.vintage-basic.net
+| Folder := vintage
+
 + Vision BASIC
 @ https://visionbasic.net/
 | Folder := vision
+
++ Web QB
+@ https://webqb.org
+| Folder := webqb
+
++ ZX Spectrum
+@ https://fuse-emulator.sourceforge.net/
+| Folder := zx
 
 ```
 
@@ -186,6 +328,8 @@ https://www.purebasic.com
 ----------------------------------------------------------------
 
 # Edition Links
+
+> ( Recommended : `basic-edition-table.html` )
 
 <div>
 <section id="table_section"></section>
@@ -215,7 +359,7 @@ https://www.purebasic.com
 
 # Groups
 
-> ["BASIX Facebook Group][basix]
+> [BASIX Facebook Group][basix]
 
 ----------------------------------------------------------------
 
@@ -235,7 +379,7 @@ https://www.purebasic.com
 ----------------------------------------------------------------
 
 <header id="header">
- <div id="messages"></div>
+  <div id="messages"></div>
 </header>
 
 <footer id="footer">
@@ -246,6 +390,12 @@ https://www.purebasic.com
 
 <style>
 @import url("./../style/every-page.css");
+</style>
+
+<style>
+thead {
+    cursor : pointer;
+}
 </style>
 
 <script>
@@ -301,8 +451,8 @@ edition.titles = dct();
 <script api="edition.js" id="edition-names.js" updated="2026-AUG-06" original="editions.json">
 edition.names = [
   "amiga", "anywhere", "apple", "atari",
-  "b256", "b3d", "b4x", "baby", "bazz", "berry", "bbc",
-  "c64", "classic", "dash",
+  "b256", "b3d", "b4x", "bazz", "berry", "bbc",
+  "c64", "classic",
   "free", "fusion", "future",
   "gw", "pbasic", "pc", "pure", "play",
   "qbasic", "qb45", "qb64", "qb64pe", "qbjs",
@@ -422,7 +572,7 @@ function populate_editions() {
 
 <script id="populate-links.js">
 function populate_links() {
-    const id = "link_table";
+    const id = ( populate_links.id );
     const owner = gid( "table_section" );
     let table = gid( id );
     if (! table ) {
@@ -458,6 +608,11 @@ function populate_links() {
     );
     return ( table );
 }
+
+;
+; populate_links.id = ( "basic-edition-table.html" )
+;
+
 </script>
 
 
@@ -589,7 +744,7 @@ function message( s, silent ) {
     if (! silent ) {
         console.log( s );
     }
-    message.textContent = ( s );
+    messages.textContent = ( s );
     return ( s );
 }
 </script>
@@ -629,7 +784,7 @@ minnie.th = function( event ) {
 			save_table( te );
 			return;
 		} else {
-			preserve_table( te );
+			persist_table( te );
 			return;
 		}
 	}
@@ -651,10 +806,6 @@ function input_gadget_id( gadget ) {
 
 <script>
 function get_gadget_id( gadget ) {
-	let s = str( gadget.id );
-	if ( s ) {
-		return ( gadget.id = s );
-	}
 	return input_gadget_id( gadget );
 }
 </script>
@@ -670,7 +821,11 @@ function get_storage() {
 </script>
 
 <script>
-function preserve_table( table ) {
+function persist_table( table ) {
+    if ( table.editable ) {
+        message( `Can't persist table in edit mode` );
+        return;
+    }
 	const stg = get_storage();
 	if (! stg ) { return; }
 	const k = get_gadget_id( table );
@@ -683,6 +838,10 @@ function preserve_table( table ) {
 
 <script>
 function recover_table( table ) {
+    if ( table.editable ) {
+        message( `Can't recover table in edit mode` );
+        return;
+    }
 	const stg = get_storage();
 	if (! stg ) { return; }
 	const k = get_gadget_id( table );
@@ -698,7 +857,11 @@ function recover_table( table ) {
 </script>
 
 <script>
-function save_table( gadget ) {
+function save_table( table ) {
+    if ( table.editable ) {
+        message( `Can't save table in edit mode` );
+        return;
+    }
 	const k = get_gadget_id( table );
 	if (! k ) { return; }
 	const v = table.outerHTML;
@@ -747,3 +910,45 @@ function canedit( o, en=1 ) {
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
+<script>
+function read_table_json( table ) {
+    table = (
+         resolve( table )
+      || gid( populate_links.id )
+    );
+    const be = table.tBodies[ 0 ];
+    const entries = [];
+    const add =( tr )=> {
+        const entry = [];
+        const count = tr.cells.length;
+        for ( let i =0; i < count; i += 1 ) {
+            const ce = tr.cells[ i ];
+            const s = str( ce.textContent );
+            entry.push( s );
+        }
+        entries.push( entry );
+    };
+    const rows = arr( be.rows );
+    rows.forEach( add );
+    return JSON.stringify( entries, null, 2 );
+}
+</script>
+
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script>
+function resolve( o ) {
+    if ( o ) {
+        if ( gad( o ) ) {
+            return ( o );
+        }
+        if ( o = gid( o ) ) {
+            return ( o );
+        }
+    }
+    return ( null );
+}
+</script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
