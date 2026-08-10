@@ -134,6 +134,9 @@ https://www.trs-80.org/level-2-basic.html
 ```hal
 
 https://github.com/eddavis2/Tiny-Basic
+https://oxygenbasic.sourceforge.io/
+https://ugbasic.iwashere.eu/
+https://github.com/thinkyhead/AtariBASIC
 
 ```
 
