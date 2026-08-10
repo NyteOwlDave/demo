@@ -1,0 +1,30 @@
+
+/*
+
+# Dial of Destiny
+
+> ( `destiny.css` )
+
+*/
+
+@import url("./../../style/every-page.css");
+
+:root {
+  --border : 1px solid transparent;
+}
+
+html, body {
+  color : #eeccbb;
+  background: #010125;
+}
+
+body, p {
+	text-align : center;
+}
+
+canvas {
+    border : var( --border );
+    width  : 50vh;
+    height : 50vh;
+}
+
