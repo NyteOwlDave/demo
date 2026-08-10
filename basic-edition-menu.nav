@@ -1,0 +1,163 @@
++ 3D Basic
+@ https://threedbasic.wixsite.com/3d-basic
+| Folder := b3d
+
++ Amiga Basic
+@ https://gotbasic.com/amiga.html
+| Folder := amiga
+
++ AppleSoft Basic
+@ https://gotbasic.com/apple.html
+| Folder := apple
+
++ Atari Basic
+@ https://eahumada.github.io/AtariOnline/basic/basic-mame.html
+| Folder := atari
+
++ B4X
+@ https://www.b4x.com
+| Folder := b4x
+
++ Basic 256
+@ https://basic256.org
+| Folder := b256
+
++ Basic Anywhere
+@ https://basicanywheremachine.neocities.org/bam-ide
+| Folder := anywhere
+
++ Basic Fusion
+@ https://basicfusion.org
+| Folder := fusion
+
++ Bazz Basic
+@ https://ekbass.github.io/BazzBasic
+| Folder := bazz
+
++ BBC BASIC
+@ https://www.bbcbasic.co.uk/bbcsdl/index.html
+| Folder := bbc
+
++ Berry BASIC
+@ https://github.com/fritzone/berrybasic
+| Folder := berry
+
++ C64 Basic
+@ https://stigc.dk/c64/basic
+| Folder := c64
+
++ Classic Basic
+@ https://classicbasic.org
+| Folder := classic
+
++ Free BASIC
+@ https://freebasic.net
+| Folder := free
+
++ Future BASIC
+@ https://www.brilorsoftware.com/fb/pages/home.html
+| Folder := future
+
++ GW Basic
+@ https://gotbasic.com/gw-basic.html
+| Folder := gw
+
++ PBASIC
+@ https://www.parallax.com/education/programming-languages/pbasic
+| Folder := pbasic
+
++ PC Basic
+@ https://robhagemans.github.io/pcbasic/doc/2.0/
+| Folder := pc
+
++ Play Basic
+@ https://www.playbasic.com/
+| Folder := play
+
++ Pure Basic
+@ https://www.purebasic.com
+| Folder := pure
+
++ QBasic
+@ https://qbasic.com
+| Folder := qbasic
+
++ QB 4.5
+@ https://vetusware.com/download/qb4.5%204.5/?id=5422
+| Folder := qb45
+
++ QB64
+@ https://qb64.com
+| Folder := qb64
+
++ QB64 Phoenix
+@ https://qb64phoenix.com
+| Folder := qb64pe
+
++ QBJS
+@ https://qbjs.org
+| Folder := qbjs
+
++ QBX
+@ https://github.com/logiclrd/QBX
+| Folder := qbx
+
++ Sedai Basic
+@ https://github.com/camauri/SedaiBasic2
+| Folder := sedai
+
++ Sega Level III
+@ https://segaretro.org/BASIC_Level_III_A
+| Folder := sega
+
++ Small Basic
+@ https://smallbasic-publicwebsite.azurewebsites.net/
+| Folder := vbsmall2
+
++ Spectrum Basic
+@ https://github.com/ZXDunny
+| Folder := spectrum
+
++ TI-99/4A
+@ https://sourceforge.net/projects/ti99basic
+| Folder := ti99
+
++ Tiny Basic
+@ https://github.com/eddavis2/Tiny-Basic
+| tiny
+
++ Thoreau BASIC
+@ https://tarjan.itch.io/thoreaubasic
+| Folder := thoreau
+
++ TRS-80
+@ https://www.trs-80.org/level-2-basic.html
+| Folder := trs80
+
++ VB Classic
+@ https://microsoft-visual-basic.en.softonic.com
+| Folder := vb
+
++ VB .Net
+@ https://gotbasic.com/vb.html
+| Folder := vbnet
+
++ VB Script
+@ https://en.softonic.com/downloads/vbscript
+| Folder := vbscript
+
++ Vintage Basic
+@ http://www.vintage-basic.net
+| Folder := vintage
+
++ Vision BASIC
+@ https://visionbasic.net/
+| Folder := vision
+
++ Web QB
+@ https://webqb.org
+| Folder := webqb
+
++ ZX Spectrum
+@ https://fuse-emulator.sourceforge.net/
+| Folder := zx
