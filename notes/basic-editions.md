@@ -11,15 +11,23 @@
 <https://www.facebook.com/groups/basicxgame/>
 "BASIX Facebook Group"
 
+[basic-pgm-group]:
+<https://www.facebook.com/groups/2057165187928233>
+"BASIC Programming Language"
+
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
-[editions-wiki]:
+[dialects-wiki]:
 <https://en.wikipedia.org/wiki/List_of_BASIC_dialects>
-"BASIC Edition Wiki"
+"BASIC Dialects Wiki"
 
 [basic-wiki]:
 <https://en.wikipedia.org/wiki/BASIC>
 "BASIC Wiki"
+
+[got-basic]:
+<https://gotbasic.com>
+"Got BASIC"
 
 [qb64-wiki]:
 <https://qb64.com/wiki>
@@ -350,12 +358,16 @@ https://apps.apple.com/ca/app/pbasic/id6789459761?mt=12
 # References
 
 > [BASIC Wiki][basic-wiki]
-> [QB64 Notes][qb64-notes]
+> [BASIC Dialects Wiki][dialects-wiki]
+> [Got BASIC][got-basic]
+
 > [QB64 Wiki][qb64-wiki]
 > [QB64 Phoenix Wiki][qb64pe-wiki]
 > [QB45 Wiki][qb45-wiki]
 > [QBasic Wiki][qbasic-wiki]
+
 > [PC Basic Manual][pc-help]
+
 > [Xojo IDE][xojo]
 > [Code Beautify](https://beautifier.io/)
 
@@ -363,6 +375,7 @@ https://apps.apple.com/ca/app/pbasic/id6789459761?mt=12
 
 # Groups
 
+> [BASIC Programming Language][basic-pgm-group]
 > [BASIX Facebook Group][basix]
 
 ----------------------------------------------------------------
@@ -376,6 +389,8 @@ https://apps.apple.com/ca/app/pbasic/id6789459761?mt=12
 # [Navigation][sulu]
 
 > [Demo Menu](./../demo-menu.html)
+
+> [QB64 Notes][qb64-notes]
 
 > [Folder Tree](./tree.php)
 > [File System](./)

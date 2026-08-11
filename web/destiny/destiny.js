@@ -28,17 +28,17 @@ const dayCounts = [
 
 class JulianDate {
 	constructor( date ) {
-    if ( date ) {
-		this.date = new Date( date );
-    } else {
-		this.read( dt );
-    }
-    console.log( this.date );
+        if ( date ) {
+    		this.date = new Date( date );
+        } else {
+    		this.read( dt );
+        }
+        console.log( this.date );
 	}
 	get dayIndex() {
 		let sum = this.dayOfMonth;
 		const limit = this.monthIndex;
-    for ( let mi = 0; mi < limit; mi++ ) {
+        for ( let mi = 0; mi < limit; mi++ ) {
 			sum += dayCounts[ mi ];
 		}
 		if ( limit < 2 ) return sum;
