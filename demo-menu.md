@@ -14,14 +14,19 @@
 
 ## Featured Pages
 
+> [Dial of Destiny](./web/destiny/destiny.html)
+
 > [Demo Checklist](./demo-checklist.html)
 > [Demo Repo Clone](./demo-repo-clone.html)
+
 > [BASIC Editions](./notes/basic-editions.html)
 > [QB64 Notes](./notes/qb64-notes.html)
+
 > [Math Groups](./dot/md/math-groups.html)
 
 > [Physics 101](./latex/physics-101.html)
 > [Physics Limits](./latex/limits/2026-AUG-01-A.html)
+
 > [Mandelbrot 3D Notes](./qb64pe/mandelbrot-3d-notes.html)
 > [Mandelbrot 3D P-Code](./qb64pe/mandelbrot-3d-pcode.html)
 > [Mandelbulb](./web/pixmap/mandelbulb.html)
