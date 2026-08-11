@@ -1,48 +1,66 @@
 
+[locutus]:
+<http://dave-legacy/app/locutus/locutus.html>
+"Legacy Edition"
+
+[me-omega]:
+<http://dave-omega/demo/icons/edition-checklist.html>
+"Omega Edition"
+
+[me]:
+<http://dave-legacy/demo/icons/edition-checklist.html>
+"Legacy Edition"
+
 ----------------------------------------------------------------
 
-# BASIC Edition Checklist
+# [BASIC Edition Checklist][me]
 
 > ( `Demo Icons` )
 
 ----------------------------------------------------------------
 
-- [?] amiga
-- [?] anywhere
-- [?] apple
-- [?] atari
-- [?] b256
-- [?] b3d
-- [?] b4x
-- [?] bazz
-- [?] bbc
-- [?] berry
-- [?] c64
-- [?] classic
-- [?] free
-- [?] fusion
-- [?] future
-- [?] gw-basic
-- [?] pbasic
-- [?] pc-basic
-- [?] play
-- [?] qb
-- [?] qb64
-- [?] qb64pe
-- [?] qbjs
-- [?] qbx
-- [?] sedai
-- [?] sega
-- [?] spectrum
-- [?] thoreau
-- [?] ti-99
-- [?] tiny
-- [?] trs-80
-- [?] vb
-- [?] vintage
-- [?] vision
-- [?] webqb
-- [?] zx
+- [`?`] amiga
+- [`?`] anywhere
+- [`?`] apple
+- [`X`] atari
+- [`X`] b256
+- [`X`] b3d
+- [`?`] b4x
+- [`?`] bazz
+- [`?`] bbc
+- [`?`] berry
+- [`?`] c64
+- [`X`] classic
+- [`X`] free
+- [`X`] fusion
+- [`?`] future
+- [`?`] gw-basic
+- [`X`] pbasic
+- [`?`] pc-basic
+- [`?`] play
+- [`X`] qb
+- [`X`] qb64
+- [`X`] qb64pe
+- [`?`] qbjs
+- [`?`] qbx
+- [`?`] sedai
+- [`?`] sega
+- [`X`] spectrum
+- [`?`] thoreau
+- [`X`] ti-99
+- [`?`] tiny
+- [`X`] trs-80
+- [`X`] vb
+- [`X`] vintage
+- [`?`] vision
+- [`X`] webqb
+- [`X`] zx
+
+----------------------------------------------------------------
+
+## Toolkit
+
+> [Locutus Checklists][locutus]
 
 ----------------------------------------------------------------
 
