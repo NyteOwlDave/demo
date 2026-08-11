@@ -51,7 +51,7 @@ Next m%
 ' UNCOMMENT THIS FOR CUSTOM FONT
 ' See Notes Below Regarding Pathname
 
-UseCustomFont
+' UseCustomFont
 
 Dim now As Date
 GetToday now
