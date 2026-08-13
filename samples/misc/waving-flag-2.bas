@@ -1,0 +1,27 @@
+10 REM ZXASCII : AUTO -1 : PROG demos:graphics/flagwave : CHANGED FALSE
+180 REM =====================================================================
+110 REM Waving Flag
+150 SCREEN LOCK : DEF FN x=phase+x/c*tau+y/c*tau : GO SUB 1000
+180 REM =====================================================================
+200 c=25,e=20,st=MIN(SCRw-40,SCRh-40)/c,cx=(SCRw-40)/st,phase=0,d=c/2
+250 CLS 0 : phase+=0.075 : FOR y=1 TO c : FOR x=1 TO cx : xp=x*st+d,yp=y*st+d,xs=e*SIN FN x,ys=e*COS FN x
+350 CIRCLE INK GPOINT(flag,xp,yp);xp+xs,yp+ys,6 FILL : NEXT x: NEXT y : WAIT SCREEN : GO TO 40
+180 REM =====================================================================
+1000 REM Draw a union flag
+1100 GRAPHIC NEW flag,SCRw,SCRh : WINDOW GRAPHIC flag
+1150 b=SCRh , r=SCRw , th=b/3 , tth=b*2/3 , ho=b/4.472 , vo=b/8.944
+1200 INK 1 : RECTANGLE 0,0 TO r,b FILL
+1200 INK 7 : POLYGON 0,0 TO ho,0 TO r,b-vo TO r,b TO r-ho,b TO 0,vo FILL
+1250 INK 7 : POLYGON 0,b TO ho,b TO r,vo TO r,0 TO r-ho,0 TO 0,b-vo FILL
+1350 vo = b/13.41 , ho=r/3 , ho2=(b/3-vo)*(r/b)
+1360 INK 2 : POLYGON 0,0 TO ho,th TO ho2,th TO 0,vo FILL
+1400 INK 2 : POLYGON r,b TO r-ho,tth TO r-ho2,tth TO r,b-vo FILL
+1500 ho2 = ho+(b/6.945)
+1510 INK 2 : POLYGON 0,b TO ho2-ho,b TO ho2,tth TO ho,tth FILL
+1550 INK 2 : POLYGON r,0 TO r-ho,th TO r-ho2,th TO r-ho2+ho,0 FILL
+1600 INK 7 : RECTANGLE r*5/12,0 TO r*7/12,b FILL
+1610 INK 7 : RECTANGLE 0,b/3 TO r,b*2/3 FILL
+1650 INK 2 : RECTANGLE r*9/20,0 TO r*11/20,b FILL
+1660 INK 2 : RECTANGLE 0,b*2/5 TO r,b*3/5 FILL
+1700 WINDOW 0 : RETURN
+

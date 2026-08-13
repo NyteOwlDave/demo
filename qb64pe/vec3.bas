@@ -157,7 +157,7 @@ Function VecLen# (v As Vec3)
 End Function
 
 Function VecNorm# (vi As Vec3, vo As Vec3)
-    k# = VecDotSelf(vi)
+    k# = VecDotSelf#(vi)
     If k# > 1E-20 Then
         r# = 1 / Sqr(k#)
         VecScale vi, r#, vo
@@ -167,8 +167,8 @@ Function VecNorm# (vi As Vec3, vo As Vec3)
     VecNorm# = k#
 End Function
 
-Function VecRecip (vi As Vec3, vo As Vec3)
-    d# = VecDotSelf(vi)
+Function VecRecip# (vi As Vec3, vo As Vec3)
+    d# = VecDotSelf#(vi)
     If (d# > 1E-20) Then
         k# = 1 / d#
         VecScale vi, k#, vo
@@ -189,7 +189,7 @@ Function VecRandT# (v As Vec3, t#)
     VecRandT# = n#
 End Function
 
-' Vo = Vi - 2(Vi \dot N)N
+' Vo = Vi - 2*(Vi \dot N)*N
 Function VecReflect# (vi As Vec3, n As Vec3, vo As Vec3)
     d# = VecDot#(vi, n)
     VecScale n, 2 * d#, vo
@@ -198,8 +198,54 @@ Function VecReflect# (vi As Vec3, n As Vec3, vo As Vec3)
 End Function
 
 ' Snell's Law
-Function VecRefract# (vi As Vec3, n As Vec3, eta#, vo As Vec3)
-    VecRefract# = 0 ' "TODO"
+' Calculate Refracted Ray
+' All vectors are normalized
+Function VecRefract# (vi As Vec3, n As Vec3, eta#, vr As Vec3)
+    dot# = VecDot#(vi, n)
+    k# = 1.0 - eta# * eta# * (1.0 - dot# * dot#)
+    VecRefract# = k#
+    If (k# < 0.0) Then
+        VecZero vr
+        Exit Function
+    End If
+    mu# = eta# * dot# + Sqr(k#)
+    vr.x = eta# * vi.x - mu# * n.x
+    vr.y = eta# * vi.y - mu# * n.y
+    vr.z = eta# * vi.z - mu# * n.z
 End Function
 
+Sub TestRefract ()
+
+    n1# = 1.0 ' Air IOR
+    n2# = 1.5 ' Glass IOR
+    eta# = n1# / n2# ' Ratio
+
+    isrt2# = 1 / Sqr(2)
+
+    Dim vi As Vec3
+    VecInit isrt2#, -isrt2#, 0, vi
+
+    Dim n As Vec3
+    VecAxisY n
+
+    Dim vr As Vec3
+    k# = VecRefract#(vi, n, eta#, vr)
+
+    If (k# < 0.0) Then
+        Print "100% Reflection"
+    Else
+        rx# = Round#(vr.x, 4)
+        ry# = Round#(vr.y, 4)
+        rz# = Round#(vr.z, 4)
+        Print "Refracted Vector X :"; rx
+        Print "Refracted Vector Y :"; ry
+        Print "Refracted Vector Z :"; rz
+    End If
+End Sub
+
+Function Round# (n#, digits%)
+    k# = 10 ^ (digits%)
+    n# = Int(n# * k# + 0.5)
+    Round# = n# / k#
+End Function
 
