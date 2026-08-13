@@ -19,14 +19,14 @@
 
 ----------------------------------------------------------------
 
-- [`?`] amiga
-- [`?`] anywhere
+- [`X`] amiga
+- [`X`] anywhere
 - [`?`] apple
 - [`X`] atari
 - [`X`] b256
 - [`X`] b3d
-- [`?`] b4x
-- [`?`] bazz
+- [`X`] b4x
+- [`X`] bazz
 - [`?`] bbc
 - [`?`] berry
 - [`?`] c64
@@ -34,10 +34,14 @@
 - [`X`] free
 - [`X`] fusion
 - [`?`] future
+- [`?`] gfa
+- [`?`] gfa32
 - [`?`] gw-basic
+- [`?`] impact
 - [`X`] pbasic
-- [`?`] pc-basic
+- [`X`] pc-basic
 - [`?`] play
+- [`?`] pure
 - [`X`] qb
 - [`X`] qb64
 - [`X`] qb64pe
@@ -69,6 +73,7 @@
 - List Ops API
 - Gideon Gadgets API
 - Persistent State
+- Replace Checklist Decals
 
 ----------------------------------------------------------------
 
