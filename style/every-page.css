@@ -14,9 +14,7 @@
 @import url("./tilly/every-page.css");
 @import url("./tilly/every-page-todo.css");
 @import url("./jefr/just/rainbow.css");
-
-/* TEMPORARY HACK */
-@import url("http://dave-legacy/jefr/style/just/active-header.css");
+@import url("./jefr/just/active-header.css");
 
 [center] ,
 *.center {

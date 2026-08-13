@@ -54,32 +54,60 @@
 
 ### `🥁` BASIC
 
+> [`🥁 amiga`](./amiga/)
 > [`🥁 anywhere`](./anywhere/)
 > [`🥁 apple`](./apple/)
 > [`🥁 atari`](./atari/)
+
 > [`🥁 b256`](./b256/)
 > [`🥁 b3d`](./b3b/)
+> [`🥁 b4x`](./b4x/)
+> [`🥁 bazz`](./bazz/)
+> [`🥁 berry`](./berry/)
+> [`🥁 bbc`](./bbc/)
 
-> [`🥁 baby`](./baby/)
 > [`🥁 c64`](./c64/)
 > [`🥁 classic`](./classic/)
+
 > [`🥁 free`](./free/)
 > [`🥁 fusion`](./fusion/)
+> [`🥁 future`](./future/)
 
+> [`🥁 gfa`](./gfa/)
+> [`🥁 gfa32`](./gfa32/)
 > [`🥁 gw-basic`](./gw-basic/)
+
+> [`🥁 impact`](./impact/)
+
+> [`🥁 pbasic`](./pbasic/)
 > [`🥁 pc-basic`](./pc-basic/)
-> [`🥁 qb`](./qb/)
+> [`🥁 play`](./play/)
+> [`🥁 pure`](./pure/)
+
+> [`🥁 qbasic`](./qbasic/)
+> [`🥁 qb45`](./qb45/)
 > [`🥁 qb64`](./qb64/)
 > [`🥁 qb64pe`](./qb64pe/)
-
 > [`🥁 qbjs`](./qbjs/)
+> [`🥁 qbx`](./qbx/)
+
+> [`🥁 sedia`](./sedia/)
+> [`🥁 sega`](./sega/)
 > [`🥁 spectrum`](./spectrum/)
+
+> [`🥁 thoreau`](./thoreau/)
 > [`🥁 ti-99`](./ti-99/)
 > [`🥁 trs-80`](./trs-80/)
-> [`🥁 vb`](./vb/)
 
+> [`🥁 vb`](./vb/)
+> [`🥁 vbscript`](./vbscript/)
+> [`🥁 vbnet`](./vbnet/)
+> [`🥁 vbsmall`](./vbsmall/)
 > [`🥁 vintage`](./vintage/)
+> [`🥁 vision`](./vision/)
+
 > [`🥁 webqb`](./webqb/)
+
 > [`🥁 zx`](./zx/)
 
 ### Web

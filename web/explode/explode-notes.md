@@ -1,8 +1,9 @@
-
 <head> <link rel="icon" href="favicon.ico" /> </head>
 
 [allegro]: <https://liballeg.org/>
 [djgpp]: <https://www.delorie.com/djgpp/>
+
+[sulu]: <http://dave-ryzen/nav/sulu.html>
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
@@ -744,6 +745,26 @@ function create_explosion() {
 
 ----------------------------------------------------------------
 
+# [`🧭` Navigation][sulu]
+
+> [`☰` Web Menu](./../web-menu.html)
+> [`☰` Demo Menu](./../../demo-menu.html)
+
+> [`🌲` Folder Tree](./tree.php)
+> [`🗃️` File System](./)
+
+----------------------------------------------------------------
+
+<header id="header">
+  <div id="messages"></div>
+</header>
+
+<footer id="footer">
+  <input wide id="footer_input" onchange="perform(event)" />
+</footer>
+
+----------------------------------------------------------------
+
 <style>
 @import url("./../../style/every-page.css");
 </style>
@@ -773,5 +794,24 @@ pre {
 
 <script>
 ; doc = document
-; doc . title = ( prolog.title )
 </script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script src="./../gems/core-ops.js"></script>
+<script src="./../gems/pcl-ultra.js"></script>
+<script src="./../gems/interpreter-lite.js"></script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script>
+function main( event ) {
+    doc . title = ( prolog.title );
+    message( "Ready for action!" );
+}
+</script>
+
+<script src="./explode-app.js"></script>
+
+
+

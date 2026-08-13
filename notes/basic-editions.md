@@ -33,6 +33,10 @@
 <https://gotbasic.com>
 "Got BASIC"
 
+[softonic]:
+<https://en.softonic.com>
+"Softonic Download"
+
 [qb64-wiki]:
 <https://qb64.com/wiki>
 "QB64 Wiki"
@@ -87,6 +91,10 @@
 [me]:
 <http://dave-omega/demo/notes/basic-editions.html>
 "Omega Edition"
+
+[me-tower]:
+<http://dave-tower/demo/notes/basic-editions.html>
+"Tower Edition"
 
 ----------------------------------------------------------------
 
@@ -331,7 +339,7 @@ https://gfabasic32.blogspot.com
 
 ----------------------------------------------------------------
 
-# [Edition List][editions-wiki]
+# [Edition List][dialects-wiki]
 
 <div center>
 <section id="droplist_section">
@@ -361,17 +369,19 @@ https://gfabasic32.blogspot.com
 
 > [JSON Edition List](./basic-editions-latest.json)
 
+> [Got BASIC][got-basic]
+> [Awesome BASIC][awesome]
+> [Softonic][softonic]
+
 ----------------------------------------------------------------
 
 # References
 
 > [BASIC Wiki][basic-wiki]
 > [BASIC Dialects Wiki][dialects-wiki]
-> [Got BASIC][got-basic]
-> [Awesome BASIC][awesome]
 
-> [QB64 Wiki][qb64-wiki]
 > [QB64 Phoenix Wiki][qb64pe-wiki]
+> [QB64 Wiki][qb64-wiki]
 > [QB45 Wiki][qb45-wiki]
 > [QBasic Wiki][qbasic-wiki]
 
@@ -428,7 +438,6 @@ thead {
 
 <script>
 ; doc = document
-; doc . title = ( `BASIC Editions` )
 </script>
 
 
@@ -437,6 +446,7 @@ thead {
 <script id="main.js">
 function main( event ) {
     try {
+        doc . title = ( `BASIC Editions` );
         populate_editions();
     } catch ( e ) {
         alert ( e );
@@ -482,7 +492,7 @@ edition.names = [
   "b256", "b3d", "b4x", "bazz", "berry", "bbc",
   "c64", "classic",
   "free", "fusion", "future",
-  "gw", "impact",
+  "gfa", "gfa32", "gw", "impact",
   "pbasic", "pc", "pure", "play",
   "qbasic", "qb45", "qb64", "qb64pe", "qbjs",
   "qbx", "sedai", "sega", "spectrum",
@@ -817,7 +827,7 @@ minnie.th = function( event ) {
 			return;
 		}
 	}
-	toggle_table_edit_node( te );
+	toggle_table_edit_mode( te );
 }
 </script>
 
@@ -899,7 +909,7 @@ function save_table( table ) {
 </script>
 
 <script>
-function toggle_table_edit_node( te ) {
+function toggle_table_edit_mode( te ) {
 	const m = ale( "TD", te );
 	if ( te.editable ) {
 		te.editable = false;

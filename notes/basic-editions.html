@@ -75,10 +75,14 @@ https://www.trs-80.org/level-2-basic.html
 <h3>Not Added to Table</h3>
 <pre><code class="language-hal">
 https://github.com/eddavis2/Tiny-Basic
-https://oxygenbasic.sourceforge.io/
-https://ugbasic.iwashere.eu/
+https://oxygenbasic.sourceforge.io
+https://ugbasic.iwashere.eu
 https://github.com/thinkyhead/AtariBASIC
 https://apps.apple.com/ca/app/pbasic/id6789459761?mt=12
+https://stigc.dk/c64/basic
+http://helijah.free.fr/pages/download/download.htm
+https://dompub30.free.nf/GFA-Win16.html
+https://gfabasic32.blogspot.com
 
 </code></pre>
 <hr>
@@ -250,7 +254,7 @@ https://apps.apple.com/ca/app/pbasic/id6789459761?mt=12
 
 </code></pre>
 <hr>
-<h1>[Edition List][editions-wiki]</h1>
+<h1><a href="https://en.wikipedia.org/wiki/List_of_BASIC_dialects" title="BASIC Dialects Wiki">Edition List</a></h1>
 <div center>
 <section id="droplist_section">
   <select id="edition_droplist"></select>
@@ -275,15 +279,17 @@ https://apps.apple.com/ca/app/pbasic/id6789459761?mt=12
 <h1>Downloads</h1>
 <blockquote>
 <p><a href="./basic-editions-latest.json">JSON Edition List</a></p>
+<p><a href="https://gotbasic.com" title="Got BASIC">Got BASIC</a>
+<a href="https://github.com/JohnBlood/awesome-basic" title="Awesome BASIC Dialect List">Awesome BASIC</a>
+<a href="https://en.softonic.com" title="Softonic Download">Softonic</a></p>
 </blockquote>
 <hr>
 <h1>References</h1>
 <blockquote>
 <p><a href="https://en.wikipedia.org/wiki/BASIC" title="BASIC Wiki">BASIC Wiki</a>
-<a href="https://en.wikipedia.org/wiki/List_of_BASIC_dialects" title="BASIC Dialects Wiki">BASIC Dialects Wiki</a>
-<a href="https://gotbasic.com" title="Got BASIC">Got BASIC</a></p>
-<p><a href="https://qb64.com/wiki" title="QB64 Wiki">QB64 Wiki</a>
-<a href="https://qb64phoenix.com/qb64wiki/index.php/Main_Page" title="QB64 Phoenix Wiki">QB64 Phoenix Wiki</a>
+<a href="https://en.wikipedia.org/wiki/List_of_BASIC_dialects" title="BASIC Dialects Wiki">BASIC Dialects Wiki</a></p>
+<p><a href="https://qb64phoenix.com/qb64wiki/index.php/Main_Page" title="QB64 Phoenix Wiki">QB64 Phoenix Wiki</a>
+<a href="https://qb64.com/wiki" title="QB64 Wiki">QB64 Wiki</a>
 <a href="https://en.wikipedia.org/wiki/QuickBASIC" title="QB45 Wiki">QB45 Wiki</a>
 <a href="https://en.wikipedia.org/wiki/QBasic" title="QBasic Wiki">QBasic Wiki</a></p>
 <p><a href="http://dave-legacy/app/pc-basic/docs/source/documentation.html" title="PC Basic Manual">PC Basic Manual</a></p>
@@ -331,7 +337,6 @@ thead {
 
 <script>
 ; doc = document
-; doc . title = ( `BASIC Editions` )
 </script>
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
@@ -339,6 +344,7 @@ thead {
 <script id="main.js">
 function main( event ) {
     try {
+        doc . title = ( `BASIC Editions` );
         populate_editions();
     } catch ( e ) {
         alert ( e );
@@ -382,7 +388,8 @@ edition.names = [
   "b256", "b3d", "b4x", "bazz", "berry", "bbc",
   "c64", "classic",
   "free", "fusion", "future",
-  "gw", "pbasic", "pc", "pure", "play",
+  "gw", "impact",
+  "pbasic", "pc", "pure", "play",
   "qbasic", "qb45", "qb64", "qb64pe", "qbjs",
   "qbx", "sedai", "sega", "spectrum",
   "thoreau",  "ti99", "trs80",
@@ -710,7 +717,7 @@ minnie.th = function( event ) {
             return;
         }
     }
-    toggle_table_edit_node( te );
+    toggle_table_edit_mode( te );
 }
 </script>
 
@@ -792,7 +799,7 @@ function save_table( table ) {
 </script>
 
 <script>
-function toggle_table_edit_node( te ) {
+function toggle_table_edit_mode( te ) {
     const m = ale( "TD", te );
     if ( te.editable ) {
         te.editable = false;

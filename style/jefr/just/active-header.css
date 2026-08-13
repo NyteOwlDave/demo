@@ -1,0 +1,22 @@
+
+/*
+    active-header.css
+*/
+
+header { cursor : pointer; }
+
+header:hover {
+    font-weight : 900;
+    background  : #77FF77;
+}
+
+
+/*
+
+    This causes the header to indicate it takes some
+    action when clicked with the mouse.
+
+    One use case is to use a header click to open the
+    home page or main menu for the app.
+
+*/
