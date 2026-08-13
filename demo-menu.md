@@ -2,137 +2,141 @@
   <link rel="icon" href="favicon.ico" />
 </head>
 
+[sulu]: <http://dave-ryzen/nav/sulu.html>
+
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
 [me]: <http://dave-omega/demo/demo-menu.html>
 
 ----------------------------------------------------------------
 
-# [Demo Menu][me]
+# [`☰` Demo Menu][me]
 
 ----------------------------------------------------------------
 
-## Featured Pages
+## `🤩` Featured Pages
 
-> [Dial of Destiny](./web/destiny/destiny.html)
+> [`🔗` Dial of Destiny](./web/destiny/destiny.html)
 
-> [Demo Checklist](./demo-checklist.html)
-> [Demo Repo Clone](./demo-repo-clone.html)
+> [`🔗` Demo Checklist](./demo-checklist.html)
+> [`🔗` Demo Repo Clone](./demo-repo-clone.html)
 
-> [BASIC Editions](./notes/basic-editions.html)
-> [QB64 Notes](./notes/qb64-notes.html)
+> [`🔗` BASIC Editions](./notes/basic-editions.html)
+> [`🔗` QB64 Notes](./notes/qb64-notes.html)
 
-> [Math Groups](./dot/md/math-groups.html)
+> [`🔗` Math Groups](./dot/md/math-groups.html)
 
-> [Physics 101](./latex/physics-101.html)
-> [Physics Limits](./latex/limits/2026-AUG-01-A.html)
+> [`🔗` Physics 101](./latex/physics-101.html)
+> [`🔗` Physics Limits](./latex/limits/2026-AUG-01-A.html)
 
-> [Mandelbrot 3D Notes](./qb64pe/mandelbrot-3d-notes.html)
-> [Mandelbrot 3D P-Code](./qb64pe/mandelbrot-3d-pcode.html)
-> [Mandelbulb](./web/pixmap/mandelbulb.html)
+> [`🔗` Mandelbrot 3D Notes](./qb64pe/mandelbrot-3d-notes.html)
+> [`🔗` Mandelbrot 3D P-Code](./qb64pe/mandelbrot-3d-pcode.html)
+> [`🔗` Mandelbulb](./web/pixmap/mandelbulb.html)
 
-> [Explode Notes](./web/explode/explode-notes.html)
-> [Pixel Map Notes](./web/pixmap/pixmap-notes.html)
-> [Goldberg Polyhedra](./web/polyhedra/goldberg.html)
-
-----------------------------------------------------------------
-
-## Featured Demo Pages
-
-> [Stochastic Font](./fusion/stochastic-font-bf.html)
-> [Quiverbloom Web](./qb64/quiverbloom.html)
-> [Quiverbloom QB64](./qb64/quiverbloom-bas.html)
-> [Pixel Map](./web/pixmap/pixmap.html)
-> [Poincare Disc](./web/pixmap/poincare-disc.html)
-
-> [Turtle 001](./web/turtle/turtle-001.html)
-> [Turtle Graph](./web/turtle/turtle-graph.html)
+> [`🔗` Explode Notes](./web/explode/explode-notes.html)
+> [`🔗` Pixel Map Notes](./web/pixmap/pixmap-notes.html)
+> [`🔗` Goldberg Polyhedra](./web/polyhedra/goldberg.html)
 
 ----------------------------------------------------------------
 
-## Workspaces
+## `🧨` Featured Demo Pages
+
+> [`🧨` Stochastic Font](./fusion/stochastic-font-bf.html)
+> [`🧨` Quiverbloom Web](./qb64/quiverbloom.html)
+> [`🧨` Quiverbloom QB64](./qb64/quiverbloom-bas.html)
+> [`🧨` Pixel Map](./web/pixmap/pixmap.html)
+> [`🧨` Poincare Disc](./web/pixmap/poincare-disc.html)
+
+> [`🧨` Turtle 001](./web/turtle/turtle-001.html)
+> [`🧨` Turtle Graph](./web/turtle/turtle-graph.html)
+
+----------------------------------------------------------------
+
+## `🗂️` Workspaces
 
 ### `🥁` BASIC
 
-> [`🥁 amiga`](./amiga/)
-> [`🥁 anywhere`](./anywhere/)
-> [`🥁 apple`](./apple/)
-> [`🥁 atari`](./atari/)
+> [`🥁` amiga](./amiga/)
+> [`🥁` anywhere](./anywhere/)
+> [`🥁` apple](./apple/)
+> [`🥁` atari](./atari/)
 
-> [`🥁 b256`](./b256/)
-> [`🥁 b3d`](./b3b/)
-> [`🥁 b4x`](./b4x/)
-> [`🥁 bazz`](./bazz/)
-> [`🥁 berry`](./berry/)
-> [`🥁 bbc`](./bbc/)
+> [`🥁` b256](./b256/)
+> [`🥁` b3d](./b3b/)
+> [`🥁` b4x](./b4x/)
+> [`🥁` bazz](./bazz/)
+> [`🥁` berry](./berry/)
+> [`🥁` bbc](./bbc/)
 
-> [`🥁 c64`](./c64/)
-> [`🥁 classic`](./classic/)
+> [`🥁` c64](./c64/)
+> [`🥁` classic](./classic/)
 
-> [`🥁 free`](./free/)
-> [`🥁 fusion`](./fusion/)
-> [`🥁 future`](./future/)
+> [`🥁` free](./free/)
+> [`🥁` fusion](./fusion/)
+> [`🥁` future](./future/)
 
-> [`🥁 gfa`](./gfa/)
-> [`🥁 gfa32`](./gfa32/)
-> [`🥁 gw-basic`](./gw-basic/)
+> [`🥁` gfa](./gfa/)
+> [`🥁` gfa32](./gfa32/)
+> [`🥁` gw-basic](./gw-basic/)
 
-> [`🥁 impact`](./impact/)
+> [`🥁` impact](./impact/)
 
-> [`🥁 pbasic`](./pbasic/)
-> [`🥁 pc-basic`](./pc-basic/)
-> [`🥁 play`](./play/)
-> [`🥁 pure`](./pure/)
+> [`🥁` pbasic](./pbasic/)
+> [`🥁` pc-basic](./pc-basic/)
+> [`🥁` play](./play/)
+> [`🥁` pure](./pure/)
 
-> [`🥁 qbasic`](./qbasic/)
-> [`🥁 qb45`](./qb45/)
-> [`🥁 qb64`](./qb64/)
-> [`🥁 qb64pe`](./qb64pe/)
-> [`🥁 qbjs`](./qbjs/)
-> [`🥁 qbx`](./qbx/)
+> [`🥁` qbasic](./qbasic/)
+> [`🥁` qb45](./qb45/)
+> [`🥁` qb64](./qb64/)
+> [`🥁` qb64pe](./qb64pe/)
+> [`🥁` qbjs](./qbjs/)
+> [`🥁` qbx](./qbx/)
 
-> [`🥁 sedia`](./sedia/)
-> [`🥁 sega`](./sega/)
-> [`🥁 spectrum`](./spectrum/)
+> [`🥁` sedia](./sedia/)
+> [`🥁` sega](./sega/)
+> [`🥁` spectrum](./spectrum/)
 
-> [`🥁 thoreau`](./thoreau/)
-> [`🥁 ti-99`](./ti-99/)
-> [`🥁 trs-80`](./trs-80/)
+> [`🥁` thoreau](./thoreau/)
+> [`🥁` ti-99](./ti-99/)
+> [`🥁` trs-80](./trs-80/)
 
-> [`🥁 vb`](./vb/)
-> [`🥁 vbscript`](./vbscript/)
-> [`🥁 vbnet`](./vbnet/)
-> [`🥁 vbsmall`](./vbsmall/)
-> [`🥁 vintage`](./vintage/)
-> [`🥁 vision`](./vision/)
+> [`🥁` vb](./vb/)
+> [`🥁` vbscript](./vbscript/)
+> [`🥁` vbnet](./vbnet/)
+> [`🥁` vbsmall](./vbsmall/)
+> [`🥁` vintage](./vintage/)
+> [`🥁` vision](./vision/)
 
-> [`🥁 webqb`](./webqb/)
+> [`🥁` webqb](./webqb/)
 
-> [`🥁 zx`](./zx/)
+> [`🥁` zx](./zx/)
 
-### Web
+### `🌐` Web
 
-> [`latex`](./latex/)
-> [`notes`](./notes/)
-> [`ops`](./ops/)
-> [`web`](./web/)
+> [`📁` latex](./latex/)
+> [`📁` notes](./notes/)
+> [`📁` ops](./ops/)
+> [`📁` web](./web/)
 
-### Support
+### `🧝` Support
 
-> [`archives`](./archives/)
-> [`art`](./art/)
-> [`dot`](./dot/)
-> [`icons`](./icons/)
+> [`📁` archives](./archives/)
+> [`📁` art](./art/)
+> [`📁` dot](./dot/)
+> [`📁` icons](./icons/)
 
-> [`style`](./style/)
-> [`templates`](./templates/)
+> [`📁` style](./style/)
+> [`📁` templates](./templates/)
 
 ----------------------------------------------------------------
 
-## Explore
+## [`🧭` Navigation][sulu]
 
-> [Folder Tree](./tree.php)
-> [File System](./)
+> [`🥁` Basic Editions](./notes/basic-editions.html)
+
+> [`🌲` Folder Tree](./tree.php)
+> [`🗃️` File System](./)
 
 ----------------------------------------------------------------
 
