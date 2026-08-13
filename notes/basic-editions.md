@@ -17,6 +17,10 @@
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
+[awesome]:
+<https://github.com/JohnBlood/awesome-basic>
+"Awesome BASIC Dialect List"
+
 [dialects-wiki]:
 <https://en.wikipedia.org/wiki/List_of_BASIC_dialects>
 "BASIC Dialects Wiki"
@@ -142,10 +146,14 @@ https://www.trs-80.org/level-2-basic.html
 ```hal
 
 https://github.com/eddavis2/Tiny-Basic
-https://oxygenbasic.sourceforge.io/
-https://ugbasic.iwashere.eu/
+https://oxygenbasic.sourceforge.io
+https://ugbasic.iwashere.eu
 https://github.com/thinkyhead/AtariBASIC
 https://apps.apple.com/ca/app/pbasic/id6789459761?mt=12
+https://stigc.dk/c64/basic
+http://helijah.free.fr/pages/download/download.htm
+https://dompub30.free.nf/GFA-Win16.html
+https://gfabasic32.blogspot.com
 
 ```
 
@@ -360,6 +368,7 @@ https://apps.apple.com/ca/app/pbasic/id6789459761?mt=12
 > [BASIC Wiki][basic-wiki]
 > [BASIC Dialects Wiki][dialects-wiki]
 > [Got BASIC][got-basic]
+> [Awesome BASIC][awesome]
 
 > [QB64 Wiki][qb64-wiki]
 > [QB64 Phoenix Wiki][qb64pe-wiki]
@@ -473,7 +482,8 @@ edition.names = [
   "b256", "b3d", "b4x", "bazz", "berry", "bbc",
   "c64", "classic",
   "free", "fusion", "future",
-  "gw", "pbasic", "pc", "pure", "play",
+  "gw", "impact",
+  "pbasic", "pc", "pure", "play",
   "qbasic", "qb45", "qb64", "qb64pe", "qbjs",
   "qbx", "sedai", "sega", "spectrum",
   "thoreau",  "ti99", "trs80",
