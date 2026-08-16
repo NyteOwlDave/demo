@@ -5,7 +5,13 @@
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
-[me]: <http://dave-tower/demo/web/web-menu.html>
+[me-tower]:
+<http://dave-tower/demo/web/web-menu.html>
+"Tower Edition"
+
+[me]:
+<http://dave-omega/demo/web/web-menu.html>
+"Omega Edition"
 
 ----------------------------------------------------------------
 
@@ -20,6 +26,7 @@
 - [`🧨` Kurt's Swimmer](./claude/simple-swimmer.html)
 - [`🧨` Gabriel's Horn](./claude/gabriel-horn.html)
 - [`🧨` Dial of Destiny](./destiny/destiny.html)
+- [`🧨` Dodecahedron](./dodec/dodec.html)
 - [`🧨` Explode](./explode/explode.html)
 - [`🧨` Turtle Demo #001](./turtle/turtle-001.html)
 - [`🧨` Turtle Math Graph](./turtle/turtle-graph.html)
@@ -43,6 +50,7 @@
 - [`📁` art](./art/)
 - [`📁` claude](./claude/)
 - [`📁` destiny](./destiny/)
+- [`📁` dodec](./dodec/)
 - [`📁` explode](./explode/)
 - [`📁` gems](./gems/)
 - [`📁` pixmap](./pixmap/)
@@ -62,6 +70,7 @@
 
 ## [`🧭` Navigation][sulu]
 
+> [`☰` Dodecahedron Menu](./dodec/dodec-menu.html)
 > [`☰` Pixmap Menu](./pixmap/pixmap-menu.html)
 > [`☰` Demo Menu](./../demo-menu.html)
 
@@ -73,8 +82,10 @@
 ----------------------------------------------------------------
 
 <style>
-@import url("http://dave-legacy/jefr/style/every-page.css");
+@import url("./../style/every-page.css");
 </style>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
 <script>
 ;
@@ -85,7 +96,7 @@
 <script>
 ;
 ; prolog = {}
-; prolog . title = ( `Explore` )
+; prolog . title = ( `Web Demo Menu` )
 ;
 </script>
 
@@ -99,7 +110,6 @@
 <script>
 ;
 ; doc = document
-; doc . title = ( prolog . title )
 ;
 </script>
 
@@ -108,6 +118,7 @@
 <script>
 function main( event ) {
     try {
+        doc . title = ( prolog . title );
     } catch ( e ) {
         alert ( e )
         throw ( e )
@@ -118,4 +129,6 @@ function main( event ) {
 <script>
 addEventListener( "load", main );
 </script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 

@@ -17,7 +17,7 @@ img { max-width: 100%; }
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
 <hr>
-<h1><a href="http://dave-tower/demo/web/web-menu.html"><code>☰</code> Web Menu</a></h1>
+<h1><a href="http://dave-omega/demo/web/web-menu.html" title="Omega Edition"><code>☰</code> Web Menu</a></h1>
 <blockquote>
 <p>( <code>Dave's 🧨 Demos</code> )</p>
 </blockquote>
@@ -27,6 +27,7 @@ img { max-width: 100%; }
 <li><a href="./claude/simple-swimmer.html"><code>🧨</code> Kurt's Swimmer</a></li>
 <li><a href="./claude/gabriel-horn.html"><code>🧨</code> Gabriel's Horn</a></li>
 <li><a href="./destiny/destiny.html"><code>🧨</code> Dial of Destiny</a></li>
+<li><a href="./dodec/dodec.html"><code>🧨</code> Dodecahedron</a></li>
 <li><a href="./explode/explode.html"><code>🧨</code> Explode</a></li>
 <li><a href="./turtle/turtle-001.html"><code>🧨</code> Turtle Demo #001</a></li>
 <li><a href="./turtle/turtle-graph.html"><code>🧨</code> Turtle Math Graph</a></li>
@@ -48,6 +49,7 @@ img { max-width: 100%; }
 <li><a href="./art/"><code>📁</code> art</a></li>
 <li><a href="./claude/"><code>📁</code> claude</a></li>
 <li><a href="./destiny/"><code>📁</code> destiny</a></li>
+<li><a href="./dodec/"><code>📁</code> dodec</a></li>
 <li><a href="./explode/"><code>📁</code> explode</a></li>
 <li><a href="./gems/"><code>📁</code> gems</a></li>
 <li><a href="./pixmap/"><code>📁</code> pixmap</a></li>
@@ -67,7 +69,8 @@ img { max-width: 100%; }
 <hr>
 <h2><a href="http://dave-ryzen/nav/sulu.html"><code>🧭</code> Navigation</a></h2>
 <blockquote>
-<p><a href="./pixmap/pixmap-menu.html"><code>☰</code> Pixmap Menu</a>
+<p><a href="./dodec/dodec-menu.html"><code>☰</code> Dodecahedron Menu</a>
+<a href="./pixmap/pixmap-menu.html"><code>☰</code> Pixmap Menu</a>
 <a href="./../demo-menu.html"><code>☰</code> Demo Menu</a></p>
 <p><a href="./../demo-checklist.html"><code>✅</code> Demo Checklist</a></p>
 <p><a href="./tree.php"><code>🌲</code> Folder Tree</a>
@@ -75,8 +78,10 @@ img { max-width: 100%; }
 </blockquote>
 <hr>
 <style>
-@import url("http://dave-legacy/jefr/style/every-page.css");
+@import url("./../style/every-page.css");
 </style>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
 <script>
 ;
@@ -87,7 +92,7 @@ img { max-width: 100%; }
 <script>
 ;
 ; prolog = {}
-; prolog . title = ( `Explore` )
+; prolog . title = ( `Web Demo Menu` )
 ;
 </script>
 
@@ -101,7 +106,6 @@ img { max-width: 100%; }
 <script>
 ;
 ; doc = document
-; doc . title = ( prolog . title )
 ;
 </script>
 
@@ -110,6 +114,7 @@ img { max-width: 100%; }
 <script>
 function main( event ) {
     try {
+        doc . title = ( prolog . title );
     } catch ( e ) {
         alert ( e )
         throw ( e )
@@ -120,6 +125,8 @@ function main( event ) {
 <script>
 addEventListener( "load", main );
 </script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
 </body>
 </html>
