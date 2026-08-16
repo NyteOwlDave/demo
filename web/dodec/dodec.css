@@ -1,7 +1,45 @@
 
 /* dodec.css */
 
+html, body {
+    box-sizing : border-box;
+    margin : 0;
+    border : none;
+    background  : midnightblue;
+    color : rgb( 255, 215, 42 );
+}
+
+body {
+    margin-top : 80px;
+    margin-bottom : 42vh;
+}
+
 .container {
     display: flex;
     justify-content: center;
 }
+
+header, footer {
+    box-sizing : border-box;
+    position : fixed;
+    left : 0;
+    width : calc( 100vw );
+    color  : midnightblue;
+    background : rgb( 255, 215, 42 );
+    text-align : center;
+    padding : 8px 2ch;
+}
+
+header {
+    top : 0;
+}
+
+footer {
+    bottom : 0;
+}
+
+#footer_input {
+    width : calc( 100% - 60px );
+}
+
+

@@ -28,6 +28,9 @@ function main() {
     try {
         Screen.init( get_canvas(), 60 );
         render();
+        // message( `Ready for Action!` );
+        const n = Dodec.polyList.length;
+        message( `Total Polygons : ${n}` );
     } catch ( e ) {
         alert ( e );
         throw ( e );
@@ -77,5 +80,23 @@ visit.codepen = function() {
     );
     visit( url );
 };
+
+
+function message( s, silent ) {
+    s = str( s );
+    if (! s ) { return; }
+    if (! silent ) {
+        console.log( s );
+    }
+    messages.textContent = ( s );
+    return ( s );
+}
+
+function mine( event ) {
+    const ev = event;
+    ev.preventDefault();
+    ev.stopPropagation();
+    return ( ev );
+}
 
 

@@ -3,31 +3,46 @@
 ' dodecahedron.bas (dodecahedron.js)
 '
 
+' View Matrix
+Dim Shared ViewMatrix( 4, 4 ) as Double
+
+MtxIdentity ViewMatrix
+
+' Camera Orientation
+Dim CameraEye( 3 ) as Double
+Dim CameraAt( 3 ) as Double
+Dim CameraUp( 3 ) as Double
+
+VecZero CameraAt '             Point of Interest
+VecInit 13, 9, 30, CameraEye ' Eye Location
+VecInit 0, -1, 0, CameraUp '   Up Direction
+
+Dim DocecHeight as Integer
+
+DodecHeight = 1
+
+PolygonCount% = 1
+
+' Dim PolygonList( PolygonCount% )
+
+Sub TransformShape( pt( 3 ) as Double, shape( 8, 4 ) as Double )
+    Dim v( 4 ) as Double
+    For vert = 0 to 7
+        v( 0 ) = pt( 0 ) + CubeVerts( vert, 0 )
+        v( 1 ) = pt( 1 ) + CubeVerts( vert, 1 )
+        v( 2 ) = pt( 2 ) + CubeVerts( vert, 2 )
+        MtxApply ViewMatrix, v, v
+        shape( vert, 0 ) = v( 0 )
+        shape( vert, 1 ) = v( 1 )
+        shape( vert, 2 ) = v( 2 )
+    Next vert
+End Sub
+
 // Singleton Dodecahedron Object
 const Dodec = {
-    // Camera orientation
-    camera: {
-        eye: [ 13, 9, 30 ],
-        at:  [  0, 0,  0 ],
-        up:  [  0,-1,  0 ]
-    },
-    // View matrix
-    Q: Mtx.identity(),
-    // Height
-    height: 1,
-    // Polygon list (all cubes)
-    polyList: [],
     // Add a unit cube's facets to the polygon list
     // centered at the specified (x,y,z) coordinates
     addCube: function( x, y, z ) {
-        const v2 = [];
-        const view = [];
-        Cube.vert.forEach(
-            ( v ) =>{
-                Vec.Add( v, [ x, y, z ], v2 );
-                view.push( Mtx.transVector( Dodec.Q, v2 ) );
-            }
-        );
         let n;
         for ( n=0; n<6; n++ ) {
             let poly = [];
@@ -37,11 +52,11 @@ const Dodec = {
             face.forEach(
                 ( index ) => {
                     let vec3 = [
-                        view[ index ][ 0 ],
-                        view[ index ][ 1 ],
-                        view[ index ][ 2 ]
+                        shape[ index ][ 0 ],
+                        shape[ index ][ 1 ],
+                        shape[ index ][ 2 ]
                     ];
-                    totalZ += view[ index ][ 2 ];
+                    totalZ += shape[ index ][ 2 ];
                     countZ++;
                     poly.push( Screen.mapToScreen( vec3 ) );
                 }
@@ -139,23 +154,27 @@ const Dodec = {
             }
         );
     },
-    // Draw
-    draw: function( context ) {
-        context.lineWidth = 1;
-        context.strokeStyle = 'white';
-        context.fillStyle = 'gray';
-        function drawPoly( p ) {
-            context.beginPath();
-            context.moveTo( p[ 0 ].x, p[ 0 ].y );
-            for ( let n=1; n < p.length; n++ ) {
-                context.lineTo( p[ n ].x, p[ n ].y );
-                context.stroke();
-            }
-            context.closePath();
-            context.stroke();
-            context.fill();
-        }
-        Dodec.polyList.forEach( poly=>drawPoly( poly.p ) );
+
+Sub ZSortPolygonList()
+End Sub
+
+Sub DrawPolygon( p )
+    context.beginPath();
+    context.moveTo( p[ 0 ].x, p[ 0 ].y );
+    for ( let n=1; n < p.length; n++ ) {
+        context.lineTo( p[ n ].x, p[ n ].y );
+        context.stroke();
     }
-};
+    context.closePath();
+    context.stroke();
+    context.fill();
+End Sub
+
+// Draw Dedecahedron
+Sub DodecDraw( context )
+    context.lineWidth = 1;
+    context.strokeStyle = 'white';
+    context.fillStyle = 'gray';
+    Dodec.polyList.forEach( poly=>drawPoly( poly.p ) );
+End Sub
 
