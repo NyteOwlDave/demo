@@ -1,0 +1,84 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+<meta charset="utf-8"/>
+<title>Explosion</title>
+<style>
+html, body {
+    margin : 0;
+    border : none;
+}
+body {
+    text-align : center;
+    margin-top : 80px;
+    margin-bottom : 42vh;
+}
+canvas {
+    width  : 200px;
+    height : 200px;
+	background-color : black;
+	border : 1px solid gold;
+}
+</style>
+</head>
+
+<body>
+
+<main>
+<canvas id="idCanvas" width="100" height="100"></canvas>
+</main>
+
+<footer id="idFooter" style="margin-top: 120px">
+<div id="messages">Please wait while the explosion is being generated...</div>
+</footer>
+
+<application>
+
+<!--
+<script src="./explosion.js"></script>
+-->
+
+<script src="./fire-palette.js"></script>
+<script src="./fire.js"></script>
+<script src="./rgb.js"></script>
+<script src="./draw-pixel.js"></script>
+<script src="./sprites.js"></script>
+
+<script>
+let frame = -1;
+function draw() {
+	if ( frame < 0 ) return;
+	if ( frame >= Sprites.EXPLODE_FRAMES ) { frame = 0; }
+	// const pal = htmlFirePalette.color;
+	// Sprites.drawFrame( idCanvas, frame++, 10, 10, pal );
+    draw_frame( frame++, 10, 10, idCanvas );
+}
+</script>
+
+<script>
+function main( event ) {
+
+    copy_fire_palette();
+
+    // draw_palette( Sprites.color, idCanvas );
+    // draw_pixel_test( idCanvas );
+
+    create_explosion();
+
+	messages.textContent = 'Enjoy!';
+
+	frame = 0;
+	window.setInterval( draw, 20 );
+
+}
+</script>
+
+<script src="explode-app.js"></script>
+
+</application>
+
+</body>
+
+</html>

@@ -180,7 +180,7 @@ const Sprites = {
 		const ops = Sprites;
 		const frames = ops.EXPLODE_FRAMES;
 		const size   = ops.EXPLODE_SIZE;
-		if ( ( i<0 ) || ( i > frames ) ) { return; }
+		if ( ( i > frames ) || ( i < 0 ) ) { return; }
 		const gfx = canvas.getContext( '2d' );
 		const get = ops.getpixel;
 		const put = function( p, q, c ) {
@@ -235,7 +235,7 @@ intention of __porting__ this to __another language__.
 
 ----------------------------------------------------------------
 
-## Sprite Engine State
+## [Sprite Engine State](./sprites.js)
 
 ```javascript
 
@@ -268,7 +268,7 @@ __Sprite Engine__.
 
 ----------------------------------------------------------------
 
-## Draw Canvas Pixel
+## [Draw Canvas Pixel](./draw-pixel.js)
 
 ```javascript
 
@@ -296,7 +296,7 @@ a __Palette Color Index__.
 
 ----------------------------------------------------------------
 
-## Draw Canvas Pixel Raw
+## [Draw Canvas Pixel Raw](./draw-pixel.js)
 
 ```javascript
 
@@ -324,7 +324,7 @@ a __CSS Style__.
 
 ----------------------------------------------------------------
 
-## Read Sprite Texel
+## [Read Sprite Texel](./sprites.js)
 
 ```javascript
 
@@ -350,7 +350,7 @@ Reads a single __Texel__ from any __Sprite Frame Buffer__.
 
 ----------------------------------------------------------------
 
-## Write Sprite Texel
+## [Write Sprite Texel](./sprites.js)
 
 ```javascript
 
@@ -377,7 +377,7 @@ Writes a single __Texel__ to any __Sprite Frame Buffer__.
 
 ----------------------------------------------------------------
 
-## Read Palette Color
+## [Read Palette Color](./sprites.js)
 
 ```javascript
 
@@ -404,7 +404,7 @@ __Colors__ are __CSS Styles__ in `rgb()` format.
 
 ----------------------------------------------------------------
 
-## Write Palette Color
+## [Write Palette Color](./sprites.js)
 
 ```javascript
 
@@ -435,7 +435,7 @@ __Colors__ are __CSS Styles__ in `rgb()` format.
 
 ----------------------------------------------------------------
 
-## Write Palette RGB Color
+## [Write Palette RGB Color](./sprites.js)
 
 ```javascript
 
@@ -463,7 +463,7 @@ format.
 
 ----------------------------------------------------------------
 
-## Compose RGB Color
+## [Compose RGB Color](./rgb.js)
 
 ```javascript
 
@@ -494,7 +494,7 @@ Converts `RGB` Components to __CSS Styles__ in `rgb()` format.
 
 ----------------------------------------------------------------
 
-## Prepare Fire Palette
+## [Prepare Fire Palette](./fire.js)
 
 ```javascript
 
@@ -516,7 +516,7 @@ Prepares a __Palette__ using __Fire-like Colors__.
 
 ----------------------------------------------------------------
 
-## Draw Sprite Frame
+## [Draw Sprite Frame](./sprites.js)
 
 ```javascript
 
@@ -538,7 +538,7 @@ function draw_frame( index, x, y, canvas ) {
             );
 		}
 	}
-};
+}
 
 ```
 
@@ -557,7 +557,7 @@ Draws a single __Sprite Frame__ to the __Canvas__.
 
 ----------------------------------------------------------------
 
-## Create Hotspot
+## [Create Hotspot](./sprites/js)
 
 ```javascript
 
@@ -585,7 +585,7 @@ Creates and initializes a __Hotspot__ object.
 
 ----------------------------------------------------------------
 
-## Prepare Hotspot Array
+## [Prepare Hotspot Array](./sprites.js)
 
 ```javascript
 
@@ -620,7 +620,7 @@ these objects are discarded.
 
 ----------------------------------------------------------------
 
-## Create Sprite Buffers
+## [Create Sprite Buffers](./sprites.js)
 
 ```javascript
 
@@ -654,7 +654,7 @@ Creates an empty __Texel__ buffer for each __Sprite Frame__.
 
 ----------------------------------------------------------------
 
-## Prepare Sprite Frame
+## [Prepare Sprite Frame](./sprites.js)
 
 ```javascript
 
@@ -715,7 +715,7 @@ function prepare_sprite_frame( index, hot, axis, rise ) {
 
 ----------------------------------------------------------------
 
-## Create Explosion
+## [Create Explosion](./sprites/js)
 
 ```javascript
 
