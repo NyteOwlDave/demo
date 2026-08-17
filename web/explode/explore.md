@@ -36,7 +36,7 @@
 <script>
 function main( event ) {
     try {
-			doc . title = ( prolog . title );
+		doc . title = ( prolog . title );
     } catch ( e ) {
         alert ( e )
         throw ( e )
@@ -50,9 +50,9 @@ addEventListener( "load", main );
 
 <script>
 function params() {
-		return (
-			new URISearchParams( location.search )
-		);
+	return (
+		new URISearchParams( location.search )
+	);
 }
 </script>
 

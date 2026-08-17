@@ -27,6 +27,7 @@
 - [`🧨` Gabriel's Horn](./claude/gabriel-horn.html)
 - [`🧨` Dial of Destiny](./destiny/destiny.html)
 - [`🧨` Dodecahedron](./dodec/dodec.html)
+- [`🧨` Explode Deux](./explode/explode-deux.html)
 - [`🧨` Explode](./explode/explode.html)
 - [`🧨` Turtle Demo #001](./turtle/turtle-001.html)
 - [`🧨` Turtle Math Graph](./turtle/turtle-graph.html)
@@ -71,6 +72,7 @@
 ## [`🧭` Navigation][sulu]
 
 > [`☰` Dodecahedron Menu](./dodec/dodec-menu.html)
+> [`☰` Explode Menu](./explode/explode-menu.html)
 > [`☰` Pixmap Menu](./pixmap/pixmap-menu.html)
 > [`☰` Demo Menu](./../demo-menu.html)
 
