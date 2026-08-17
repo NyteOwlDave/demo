@@ -13,13 +13,155 @@ img { max-width: 100%; }
 </style>
 </head>
 <body>
+<p><head> <link rel="icon" href="favicon.ico" /> </head></p>
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
 <hr>
-<h1>Palette Analyzer Notes</h1>
+<h1><a href="http://dave-tower/demo/web/palette-analyzer-notes.html" title="Tower Edition"><code>🗒️</code> Palette Analyzer Notes</a></h1>
+<div center>
+  <div class="decal-icon">🗒️</div>
+</div>
+
+<h3><code>&gt;&gt;</code> FEATURING <code>&lt;&lt;</code></h3>
+<blockquote>
+<p><a href="./palette-analyzer.html"><code>🎨</code> Palette Analyzer</a></p>
+</blockquote>
 <hr>
-<ul>
-<li>( <code>pending</code> )</li>
-</ul>
+<h1>Description</h1>
+<p>The <code>Palette Analyzer</code> app began as a simple tool for
+graphing RGB Color Components.</p>
+<p>The need arose to build a function that interpolates colors
+in order to replicate the <code>Fire Demo</code> palette.</p>
+<p>This palette was build dynamically quite some time ago, then
+shared with various apps.</p>
+<p>I've lost track of the original function used to generate the
+fire palette. In order to produce identical results, I needed
+a means of determining the parameters for color interpolation.</p>
+<p>The easiest way I could think of to accomplish this was to
+graph each color component and analyze their slopes. This
+basic feature quickly expanded into a fairly extensive
+statistical tool.</p>
 <hr>
+<h1>Jarvis Support</h1>
+<p><code>Pal-Anz</code> supports both <code>Jarvis</code> and <code>seeker</code> for Spelunking
+source code.</p>
+<hr>
+<h1>Footer Input</h1>
+<p><code>Pal-Anz</code> supports the standard paradigm for footer input
+gadgets, including <code>perform</code>, <code>exec</code>, and <code>macro</code> methods.</p>
+<hr>
+<h1>Madge Graphics</h1>
+<p><code>Pal-Anz</code> uses a variation on the <code>Madge</code> Graphics paradigm.
+This provides <code>Surface</code>, <code>Graphics</code>, <code>Pen</code> and similar
+constructs for plotting lines and other basic <code>2D</code> drawing.</p>
+<hr>
+<h1>Core Ops</h1>
+<p><code>Pal-Anz</code> imports the simplified <code>core-ops.js</code> gem common to
+many of the Demo Web Apps.</p>
+<p>This isn't a comprehensive version. It does suffice for most
+app requirements.</p>
+<hr>
+<h1>Scalar Math</h1>
+<p><code>Pal-Anz</code> uses a subset of the <code>Vulcan Math</code> API. This doesn't
+presently support trig. It does support the required math for
+the <code>Statistics</code> component.</p>
+<hr>
+<h1>Statistics Math</h1>
+<p><code>Pal-Anz</code> has a moderately comprehensive Stats Component. This
+includes operations on arbitrary sized sample sets (vectors).</p>
+<p>The <code>vstats</code> function doubles as an accessor for enhanced
+methods, like <code>hints</code> and <code>inspect</code>.</p>
+<p>The <code>vstats</code> function returns the most comprehensive set of
+statistics for a sample set. This includes Least Squares
+slope and intercept, <code>mse</code>, <code>stddev</code>, and a slew of related
+values.</p>
+<p>The easiest way to understand the returned object is to use
+the <code>vstats.inspect()</code> method from within the debug console.
+If no arg is passed, member hints are displayed in a table.</p>
+<p>If a <code>stats</code> return object is passed in, its members are shown
+in a table. To clarify, <code>vstats</code> is the function. This
+function returns a comprehensive <code>stats</code> instance.</p>
+<hr>
+<h1>Palette Analysis</h1>
+<p>There's an embedded <code>script</code> with the id of <code>analyzer.js</code>. This
+script is intended to server as a <strong>Peach</strong>. That is, a
+starting point or basis for custom scripts at run-time. This
+script is loaded into the <code>sce</code> Script Editor at load time.</p>
+<hr>
+<h1>UI Layout</h1>
+<p>The User Interface layout is comprised of two docked vertical
+panels and a footer. The left panel contains a <code>canvas</code>, The
+right panel contains a <code>textarea</code>. The footer contains an
+<code>input</code> and s <code>div</code> for buttons.</p>
+<hr>
+<h2><a href="http://tiny.cc/jarvis-snipper-101"><code>🧰</code> Toolkit</a></h2>
+<blockquote>
+<p><a href="http://dave-legacy/math/latex/mathjax-test.html"><code>🧰</code> Math Jax</a>
+<a href="http://dave-legacy/math/math-menu.html"><code>🧰</code> Math Universe</a></p>
+</blockquote>
+<hr>
+<h2><a href="https://app.raindrop.io/my/45357558"><code>💧</code> References</a></h2>
+<blockquote>
+<p><a href="https://app.raindrop.io/my/46171960"><code>💧</code> Raindrop Math</a>
+<a href="http://dave-probook/std/pubs/math/least-squares.html"><code>📙</code> Least Squares</a>
+<a href="http://dave-probook/std/pubs/math/bell-curve.html"><code>📙</code> Bell Curve</a>
+<a href="http://dave-probook/std/pubs/math/formulas.html"><code>📙</code> Math Formulas</a>
+<a href="http://dave-probook/std/pubs/math/links.html"><code>📚</code> Math Links</a></p>
+</blockquote>
+<hr>
+<h2><a href="http://dave-ryzen/nav/sulu.html"><code>🧭</code> Navigation</a></h2>
+<blockquote>
+<p><a href="./web-menu.html"><code>☰</code> Web Menu</a>
+<a href="./../demo-menu.html"><code>☰</code> Demo Menu</a></p>
+<p><a href="./explode/explode-deux.html"><code>🎇</code> Explosion Demo</a></p>
+<p><a href="./tree.php"><code>🌲</code> Folder Tree</a>
+<a href="./"><code>🗃️</code> File System</a></p>
+</blockquote>
+<hr>
+<style>
+@import url("./../style/every-page.css");
+</style>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script>
+;
+; iwm = Object.keys( window ).sort()
+;
+</script>
+
+<script>
+;
+; prolog = {}
+; prolog . title = ( `Palette Analyzer Notes` )
+;
+</script>
+
+<script>
+;
+; cls =()=> console.clear()
+; agn =()=> location.reload()
+;
+</script>
+
+<script>
+;
+; doc = document
+; doc . title = ( prolog . title )
+;
+</script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script src="./gems/core-ops.js"></script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script src="./app/notes-app.js"></script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
 </body>
 </html>

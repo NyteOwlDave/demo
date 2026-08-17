@@ -1,0 +1,15 @@
+
+/*
+	decal-icon.css
+*/
+
+.decal-icon {
+	display : inline-block;
+	min-width  : 225px;
+	min-height : 225px;
+	max-width  : 225px;
+	max-height : 225px;
+	font : 180px monospace;
+	line-height : 180px;
+	text-align : center;
+}

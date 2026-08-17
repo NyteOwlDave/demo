@@ -445,7 +445,7 @@ function mine( ev ) {
 
 <script>
 function perform( event ) {
-    ops = perform;
+    const ops = perform;
 	try {
         ops.event  = mine( event );
         const sender = event.target;
@@ -461,7 +461,7 @@ function perform( event ) {
 
 <script>
 function exec( js ) {
-    ops = exec;
+    const ops = exec;
 	try {
         const cmd = str( js );
         if ( macro( cmd ) ) { return; }
@@ -482,7 +482,7 @@ function exec( js ) {
 
 <script>
 function macro( cmd ) {
-    ops = macro;
+    const ops = macro;
 	try {
         ops . error = "";
         ops . input = cmd;
