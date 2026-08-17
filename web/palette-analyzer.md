@@ -1,8 +1,13 @@
+<head>
+  <link rel="icon" href="./icons/palette-analyzer.png" />
+</head>
 
 <style>
 html, body {
 	margin : 0;
 	border : none;
+    color  : mintcream;
+    background : midnightblue;
 }
 .panel {
 	position : fixed;
@@ -43,6 +48,38 @@ html, body {
 hr {
 	display : none;
 }
+footer {
+    position : fixed;
+    margin   : 0;
+    padding  : 4px 1ch;
+    width    : 100%;
+    bottom   : 0;
+    left     : 0;
+    background  : lemonchiffon;
+    color : midnightblue;
+    white-space : nowrap;
+    overflow : hidden;
+}
+#footer_input {
+    padding   : 4px 1.2ch;
+    width     : calc( 100% - 40ch );
+    min-width : calc( 40ch );
+}
+.tray ,
+#footer_input {
+    display : inline-block;
+    font    : 11pt monospace;
+}
+.tray {
+    margin : 2px 10px;
+}
+.tray button {
+    display : inline-block;
+    font : inherit;
+    width : 3.3ch;
+    text-align : center;
+    cursor : pointer;
+}
 </style>
 
 ----------------------------------------------------------------
@@ -56,6 +93,18 @@ hr {
 <div class="panel dock-right">
   <textarea id="sce" wrap="off"></textarea>
 </div>
+
+----------------------------------------------------------------
+
+<footer id="footer">
+  <input id="footer_input" onchange="perform(event)" />
+  <div class="tray">
+    <button onclick="crunch(event)">🏍️</button>
+    <button onclick="crunch(event)">🧼</button>
+    <button onclick="crunch(event)">🏠</button>
+    <button onclick="crunch(event)">❓</button>
+  </div>
+</footer>
 
 ----------------------------------------------------------------
 
@@ -356,8 +405,12 @@ function prepare_rgba_colors() {
 <script>
 function main( event ) {
 	try {
+        doc = document;
+        doc . title = ( `Palette Analyzer` );
 		prepare_rgba_colors();
+        Background( "black" );
 		sce.value = gid( "analyzer.js" ).innerText;
+        crunch.init();
 	} catch ( e ) {
 		crashed ( e );
 	}
@@ -375,50 +428,535 @@ function crashed( e ) {
 }
 </script>
 
-<script id="analyzer.js">
+<script>
+function incomplete( s ) {
+    s = ( `The "${s}" feature is incomplete` );
+	alert ( s );
+}
+</script>
 
-xAxis = 266;
-yAxis = 10;
-scale = 256;
+<script>
+function mine( ev ) {
+    ev.preventDefault();
+    ev.stopPropagation();
+    return ( ev );
+}
+</script>
 
-function init_surface() {
+<script>
+function perform( event ) {
+    ops = perform;
+	try {
+        ops.event  = mine( event );
+        const sender = event.target;
+        exec( sender.value );
+        ops.error = "";
+	} catch ( e ) {
+        ops.output  = "";
+        ops.error   = ( e );
+        console.error ( e );
+	}
+}
+</script>
+
+<script>
+function exec( js ) {
+    ops = exec;
+	try {
+        const cmd = str( js );
+        if ( macro( cmd ) ) { return; }
+        ops.prior  = String( ops.input || "" );
+        ops.input  = String( js );
+        ops.output = window.eval( ops.input );
+        ops.error = "";
+	} catch ( e ) {
+        ops.output  = "";
+        ops.error   = ( e );
+        console.error ( e );
+	}
+}
+;
+; run =()=> exec( sce.value );
+;
+</script>
+
+<script>
+function macro( cmd ) {
+    ops = macro;
+	try {
+        ops . error = "";
+        ops . input = cmd;
+        const p = cmd.split( " " );
+        if (! p.length ) { return true; }
+        const t = p.shift();
+        const v = p.join( " " );
+        switch ( t ) {
+        case "?" : return _help( v );
+        default  : return ( false  );
+        }
+        function _help( rex ) {
+            inspect( "Global Members", seeker( rex ) );
+            return ( true );
+        }
+	} catch ( e ) {
+        ops.error   = ( e );
+        console.error ( e );
+	}
+    return ( false );
+}
+;
+; run =()=> exec( sce.value );
+;
+</script>
+
+<script>
+function seeker( rex ) {
+    let r, m = Object.keys( window );
+    m = m.filter( k => (! iwm.includes( k ) ) );
+    if ( r = str( rex ) ) {
+        rex = new RegExp( r );
+        m = m.filter( k => ( rex.test( k ) ) );
+    }
+    return ( m );
+}
+</script>
+
+<script>
+function inspect_size( title, w, h ) {
+    const t = [
+        ( `Width : ${w}`  )
+      , ( `Height : ${h}` )
+    ];
+    inspect( title, t );
+}
+</script>
+
+<script>
+function inspect( title, t ) {
+    const ops = inspect;
+    t = ops.tabulate( t );
+    const c = console;
+    c.groupCollapsed( title || "Untitled" );
+    c.table( t );
+    c.groupEnd();
+}
+</script>
+
+<script>
+inspect.tabulate = function( o ) {
+    if ( o instanceof Object ) {
+        if ( Array.isArray( o ) ) {
+            return ( o );
+        }
+        return Object.keys( o ).sort();
+    }
+    return [ String( o ) ];
+};
+</script>
+
+<script id="debug-helpers.js">
+cls =()=> console.clear();
+agn =()=> location.reload();
+</script>
+
+<script id="math.js">
+
+_PI  = Math.PI;
+_PHI = _PI / 2;
+_TAU = _PI * 2;
+
+_SR2 = Math.sqrt( 2 );
+_SR3 = Math.sqrt( 3 );
+_SR5 = Math.sqrt( 5 );
+
+round =( n )=> Math.round( n );
+trunc =( n )=> Math.trunc( n );
+floor =( n )=> Math.floor( n );
+ceil  =( n )=> Math.ceil ( n );
+
+abs =( a )=> Math.abs ( a );
+sgn =( a )=> Math.sign( a );
+
+max =( a, b )=> Math.max( a, b );
+min =( a, b )=> Math.min( a, b );
+mid =( a, b, c )=> min( max( a, b ), c );
+
+pow =( x, n )=> Math.pow( x, n );
+rootn =( x, n )=> Math.pow( x, 1 / n );
+
+sqrt =( n )=> Math.sqrt( n );
+cbrt =( n )=> Math.cbrt( n );
+
+square =( n )=> ( n * n );
+cube =( n )=> pow( n, 3 );
+
+exp =( n )=> Math.exp( n );
+log =( n )=> Math.log( n );
+logn =( x, n )=> ( log( x ) / log( n ) );
+
+rnd  =( k )=> ( (k||1) * Math.random() );
+irnd =( k )=> ( floor( rnd( k ) ) );
+crnd =( k )=> ( (k=k||1), rnd( k ) - (0.5 * k) );
+arnd =(   )=> crnd( _TAU );
+
+MathProps = {
+  _PI, _PHI, _TAU
+, _SR2, _SR3, _SR5
+};
+
+MathOps = {
+  abs, sgn
+, min, max, mid
+, round, trunc, floor, ceil
+, pow, rootn
+, sqrt, cbrt
+, square, cube
+, exp, log, logn
+, rnd, irnd, crnd, arnd
+};
+
+</script>
+
+<script id="stats.js">
+
+vmax =( v )=> v.reduce((a,b)=>max(a,b),-Infinity);
+vmin =( v )=> v.reduce((a,b)=>min(a,b),+Infinity);
+vsum =( v )=> v.reduce((a,b)=>(a+b),0);
+vavg =( v )=> (vsum(v)/(v.length));
+
+vbounds = function( v ) {
+    let lo = +Infinity;
+    let hi = -Infinity;
+    v.forEach(
+        ( n ) => {
+            lo = min( n, lo );
+            hi = max( n, hi );
+        }
+    );
+    return { lower : lo, upper : hi };
+};
+
+vmedian = function( v ) {
+    let i, j;
+    if (! v.length ) { return NaN; }
+    v = v.vsort();
+    if ( v.length % 1 ) {
+        i = ceil( v.length / 2 );
+        return v[ i ];
+    } else {
+        i = floor( v.length / 2 );
+        j = i + 1;
+        return ( 0.5 * ( v[i] + v[j] ) );
+    }
+};
+
+vlerp = function( v, t ) {
+    const bounds = vbounds( v );
+    const lo = bounds.lower;
+    const hi = bounds.upper;
+    const u = ( 1 - t );
+    return ( u*lo + t*hi );
+};
+
+vhalf =( v )=> vlerp( v, 0.5 );
+
+vrange = function( v ) {
+    const bounds = vbounds( v );
+    return ( bounds.upper - bounds.lower );
+};
+
+vmse = function( v ) {
+    const k = ( v.length - 1 );
+    if ( k < 0 ) {
+        return NaN;
+    }
+    if ( k < 1 ) {
+        return 0;
+    }
+    const mean = vavg( v );
+    let err = 0;
+    v.forEach(
+        ( x ) => {
+            dx = x - mean;
+            err += square( dx );
+        }
+    );
+    return ( err / k );
+};
+
+vstd =( v )=> sqrt( vmse( v ) );
+
+vnorm = function( v ) {
+    const bounds = vbounds( v );
+    const range  = ( bounds.upper - bounds.lower );
+    const scale  = 1 / range;
+    const samples = v.map( n => n * scale );
+    return { samples, bounds, range, scale };
+};
+
+vstats = function( v ) {
+    const n = v.length;
+    let lo = +Infinity;
+    let hi = -Infinity;
+    let xx = 0; let xsum = 0;
+    let yy = 0; let ysum = 0;
+    let xy = 0;
+    let x = 0;
+    v.forEach(
+        ( y ) => {
+            xsum += x;
+            ysum += y;
+            xx += square( x );
+            yy += square( y );
+            xy += ( x * y );
+            lo = min( y, lo );
+            hi = max( y, hi );
+            x += 1;
+        }
+    );
+    const m = ((n*xy)-(xsum*ysum)) / ((n*xx)-square(xsum));
+    const b = ((ysum*xx)-(xsum*xy)) / ((n*xx)-square(xsum));
+    const avg = ysum / n;
+    const sse = vsum(
+        v.map(
+            ( y ) => square( y-avg )
+        )
+    );
+    const mse = sse / ( n - 1 );
+    const std = sqrt( mse );
+    return {
+        n, avg,
+        m, b,
+        lo, hi,
+        xsum, ysum,
+        xx, yy, xy,
+        sse, mse, std
+    };
+};
+
+vstats.hints = {
+  n    : "Sample Count"
+, avg  : "Mean Average"
+, m    : "Slope"
+, b    : "Intercept"
+, lo   : "Lower Y Bound"
+, hi   : "Upper Y Bound"
+, xsum : "Sum of X Indices"
+, ysum : "Sum of Y Samples"
+, xx   : "Sum of Squares of Indices"
+, yy   : "Sum of Squares of Samples"
+, xy   : "Sum of X-Y Products"
+, sse  : "Sum of Squared Errors"
+, mse  : "Mean Squared Error"
+, std  : "Standard Deviation"
+};
+
+vstats.pubs = ( "http://dave-probook/std/pubs/math/" );
+
+vstats.tabulate = function( o ) {
+    o = ( o || vstats.hints );
+    const m = Object.keys( o );
+    return m.map( k => ( [ k, o[ k ] ] ) );
+};
+
+vstats.inspect = function( o ) {
+    const t = vstats.tabulate( o );
+    inspect( "Statistics", t );
+};
+
+StatOps = {
+  vmax, vmin, vsum, vavg
+, vbounds, vmedian, vlerp
+, vhalf, vrange, vnorm
+, vmse, vstd
+, vstats
+};
+
+</script>
+
+<script id="madge.js">
+
+function Surface() {
     const srf = surface;
     rc = srf.getBoundingClientRect();
-    srf.width  = rc.width;
-    srf.height = rc.height;
+    let w = parseInt( rc.width  );
+    let h = parseInt( rc.height );
+    inspect_size( `Viewport`, w, h );
+    if ( srf.width !== w ) {
+        srf.width = w;
+    }
+    if ( srf.height !== h ) {
+        srf.height = h;
+    }
+    w = srf.width;
+    h = srf.height;
+    inspect_size( `Surface`, w, h );
     return ( srf );
 }
 
 Graphics = function() {
-   return surface.getContext( "2d" );
+    return (
+        Surface().getContext( "2d" )
+    );
 };
 
-function plot_red( y=10 ) {}
+function Background( style ) {
+    const srf = Surface();
+    const gfx = Graphics();
+    const w = srf.width;
+    const h = srf.height;
+    gfx.fillStyle = ( style || gfx.fillStyle );
+    gfx.fillRect( 0, 0, w, h );
+}
 
-function plot_grn( y=10 ) {}
+function Pen( style ) {
+    Graphics().strokeStyle = ( style );
+}
 
-function plot_blu( y=10 ) {}
+Pen.thickness = function( n ) {
+    n = ( parseInt( n ) || 1 );
+    Graphics().strokeWidth = ( n );
+};
 
-function plot_rgb() {}
+function Palette() {
+    return colors_rgba;
+}
 
-function plot_rdx( y=10 ) {}
+Palette.from_hex = function( source ) {
+    colors_rgba = source.map( rgba_from_hex );
+};
 
-function plot_gdx( y=10 ) {}
+function Color( index ) {
+    return ( Palette() [ index ] );
+}
 
-function plot_bdx( y=10 ) {}
+Color.from_hex = function( source ) {
+    return rgba_from_hex( source );
+};
 
-function plot_rgbdx() {}
+MadgeOps = {
+    Surface, Graphics, Background,
+    Pen, Palette, Color
+};
+
+</script>
+
+<script id="jarvis.js">
+
+Jarvis = {};
+
+Jarvis.ops = {
+    MadgeOps, CoreOps, MathOps, StatOps
+};
+
+</script>
+
+<script id="analyzer.js">
+
+yAxis = 10;     // X for Y-axis
+xAxis = 266;    // Y for X-axis
+scale = 256;    // Scaling Factor
+
+function init_xform( xo, yo, k ) {
+    xAxis = yo;
+    yAxis = xo;
+    scale = k;
+    console.debug( { xAxis, yAxis, scale } );
+}
+
+function red_norm( colors ) {
+    colors = ( colors || Palette() );
+    const v = colors.map( c => c.r );
+    return vnorm( v );
+};
+
+function grn_norm( colors ) {
+    colors = ( colors || Palette() );
+    const v = colors.map( c => c.g );
+    return vnorm( v );
+};
+
+function blu_norm( colors ) {
+    colors = ( colors || Palette() );
+    const v = colors.map( c => c.b );
+    return vnorm( v );
+};
+
+function plot_vec( v, y=266, yScale=256 ) {
+    function cb( index ) {
+        return ( v[ index ] || 0 );
+    }
+    const xo = 10;
+    const k  = ( yScale || 256 );
+    const yo = ( y || ( k + 10 ) );
+    v = ( v || [] );
+    inspect( `Vector`, v );
+    init_xform( xo, yo, k );
+    plot( 0, 1, 256, cb );
+    draw_axes_positive( xo, yo, 256, k );
+    // draw_axes_negative( xo, yo, 256, k );
+}
+
+function plot_red( colors, y=266, yScale=256 ) {
+    colors = ( colors || Palette() );
+    const v = red_norm( colors ).samples;
+    Pen( "red" );
+    plot_vec( v, y, yScale );
+}
+
+function plot_grn( colors, y=266, yScale=256 ) {
+    colors = ( colors || Palette() );
+    const v = grn_norm( colors ).samples;
+    Pen( "green" );
+    plot_vec( v, y, yScale );
+}
+
+function plot_blu( colors, y=266, yScale=256 ) {
+    colors = ( colors || Palette() );
+    const v = blu_norm( colors ).samples;
+    Pen( "blue" );
+    plot_vec( v, y, yScale );
+}
+
+function plot_rgb( colors, yScale=128 ) {
+    colors = ( colors || Palette() );
+    const k = ( yScale || 128 );
+    const h = ( 10 + k );
+    Background( "black" );
+    plot_red( colors, h * 1, 128 );
+    plot_grn( colors, h * 2, 128 );
+    plot_blu( colors, h * 3, 128 );
+}
+
+function plot_rdx( colors, y=266 ) {
+    colors = ( colors || Palette() );
+    incomplete( `plot_rdx()` );
+}
+
+function plot_gdx( colors, y=266 ) {
+    colors = ( colors || Palette() );
+    incomplete( `plot_gdx()` );
+}
+
+function plot_bdx( colors, y=266 ) {
+    colors = ( colors || Palette() );
+    incomplete( `plot_bdx()` );
+}
+
+function plot_rgbdx( colors ) {
+    colors = ( colors || Palette() );
+    incomplete( `plot_rgbdx()` );
+}
 
 function plot( x, dx, count, cb ) {
     const gfx = Graphics();
-    gfx.strokeStyle = "black";
-    gfx.strokeWidth = 2;
+    Pen.thickness( 1 );
     let u=0;
     while ( count-- > 0 ) {
         const y = cb( x );
         x += dx;
-        let p = yAxis + u; u += 1;
-        let q = xAxis - v * scale;
+        let p = round( yAxis + u ); u += 1;
+        let q = round( xAxis - y * scale );
         gfx.beginPath();
         gfx.moveTo( p, xAxis );
         gfx.lineTo( p, q );
@@ -426,22 +964,123 @@ function plot( x, dx, count, cb ) {
     }
 }
 
-function draw_axes( xo, yo, w, h ) {
+function draw_axes( xo, yo, w, ha, hb ) {
     const gfx = Graphics();
-    gfx.strokeStyle = "black";
-    gfx.strokeWidth = 2;
+    Pen( "white" );
+    Pen.thickness( 2 );
+    const ya = yo - ha;
+    const yb = yo + hb;
     gfx.beginPath();
-    gfx.moveTo( xo , yo );
+    gfx.moveTo( xo     , yo );
     gfx.lineTo( xo + w , yo );
     gfx.stroke();
     gfx.beginPath();
-    gfx.moveTo( xo , yo );
-    gfx.lineTo( xo , yo - h );
+    gfx.moveTo( xo , ya );
+    gfx.lineTo( xo , yb );
     gfx.stroke();
 }
 
-run =()=> window.eval( sce.value );
-cls =()=>console.clear();
+function draw_axes_positive( xo, yo, w, h ) {
+    draw_axes( xo, yo, w, h, 0 )
+}
 
+function draw_axes_negative( xo, yo, w, h ) {
+    draw_axes( xo, yo, w, 0, h )
+}
+
+// seeker( rex )
+// inspect( "Madge Operations", MadgeOps )
+
+</script>
+
+<script>
+
+function crunch( event ) {
+    try {
+        const js = crunch.decode( event.target );
+        console.log( js );
+        window.eval( js );
+    } catch ( e ) {
+        crashed ( e );
+    }
+}
+
+crunch.decode = function( sender ) {
+    const k = sender.textContent.trim();
+    switch( k ) {
+    case "🏍️" : return "run()";
+    case "🧼" : return "Background()";
+    case "🏠" : return "home()";
+    case "❓"  : return "macro('?')";
+    }
+    throw new Error( "Unknown Action : " + k );
+};
+
+crunch.init = function() {
+    const m = all( "BUTTON" );
+    function init( btn ) {
+        const k = btn.textContent.trim();
+        switch( k ) {
+        case "🏍️" : return _run();
+        case "🧼" : return _bgnd();
+        case "🏠" : return _home();
+        case "❓"  : return _help();
+        }
+        function _run() {
+            btn.title = "Run Script";
+        }
+        function _bgnd() {
+            btn.title = "Erase Background";
+        }
+        function _home() {
+            btn.title = "View in Browser";
+        }
+        function _help() {
+            btn.title = "Inspect Globals";
+        }
+        console.warn( `Ignoring Button:`, k );
+    }
+    m.forEach( init );
+};
+
+</script>
+
+<script>
+function visit( url ) {
+    url = str( url );
+    if (! url ) {
+        console.warn( `Ignoring Empty URL` );
+        return;
+    }
+    if ( null === localStorage ) {
+        const a = elx( "A" );
+        a.href = ( url );
+        a.click();
+    } else {
+        const o = visit.options;
+        const w = window;
+        w.open( url, url, o );
+    }
+}
+;
+; visit.options = ( `left=10,top=10,width=800,height=680` )
+;
+</script>
+
+<script>
+function dot( filename ) {
+    incomplete( "dot()" );
+}
+</script>
+
+<script>
+function home() {
+    visit( home.address );
+}
+;
+; home.address = (
+  "http://dave-omega/demo/web/palette-analyzer.html"
+)
+;
 </script>
 
