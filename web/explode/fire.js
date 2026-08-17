@@ -6,7 +6,6 @@ function prepare_fire_palette( count ) {
     throw new Error( `This feature is incomplete` );
 }
 
-
 function copy_fire_palette() {
     const pal = htmlFirePalette.color;
     for ( let i = 0; i < 256; i += 1 ) {
