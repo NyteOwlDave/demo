@@ -9,15 +9,21 @@
 <http://dave-tower/demo/web/web-menu.html>
 "Tower Edition"
 
-[me]:
+[me-omega]:
 <http://dave-omega/demo/web/web-menu.html>
 "Omega Edition"
 
 ----------------------------------------------------------------
 
-# [`☰` Web Menu][me]
+# [`☰` Web Menu][me-omega]
 
 > ( `Dave's 🧨 Demos` )
+
+----------------------------------------------------------------
+
+## `🧰` Toolkit
+
+> [Palette Analyzer](./palette-analyzer.html)
 
 ----------------------------------------------------------------
 
