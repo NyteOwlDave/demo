@@ -6,6 +6,8 @@
 [raindrop]: <https://app.raindrop.io/my/45357558>
 [ideaflip]: <https://ideaflip.com/>
 [luminous]: <http://tiny.cc/jarvis-snipper-101>
+[nancy]:    <https://sites.google.com/view/nancys-notebooks/home>
+[cdn]:      <https://nyteowldave.github.io/cdn/third-party.html>
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
@@ -19,13 +21,17 @@
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
-[me]:
-<http://dave-tower/demo/web/palette-analyzer-notes.html>
+[me-tower]:
+<http://dave-tower/demo/web/pal-anz-math-notes.html>
 "Tower Edition"
+
+[me-omega]:
+<http://dave-omega/demo/web/pal-anz-math-notes.html>
+"Omega Edition"
 
 ----------------------------------------------------------------
 
-# [`🗒️` Palette Analyzer Math Notes][me]
+# [`🗒️` Palette Analyzer Math Notes][me-tower]
 
 <div center>
   <div class="decal-icon">🗒️</div>
@@ -52,31 +58,31 @@ There are three components of interest:
 
 ## MathOps ( Scalar Math )
 
-| Method   | Args    | Purpose |
-|----------|---------|--------------------------------|
-| `abs`    | n       | Absolute Value of N            |
-| `sgn`    | n       | Algebraic Sign of N            |
-| `min`    | a, b    | Minimum of A and B             |
-| `max`    | a, b    | Maximum of A and B             |
-| `mid`    | a, b, c | Clamp A to Range [ B ... C ]   |
-| `round`  | n       | Round N to Nearest Integer     |
-| `trunc`  | n       | Truncate N to Integer          |
-| `floor`  | n       | Round N Toward -Infinity       |
-| `ceil`   | n       | Round N Toward +Infinity       |
-| `pow`    | x, n    | Raise X to the Power of N      |
-| `rootn`  | x, n    | Raise X to the Power of 1 / N  |
-| `sqrt`   | n       | Square Root of N               |
-| `cbrt`   | n       | Cube Root of N                 |
-| `square` | n       | Calculate N Squared            |
-| `cube`   | n       | Calculate N Cubed              |
-| `exp`    | n       | Natural Exponential for N      |
-| `log`    | n       | Natural Logarithm for N        |
-| `logn`   | x, n    | Base-N Logarithm for X         |
-| `rnd`    | k       | Random Real [ 0 ... K ]        |
-| `irnd`   | k       | Random Integer [ 0 ... K-1 ]   |
-| `crnd`   | k       | Random Real [ -K/2 ... +K/2 ]  |
-| `arnd`   |         | Random Angle [ -PHI ... +PHI ] |
-| `constants` |      | Inspect Math Constants         |
+| Method   | Args      | Purpose |
+|----------|-----------|--------------------------------|
+| `abs`    | `n`       | Absolute Value of N            |
+| `sgn`    | `n        | Algebraic Sign of N            |
+| `min`    | `a, b`    | Minimum of A and B             |
+| `max`    | `a, b`    | Maximum of A and B             |
+| `mid`    | `a, b, c` | Clamp A to Range [ B ... C ]   |
+| `round`  | `n`       | Round N to Nearest Integer     |
+| `trunc`  | `n`       | Truncate N to Integer          |
+| `floor`  | `n`       | Round N Toward -Infinity       |
+| `ceil`   | `n`       | Round N Toward +Infinity       |
+| `pow`    | `x, n`    | Raise X to the Power of N      |
+| `rootn`  | `x, n`    | Raise X to the Power of 1 / N  |
+| `sqrt`   | `n`       | Square Root of N               |
+| `cbrt`   | `n`       | Cube Root of N                 |
+| `square` | `n`       | Calculate N Squared            |
+| `cube`   | `n`       | Calculate N Cubed              |
+| `exp`    | `n`       | Natural Exponential for N      |
+| `log`    | `n`       | Natural Logarithm for N        |
+| `logn`   | `x, n`    | Base-N Logarithm for X         |
+| `rnd`    | `k`       | Random Real [ 0 ... K ]        |
+| `irnd`   | `k`       | Random Integer [ 0 ... K-1 ]   |
+| `crnd`   | `k`       | Random Real [ -K/2 ... +K/2 ]  |
+| `arnd`   |           | Random Angle [ -PHI ... +PHI ] |
+| `constants` |        | Inspect Math Constants         |
 
 ----------------------------------------------------------------
 
@@ -99,26 +105,26 @@ There are three components of interest:
 
 | Method    | Args    | Purpose |
 |-----------|---------|------------------------------------|
-| `vmax`    | v       | Maximum Sample Value               |
-| `vmin`    | v       | Minimum Sample Value               |
-| `vmedian` | v       | Median Sample Value                |
-| `vavg`    | v       | Mean Average of Sample Values      |
-| `vsum`    | v       | Sum of Sample Values               |
-| `vbounds` | v       | Lower and Upper Sample Bounds      |
-| `vlerp`   | v, t    | Linear Interpolation               |
-| `vhalf`   | v       | Midpoint of Lower and Upper Bounds |
-| `vrange`  | v       | Distance from Lower to Upper Bound |
-| `vnorm`   | v       | Normalize Samples [ -1 ... +1 ]    |
-| `vmse`    | v       | Variance (Mean Squared Error)      |
-| `vstd`    | v       | Standard Deviation                 |
-| `vstats`  | v       | Comprehensive Statistics           |
+| `vmax`    | `v`     | Maximum Sample Value               |
+| `vmin`    | `v`     | Minimum Sample Value               |
+| `vmedian` | `v`     | Median Sample Value                |
+| `vavg`    | `v`     | Mean Average of Sample Values      |
+| `vsum`    | `v`     | Sum of Sample Values               |
+| `vbounds` | `v`     | Lower and Upper Sample Bounds      |
+| `vlerp`   | `v, t`  | Linear Interpolation               |
+| `vhalf`   | `v`     | Midpoint of Lower and Upper Bounds |
+| `vrange`  | `v`     | Distance from Lower to Upper Bound |
+| `vnorm`   | `v`     | Normalize Samples [ -1 ... +1 ]    |
+| `vmse`    | `v`     | Variance (Mean Squared Error)      |
+| `vstd`    | `v`     | Standard Deviation                 |
+| `vstats`  | `v`     | Comprehensive Statistics           |
 
 ### Extended `vstat` Methods
 
 | Method     | Args | Purpose |
 |------------|------|--------------------------|
-| `tabulate` | o    | Create Core Table from O |
-| `inspect`  | o    | Inspect Core Table O     |
+| `tabulate` | `o`  | Create Core Table from O |
+| `inspect`  | `o`  | Inspect Core Table O     |
 
 ### Extended `vstat` Properties
 
@@ -149,14 +155,14 @@ There are three components of interest:
 
 ----------------------------------------------------------------
 
-# Third Party Packages
+# [Third Party Packages][cdn]
 
 - [`math.js`][math-js]
 - [`glmatrix.js`][glmatrix-js]
 
 ----------------------------------------------------------------
 
-# Usage Notes
+# [Usage Notes][nancy]
 
 - ( `pending` )
 
@@ -168,13 +174,6 @@ There are three components of interest:
 > [`☰` Demo Menu](./../demo-menu.html)
 
 > [`🗒️` Palette Analyzer Notes](./palette-analyzer-notes.html)
-
-> [`🎨` Palette Analyzer](./palette-analyzer.html)
-> [`🎇` Explosion Demo](./explode/explode-deux.html)
-
-> [`💎` RGB Gem](./explode/rgb.js)
-> [`💎` Fire Gem](./explode/fire.js)
-> [`💎` Fire Palette Gem](./explode/fire-palette.js)
 
 > [`🌲` Folder Tree](./tree.php)
 > [`🗃️` File System](./)

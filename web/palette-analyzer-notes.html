@@ -18,6 +18,8 @@ img { max-width: 100%; }
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
 <hr>
 <h1><a href="http://dave-tower/demo/web/palette-analyzer-notes.html" title="Tower Edition"><code>🗒️</code> Palette Analyzer Notes</a></h1>
 <div center>
@@ -30,11 +32,12 @@ img { max-width: 100%; }
 </blockquote>
 <hr>
 <h1>Description</h1>
+<h2>History</h2>
 <p>The <code>Palette Analyzer</code> app began as a simple tool for
-graphing RGB Color Components.</p>
+graphing <strong>RGB Color Components</strong>.</p>
 <p>The need arose to build a function that interpolates colors
 in order to replicate the <code>Fire Demo</code> palette.</p>
-<p>This palette was build dynamically quite some time ago, then
+<p>This palette was built dynamically quite some time ago, then
 shared with various apps.</p>
 <p>I've lost track of the original function used to generate the
 fire palette. In order to produce identical results, I needed
@@ -43,6 +46,22 @@ a means of determining the parameters for color interpolation.</p>
 graph each color component and analyze their slopes. This
 basic feature quickly expanded into a fairly extensive
 statistical tool.</p>
+<h2>Present</h2>
+<p>The app is now something of a powerhouse in terms of Math,
+Stats, and 2D Graphics.</p>
+<p>It imports several Third Party Packages for math and graphics.</p>
+<h2>Future</h2>
+<p>Adding more Third Party Packages would improve the app
+considerably.</p>
+<p><strong>Candidates include:</strong></p>
+<ul>
+<li><code>p5.js</code></li>
+<li><code>three.js</code></li>
+<li><code>chart.js</code></li>
+<li><code>tabulator.js</code></li>
+<li><code>papa-parse.js</code></li>
+<li><code>moment.js</code></li>
+</ul>
 <hr>
 <h1>Jarvis Support</h1>
 <p><code>Pal-Anz</code> supports both <code>Jarvis</code> and <code>seeker</code> for Spelunking
@@ -51,11 +70,6 @@ source code.</p>
 <h1>Footer Input</h1>
 <p><code>Pal-Anz</code> supports the standard paradigm for footer input
 gadgets, including <code>perform</code>, <code>exec</code>, and <code>macro</code> methods.</p>
-<hr>
-<h1>Madge Graphics</h1>
-<p><code>Pal-Anz</code> uses a variation on the <code>Madge</code> Graphics paradigm.
-This provides <code>Surface</code>, <code>Graphics</code>, <code>Pen</code> and similar
-constructs for plotting lines and other basic <code>2D</code> drawing.</p>
 <hr>
 <h1>Core Ops</h1>
 <p><code>Pal-Anz</code> imports the simplified <code>core-ops.js</code> gem common to
@@ -84,6 +98,11 @@ If no arg is passed, member hints are displayed in a table.</p>
 in a table. To clarify, <code>vstats</code> is the function. This
 function returns a comprehensive <code>stats</code> instance.</p>
 <hr>
+<h1>Madge Graphics</h1>
+<p><code>Pal-Anz</code> uses a variation on the <code>Madge</code> Graphics paradigm.
+This provides <code>Surface</code>, <code>Graphics</code>, <code>Pen</code> and similar
+constructs for plotting lines and other basic <code>2D</code> drawing.</p>
+<hr>
 <h1>Palette Analysis</h1>
 <p>There's an embedded <code>script</code> with the id of <code>analyzer.js</code>. This
 script is intended to server as a <strong>Peach</strong>. That is, a
@@ -91,10 +110,19 @@ starting point or basis for custom scripts at run-time. This
 script is loaded into the <code>sce</code> Script Editor at load time.</p>
 <hr>
 <h1>UI Layout</h1>
-<p>The User Interface layout is comprised of two docked vertical
-panels and a footer. The left panel contains a <code>canvas</code>, The
-right panel contains a <code>textarea</code>. The footer contains an
-<code>input</code> and s <code>div</code> for buttons.</p>
+<p>The <strong>User Interface</strong> layout is comprised of two docked
+vertical <strong>Panels</strong> and a <strong>Footer</strong>.</p>
+<p>The <strong>Left Panel</strong> contains a <code>canvas</code> ( id : <code>surface</code> ).</p>
+<p>The <strong>Right Panel</strong> contains a <code>textarea</code> ( id : <code>sce</code> ).</p>
+<p>The <strong>Footer</strong> contains an <code>input</code> and a <code>div</code>.</p>
+<p>The <code>input</code> is for <strong>Commands</strong> ( id : <code>footer_input</code> ).</p>
+<p>The <code>div</code> serves as  <strong>Button Tray</strong> ( id : <code>tray</code> ).</p>
+<hr>
+<h2><a href="https://sites.google.com/view/nancys-notebooks/home"><code>🗒️</code> Additional Notes</a></h2>
+<blockquote>
+<p><a href="./pal-anz-math-notes.html"><code>🗒️</code> Math Notes</a>
+<a href="./pal-anz-nav-notes.html"><code>🗒️</code> Navigation Notes</a></p>
+</blockquote>
 <hr>
 <h2><a href="http://tiny.cc/jarvis-snipper-101"><code>🧰</code> Toolkit</a></h2>
 <blockquote>
@@ -102,21 +130,34 @@ right panel contains a <code>textarea</code>. The footer contains an
 <a href="http://dave-legacy/math/math-menu.html"><code>🧰</code> Math Universe</a></p>
 </blockquote>
 <hr>
+<h2><a href="./../demo-menu.html"><code>🧨</code> Demos</a></h2>
+<blockquote>
+<p><a href="./explode/explode-deux.html"><code>🎇</code> Explosion Demo</a></p>
+</blockquote>
+<hr>
+<h2><a href="http://dave-omega/app/jarvis/toolkit/ncs/jimbo/jimbo-menu.html"><code>💎</code> Gems</a></h2>
+<blockquote>
+<p><a href="./explode/rgb.js"><code>💎</code> RGB Gem</a>
+<a href="./explode/fire.js"><code>💎</code> Fire Gem</a>
+<a href="./explode/fire-palette.js"><code>💎</code> Fire Palette Gem</a></p>
+</blockquote>
+<hr>
 <h2><a href="https://app.raindrop.io/my/45357558"><code>💧</code> References</a></h2>
 <blockquote>
-<p><a href="https://app.raindrop.io/my/46171960"><code>💧</code> Raindrop Math</a>
+<p><a href="http://dave-tower/demo/dot/md/math-groups.html"><code>👨‍👦‍👦</code> Math Groups</a>
+<a href="http://dave-probook/std/pubs/math/links.html"><code>📚</code> Math Links</a>
 <a href="http://dave-probook/std/pubs/math/least-squares.html"><code>📙</code> Least Squares</a>
 <a href="http://dave-probook/std/pubs/math/bell-curve.html"><code>📙</code> Bell Curve</a>
 <a href="http://dave-probook/std/pubs/math/formulas.html"><code>📙</code> Math Formulas</a>
-<a href="http://dave-probook/std/pubs/math/links.html"><code>📚</code> Math Links</a></p>
+<a href="https://mathjs.org/"><code>📙</code> Math JS</a>
+<a href="https://glmatrix.net/docs/"><code>📙</code> GL Matrix JS</a>
+<a href="https://app.raindrop.io/my/46171960"><code>💧</code> Raindrop Math</a></p>
 </blockquote>
 <hr>
 <h2><a href="http://dave-ryzen/nav/sulu.html"><code>🧭</code> Navigation</a></h2>
 <blockquote>
 <p><a href="./web-menu.html"><code>☰</code> Web Menu</a>
 <a href="./../demo-menu.html"><code>☰</code> Demo Menu</a></p>
-<p><a href="./pal-anz-math-notes.html"><code>🗒️</code> Palette Analyzer Math Notes</a></p>
-<p><a href="./explode/explode-deux.html"><code>🎇</code> Explosion Demo</a></p>
 <p><a href="./tree.php"><code>🌲</code> Folder Tree</a>
 <a href="./"><code>🗃️</code> File System</a></p>
 </blockquote>

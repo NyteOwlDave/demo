@@ -2,20 +2,37 @@
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
+[nancy]:    <https://sites.google.com/view/nancys-notebooks/home>
 [sulu]:     <http://dave-ryzen/nav/sulu.html>
 [raindrop]: <https://app.raindrop.io/my/45357558>
 [ideaflip]: <https://ideaflip.com/>
 [luminous]: <http://tiny.cc/jarvis-snipper-101>
+[jimbo]:    <http://dave-omega/app/jarvis/toolkit/ncs/jimbo/jimbo-menu.html>
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
-[me]:
+[math-groups]: <http://dave-tower/demo/dot/md/math-groups.html>
+[math-links]: <http://dave-probook/std/pubs/math/links.html>
+[math-formulas]: <http://dave-probook/std/pubs/math/formulas.html>
+[math-js]: <https://mathjs.org/>
+[glmatrix-js]: <https://glmatrix.net/docs/>
+[least-squares]: <http://dave-probook/std/pubs/math/least-squares.html>
+[bell-curve]: <http://dave-probook/std/pubs/math/bell-curve.html>
+[raindrop-math]: <https://app.raindrop.io/my/46171960>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+[me-tower]:
 <http://dave-tower/demo/web/palette-analyzer-notes.html>
 "Tower Edition"
 
+[me-omega]:
+<http://dave-omega/demo/web/palette-analyzer-notes.html>
+"Omega Edition"
+
 ----------------------------------------------------------------
 
-# [`🗒️` Palette Analyzer Notes][me]
+# [`🗒️` Palette Analyzer Notes][me-tower]
 
 <div center>
   <div class="decal-icon">🗒️</div>
@@ -29,13 +46,15 @@
 
 # Description
 
+## History
+
 The `Palette Analyzer` app began as a simple tool for
-graphing RGB Color Components.
+graphing __RGB Color Components__.
 
 The need arose to build a function that interpolates colors
 in order to replicate the `Fire Demo` palette.
 
-This palette was build dynamically quite some time ago, then
+This palette was built dynamically quite some time ago, then
 shared with various apps.
 
 I've lost track of the original function used to generate the
@@ -46,6 +65,27 @@ The easiest way I could think of to accomplish this was to
 graph each color component and analyze their slopes. This
 basic feature quickly expanded into a fairly extensive
 statistical tool.
+
+## Present
+
+The app is now something of a powerhouse in terms of Math,
+Stats, and 2D Graphics.
+
+It imports several Third Party Packages for math and graphics.
+
+## Future
+
+Adding more Third Party Packages would improve the app
+considerably.
+
+__Candidates include:__
+
+- `p5.js`
+- `three.js`
+- `chart.js`
+- `tabulator.js`
+- `papa-parse.js`
+- `moment.js`
 
 ----------------------------------------------------------------
 
@@ -60,14 +100,6 @@ source code.
 
 `Pal-Anz` supports the standard paradigm for footer input
 gadgets, including `perform`, `exec`, and `macro` methods.
-
-----------------------------------------------------------------
-
-# Madge Graphics
-
-`Pal-Anz` uses a variation on the `Madge` Graphics paradigm.
-This provides `Surface`, `Graphics`, `Pen` and similar
-constructs for plotting lines and other basic `2D` drawing.
 
 ----------------------------------------------------------------
 
@@ -112,6 +144,14 @@ function returns a comprehensive `stats` instance.
 
 ----------------------------------------------------------------
 
+# Madge Graphics
+
+`Pal-Anz` uses a variation on the `Madge` Graphics paradigm.
+This provides `Surface`, `Graphics`, `Pen` and similar
+constructs for plotting lines and other basic `2D` drawing.
+
+----------------------------------------------------------------
+
 # Palette Analysis
 
 There's an embedded `script` with the id of `analyzer.js`. This
@@ -123,10 +163,25 @@ script is loaded into the `sce` Script Editor at load time.
 
 # UI Layout
 
-The User Interface layout is comprised of two docked vertical
-panels and a footer. The left panel contains a `canvas`, The
-right panel contains a `textarea`. The footer contains an
-`input` and s `div` for buttons.
+The __User Interface__ layout is comprised of two docked
+vertical __Panels__ and a __Footer__.
+
+The __Left Panel__ contains a `canvas` ( id : `surface` ).
+
+The __Right Panel__ contains a `textarea` ( id : `sce` ).
+
+The __Footer__ contains an `input` and a `div`.
+
+The `input` is for __Commands__ ( id : `footer_input` ).
+
+The `div` serves as  __Button Tray__ ( id : `tray` ).
+
+----------------------------------------------------------------
+
+## [`🗒️` Additional Notes][nancy]
+
+> [`🗒️` Math Notes](./pal-anz-math-notes.html)
+> [`🗒️` Navigation Notes](./pal-anz-nav-notes.html)
 
 ----------------------------------------------------------------
 
@@ -137,13 +192,30 @@ right panel contains a `textarea`. The footer contains an
 
 ----------------------------------------------------------------
 
+## [`🧨` Demos](./../demo-menu.html)
+
+> [`🎇` Explosion Demo](./explode/explode-deux.html)
+
+----------------------------------------------------------------
+
+## [`💎` Gems][jimbo]
+
+> [`💎` RGB Gem](./explode/rgb.js)
+> [`💎` Fire Gem](./explode/fire.js)
+> [`💎` Fire Palette Gem](./explode/fire-palette.js)
+
+----------------------------------------------------------------
+
 ## [`💧` References][raindrop]
 
-> [`💧` Raindrop Math](https://app.raindrop.io/my/46171960)
-> [`📙` Least Squares](http://dave-probook/std/pubs/math/least-squares.html)
-> [`📙` Bell Curve](http://dave-probook/std/pubs/math/bell-curve.html)
-> [`📙` Math Formulas](http://dave-probook/std/pubs/math/formulas.html)
-> [`📚` Math Links](http://dave-probook/std/pubs/math/links.html)
+> [`👨‍👦‍👦` Math Groups][math-groups]
+> [`📚` Math Links][math-links]
+> [`📙` Least Squares][least-squares]
+> [`📙` Bell Curve][bell-curve]
+> [`📙` Math Formulas][math-formulas]
+> [`📙` Math JS][math-js]
+> [`📙` GL Matrix JS][glmatrix-js]
+> [`💧` Raindrop Math][raindrop-math]
 
 ----------------------------------------------------------------
 
@@ -151,10 +223,6 @@ right panel contains a `textarea`. The footer contains an
 
 > [`☰` Web Menu](./web-menu.html)
 > [`☰` Demo Menu](./../demo-menu.html)
-
-> [`🗒️` Palette Analyzer Math Notes](./pal-anz-math-notes.html)
-
-> [`🎇` Explosion Demo](./explode/explode-deux.html)
 
 > [`🌲` Folder Tree](./tree.php)
 > [`🗃️` File System](./)

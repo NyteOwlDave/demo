@@ -1,6 +1,6 @@
 <head>
   <link rel="icon" href="./icons/palette-analyzer.png" />
-  <script external src="./api/gl-matrix/dist/gl-matrix-min.js"></script>
+  <script external src="./api/gl-matrix/gl-matrix-min.js"></script>
   <script external src="https://unpkg.com/mathjs@14.5.2/lib/browser/math.js"></script>
 </head>
 
@@ -1122,6 +1122,12 @@ function dot( filename ) {
 </script>
 
 <script>
+function veer( hostname ) {
+    location.hostname = hostname;
+}
+</script>
+
+<script>
 function home() {
     visit( home.address );
 }
@@ -1156,7 +1162,7 @@ function jax() {
 
 <script>
 NavOps = {
-   dot, visit, home, notes, jax
+   dot, visit, home, notes, jax, veer
 };
 </script>
 
