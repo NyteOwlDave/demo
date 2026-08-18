@@ -1,0 +1,11 @@
+core-ops.js
+fractal-palette-16.js
+geom-2d.js
+geom-3d.js
+geom-4d.js
+mandelbulb.js
+pixmap.js
+poincare-disc.js
+rgba.js
+scalar.js
+vector.js

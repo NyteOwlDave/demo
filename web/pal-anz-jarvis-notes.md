@@ -20,10 +20,10 @@
 
 ----------------------------------------------------------------
 
-# [`🗒️` Navigation Notes][me-omega]
+# [`🗒️` Jarvis Notes][me-omega]
 
 <div center>
-  <div class="decal-icon">🧭</div>
+  <div class="decal-icon">🤖</div>
 </div>
 
 ### `>>` FEATURING `<<`
@@ -34,56 +34,66 @@
 
 # `🧝` Description
 
-This document is devoted to the __Navigation__ component of the
+This document is devoted to the __Jarvis__ component of the
 `Palette Analyzer` app.
+
+`Jarvis` helps with code <i>spelunking</i>. That is, analysis
+of available methods and properties within the app.
 
 __Components of Interest:__
 
-- `NavOps`
-- `NavProps`
+- `Jarvis`
+- `Jarvis.Aliases`
+- `Jarvis.Ops`
+- `Jarvis.Props`
 
 ----------------------------------------------------------------
 
-## NavOps ( Methods )
+### NOTE:
 
-| Method   | Args       | Purpose |
-|----------|------------|--------------------------------|
-| `veer`   | `hostname` | Redirect to Altername Host     |
-| `dot`    | `filename` | Launch Dot Rocket (See Note)   |
-| `visit`  | `url`      | Open URL Address               |
-| `home`   |            | Open Home Page                 |
-| `notes`  |            | Open Notes Page                |
-| `jax`    |            | Open MathJax Editor            |
+> Additional spelunking methods can be found in `SupportOps`.
 
 ----------------------------------------------------------------
 
-### NOTE
+## Jarvis.Aliases
 
-> The `dot` function is incomplete
-
-----------------------------------------------------------------
-
-## NavProps ( Constants )
-
-| Accessor | Property  | Type   | Description |
-|----------|-----------|--------|----------------------|
-| `home`   | `address` | String | Palette Analyzer     |
-| `notes`  | `address` | String | Pal-Anz Notes        |
-| `jax`    | `address` | String | MathJax Editor       |
-| `visit`  | `options` | String | Popup Window Options |
+| Alias | Original   | Comments |
+|-------|------------|------------------------------|
+| `iwm` | n/a        | Initial Window Members       |
+| `doc` | `document` | Document Object              |
 
 ----------------------------------------------------------------
 
-### NOTE
+## Jarvis.Ops
 
-> The `NavProps` object isn't implemented yet
+| Accessor     | Purpose |
+|--------------|---------------------------------|
+| `CoreOps`    | Core Methods (DOM, BOM, etc.)   |
+| `NavOps`     | Navigation Methods              |
+| `JsonOps`    | JSON Methods                    |
+| `MadgeOps`   | Madge Graphics System           |
+| `MathOps`    | Scalar Math Methods             |
+| `StatOps`    | Vector Statistics Methods       |
+| `TrigOps`    | Trigonometric Methods           |
+| `ColorOps`   | Color Methods                   |
+| `SupportOps` | Support Methods                 |
+| `DebugOps`   | Debug Methods                   |
+
+----------------------------------------------------------------
+
+## Jarvis.Props
+
+| Property      | Type         | Purpose |
+|---------------|--------------|---------------------------|
+| `colors_rgba` | String Array | RGBA Palette              |
+| `colors_hex`  | String Array | HTML Hexadecimal Palette  |
+| `math`        | Object       | Math Constants            |
 
 ----------------------------------------------------------------
 
 # [`📘` Usage Notes][nancy]
 
-These methods are very useful when executed from the
-__Footer Input__ gadget.
+- ( `pending` )
 
 ----------------------------------------------------------------
 
@@ -111,7 +121,7 @@ __Footer Input__ gadget.
 <script>
 ;
 ; prolog = {}
-; prolog . title = ( `Palette Analyzer Navigation Notes` )
+; prolog . title = ( `Palette Analyzer Jarvis Notes` )
 ;
 </script>
 

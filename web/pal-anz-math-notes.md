@@ -1,4 +1,4 @@
-<head> <link rel="icon" href="favicon.ico" /> </head>
+<head> <link rel="icon" href="./icons/palette-analyzer.png" /> </head>
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
@@ -7,17 +7,6 @@
 [ideaflip]: <https://ideaflip.com/>
 [luminous]: <http://tiny.cc/jarvis-snipper-101>
 [nancy]:    <https://sites.google.com/view/nancys-notebooks/home>
-[cdn]:      <https://nyteowldave.github.io/cdn/third-party.html>
-
-<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-
-[math-js]:
-<https://mathjs.org/>
-"Math JS Home Site"
-
-[glmatrix-js]:
-<https://glmatrix.net/docs/>
-"GL Matrix Manual"
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
@@ -31,10 +20,10 @@
 
 ----------------------------------------------------------------
 
-# [`🗒️` Palette Analyzer Math Notes][me-tower]
+# [`🗒️` Math Notes][me-omega]
 
 <div center>
-  <div class="decal-icon">🗒️</div>
+  <div class="decal-icon">🧮</div>
 </div>
 
 ### `>>` FEATURING `<<`
@@ -43,20 +32,21 @@
 
 ----------------------------------------------------------------
 
-# Description
+# `🧝` Description
 
 This document is devoted to the __Math__ components of the
 `Palette Analyzer` app.
 
-There are three components of interest:
+__Components of Interest:__
 
 - `MathProps` ( Scalar Constants )
-- `MathOps` ( Scalar Math )
-- `StatOps` ( Vector Math )
+- `MathOps` ( Scalar Math Methods )
+- `TrigOps` ( Scalar Trig Methods )
+- `StatOps` ( Vector Math Methods )
 
 ----------------------------------------------------------------
 
-## MathOps ( Scalar Math )
+## MathOps ( Scalar Math Methods )
 
 | Method   | Args      | Purpose |
 |----------|-----------|--------------------------------|
@@ -101,7 +91,29 @@ There are three components of interest:
 
 ----------------------------------------------------------------
 
-## StatOps ( Vector Math )
+## TrigOps ( Scalar Trig Methods )
+
+| Method   | Args      | Purpose |
+|----------|-----------|---------------------------------------|
+| `sin`    |   `t`     | Sine of Angle T                       |
+| `cos`    |   `t`     | Cosine of Angle T                     |
+| `tan`    |   `t`     | Tangent of Angle T                    |
+| `asin`   |   `n`     | Inverse Sine of Ratio N               |
+| `acos`   |   `n`     | Inverse Cosine of Ratio N             |
+| `atan`   |   `n`     | Inverse Tangent of Ratio N            |
+| `atan2`  |  `y, x`   | Inverse Tangent of Y / X              |
+| `hypot`  |  `y, x`   | Hypotenuse of Vector { X, Y }         |
+| `sinh`   |   `t`     | Hyberbolic Sine of Angle T            |
+| `cosh`   |   `t`     | Hyberbolic Cosine of Angle T          |
+| `tanh`   |   `t`     | Hyberbolic Tangent of Angle T         |
+| `asinh`  |   `n`     | Hyberbolic Inverse Sine of Ratio N    |
+| `acosh`  |   `n`     | Hyberbolic Inverse Cosine of Ratio N  |
+| `atanh`  |   `n`     | Hyberbolic Inverse Tangent of Ratio N |
+| `xpose`  |   `n`     | Convert Sine to Cosine or Vice-Versa  |
+
+----------------------------------------------------------------
+
+## StatOps ( Vector Math Methods )
 
 | Method    | Args    | Purpose |
 |-----------|---------|------------------------------------|
@@ -155,14 +167,7 @@ There are three components of interest:
 
 ----------------------------------------------------------------
 
-# [Third Party Packages][cdn]
-
-- [`math.js`][math-js]
-- [`glmatrix.js`][glmatrix-js]
-
-----------------------------------------------------------------
-
-# [Usage Notes][nancy]
+# [`📘` Usage Notes][nancy]
 
 - ( `pending` )
 
@@ -170,10 +175,7 @@ There are three components of interest:
 
 ## [`🧭` Navigation][sulu]
 
-> [`☰` Web Menu](./web-menu.html)
-> [`☰` Demo Menu](./../demo-menu.html)
-
-> [`🗒️` Palette Analyzer Notes](./palette-analyzer-notes.html)
+> [`☰` Palette Analyzer Menu](./pal-anz-menu.html)
 
 > [`🌲` Folder Tree](./tree.php)
 > [`🗃️` File System](./)

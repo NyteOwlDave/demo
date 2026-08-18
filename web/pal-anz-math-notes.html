@@ -13,17 +13,15 @@ img { max-width: 100%; }
 </style>
 </head>
 <body>
-<p><head> <link rel="icon" href="favicon.ico" /> </head></p>
-<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-
+<p><head> <link rel="icon" href="./icons/palette-analyzer.png" /> </head></p>
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
 <hr>
-<h1><a href="http://dave-tower/demo/web/pal-anz-math-notes.html" title="Tower Edition"><code>🗒️</code> Palette Analyzer Math Notes</a></h1>
+<h1><a href="http://dave-omega/demo/web/pal-anz-math-notes.html" title="Omega Edition"><code>🗒️</code> Math Notes</a></h1>
 <div center>
-  <div class="decal-icon">🗒️</div>
+  <div class="decal-icon">🧮</div>
 </div>
 
 <h3><code>&gt;&gt;</code> FEATURING <code>&lt;&lt;</code></h3>
@@ -31,17 +29,18 @@ img { max-width: 100%; }
 <p><a href="./palette-analyzer.html"><code>🎨</code> Palette Analyzer</a></p>
 </blockquote>
 <hr>
-<h1>Description</h1>
+<h1><code>🧝</code> Description</h1>
 <p>This document is devoted to the <strong>Math</strong> components of the
 <code>Palette Analyzer</code> app.</p>
-<p>There are three components of interest:</p>
+<p><strong>Components of Interest:</strong></p>
 <ul>
 <li><code>MathProps</code> ( Scalar Constants )</li>
-<li><code>MathOps</code> ( Scalar Math )</li>
-<li><code>StatOps</code> ( Vector Math )</li>
+<li><code>MathOps</code> ( Scalar Math Methods )</li>
+<li><code>TrigOps</code> ( Scalar Trig Methods )</li>
+<li><code>StatOps</code> ( Vector Math Methods )</li>
 </ul>
 <hr>
-<h2>MathOps ( Scalar Math )</h2>
+<h2>MathOps ( Scalar Math Methods )</h2>
 <table>
 <thead>
 <tr>
@@ -231,7 +230,95 @@ img { max-width: 100%; }
 </tbody>
 </table>
 <hr>
-<h2>StatOps ( Vector Math )</h2>
+<h2>TrigOps ( Scalar Trig Methods )</h2>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Args</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sin</code></td>
+<td><code>t</code></td>
+<td>Sine of Angle T</td>
+</tr>
+<tr>
+<td><code>cos</code></td>
+<td><code>t</code></td>
+<td>Cosine of Angle T</td>
+</tr>
+<tr>
+<td><code>tan</code></td>
+<td><code>t</code></td>
+<td>Tangent of Angle T</td>
+</tr>
+<tr>
+<td><code>asin</code></td>
+<td><code>n</code></td>
+<td>Inverse Sine of Ratio N</td>
+</tr>
+<tr>
+<td><code>acos</code></td>
+<td><code>n</code></td>
+<td>Inverse Cosine of Ratio N</td>
+</tr>
+<tr>
+<td><code>atan</code></td>
+<td><code>n</code></td>
+<td>Inverse Tangent of Ratio N</td>
+</tr>
+<tr>
+<td><code>atan2</code></td>
+<td><code>y, x</code></td>
+<td>Inverse Tangent of Y / X</td>
+</tr>
+<tr>
+<td><code>hypot</code></td>
+<td><code>y, x</code></td>
+<td X_="X," Y>Hypotenuse of Vector</td>
+</tr>
+<tr>
+<td><code>sinh</code></td>
+<td><code>t</code></td>
+<td>Hyberbolic Sine of Angle T</td>
+</tr>
+<tr>
+<td><code>cosh</code></td>
+<td><code>t</code></td>
+<td>Hyberbolic Cosine of Angle T</td>
+</tr>
+<tr>
+<td><code>tanh</code></td>
+<td><code>t</code></td>
+<td>Hyberbolic Tangent of Angle T</td>
+</tr>
+<tr>
+<td><code>asinh</code></td>
+<td><code>n</code></td>
+<td>Hyberbolic Inverse Sine of Ratio N</td>
+</tr>
+<tr>
+<td><code>acosh</code></td>
+<td><code>n</code></td>
+<td>Hyberbolic Inverse Cosine of Ratio N</td>
+</tr>
+<tr>
+<td><code>atanh</code></td>
+<td><code>n</code></td>
+<td>Hyberbolic Inverse Tangent of Ratio N</td>
+</tr>
+<tr>
+<td><code>xpose</code></td>
+<td><code>n</code></td>
+<td>Convert Sine to Cosine or Vice-Versa</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2>StatOps ( Vector Math Methods )</h2>
 <table>
 <thead>
 <tr>
@@ -440,22 +527,14 @@ img { max-width: 100%; }
 </tbody>
 </table>
 <hr>
-<h1><a href="https://nyteowldave.github.io/cdn/third-party.html">Third Party Packages</a></h1>
-<ul>
-<li><a href="https://mathjs.org/" title="Math JS Home Site"><code>math.js</code></a></li>
-<li><a href="https://glmatrix.net/docs/" title="GL Matrix Manual"><code>glmatrix.js</code></a></li>
-</ul>
-<hr>
-<h1><a href="https://sites.google.com/view/nancys-notebooks/home">Usage Notes</a></h1>
+<h1><a href="https://sites.google.com/view/nancys-notebooks/home"><code>📘</code> Usage Notes</a></h1>
 <ul>
 <li>( <code>pending</code> )</li>
 </ul>
 <hr>
 <h2><a href="http://dave-ryzen/nav/sulu.html"><code>🧭</code> Navigation</a></h2>
 <blockquote>
-<p><a href="./web-menu.html"><code>☰</code> Web Menu</a>
-<a href="./../demo-menu.html"><code>☰</code> Demo Menu</a></p>
-<p><a href="./palette-analyzer-notes.html"><code>🗒️</code> Palette Analyzer Notes</a></p>
+<p><a href="./pal-anz-menu.html"><code>☰</code> Palette Analyzer Menu</a></p>
 <p><a href="./tree.php"><code>🌲</code> Folder Tree</a>
 <a href="./"><code>🗃️</code> File System</a></p>
 </blockquote>

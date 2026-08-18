@@ -2,22 +2,28 @@
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
-[nancy]:    <https://sites.google.com/view/nancys-notebooks/home>
+[jarvis]:   <http://dave-omega/app/jarvis/jarvis-menu.html>
 [sulu]:     <http://dave-ryzen/nav/sulu.html>
-[raindrop]: <https://app.raindrop.io/my/45357558>
 [ideaflip]: <https://ideaflip.com/>
 [luminous]: <http://tiny.cc/jarvis-snipper-101>
 [jimbo]:    <http://dave-omega/app/jarvis/toolkit/ncs/jimbo/jimbo-menu.html>
+[nancy]:    <https://sites.google.com/view/nancys-notebooks/home>
+[raindrop]: <https://app.raindrop.io/my/45357558>
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
+[named-colors]: <http://dave-jefr/palettes/named-colors/named-colors.html>
 [math-groups]: <http://dave-tower/demo/dot/md/math-groups.html>
 [math-links]: <http://dave-probook/std/pubs/math/links.html>
 [math-formulas]: <http://dave-probook/std/pubs/math/formulas.html>
-[math-js]: <https://mathjs.org/>
-[glmatrix-js]: <https://glmatrix.net/docs/>
 [least-squares]: <http://dave-probook/std/pubs/math/least-squares.html>
 [bell-curve]: <http://dave-probook/std/pubs/math/bell-curve.html>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+[mdn-gfx]: <https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D>
+[math-js]: <https://mathjs.org/>
+[glmatrix-js]: <https://glmatrix.net/docs/>
 [raindrop-math]: <https://app.raindrop.io/my/46171960>
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
@@ -44,7 +50,7 @@
 
 ----------------------------------------------------------------
 
-# Description
+# `🧝` Description
 
 ## History
 
@@ -78,7 +84,7 @@ It imports several Third Party Packages for math and graphics.
 Adding more Third Party Packages would improve the app
 considerably.
 
-__Candidates include:__
+__Candidate Packages:__
 
 - `p5.js`
 - `three.js`
@@ -89,21 +95,14 @@ __Candidates include:__
 
 ----------------------------------------------------------------
 
-# Jarvis Support
+# [`🤖` Jarvis Support][jarvis]
 
 `Pal-Anz` supports both `Jarvis` and `seeker` for Spelunking
 source code.
 
 ----------------------------------------------------------------
 
-# Footer Input
-
-`Pal-Anz` supports the standard paradigm for footer input
-gadgets, including `perform`, `exec`, and `macro` methods.
-
-----------------------------------------------------------------
-
-# Core Ops
+# `🍏` Core Ops
 
 `Pal-Anz` imports the simplified `core-ops.js` gem common to
 many of the Demo Web Apps.
@@ -113,15 +112,18 @@ app requirements.
 
 ----------------------------------------------------------------
 
-# Scalar Math
+# `🧮` Scalar Math
 
-`Pal-Anz` uses a subset of the `Vulcan Math` API. This doesn't
-presently support trig. It does support the required math for
-the `Statistics` component.
+`Pal-Anz` uses a subset of the `Vulcan Math` API. Components
+include:
+
+- `MathProps`
+- `MathOps`
+- `TrigOps`
 
 ----------------------------------------------------------------
 
-# Statistics Math
+# `🧮` Statistics Math
 
 `Pal-Anz` has a moderately comprehensive Stats Component. This
 includes operations on arbitrary sized sample sets (vectors).
@@ -144,7 +146,7 @@ function returns a comprehensive `stats` instance.
 
 ----------------------------------------------------------------
 
-# Madge Graphics
+# [`🖌️` Madge Graphics][mdn-gfx]
 
 `Pal-Anz` uses a variation on the `Madge` Graphics paradigm.
 This provides `Surface`, `Graphics`, `Pen` and similar
@@ -152,16 +154,17 @@ constructs for plotting lines and other basic `2D` drawing.
 
 ----------------------------------------------------------------
 
-# Palette Analysis
+# [`🎨` Palette Analysis][named-colors]
 
-There's an embedded `script` with the id of `analyzer.js`. This
-script is intended to server as a __Peach__. That is, a
+There's an embedded `script` with the __id__ of `analyzer.js`.
+
+This script is intended to server as a __Peach__. That is, a
 starting point or basis for custom scripts at run-time. This
 script is loaded into the `sce` Script Editor at load time.
 
 ----------------------------------------------------------------
 
-# UI Layout
+# `☸` UI Layout
 
 The __User Interface__ layout is comprised of two docked
 vertical __Panels__ and a __Footer__.
@@ -178,49 +181,31 @@ The `div` serves as  __Button Tray__ ( id : `tray` ).
 
 ----------------------------------------------------------------
 
-## [`🗒️` Additional Notes][nancy]
+# `🚧` Incomplete Topics
 
-> [`🗒️` Math Notes](./pal-anz-math-notes.html)
-> [`🗒️` Navigation Notes](./pal-anz-nav-notes.html)
+__These components need their own sections:__
 
-----------------------------------------------------------------
+- `JsonOps`
+- `DebugOps`
+- `SupportOps`
+- `NavOps`
+- `ColorOps`
 
-## [`🧰` Toolkit][luminous]
+## `✔️` Completed Topics
 
-> [`🧰` Math Jax](http://dave-legacy/math/latex/mathjax-test.html)
-> [`🧰` Math Universe](http://dave-legacy/math/math-menu.html)
-
-----------------------------------------------------------------
-
-## [`🧨` Demos](./../demo-menu.html)
-
-> [`🎇` Explosion Demo](./explode/explode-deux.html)
-
-----------------------------------------------------------------
-
-## [`💎` Gems][jimbo]
-
-> [`💎` RGB Gem](./explode/rgb.js)
-> [`💎` Fire Gem](./explode/fire.js)
-> [`💎` Fire Palette Gem](./explode/fire-palette.js)
-
-----------------------------------------------------------------
-
-## [`💧` References][raindrop]
-
-> [`👨‍👦‍👦` Math Groups][math-groups]
-> [`📚` Math Links][math-links]
-> [`📙` Least Squares][least-squares]
-> [`📙` Bell Curve][bell-curve]
-> [`📙` Math Formulas][math-formulas]
-> [`📙` Math JS][math-js]
-> [`📙` GL Matrix JS][glmatrix-js]
-> [`💧` Raindrop Math][raindrop-math]
+- `MadgeOps`
+- `MathOps`
+- `TrigOps`
+- `StatOps`
+- `Jarvis`
+- `Palette Analysis`
+- `UI Layout`
 
 ----------------------------------------------------------------
 
 ## [`🧭` Navigation][sulu]
 
+> [`☰` Palette Analyzer Menu](./pal-anz-menu.html)
 > [`☰` Web Menu](./web-menu.html)
 > [`☰` Demo Menu](./../demo-menu.html)
 
@@ -245,11 +230,6 @@ The `div` serves as  __Button Tray__ ( id : `tray` ).
 ;
 ; prolog = {}
 ; prolog . title = ( `Palette Analyzer Notes` )
-;
-</script>
-
-<script>
-;
 ;
 </script>
 

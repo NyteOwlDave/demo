@@ -571,7 +571,7 @@ inspect.tabulate = function( o ) {
 };
 </script>
 
-<script id="math-props.js">
+<script id="math.js">
 
 _E = Math.E;
 
@@ -584,10 +584,6 @@ _SR3 = Math.sqrt( 3 );
 _SR5 = Math.sqrt( 5 );
 
 _PSI = ( 1 + _SR5 ) / 2;
-
-</script>
-
-<script id="math-ops.js">
 
 round =( n )=> Math.round( n );
 trunc =( n )=> Math.trunc( n );
@@ -626,7 +622,7 @@ function constants() {
 
 </script>
 
-<script>
+<script id="math-props.js">
 
 MathProps = {
   _E
@@ -637,7 +633,7 @@ MathProps = {
 
 </script>
 
-<script>
+<script id="math-ops.js">
 
 MathOps = {
   abs, sgn
@@ -649,6 +645,46 @@ MathOps = {
 , exp, log, logn
 , rnd, irnd, crnd, arnd
 , constants
+};
+
+</script>
+
+<script id="trig.js">
+
+sin =( t )=> Math.sin( t );
+cos =( t )=> Math.cos( t );
+tan =( t )=> Math.tan( t );
+
+asin =( n )=> Math.asin( n );
+acos =( n )=> Math.acos( n );
+atan =( n )=> Math.atan( n );
+
+atan2 =( y, x )=> Math.atan2( y, x );
+hypot =( y, x )=> Math.hypot( y, x );
+
+sinh =( t )=> Math.sinh( t );
+cosh =( t )=> Math.cosh( t );
+tanh =( t )=> Math.tanh( t );
+
+asinh =( n )=> Math.asinh( n );
+acosh =( n )=> Math.acosh( n );
+atanh =( n )=> Math.atanh( n );
+
+xpose = function( n ) {
+    return sqrt( 1 - square( n ) );
+};
+
+</script>
+
+<script id="trig-ops.js">
+
+TrigOps = {
+  sin, cos, tan
+, asin, acos, atan
+, atan2, hypot
+, sinh, cosh, tanh
+, asinh, acosh, atanh
+, xpose
 };
 
 </script>
@@ -810,7 +846,7 @@ vstats.inspect = function( o ) {
 
 </script>
 
-<script>
+<script id="stat-ops.js">
 
 StatOps = {
   vmax, vmin, vsum, vavg
@@ -855,6 +891,63 @@ function Graphics() {
     );
 };
 
+Graphics.pixmap = function( x, y, w, h ) {
+    const srf = Surface();
+    if ( "undefined" === typeof x ) {
+        x = 0; y = 0;
+        w = srf.width;
+        h = srf.height;
+    }
+    const gfx = srf.getContext( "2d" );
+    return gfx.getImageData( x, y, w, h );
+};
+
+Graphics.sprite = function( dx, dy, pixmap ) {
+    const mw = ( pixmap.width  );
+    const mh = ( pixmap.height );
+    dx = ( dx || 0 );
+    dy = ( dy || 0 );
+    const gfx = Graphics();
+    gfx.putImageData( pixmap, dx, dy, 0, 0, mw, mh );
+    return ( gfx );
+};
+
+Graphics.mip = function( dx, dy, rc, mipmap ) {
+    mw = ( rc.w || rc.width  || mipmap.width  );
+    mh = ( rc.h || rc.height || mipmap.height );
+    mx = ( rc.x || rc.left || 0 );
+    my = ( rc.y || rc.top  || 0 );
+    dx = ( dx || 0 );
+    dy = ( dy || 0 );
+    const gfx = Graphics();
+    gfx.putImageData( mipmap, dx, dy, mx, my, mw, mh );
+    return ( gfx );
+};
+
+function Snapshot( x, y, w, h ) {
+    const srf = Surface();
+    w = ( w || srf.width  );
+    h = ( h || srf.height );
+    x = ( x || 0 );
+    y = ( y || 0 );
+    const gfx = srf.getContext( "2d" );
+    const dst = new OffscreenCanvas( w, h );
+    const pic = dst.getContext( "2d" );
+    pic.drawImage( gfx, x, y, w, h, 0, 0, w, h );
+    return ( pic );
+}
+
+function Picture( pic, x, y, w, h ) {
+    const srf = Surface();
+    w = ( w || srf.width  );
+    h = ( h || srf.height );
+    x = ( x || 0 );
+    y = ( y || 0 );
+    const gfx = srf.getContext( "2d" );
+    gfx.drawImage( pix, x, y, w, h );
+    return ( gfx );
+}
+
 function Background( style ) {
     const srf = Surface();
     const gfx = Graphics();
@@ -873,6 +966,103 @@ Pen.thickness = function( n ) {
     Graphics().strokeWidth = ( n );
 };
 
+Pen.lineseg = function( p0, p1 ) {
+    const gfx = Graphics();
+    gfx.beginPath();
+    gfx.moveTo( p0.x, p0.y );
+    gfx.lineTo( p1.x, p1.y );
+    gfx.stroke();
+};
+
+Pen.rect = function( x, y, w, h ) {
+    const gfx = Graphics();
+    gfx.beginPath();
+    gfx.rect( x, y, w, h );
+    gfx.stroke();
+};
+
+Pen.dot = function( x, y ) {
+    Pen.rect( x, y, 1, 1 );
+};
+
+Pen.circle = function( x, y, r ) {
+    const gfx = Graphics();
+    gfx.beginPath();
+    gfx.ellipse( x, y, r, r, 0, 0, _TAU );
+    gfx.stroke();
+};
+
+Pen.poly = function( points ) {
+    const sides = points.length;
+    if ( sides < 1 ) { return; }
+    if ( sides < 2 ) {
+        const pt = points[ 0 ];
+        Pen.dot( pt.x, pt.y );
+        return;
+    }
+    if ( sides < 3 ) {
+        Pen.lineseg( points[ 0 ], points[ 1 ] );
+        return;
+    }
+    const gfx = Graphics();
+    gfx.beginPath();
+    let pt = points[ 0 ];
+    gfx.moveTo( pt.x, pt.y );
+    for( let i = 1; i < sides; i += 1 ) {
+        pt = points[ i ];
+        gfx.lineTo( pt.x, pt.y );
+    }
+    pt = points[ 0 ];
+    gfx.lineTo( pt.x, pt.y );
+    gfx.closePath();
+    gfx.stroke();
+};
+
+Pen.polyn = function( center, radius, angle, sides ) {
+    if ( sides < 3 ) {
+        throw new Error( `Expected a minimum of 3 sides` );
+    }
+    const gfx = Graphics();
+    angle  = ( angle  || 0 );
+    radius = ( radius || 1 );
+    const dt = _TAU / sides;
+    let t = angle;
+    const vert =()=> {
+        const x = center.x + radius * cos( t );
+        const y = center.y - radius * sin( t );
+        return { x, y };
+    };
+    gfx.beginPath();
+    let pt = vert();
+    gfx.moveTo( pt.x, pt.y );
+    for ( let i = 1; i < sides; i += 1 ) {
+        t += dt;
+        pt = vert();
+        gfx.lineTo( pt.x, pt.y );
+    }
+    t = angle;
+    pt = vert();
+    gfx.lineTo( pt.x, pt.y );
+    gfx.closePath();
+    gfx.stroke();
+};
+
+function Point( x, y ) {
+    return { x, y };
+}
+
+function Vertex( x, y, z ) {
+    return { x, y, z };
+}
+
+Vertex.flatten = function( v, scale ) {
+    scale = ( scale || 1.0 );
+    const k = scale / ( v.z || 1.0 );
+    const x = v.x * k;
+    const y = v.y * k;
+    return Point( x, y );
+};
+
 function Palette() {
     return colors_rgba;
 }
@@ -889,13 +1079,70 @@ Color.from_hex = function( source ) {
     return rgba_from_hex( source );
 };
 
+Color.from_rgb = function( r, g, b ) {
+    const c = ( `${r},${g},${b}` );
+    return [ "rgb(", c, ")" ].join( "" );
+};
+
+Color.from_rgba = function( r, g, b, a ) {
+    const c = ( `${r},${g},${b},${a}` );
+    return [ "rgba(", c, ")" ].join( "" );
+};
+
+Color.from_int = function( n ) {
+    const s = "#" + Number( n ).toString( 16 );
+    return Color.from_hex( s );
+};
+
+Color.from_vec3 = function( v ) {
+    function byte( n ) {
+        n = round( n * 255 );
+        return mid( n, 0, 255 );
+    }
+    const r = byte( v[ 0 ] );
+    const g = byte( v[ 1 ] );
+    const b = byte( v[ 2 ] );
+    return Color.from_rgb( r, g, b );
+};
+
+Color.from_vec4 = function( v ) {
+    function byte( n ) {
+        n = round( n * 255 );
+        return mid( n, 0, 255 );
+    }
+    function real( n ) {
+        return mid( n, 0.0, 1.0 );
+    }
+    const r = byte( v[ 0 ] );
+    const g = byte( v[ 1 ] );
+    const b = byte( v[ 2 ] );
+    const a = real( v[ 3 ] );
+    return Color.from_rgba( r, g, b, a );
+};
+
+Color.from_pixel = function( x, y, img ) {
+    if (! ( img instanceof ImageData ) ) {
+        img = Graphics.pixmap();
+    }
+    const w = img.width;
+    const data = img.data;
+    const index = 4 * ( w * y + x );
+    const r = data[ 0 + index ];
+    const g = data[ 1 + index ];
+    const b = data[ 2 + index ];
+    return Color.from_rgb( r, g, b );
+};
+
 </script>
 
 <script>
 
 MadgeOps = {
-    Surface, Graphics, Background,
-    Pen, Palette, Color
+  Surface, Graphics
+, Background
+, Pen, Palette, Color
+, Point, Vertex
+, Snapshot, Picture
 };
 
 </script>
@@ -1144,7 +1391,7 @@ function home() {
 }
 ;
 ; home.address = (
-  "http://dave-omega/demo/web/palette-analyzer.html"
+  "http://dave-omega/demo/web/pal-anz-menu.html"
 )
 ;
 </script>
@@ -1210,7 +1457,8 @@ Jarvis = {};
 
 Jarvis.Ops = {
   CoreOps, NavOps, JsonOps
-, MadgeOps, MathOps, StatOps
+, MadgeOps
+, MathOps, StatOps, TrigOps
 , ColorOps, SupportOps, DebugOps
 };
 
@@ -1221,6 +1469,7 @@ Jarvis.Aliases = {
 Jarvis.Props = {
   colors_rgba
 , colors_hex
+, math : MathProps
 };
 
 </script>

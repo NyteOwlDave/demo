@@ -8,7 +8,7 @@ table { border-collapse: collapse; }
 img { max-width: 100%; }
 </style>
 <meta name="generator" content="ReText 7.2.3">
-<title>pal-anz-nav-notes</title>
+<title>pal-anz-jarvis-notes</title>
 <style type="text/css">
 </style>
 </head>
@@ -19,9 +19,9 @@ img { max-width: 100%; }
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
 <hr>
-<h1><a href="http://dave-omega/demo/web/pal-anz-nav-notes.html" title="Omega Edition"><code>🗒️</code> Navigation Notes</a></h1>
+<h1><a href="http://dave-omega/demo/web/pal-anz-nav-notes.html" title="Omega Edition"><code>🗒️</code> Jarvis Notes</a></h1>
 <div center>
-  <div class="decal-icon">🧭</div>
+  <div class="decal-icon">🤖</div>
 </div>
 
 <h3><code>&gt;&gt;</code> FEATURING <code>&lt;&lt;</code></h3>
@@ -30,108 +30,130 @@ img { max-width: 100%; }
 </blockquote>
 <hr>
 <h1><code>🧝</code> Description</h1>
-<p>This document is devoted to the <strong>Navigation</strong> component of the
+<p>This document is devoted to the <strong>Jarvis</strong> component of the
 <code>Palette Analyzer</code> app.</p>
+<p><code>Jarvis</code> helps with code <i>spelunking</i>. That is, analysis
+of available methods and properties within the app.</p>
 <p><strong>Components of Interest:</strong></p>
 <ul>
-<li><code>NavOps</code></li>
-<li><code>NavProps</code></li>
+<li><code>Jarvis</code></li>
+<li><code>Jarvis.Aliases</code></li>
+<li><code>Jarvis.Ops</code></li>
+<li><code>Jarvis.Props</code></li>
 </ul>
 <hr>
-<h2>NavOps ( Methods )</h2>
+<h3>NOTE:</h3>
+<blockquote>
+<p>Additional spelunking methods can be found in <code>SupportOps</code>.</p>
+</blockquote>
+<hr>
+<h2>Jarvis.Aliases</h2>
 <table>
 <thead>
 <tr>
-<th>Method</th>
-<th>Args</th>
+<th>Alias</th>
+<th>Original</th>
+<th>Comments</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>iwm</code></td>
+<td>n/a</td>
+<td>Initial Window Members</td>
+</tr>
+<tr>
+<td><code>doc</code></td>
+<td><code>document</code></td>
+<td>Document Object</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2>Jarvis.Ops</h2>
+<table>
+<thead>
+<tr>
+<th>Accessor</th>
 <th>Purpose</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>veer</code></td>
-<td><code>hostname</code></td>
-<td>Redirect to Altername Host</td>
+<td><code>CoreOps</code></td>
+<td>Core Methods (DOM, BOM, etc.)</td>
 </tr>
 <tr>
-<td><code>dot</code></td>
-<td><code>filename</code></td>
-<td>Launch Dot Rocket (See Note)</td>
+<td><code>NavOps</code></td>
+<td>Navigation Methods</td>
 </tr>
 <tr>
-<td><code>visit</code></td>
-<td><code>url</code></td>
-<td>Open URL Address</td>
+<td><code>JsonOps</code></td>
+<td>JSON Methods</td>
 </tr>
 <tr>
-<td><code>home</code></td>
-<td></td>
-<td>Open Home Page</td>
+<td><code>MadgeOps</code></td>
+<td>Madge Graphics System</td>
 </tr>
 <tr>
-<td><code>notes</code></td>
-<td></td>
-<td>Open Notes Page</td>
+<td><code>MathOps</code></td>
+<td>Scalar Math Methods</td>
 </tr>
 <tr>
-<td><code>jax</code></td>
-<td></td>
-<td>Open MathJax Editor</td>
+<td><code>StatOps</code></td>
+<td>Vector Statistics Methods</td>
+</tr>
+<tr>
+<td><code>TrigOps</code></td>
+<td>Trigonometric Methods</td>
+</tr>
+<tr>
+<td><code>ColorOps</code></td>
+<td>Color Methods</td>
+</tr>
+<tr>
+<td><code>SupportOps</code></td>
+<td>Support Methods</td>
+</tr>
+<tr>
+<td><code>DebugOps</code></td>
+<td>Debug Methods</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3>NOTE</h3>
-<blockquote>
-<p>The <code>dot</code> function is incomplete</p>
-</blockquote>
-<hr>
-<h2>NavProps ( Constants )</h2>
+<h2>Jarvis.Props</h2>
 <table>
 <thead>
 <tr>
-<th>Accessor</th>
 <th>Property</th>
 <th>Type</th>
-<th>Description</th>
+<th>Purpose</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>home</code></td>
-<td><code>address</code></td>
-<td>String</td>
-<td>Palette Analyzer</td>
+<td><code>colors_rgba</code></td>
+<td>String Array</td>
+<td>RGBA Palette</td>
 </tr>
 <tr>
-<td><code>notes</code></td>
-<td><code>address</code></td>
-<td>String</td>
-<td>Pal-Anz Notes</td>
+<td><code>colors_hex</code></td>
+<td>String Array</td>
+<td>HTML Hexadecimal Palette</td>
 </tr>
 <tr>
-<td><code>jax</code></td>
-<td><code>address</code></td>
-<td>String</td>
-<td>MathJax Editor</td>
-</tr>
-<tr>
-<td><code>visit</code></td>
-<td><code>options</code></td>
-<td>String</td>
-<td>Popup Window Options</td>
+<td><code>math</code></td>
+<td>Object</td>
+<td>Math Constants</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3>NOTE</h3>
-<blockquote>
-<p>The <code>NavProps</code> object isn't implemented yet</p>
-</blockquote>
-<hr>
 <h1><a href="https://sites.google.com/view/nancys-notebooks/home"><code>📘</code> Usage Notes</a></h1>
-<p>These methods are very useful when executed from the
-<strong>Footer Input</strong> gadget.</p>
+<ul>
+<li>( <code>pending</code> )</li>
+</ul>
 <hr>
 <h2><a href="http://dave-ryzen/nav/sulu.html"><code>🧭</code> Navigation</a></h2>
 <blockquote>
@@ -155,7 +177,7 @@ img { max-width: 100%; }
 <script>
 ;
 ; prolog = {}
-; prolog . title = ( `Palette Analyzer Navigation Notes` )
+; prolog . title = ( `Palette Analyzer Jarvis Notes` )
 ;
 </script>
 

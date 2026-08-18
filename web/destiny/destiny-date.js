@@ -3,14 +3,15 @@
 
 # Dial of Destiny
 
-> ( `destiny.js` )
+> ( `destiny-date.js` )
 
 */
 
 
-const canvas = document.querySelector( 'canvas' );
-
-const ctx = canvas.getContext( "2d" );
+// const canvas = document.querySelector( 'canvas' );
+// const ctx = canvas.getContext( "2d" );
+// const dr = gid( "dr" );
+// const dc = gid( "dc" );
 
 const dayCounts = [
 
@@ -165,16 +166,4 @@ function onDateChanged( evt ) {
     dial( ratio );
 }
 
-function main() {
-	try {
-	    dt.oninput = onDateChanged;
-	    currentDate.write( dt );
-	    onDateChanged();
-	} catch ( e ) {
-		alert ( e );
-		throw ( e );
-	}
-}
-
-addEventListener( "load", main );
 
