@@ -8,13 +8,16 @@
 [ideaflip]: <https://ideaflip.com/>
 [luminous]: <http://tiny.cc/jarvis-snipper-101>
 [jimbo]:    <http://dave-omega/app/jarvis/toolkit/ncs/jimbo/jimbo-menu.html>
+[venus]:    <http://dave-omega/app/jarvis/toolkit/ncs/venus/>
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
 [cdn]: <https://nyteowldave.github.io/cdn/third-party.html>
 [named-colors]: <http://dave-jefr/palettes/named-colors/named-colors.html>
+[math-jax]: <http://dave-legacy/math/latex/mathjax-test.html>
 [math-groups]: <http://dave-tower/demo/dot/md/math-groups.html>
 [math-links]: <http://dave-probook/std/pubs/math/links.html>
+[math-universe]: <http://dave-legacy/math/math-menu.html>
 [math-formulas]: <http://dave-probook/std/pubs/math/formulas.html>
 [least-squares]: <http://dave-probook/std/pubs/math/least-squares.html>
 [bell-curve]: <http://dave-probook/std/pubs/math/bell-curve.html>
@@ -52,18 +55,22 @@
 
 ## [`🗒️` Notes][nancy]
 
-> [`🗒️` Palette Analyzer Notes](./palette-analyzer-notes.html)
-> [`🗒️` Math Notes](./pal-anz-math-notes.html)
-> [`🗒️` Navigation Notes](./pal-anz-nav-notes.html)
-> [`🗒️` Jarvis Notes](./pal-anz-jarvis-notes.html)
+> [`🎨` Palette Analyzer Notes](./palette-analyzer-notes.html)
+> [`🍏` Core Ops Notes](./pal-anz-core-notes.html)
+> [`🪳` Debug Notes](./pal-anz-debug-notes.html)
+> [`🧑‍🔧` Support Notes](./pal-anz-support-notes.html)
+> [`🧮` Math Notes](./pal-anz-math-notes.html)
+> [`🧭` Navigation Notes](./pal-anz-nav-notes.html)
+> [`🤖` Jarvis Notes](./pal-anz-jarvis-notes.html)
 
 ----------------------------------------------------------------
 
 ## [`🧰` Toolkit][luminous]
 
-> [`🧰` Math Jax](http://dave-legacy/math/latex/mathjax-test.html)
-> [`🧰` Math Universe](http://dave-legacy/math/math-menu.html)
+> [`🧰` Math Jax][math-jax]
+> [`🧰` Math Universe][math-universe]
 > [`🧰` HTML Color Names][named-colors]
+> [`🧰` Venus][venus]
 
 ----------------------------------------------------------------
 

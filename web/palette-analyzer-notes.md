@@ -203,6 +203,30 @@ __These components need their own sections:__
 
 ----------------------------------------------------------------
 
+# Future Improvements
+
+- Import `pcl-ultra.js` Gem
+- Import `filter.js` Gem
+- Import My Notepad Gem
+- Finish `analyzer.js` Embedded Peach
+- Finish `fire.js` Gem (for Explode Demo)
+- Finish `dot()` Method
+- Finish `macro()` Method
+- Keyboard Handler
+- Mouse Handler
+- Gadget Ops
+- Module Ops
+- Store Ops
+- Session Ops
+- File I/O Ops
+- Extract Madge Graphics
+- Convert Plot 3D Peach to API
+- Complex Math
+- Vec2D, Vec3D, Vec4D Math
+- Matrix Math
+
+----------------------------------------------------------------
+
 ## [`🧭` Navigation][sulu]
 
 > [`☰` Palette Analyzer Menu](./pal-anz-menu.html)

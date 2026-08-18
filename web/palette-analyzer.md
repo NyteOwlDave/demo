@@ -461,7 +461,6 @@ function perform( event ) {
         exec( sender.value );
         ops.error = "";
 	} catch ( e ) {
-        ops.output  = "";
         ops.error   = ( e );
         console.error ( e );
 	}
@@ -1434,7 +1433,8 @@ DebugOps = {
 
 <script>
 SupportOps = {
-  seeker, crashed, perform, exec, macro, crunch
+  seeker, crashed, crunch
+, perform, exec, macro, run
 , inspect, inspect_size
 , mine, incomplete
 };

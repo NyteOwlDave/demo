@@ -1,0 +1,269 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<style type="text/css">
+td, th { border: 1px solid #c3c3c3; padding: 0 3px 0 3px; }
+table { border-collapse: collapse; }
+img { max-width: 100%; }
+</style>
+<meta name="generator" content="ReText 7.2.3">
+<title>pal-anz-core-notes</title>
+<style type="text/css">
+</style>
+</head>
+<body>
+<p><head> <link rel="icon" href="./icons/palette-analyzer.png" /> </head></p>
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<hr>
+<h1><a href="http://dave-omega/demo/web/pal-anz-core-notes.html" title="Omega Edition"><code>🗒️</code> Core Ops Notes</a></h1>
+<div center>
+  <div class="decal-icon">🍏</div>
+</div>
+
+<h3><code>&gt;&gt;</code> FEATURING <code>&lt;&lt;</code></h3>
+<blockquote>
+<p><a href="./palette-analyzer.html"><code>🎨</code> Palette Analyzer</a></p>
+</blockquote>
+<hr>
+<h1><code>🧝</code> Description</h1>
+<p>This document is devoted to the <strong>CoreOps</strong> components of the
+<code>Palette Analyzer</code> app.</p>
+<p><strong>Components of Interest:</strong></p>
+<ul>
+<li><code>CoreOps</code> ( Global Methods )</li>
+</ul>
+<hr>
+<h2>CoreOps ( Global Methods )</h2>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Args</th>
+<th>Purpose</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>str</code></td>
+<td><code>o</code></td>
+<td>Convert O to Trimmed String</td>
+<td>1</td>
+</tr>
+<tr>
+<td><code>arr</code></td>
+<td><code>o</code></td>
+<td>Convert O to Array</td>
+<td>2</td>
+</tr>
+<tr>
+<td><code>unq</code></td>
+<td><code>o</code></td>
+<td>Convert O to Set</td>
+<td>2</td>
+</tr>
+<tr>
+<td><code>dct</code></td>
+<td></td>
+<td>Create Empty Map</td>
+<td></td>
+</tr>
+<tr>
+<td><code>ole</code></td>
+<td><code>q, e</code></td>
+<td>First Matching Child of E</td>
+<td></td>
+</tr>
+<tr>
+<td><code>ale</code></td>
+<td><code>q, e</code></td>
+<td>All Matching Children of E</td>
+<td></td>
+</tr>
+<tr>
+<td><code>one</code></td>
+<td><code>q</code></td>
+<td>First Matching Child</td>
+<td></td>
+</tr>
+<tr>
+<td><code>all</code></td>
+<td><code>q</code></td>
+<td>All Matching Children</td>
+<td></td>
+</tr>
+<tr>
+<td><code>elx</code></td>
+<td><code>t</code></td>
+<td>Create Element of Type T</td>
+<td></td>
+</tr>
+<tr>
+<td><code>gid</code></td>
+<td><code>i</code></td>
+<td>Get Element with ID of I</td>
+<td></td>
+</tr>
+<tr>
+<td><code>mem</code></td>
+<td><code>o</code></td>
+<td>Get Object Member Names</td>
+<td>3</td>
+</tr>
+<tr>
+<td><code>dir</code></td>
+<td><code>o</code></td>
+<td>Get Object Member Names</td>
+<td>4</td>
+</tr>
+<tr>
+<td><code>tmp</code></td>
+<td><code>o</code></td>
+<td>Get Object Member Names</td>
+<td>5</td>
+</tr>
+<tr>
+<td><code>gad</code></td>
+<td><code>o</code></td>
+<td>Verify O is HTMLElement</td>
+<td></td>
+</tr>
+<tr>
+<td><code>ged</code></td>
+<td><code>o</code></td>
+<td>Verify O is HTMLTextAreaElement</td>
+<td></td>
+</tr>
+<tr>
+<td><code>gvw</code></td>
+<td><code>o</code></td>
+<td>Verify O is HTMLPreElement</td>
+<td></td>
+</tr>
+<tr>
+<td><code>gtb</code></td>
+<td><code>o</code></td>
+<td>Verify O is HTMLTableElement</td>
+<td></td>
+</tr>
+<tr>
+<td><code>gsc</code></td>
+<td><code>o</code></td>
+<td>Verify O is HTMLSectionElement</td>
+<td></td>
+</tr>
+<tr>
+<td><code>isa</code></td>
+<td><code>t, o</code></td>
+<td>Verify O has Type T</td>
+<td></td>
+</tr>
+<tr>
+<td><code>iar</code></td>
+<td><code>o</code></td>
+<td>Verify O is Array</td>
+<td></td>
+</tr>
+<tr>
+<td><code>iob</code></td>
+<td><code>o</code></td>
+<td>Verify O is Object</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3>NOTES:</h3>
+<ul>
+<li>(1) Default <code>o</code> is the Empty String ( <code>""</code> )</li>
+<li>(2) Default <code>o</code> is the Empty Array ( <code>[]</code> )</li>
+<li>(3) Default <code>o</code> is <code>window</code></li>
+<li>(4) Default <code>o</code> is <code>localStorage</code></li>
+<li>(5) Default <code>o</code> is <code>sessionStorage</code></li>
+</ul>
+<hr>
+<h2>CoreProps ( Global Properties )</h2>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>iwm</code></td>
+<td>String Array</td>
+<td>Initial Global Member Names</td>
+</tr>
+<tr>
+<td><code>doc</code></td>
+<td>Document</td>
+<td>Alias for <code>document</code></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h1><a href="https://sites.google.com/view/nancys-notebooks/home"><code>📘</code> Usage Notes</a></h1>
+<ul>
+<li>( <code>pending</code> )</li>
+</ul>
+<hr>
+<h2><a href="http://dave-ryzen/nav/sulu.html"><code>🧭</code> Navigation</a></h2>
+<blockquote>
+<p><a href="./pal-anz-menu.html"><code>☰</code> Palette Analyzer Menu</a></p>
+<p><a href="./tree.php"><code>🌲</code> Folder Tree</a>
+<a href="./"><code>🗃️</code> File System</a></p>
+</blockquote>
+<hr>
+<style>
+@import url("./../style/every-page.css");
+</style>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script>
+;
+; iwm = Object.keys( window ).sort()
+;
+</script>
+
+<script>
+;
+; prolog = {}
+; prolog . title = ( `Palette Analyzer Core Ops Notes` )
+;
+</script>
+
+<script>
+;
+; doc = document
+;
+</script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script src="./gems/core-ops.js"></script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script src="./app/notes-app.js"></script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script>
+// Called from note-app.js
+function main( event ) {
+    doc . title = ( prolog . title );
+}
+</script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+</body>
+</html>
