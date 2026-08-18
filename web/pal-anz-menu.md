@@ -53,6 +53,23 @@
 
 ----------------------------------------------------------------
 
+## [`🗂️` Workspaces](./)
+
+> [`🍑` Peaches](./peaches/pal-anz/)
+> [`💎` Gems](./gems/)
+> [`📃` API Modules](./api/)
+> [`📃` App Modules](./app/)
+
+> [`🖼️` Art](./art/)
+> [`🎴` Background](./art/bgi/)
+> [`🎭` Decals](./art/decals/)
+> [`📈` Figures](./art/fig/)
+> [`🆎` Fonts](./../style/fonts/)
+> [`🃏` Icons](./icons/)
+> [`🎨` Style](./../style/)
+
+----------------------------------------------------------------
+
 ## [`🗒️` Notes][nancy]
 
 > [`🎨` Palette Analyzer Notes](./palette-analyzer-notes.html)
