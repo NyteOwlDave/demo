@@ -26,6 +26,19 @@ html, body {
     color  : mintcream;
     background : midnightblue;
 }
+html {
+    background-image : url("./art/bgi/frac-001.png");
+}
+.hide {
+    display : none !important;
+}
+.ghost {
+    position : fixed;
+    left     : -2000px;
+    width    : 1px;
+    height   : 1px;
+    opacity : 0;
+}
 .panel {
     position : fixed;
     box-sizing : border-box;
@@ -138,6 +151,7 @@ agn =()=> location.reload();
 
 <script src="./gems/core-ops.js"></script>
 <script src="./gems/json-ops.js"></script>
+<script src="./gems/toggle.js"></script>
 
 <script>
 colors_hex = [
@@ -472,7 +486,6 @@ function perform( event ) {
         exec( sender.value );
         ops.error = "";
     } catch ( e ) {
-        ops.output  = "";
         ops.error   = ( e );
         console.error ( e );
     }
@@ -885,6 +898,16 @@ function Surface() {
 
 Surface.debug = ( false );
 
+Surface.metrics = function() {
+    const srf = Surface();
+    const w = srf.width;
+    const h = srf.height;
+    const cx = w / 2;
+    const cy = h / 2;
+    const aspect = ( cx / cy );
+    return { srf, w, h, cx, cy, aspect };
+};
+
 function Graphics() {
     return (
         Surface().getContext( "2d" )
@@ -892,13 +915,13 @@ function Graphics() {
 };
 
 Graphics.pixmap = function( x, y, w, h ) {
-    const srf = Surface();
     if ( "undefined" === typeof x ) {
+        const m = Surface.metrics();
         x = 0; y = 0;
-        w = srf.width;
-        h = srf.height;
+        w = m.w;
+        h = m.h;
     }
-    const gfx = srf.getContext( "2d" );
+    const gfx = Graphics();
     return gfx.getImageData( x, y, w, h );
 };
 
@@ -925,12 +948,12 @@ Graphics.mip = function( dx, dy, rc, mipmap ) {
 };
 
 function Snapshot( x, y, w, h ) {
-    const srf = Surface();
-    w = ( w || srf.width  );
-    h = ( h || srf.height );
-    x = ( x || 0 );
-    y = ( y || 0 );
-    const gfx = srf.getContext( "2d" );
+    const m = Surface.metrics();
+    w = ( w || m.w );
+    h = ( h || m.h );
+    x = ( x || 0   );
+    y = ( y || 0   );
+    const gfx = Graphics();
     const dst = new OffscreenCanvas( w, h );
     const pic = dst.getContext( "2d" );
     pic.drawImage( gfx, x, y, w, h, 0, 0, w, h );
@@ -938,73 +961,90 @@ function Snapshot( x, y, w, h ) {
 }
 
 function Picture( pic, x, y, w, h ) {
-    const srf = Surface();
-    w = ( w || srf.width  );
-    h = ( h || srf.height );
-    x = ( x || 0 );
-    y = ( y || 0 );
-    const gfx = srf.getContext( "2d" );
+    const m = Surface.metrics();
+    w = ( w || m.w );
+    h = ( h || m.h );
+    x = ( x || 0   );
+    y = ( y || 0   );
+    const gfx = Graphics();
     gfx.drawImage( pix, x, y, w, h );
     return ( gfx );
 }
 
-function Background( style ) {
-    const srf = Surface();
+function Background( c ) {
+    const m = Surface.metrics();
     const gfx = Graphics();
-    const w = srf.width;
-    const h = srf.height;
-    gfx.fillStyle = ( style || gfx.fillStyle );
-    gfx.fillRect( 0, 0, w, h );
+    gfx.fillStyle = ( c || gfx.fillStyle );
+    gfx.fillRect( 0, 0, m.w, m.h );
+    return ( gfx );
 }
 
 function Pen( style ) {
-    Graphics().strokeStyle = ( style );
+    const gfx = Graphics();
+    const old = gfx.strokeStyle;
+    gfx.strokeStyle = ( style );
+    return ( old );
 }
 
 Pen.thickness = function( n ) {
+    const gfx = Graphics();
     n = ( parseInt( n ) || 1 );
-    Graphics().strokeWidth = ( n );
+    const old = gfx.strokeWidth;
+    gfx.strokeWidth = ( n );
+    return ( old );
 };
 
-Pen.lineseg = function( p0, p1 ) {
+Pen.dot = function( x, y, c ) {
     const gfx = Graphics();
+    gfx.beginPath();
+    const old = gfx.fillStyle;
+    gfx.fillStyle = ( c || gfx.strokeStyle );
+    gfx.fillRect( x, y, 1, 1 );
+    gfx.fillStyle = ( old );
+    return ( gfx );
+};
+
+Pen.lineseg = function( p0, p1, c ) {
+    const gfx = Graphics();
+    gfx.strokeStyle = ( c || gfx.strokeStyle );
     gfx.beginPath();
     gfx.moveTo( p0.x, p0.y );
     gfx.lineTo( p1.x, p1.y );
     gfx.stroke();
+    return ( gfx );
 };
 
-Pen.rect = function( x, y, w, h ) {
+Pen.rect = function( x, y, w, h, c ) {
     const gfx = Graphics();
+    gfx.strokeStyle = ( c || gfx.strokeStyle );
     gfx.beginPath();
     gfx.rect( x, y, w, h );
     gfx.stroke();
+    return ( gfx );
 };
 
-Pen.dot = function( x, y ) {
-    Pen.rect( x, y, 1, 1 );
-};
-
-Pen.circle = function( x, y, r ) {
+Pen.circle = function( x, y, r, c ) {
     const gfx = Graphics();
+    gfx.strokeStyle = ( c || gfx.strokeStyle );
     gfx.beginPath();
     gfx.ellipse( x, y, r, r, 0, 0, _TAU );
     gfx.stroke();
 };
 
-Pen.poly = function( points ) {
+Pen.poly = function( points, c ) {
     const sides = points.length;
     if ( sides < 1 ) { return; }
     if ( sides < 2 ) {
         const pt = points[ 0 ];
-        Pen.dot( pt.x, pt.y );
+        Pen.dot( pt.x, pt.y, c );
         return;
     }
     if ( sides < 3 ) {
-        Pen.lineseg( points[ 0 ], points[ 1 ] );
+        Pen.lineseg( points[ 0 ], points[ 1 ], c );
         return;
     }
     const gfx = Graphics();
+    gfx.strokeStyle = ( c || gfx.strokeStyle );
     gfx.beginPath();
     let pt = points[ 0 ];
     gfx.moveTo( pt.x, pt.y );
@@ -1013,35 +1053,6 @@ Pen.poly = function( points ) {
         gfx.lineTo( pt.x, pt.y );
     }
     pt = points[ 0 ];
-    gfx.lineTo( pt.x, pt.y );
-    gfx.closePath();
-    gfx.stroke();
-};
-
-Pen.polyn = function( center, radius, angle, sides ) {
-    if ( sides < 3 ) {
-        throw new Error( `Expected a minimum of 3 sides` );
-    }
-    const gfx = Graphics();
-    angle  = ( angle  || 0 );
-    radius = ( radius || 1 );
-    const dt = _TAU / sides;
-    let t = angle;
-    const vert =()=> {
-        const x = center.x + radius * cos( t );
-        const y = center.y - radius * sin( t );
-        return { x, y };
-    };
-    gfx.beginPath();
-    let pt = vert();
-    gfx.moveTo( pt.x, pt.y );
-    for ( let i = 1; i < sides; i += 1 ) {
-        t += dt;
-        pt = vert();
-        gfx.lineTo( pt.x, pt.y );
-    }
-    t = angle;
-    pt = vert();
     gfx.lineTo( pt.x, pt.y );
     gfx.closePath();
     gfx.stroke();
@@ -1137,12 +1148,39 @@ Color.from_pixel = function( x, y, img ) {
 
 <script>
 
+function RegPoly( center, radius, angle, sides ) {
+    if ( sides < 3 ) {
+        throw new Error( `Expected a minimum of 3 sides` );
+    }
+    const points = [];
+    angle  = ( angle  || 0 );
+    radius = ( radius || 1 );
+    const dt = _TAU / sides;
+    let t = angle;
+    const vert =()=> {
+        const x = center.x + radius * cos( t );
+        const y = center.y - radius * sin( t );
+        return { x, y };
+    };
+    points.push( vert() );
+    for ( let i = 1; i < sides; i += 1 ) {
+        t += dt;
+        points.push( vert() );
+    }
+    return ( points );
+};
+
+</script>
+
+<script>
+
 MadgeOps = {
   Surface, Graphics
 , Background
 , Pen, Palette, Color
 , Point, Vertex
 , Snapshot, Picture
+, RegPoly
 };
 
 </script>
@@ -1445,7 +1483,8 @@ DebugOps = {
 
 <script>
 SupportOps = {
-  seeker, crashed, perform, exec, macro, crunch
+  seeker, crashed, crunch
+, perform, exec, macro, run
 , inspect, inspect_size
 , mine, incomplete
 };
