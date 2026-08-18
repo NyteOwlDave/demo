@@ -1,5 +1,7 @@
 <head>
   <link rel="icon" href="./icons/palette-analyzer.png" />
+  <script external src="./api/gl-matrix/dist/gl-matrix-min.js"></script>
+  <script external src="https://unpkg.com/mathjs@14.5.2/lib/browser/math.js"></script>
 </head>
 
 <style>
@@ -101,8 +103,10 @@ footer {
   <div class="tray">
     <button onclick="crunch(event)">🏍️</button>
     <button onclick="crunch(event)">🧼</button>
+    <button onclick="crunch(event)">🗒️</button>
+    <button onclick="crunch(event)">👥</button>
+    <button onclick="crunch(event)">📟</button>
     <button onclick="crunch(event)">🏠</button>
-    <button onclick="crunch(event)">❓</button>
   </div>
 </footer>
 
@@ -114,6 +118,11 @@ footer {
 
 <script>
 ; doc = document
+</script>
+
+<script id="debug-helpers.js">
+cls =()=> console.clear();
+agn =()=> location.reload();
 </script>
 
 <script src="./gems/core-ops.js"></script>
@@ -387,11 +396,11 @@ colors_rgba = [];
 <script>
 function rgba_from_hex( s ) {
 	s = str( s ).slice( 1 );
-	n = parseInt( `0x${s}` );
-	a = ( n >> 24 ) & 0xFF;
-	r = ( n >> 16 ) & 0xFF;
-	g = ( n >>  8 ) & 0xFF;
-	b = ( n       ) & 0xFF;
+	const n = parseInt( `0x${s}` );
+	const a = ( n >> 24 ) & 0xFF;
+	const r = ( n >> 16 ) & 0xFF;
+	const g = ( n >>  8 ) & 0xFF;
+	const b = ( n       ) & 0xFF;
 	return { r, g, b, a };
 }
 </script>
@@ -504,9 +513,6 @@ function macro( cmd ) {
 	}
     return ( false );
 }
-;
-; run =()=> exec( sce.value );
-;
 </script>
 
 <script>
@@ -554,12 +560,9 @@ inspect.tabulate = function( o ) {
 };
 </script>
 
-<script id="debug-helpers.js">
-cls =()=> console.clear();
-agn =()=> location.reload();
-</script>
+<script id="math-props.js">
 
-<script id="math.js">
+_E = Math.E;
 
 _PI  = Math.PI;
 _PHI = _PI / 2;
@@ -568,6 +571,12 @@ _TAU = _PI * 2;
 _SR2 = Math.sqrt( 2 );
 _SR3 = Math.sqrt( 3 );
 _SR5 = Math.sqrt( 5 );
+
+_PSI = ( 1 + _SR5 ) / 2;
+
+</script>
+
+<script id="math-ops.js">
 
 round =( n )=> Math.round( n );
 trunc =( n )=> Math.trunc( n );
@@ -599,10 +608,25 @@ irnd =( k )=> ( floor( rnd( k ) ) );
 crnd =( k )=> ( (k=k||1), rnd( k ) - (0.5 * k) );
 arnd =(   )=> crnd( _TAU );
 
+function constants() {
+    const t = vstats.tabulate( MathProps );
+    inspect( "Math Constants", t );
+}
+
+</script>
+
+<script>
+
 MathProps = {
-  _PI, _PHI, _TAU
+  _E
+, _PI, _PHI, _TAU
+, _PSI
 , _SR2, _SR3, _SR5
 };
+
+</script>
+
+<script>
 
 MathOps = {
   abs, sgn
@@ -613,6 +637,7 @@ MathOps = {
 , square, cube
 , exp, log, logn
 , rnd, irnd, crnd, arnd
+, constants
 };
 
 </script>
@@ -695,6 +720,7 @@ vnorm = function( v ) {
 };
 
 vstats = function( v ) {
+    v = ( v || [] );
     const n = v.length;
     let lo = +Infinity;
     let hi = -Infinity;
@@ -730,7 +756,8 @@ vstats = function( v ) {
         lo, hi,
         xsum, ysum,
         xx, yy, xy,
-        sse, mse, std
+        sse, mse, std,
+        samples : v
     };
 };
 
@@ -749,12 +776,18 @@ vstats.hints = {
 , sse  : "Sum of Squared Errors"
 , mse  : "Mean Squared Error"
 , std  : "Standard Deviation"
+, samples : "Sample Set"
 };
 
 vstats.pubs = ( "http://dave-probook/std/pubs/math/" );
 
 vstats.tabulate = function( o ) {
-    o = ( o || vstats.hints );
+    if ( Array.isArray( o ) ) {
+        return ( o );
+    }
+    if (! ( o instanceof Object ) ) {
+        o = vstats.hints;
+    }
     const m = Object.keys( o );
     return m.map( k => ( [ k, o[ k ] ] ) );
 };
@@ -763,6 +796,10 @@ vstats.inspect = function( o ) {
     const t = vstats.tabulate( o );
     inspect( "Statistics", t );
 };
+
+</script>
+
+<script>
 
 StatOps = {
   vmax, vmin, vsum, vavg
@@ -777,11 +814,14 @@ StatOps = {
 <script id="madge.js">
 
 function Surface() {
+    const ops = Surface;
     const srf = surface;
-    rc = srf.getBoundingClientRect();
+    const rc = srf.getBoundingClientRect();
     let w = parseInt( rc.width  );
     let h = parseInt( rc.height );
-    inspect_size( `Viewport`, w, h );
+    if ( ops.debug ) {
+        inspect_size( `Viewport`, w, h );
+    }
     if ( srf.width !== w ) {
         srf.width = w;
     }
@@ -790,11 +830,15 @@ function Surface() {
     }
     w = srf.width;
     h = srf.height;
-    inspect_size( `Surface`, w, h );
+    if ( ops.debug ) {
+        inspect_size( `Surface`, w, h );
+    }
     return ( srf );
 }
 
-Graphics = function() {
+Surface.debug = ( false );
+
+function Graphics() {
     return (
         Surface().getContext( "2d" )
     );
@@ -834,19 +878,13 @@ Color.from_hex = function( source ) {
     return rgba_from_hex( source );
 };
 
+</script>
+
+<script>
+
 MadgeOps = {
     Surface, Graphics, Background,
     Pen, Palette, Color
-};
-
-</script>
-
-<script id="jarvis.js">
-
-Jarvis = {};
-
-Jarvis.ops = {
-    MadgeOps, CoreOps, MathOps, StatOps
 };
 
 </script>
@@ -1011,7 +1049,9 @@ crunch.decode = function( sender ) {
     case "🏍️" : return "run()";
     case "🧼" : return "Background()";
     case "🏠" : return "home()";
-    case "❓"  : return "macro('?')";
+    case "🗒️" : return "notes()";
+    case "📟" : return "jax()";
+    case "👥" : return "macro('?')";
     }
     throw new Error( "Unknown Action : " + k );
 };
@@ -1024,19 +1064,27 @@ crunch.init = function() {
         case "🏍️" : return _run();
         case "🧼" : return _bgnd();
         case "🏠" : return _home();
-        case "❓"  : return _help();
+        case "🗒️" : return _notes();
+        case "📟" : return _jax();
+        case "👥" : return _help();
         }
         function _run() {
-            btn.title = "Run Script";
+            btn.title = "🏍️ Run Script";
         }
         function _bgnd() {
-            btn.title = "Erase Background";
+            btn.title = "🧼 Erase Background";
         }
         function _home() {
-            btn.title = "View in Browser";
+            btn.title = "🏠 View in Browser";
+        }
+        function _notes() {
+            btn.title = "🗒️ Palette Analyzer Notes";
+        }
+        function _jax() {
+            btn.title = "📟 Math Jax Editor";
         }
         function _help() {
-            btn.title = "Inspect Globals";
+            btn.title = "👥 Inspect Globals";
         }
         console.warn( `Ignoring Button:`, k );
     }
@@ -1084,3 +1132,78 @@ function home() {
 ;
 </script>
 
+<script>
+function notes() {
+    visit( notes.address );
+}
+;
+; notes.address = (
+  "http://dave-omega/demo/web/palette-analyzer-notes.html"
+)
+;
+</script>
+
+<script>
+function jax() {
+    visit( jax.address );
+}
+;
+; jax.address = (
+  "http://dave-legacy/math/latex/mathjax-test.html"
+)
+;
+</script>
+
+<script>
+NavOps = {
+   dot, visit, home, notes, jax
+};
+</script>
+
+<script>
+JsonOps = {
+    jst, jsx, jso, jsp
+};
+</script>
+
+<script>
+ColorOps = {
+  rgba_from_hex
+, prepare_rgba_colors
+};
+</script>
+
+<script>
+DebugOps = {
+  cls, agn
+};
+</script>
+
+<script>
+SupportOps = {
+  seeker, crashed, perform, exec, macro, crunch
+, inspect, inspect_size
+, mine, incomplete
+};
+</script>
+
+<script id="jarvis.js">
+
+Jarvis = {};
+
+Jarvis.Ops = {
+  CoreOps, NavOps, JsonOps
+, MadgeOps, MathOps, StatOps
+, ColorOps, SupportOps, DebugOps
+};
+
+Jarvis.Aliases = {
+  iwm, doc
+};
+
+Jarvis.Props = {
+  colors_rgba
+, colors_hex
+};
+
+</script>

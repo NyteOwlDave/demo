@@ -152,6 +152,8 @@ right panel contains a `textarea`. The footer contains an
 > [`☰` Web Menu](./web-menu.html)
 > [`☰` Demo Menu](./../demo-menu.html)
 
+> [`🗒️` Palette Analyzer Math Notes](./pal-anz-math-notes.html)
+
 > [`🎇` Explosion Demo](./explode/explode-deux.html)
 
 > [`🌲` Folder Tree](./tree.php)
@@ -180,15 +182,12 @@ right panel contains a `textarea`. The footer contains an
 
 <script>
 ;
-; cls =()=> console.clear()
-; agn =()=> location.reload()
 ;
 </script>
 
 <script>
 ;
 ; doc = document
-; doc . title = ( prolog . title )
 ;
 </script>
 
@@ -199,6 +198,15 @@ right panel contains a `textarea`. The footer contains an
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
 <script src="./app/notes-app.js"></script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script>
+// Called from note-app.js
+function main( event ) {
+    doc . title = ( prolog . title );
+}
+</script>
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 

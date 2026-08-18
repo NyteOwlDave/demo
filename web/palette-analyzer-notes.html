@@ -115,6 +115,7 @@ right panel contains a <code>textarea</code>. The footer contains an
 <blockquote>
 <p><a href="./web-menu.html"><code>☰</code> Web Menu</a>
 <a href="./../demo-menu.html"><code>☰</code> Demo Menu</a></p>
+<p><a href="./pal-anz-math-notes.html"><code>🗒️</code> Palette Analyzer Math Notes</a></p>
 <p><a href="./explode/explode-deux.html"><code>🎇</code> Explosion Demo</a></p>
 <p><a href="./tree.php"><code>🌲</code> Folder Tree</a>
 <a href="./"><code>🗃️</code> File System</a></p>
@@ -141,15 +142,12 @@ right panel contains a <code>textarea</code>. The footer contains an
 
 <script>
 ;
-; cls =()=> console.clear()
-; agn =()=> location.reload()
 ;
 </script>
 
 <script>
 ;
 ; doc = document
-; doc . title = ( prolog . title )
 ;
 </script>
 
@@ -160,6 +158,15 @@ right panel contains a <code>textarea</code>. The footer contains an
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
 <script src="./app/notes-app.js"></script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script>
+// Called from note-app.js
+function main( event ) {
+    doc . title = ( prolog . title );
+}
+</script>
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
