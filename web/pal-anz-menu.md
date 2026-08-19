@@ -47,9 +47,10 @@
   <img src="./icons/palette-analyzer.png" />
 </div>
 
-### `>>` FEATURING `<<`
+## `>>` FEATURING `<<`
 
-> [`🎨` Palette Analyzer](./palette-analyzer.html)
+## [`🎨` Palette Analyzer](./palette-analyzer.html)
+## [`🚀` Dorothy's Rockets](./dorothy-rockets.html)
 
 ----------------------------------------------------------------
 
