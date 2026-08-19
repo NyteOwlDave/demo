@@ -45,19 +45,23 @@ __Components of Interest:__
 
 ## SupportOps ( Global Methods )
 
-| Method         | Args          | Purpose                     |
-|----------------|---------------|-----------------------------|
-| `seeker`       | `rex`         | Find Global Member Names    |
-| `crashed`      | `e`           | Report Error                |
-| `crunch`       | `event`       | Handle Button Click Event   |
-| `perform`      | `event`       | Handle Input Change Event   |
-| `exec`         | `js`          | Run JavaScript              |
-| `macro`        | `cmd`         | Run Macro Command           |
-| `run`          |               | Run SCE Value as JavaScript |
-| `inspect`      | `title, o`    | Inspect Core Table          |
-| `inspect_size` | `title, w, h` | Inspect Size Metrics        |
-| `mine`         | `event`       | Signal Event as Handled     |
-| `incomplete`   | `s`           | Report Incomplete Feature   |
+| Method         | Args          | Purpose                        |
+|----------------|---------------|--------------------------------|
+| `seeker`       | `rex`         | Find Global Member Names       |
+| `crashed`      | `e`           | Report Error                   |
+| `crunch`       | `event`       | Handle Button Click Event      |
+| `perform`      | `event`       | Handle Input Change Event      |
+| `exec`         | `js`          | Run JavaScript                 |
+| `macro`        | `cmd`         | Run Macro Command              |
+| `run`          |               | Run SCE Value as JavaScript    |
+| `inspect`      | `title, o`    | Inspect Core Table             |
+| `inspect_size` | `title, w, h` | Inspect Size Metrics           |
+| `mine`         | `event`       | Signal Event as Handled        |
+| `incomplete`   | `s`           | Report Incomplete Feature      |
+| `zoom`         | `o`           | Request Full Screen Mode for O |
+| `hide`         | `o`           | Hide Element O                 |
+| `show`         | `o`           | Show Element O                 |
+| `toggle`       | `o`           | Toggle Element O Visibility    |
 
 ----------------------------------------------------------------
 

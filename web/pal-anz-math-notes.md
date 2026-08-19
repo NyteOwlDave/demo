@@ -117,6 +117,8 @@ __Components of Interest:__
 
 | Method    | Args    | Purpose |
 |-----------|---------|------------------------------------|
+| `vfill`   | `v, n`  | Fill Vector V with Value N         |
+| `vzero`   | `v`     | Fill Vector V with all Zeroes      |
 | `vmax`    | `v`     | Maximum Sample Value               |
 | `vmin`    | `v`     | Minimum Sample Value               |
 | `vmedian` | `v`     | Median Sample Value                |
@@ -126,6 +128,7 @@ __Components of Interest:__
 | `vlerp`   | `v, t`  | Linear Interpolation               |
 | `vhalf`   | `v`     | Midpoint of Lower and Upper Bounds |
 | `vrange`  | `v`     | Distance from Lower to Upper Bound |
+| `vdiff`   | `v`     | Deltas for Adjacent Samples        |
 | `vnorm`   | `v`     | Normalize Samples [ -1 ... +1 ]    |
 | `vmse`    | `v`     | Variance (Mean Squared Error)      |
 | `vstd`    | `v`     | Standard Deviation                 |
@@ -133,10 +136,20 @@ __Components of Interest:__
 
 ### Extended `vstat` Methods
 
-| Method     | Args | Purpose |
-|------------|------|--------------------------|
-| `tabulate` | `o`  | Create Core Table from O |
-| `inspect`  | `o`  | Inspect Core Table O     |
+| Method     | Args  | Purpose |
+|------------|-------|--------------------------|
+| `tabulate` | `o`   | Create Core Table from O |
+| `inspect`  | `o`   | Inspect Core Table O     |
+
+__Not Yet Implemented:__
+
+| Method     | Args  | Purpose |
+|------------|-------|--------------------------|
+| `nPr`      | `n,r` | Number of Permutations   |
+| `nCr`      | `n,r` | Number of Combinations   |
+| `bell`     | `n`   | Bell Curve Probability   |
+| `fact`     | `n`   | Factorial N!             |
+| `fib`      | `n`   | Fibonacci Number N       |
 
 ### Extended `vstat` Properties
 
@@ -145,7 +158,33 @@ __Components of Interest:__
 | `hints`  | Object | Property Hints for `stat` Object |
 | `pubs`   | String | URL Address for Math Pubs        |
 
-### Properties for `stat` Object
+----------------------------------------------------------------
+
+# Object Properties
+
+The Tables below detail the Properties for various Data 
+Structures.
+
+Data Structures are Objects used as either arguments or return
+types for Methods.
+
+These names are __informal__. They're __not__ Classes or Class
+Instances. Rather they're properties attached to vanilla
+JavaScript objects.
+
+__Data Structure Summary:__
+
+- `stat` ~ Return Value from `vstat`
+- `diff` ~ Return Value from `vdiff`
+- `bounds` ~ Return Value from `vbounds`
+- `norm` ~ Return Value from `vnorm`
+
+----------------------------------------------------------------
+
+## Properties for `stat` Object
+
+The `stat` Object contains the results returned by the `vstat`
+Method.
 
 | Property  | Type    | Purpose                     |
 |-----------|---------|-----------------------------|
@@ -164,6 +203,46 @@ __Components of Interest:__
 | `mse`     | Real    | Mean Squared Error          |
 | `std`     | Real    | Standard Deviation          |
 | `samples` | Vector  | Sample Set Y                |
+
+----------------------------------------------------------------
+
+## Properties for `diff` Object
+
+The `diff` Object contains the results returned by the `vdiff`
+Method.
+
+| Property  | Type    | Purpose                    |
+|-----------|---------|----------------------------|
+| `samples` | Vector  | Original Input Samples     |
+| `deltas`  | Vector  | Deltas for Adjacent Values |
+| `bounds`  | Object  | Sample Boundaries          |
+
+----------------------------------------------------------------
+
+## Properties for `bounds` Object
+
+The `bounds` Object contains the results returned by the 
+`vbounds` Method.
+
+| Property | Type    | Purpose                        |
+|----------|---------|--------------------------------|
+| `upper`  | Real    | Upper Bound for Samples        |
+| `lower`  | Real    | Lower Bound for Samples        |
+| `range`  | Real    | Sample Range ( upper - lower ) |
+
+----------------------------------------------------------------
+
+## Properties for `norm` Object
+
+The `norm` Object contains the results returned by the 
+`vnorm` Method.
+
+| Property  | Type    | Purpose                        |
+|-----------|---------|--------------------------------|
+| `samples` | Vector  | Original Input Samples         |
+| `normals` | Vector  | Normalized Samples             |
+| `bounds`  | Object  | Input Sample Boundaries        |
+| `scale`   | Real    | Reciprocal of Range            |
 
 ----------------------------------------------------------------
 

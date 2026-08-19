@@ -696,27 +696,36 @@ TrigOps = {
 
 <script id="stats.js">
 
+vfill =( v, n )=> ( v.map( _ => n ) );
+vzero =( v )=> vfill( v, 0 );
+
 vmax =( v )=> v.reduce((a,b)=>max(a,b),-Infinity);
-vmin =( v )=> v.reduce((a,b)=>min(a,b),+Infinity);
+vmin =( v )=> v.reduce((a,b)=>min(a,b), Infinity);
 vsum =( v )=> v.reduce((a,b)=>(a+b),0);
 vavg =( v )=> (vsum(v)/(v.length));
 
 vbounds = function( v ) {
-    let lo = +Infinity;
-    let hi = -Infinity;
+    let lower =  Infinity;
+    let upper = -Infinity;
+    if ( v.length < 1 ) {
+        throw new Error( `Expected at least one sample` );
+    }
     v.forEach(
         ( n ) => {
-            lo = min( n, lo );
-            hi = max( n, hi );
+            lower = min( n, lower );
+            upper = max( n, upper );
         }
     );
-    return { lower : lo, upper : hi };
+    const range = ( upper - lower );
+    return { lower, upper, range };
 };
 
 vmedian = function( v ) {
     let i, j;
-    if (! v.length ) { return NaN; }
-    v = v.vsort();
+    if ( v.length < 1 ) {
+        throw new Error( `Expected at least one sample` );
+    }
+    v = v.sort();
     if ( v.length % 1 ) {
         i = ceil( v.length / 2 );
         return v[ i ];
@@ -745,7 +754,7 @@ vrange = function( v ) {
 vmse = function( v ) {
     const k = ( v.length - 1 );
     if ( k < 0 ) {
-        return NaN;
+        throw new Error( `Expected at least one sample` );
     }
     if ( k < 1 ) {
         return 0;
@@ -764,23 +773,56 @@ vmse = function( v ) {
 vstd =( v )=> sqrt( vmse( v ) );
 
 vnorm = function( v ) {
-    const bounds = vbounds( v );
-    const range  = ( bounds.upper - bounds.lower );
-    const scale  = 1 / range;
-    const samples = v.map( n => n * scale );
-    return { samples, bounds, range, scale };
+    const samples = arr( v );
+    if ( samples.length < 1 ) {
+        throw new Error( `Expected at least one sample` );
+    }
+    const bounds  = vbounds( samples );
+    const scale   = ( 1 / bounds.range );
+    if (! isFinite( scale ) ) {
+        throw new Error( `Sample Set has Zero Range` );
+    }
+    const normals = samples.map( n => n * scale );
+    return { samples, normals, bounds, scale };
+};
+
+vdiff = function( v ) {
+    const deltas  = [];
+    const samples = arr( v );
+    if ( samples.length > 0 ) {
+        deltas.push( 0 );
+    } else {
+        return ( deltas );
+    }
+    let lower =  Infinity;
+    let upper = -Infinity;
+    let delta, value, prior = samples.shift();
+    while ( samples.length > 0 ) {
+        value = samples.shift();
+        delta = ( value - prior );
+        prior = value;
+        deltas.push( delta );
+        lower = min( delta, lower );
+        upper = max( delta, upper );
+    }
+    const range  = ( upper - lower );
+    const bounds = { lower, upper, range };
+    return { bounds, deltas, samples : v };
 };
 
 vstats = function( v ) {
-    v = ( v || [] );
-    const n = v.length;
+    const samples = arr( v );
+    const n = samples.length;
+    if ( n < 1 ) {
+        throw new Error( `Expected at least one sample` );
+    }
     let lo = +Infinity;
     let hi = -Infinity;
     let xx = 0; let xsum = 0;
     let yy = 0; let ysum = 0;
     let xy = 0;
     let x = 0;
-    v.forEach(
+    samples.forEach(
         ( y ) => {
             xsum += x;
             ysum += y;
@@ -796,7 +838,7 @@ vstats = function( v ) {
     const b = ((ysum*xx)-(xsum*xy)) / ((n*xx)-square(xsum));
     const avg = ysum / n;
     const sse = vsum(
-        v.map(
+        samples.map(
             ( y ) => square( y-avg )
         )
     );
@@ -809,7 +851,7 @@ vstats = function( v ) {
         xsum, ysum,
         xx, yy, xy,
         sse, mse, std,
-        samples : v
+        samples
     };
 };
 
@@ -828,7 +870,7 @@ vstats.hints = {
 , sse  : "Sum of Squared Errors"
 , mse  : "Mean Squared Error"
 , std  : "Standard Deviation"
-, samples : "Sample Set"
+, samples : "Input Sample Set"
 };
 
 vstats.pubs = ( "http://dave-probook/std/pubs/math/" );
@@ -854,9 +896,10 @@ vstats.inspect = function( o ) {
 <script id="stat-ops.js">
 
 StatOps = {
-  vmax, vmin, vsum, vavg
+  vfill, vzero
+, vmax, vmin, vsum, vavg
 , vbounds, vmedian, vlerp
-, vhalf, vrange, vnorm
+, vhalf, vrange, vdiff, vnorm
 , vmse, vstd
 , vstats
 };
@@ -1225,21 +1268,21 @@ function plot_vec( v, y=266, yScale=256 ) {
 
 function plot_red( colors, y=266, yScale=256 ) {
     colors = ( colors || Palette() );
-    const v = red_norm( colors ).samples;
+    const v = red_norm( colors ).normals;
     Pen( "red" );
     plot_vec( v, y, yScale );
 }
 
 function plot_grn( colors, y=266, yScale=256 ) {
     colors = ( colors || Palette() );
-    const v = grn_norm( colors ).samples;
+    const v = grn_norm( colors ).normals;
     Pen( "green" );
     plot_vec( v, y, yScale );
 }
 
 function plot_blu( colors, y=266, yScale=256 ) {
     colors = ( colors || Palette() );
-    const v = blu_norm( colors ).samples;
+    const v = blu_norm( colors ).normals;
     Pen( "blue" );
     plot_vec( v, y, yScale );
 }
@@ -1479,6 +1522,8 @@ SupportOps = {
 , perform, exec, macro, run
 , inspect, inspect_size
 , mine, incomplete
+, zoom, show, hide
+, toggle
 };
 </script>
 

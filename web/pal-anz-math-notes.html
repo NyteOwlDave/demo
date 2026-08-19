@@ -329,6 +329,16 @@ img { max-width: 100%; }
 </thead>
 <tbody>
 <tr>
+<td><code>vfill</code></td>
+<td><code>v, n</code></td>
+<td>Fill Vector V with Value N</td>
+</tr>
+<tr>
+<td><code>vzero</code></td>
+<td><code>v</code></td>
+<td>Fill Vector V with all Zeroes</td>
+</tr>
+<tr>
 <td><code>vmax</code></td>
 <td><code>v</code></td>
 <td>Maximum Sample Value</td>
@@ -374,6 +384,11 @@ img { max-width: 100%; }
 <td>Distance from Lower to Upper Bound</td>
 </tr>
 <tr>
+<td><code>vdiff</code></td>
+<td><code>v</code></td>
+<td>Deltas for Adjacent Samples</td>
+</tr>
+<tr>
 <td><code>vnorm</code></td>
 <td><code>v</code></td>
 <td>Normalize Samples [ -1 ... +1 ]</td>
@@ -417,6 +432,43 @@ img { max-width: 100%; }
 </tr>
 </tbody>
 </table>
+<p><strong>Not Yet Implemented:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Args</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>nPr</code></td>
+<td><code>n,r</code></td>
+<td>Number of Permutations</td>
+</tr>
+<tr>
+<td><code>nCr</code></td>
+<td><code>n,r</code></td>
+<td>Number of Combinations</td>
+</tr>
+<tr>
+<td><code>bell</code></td>
+<td><code>n</code></td>
+<td>Bell Curve Probability</td>
+</tr>
+<tr>
+<td><code>fact</code></td>
+<td><code>n</code></td>
+<td>Factorial N!</td>
+</tr>
+<tr>
+<td><code>fib</code></td>
+<td><code>n</code></td>
+<td>Fibonacci Number N</td>
+</tr>
+</tbody>
+</table>
 <h3>Extended <code>vstat</code> Properties</h3>
 <table>
 <thead>
@@ -439,7 +491,26 @@ img { max-width: 100%; }
 </tr>
 </tbody>
 </table>
-<h3>Properties for <code>stat</code> Object</h3>
+<hr>
+<h1>Object Properties</h1>
+<p>The Tables below detail the Properties for various Data 
+Structures.</p>
+<p>Data Structures are Objects used as either arguments or return
+types for Methods.</p>
+<p>These names are <strong>informal</strong>. They're <strong>not</strong> Classes or Class
+Instances. Rather they're properties attached to vanilla
+JavaScript objects.</p>
+<p><strong>Data Structure Summary:</strong></p>
+<ul>
+<li><code>stat</code> ~ Return Value from <code>vstat</code></li>
+<li><code>diff</code> ~ Return Value from <code>vdiff</code></li>
+<li><code>bounds</code> ~ Return Value from <code>vbounds</code></li>
+<li><code>norm</code> ~ Return Value from <code>vnorm</code></li>
+</ul>
+<hr>
+<h2>Properties for <code>stat</code> Object</h2>
+<p>The <code>stat</code> Object contains the results returned by the <code>vstat</code>
+Method.</p>
 <table>
 <thead>
 <tr>
@@ -523,6 +594,101 @@ img { max-width: 100%; }
 <td><code>samples</code></td>
 <td>Vector</td>
 <td>Sample Set Y</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2>Properties for <code>diff</code> Object</h2>
+<p>The <code>diff</code> Object contains the results returned by the <code>vdiff</code>
+Method.</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>samples</code></td>
+<td>Vector</td>
+<td>Original Input Samples</td>
+</tr>
+<tr>
+<td><code>deltas</code></td>
+<td>Vector</td>
+<td>Deltas for Adjacent Values</td>
+</tr>
+<tr>
+<td><code>bounds</code></td>
+<td>Object</td>
+<td>Sample Boundaries</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2>Properties for <code>bounds</code> Object</h2>
+<p>The <code>bounds</code> Object contains the results returned by the 
+<code>vbounds</code> Method.</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>upper</code></td>
+<td>Real</td>
+<td>Upper Bound for Samples</td>
+</tr>
+<tr>
+<td><code>lower</code></td>
+<td>Real</td>
+<td>Lower Bound for Samples</td>
+</tr>
+<tr>
+<td><code>range</code></td>
+<td>Real</td>
+<td>Sample Range ( upper - lower )</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2>Properties for <code>norm</code> Object</h2>
+<p>The <code>norm</code> Object contains the results returned by the 
+<code>vnorm</code> Method.</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>samples</code></td>
+<td>Vector</td>
+<td>Original Input Samples</td>
+</tr>
+<tr>
+<td><code>normals</code></td>
+<td>Vector</td>
+<td>Normalized Samples</td>
+</tr>
+<tr>
+<td><code>bounds</code></td>
+<td>Object</td>
+<td>Input Sample Boundaries</td>
+</tr>
+<tr>
+<td><code>scale</code></td>
+<td>Real</td>
+<td>Reciprocal of Range</td>
 </tr>
 </tbody>
 </table>
