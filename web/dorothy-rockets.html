@@ -20,15 +20,41 @@ img { max-width: 100%; }
 
 <hr>
 <h1><a href="http://dave-omega/demo/web/dorothy-rockets.html" title="Omega Edition"><code>🚀</code> Dorothy's Rockets</a></h1>
+<blockquote>
+<p><a href="https://www.dropbox.com/home/dot"><code>💼</code> Cloud Store</a></p>
+</blockquote>
+<hr>
+<div center>
+  <button id="btn_db_save">💾</button>
+  <button id="btn_db_open">📂</button>
+  <button id="btn_db_copy">📋</button>
+  <button id="btn_db_persist">🔏</button>
+  <button id="btn_db_recover">🔓</button>
+  <button id="btn_db_inspect">🔭</button>
+  <button id="btn_db_index">📑</button>
+  <button id="btn_db_upload">📤</button>
+  <button id="btn_db_download">📥</button>
+</div>
+
 <hr>
 <h1><code>📑</code> Index</h1>
 <hr>
 <div center>
   <select id="rocket_index"></select>
+  <button>♻️</button>
 </div>
 
 <hr>
 <h1><code>📮</code> Entry Form</h1>
+<hr>
+<div center>
+  <button id="btn_entry_insert">➕</button>
+  <button id="btn_entry_delete">➖</button>
+  <button id="btn_entry_accept">✅</button>
+  <button id="btn_entry_reject">❎</button>
+  <button id="btn_entry_search">🔍</button>
+</div>
+
 <hr>
 <table>
 <thead>
@@ -59,26 +85,55 @@ img { max-width: 100%; }
 </thead>
 <tbody class="results">
 <tr>
-<td><input /></td>
-<td><input /></td>
-<td><input /></td>
-<td><input /></td>
-<td><input /></td>
-<td>[`➕`][`➖`][`🔃`][`⬆️`][`⬇️`]</td>
+ <td><input /></td>
+ <td><input /></td>
+ <td><input /></td>
+ <td><input /></td>
+ <td><input /></td>
+ <td>
+  <button onclick="floob(event)">➕</button>
+  <button onclick="floob(event)">➖</button>
+  <button onclick="floob(event)">🔃</button>
+  <button onclick="floob(event)">⬆️</button>
+  <button onclick="floob(event)">⬇️</button>
+ </td>
 </tr>
 </tbody>
 </table>
 
 <hr>
 <h1><code>🧝</code> Description</h1>
-<ul>
-<li>( <code>pending</code> )</li>
-</ul>
+<hr>
+<div center>
+ <img src="./icons/dorothy.png" />
+</div>
+
+<hr>
+<p>This is the <strong>Dot Rocket Manager</strong> I've dreamed of, but never
+took the time to think through and implement.</p>
+<p>The difference is that Dot Rockets are now treated as a JSON
+Manuscript rather than individual HTML Files. Though the
+entries in the Rocket Database can be easily extracted to
+HTML Files, either individually or in batches.</p>
+<p>More notes can be found in the <a href="https://sites.google.com">Official Google Site</a>
+for <strong>Dorothy</strong>.</p>
+<blockquote>
+<p><code>🤩</code> Enjoy!</p>
+</blockquote>
 <hr>
 <h1><code>🧭</code> Navigation</h1>
 <ul>
 <li>( <code>pending</code> )</li>
 </ul>
+<hr>
+<header id="header">
+  <div id="messages"></div>
+</header>
+
+<footer id="footer">
+  <input wide id="footer_input" onchange="perform(event)" />
+</footer>
+
 <hr>
 <style>
 @import url("./../style/every-page.css");

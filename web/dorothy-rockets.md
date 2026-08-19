@@ -12,6 +12,22 @@
 
 # [`🚀` Dorothy's Rockets][me-omega]
 
+> [`💼` Cloud Store](https://www.dropbox.com/home/dot)
+
+----------------------------------------------------------------
+
+<div center>
+  <button id="btn_db_save">💾</button>
+  <button id="btn_db_open">📂</button>
+  <button id="btn_db_copy">📋</button>
+  <button id="btn_db_persist">🔏</button>
+  <button id="btn_db_recover">🔓</button>
+  <button id="btn_db_inspect">🔭</button>
+  <button id="btn_db_index">📑</button>
+  <button id="btn_db_upload">📤</button>
+  <button id="btn_db_download">📥</button>
+</div>
+
 ----------------------------------------------------------------
 
 # `📑` Index
@@ -20,11 +36,22 @@
 
 <div center>
   <select id="rocket_index"></select>
+  <button>♻️</button>
 </div>
 
 ----------------------------------------------------------------
 
 # `📮` Entry Form
+
+----------------------------------------------------------------
+
+<div center>
+  <button id="btn_entry_insert">➕</button>
+  <button id="btn_entry_delete">➖</button>
+  <button id="btn_entry_accept">✅</button>
+  <button id="btn_entry_reject">❎</button>
+  <button id="btn_entry_search">🔍</button>
+</div>
 
 ----------------------------------------------------------------
 
@@ -60,12 +87,18 @@
 </thead>
 <tbody class="results">
 <tr>
-<td><input /></td>
-<td><input /></td>
-<td><input /></td>
-<td><input /></td>
-<td><input /></td>
-<td>[`➕`][`➖`][`🔃`][`⬆️`][`⬇️`]</td>
+ <td><input /></td>
+ <td><input /></td>
+ <td><input /></td>
+ <td><input /></td>
+ <td><input /></td>
+ <td>
+  <button onclick="floob(event)">➕</button>
+  <button onclick="floob(event)">➖</button>
+  <button onclick="floob(event)">🔃</button>
+  <button onclick="floob(event)">⬆️</button>
+  <button onclick="floob(event)">⬇️</button>
+ </td>
 </tr>
 </tbody>
 </table>
@@ -74,13 +107,45 @@
 
 # `🧝` Description
 
-- ( `pending` )
+----------------------------------------------------------------
+
+<div center>
+ <img src="./icons/dorothy.png" />
+</div>
+
+----------------------------------------------------------------
+
+This is the __Dot Rocket Manager__ I've dreamed of, but never
+took the time to think through and implement.
+
+The difference is that Dot Rockets are now treated as a JSON
+Manuscript rather than individual HTML Files. Though the
+entries in the Rocket Database can be easily extracted to
+HTML Files, either individually or in batches.
+
+[g-sites]: <https://sites.google.com>
+[g-site]: <https://sites.google.com/view/dorothys-rockets>
+
+More notes can be found in the [Official Google Site][g-sites]
+for __Dorothy__.
+
+> `🤩` Enjoy!
 
 ----------------------------------------------------------------
 
 # `🧭` Navigation
 
 - ( `pending` )
+
+----------------------------------------------------------------
+
+<header id="header">
+  <div id="messages"></div>
+</header>
+
+<footer id="footer">
+  <input wide id="footer_input" onchange="perform(event)" />
+</footer>
 
 ----------------------------------------------------------------
 
