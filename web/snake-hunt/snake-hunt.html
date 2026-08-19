@@ -1,0 +1,255 @@
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<body>
+<canvas id="canvas"></canvas>
+</body>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<style>
+
+html, body {
+    margin: 0px;
+    background : gold;
+}
+
+canvas {
+    display: block;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+
+</style>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script>
+
+const deg2rad = (n) => n / 180 * Math.PI;
+
+const Settings = {
+	point: {
+		style: "#0000ff",
+		radius: 5
+	},
+	arm: {
+		style: "#000000",
+		width: 5,
+		cap: "round"
+	},
+	nudge_rate: deg2rad(15),
+	nudge_length: 2,
+	screen: {
+		width: 0,
+		height: 0
+	}
+}
+
+const Arm = {
+	x: 0,
+	y: 0,
+	length: 100,
+	angle: 0,
+	parent: null,
+	create: function(x, y, length, angle) {
+		const obj = Object.create(this);
+		obj.init(x, y, length, angle);
+		return obj;
+	},
+	init: function(x, y, length, angle) {
+		this.x = x;
+		this.y = y;
+		this.length = length; 
+		this.angle = angle;
+	},
+	getEndX: function() {
+		return this.x + Math.cos(this.angle) * this.length;
+	},
+	getEndY: function() {
+		return this.y + Math.sin(this.angle) * this.length;
+	},
+	render: function(context) {
+		context.strokeStyle = Settings.arm.style;
+		context.lineWidth = Settings.arm.width;
+		context.lineCap = Settings.arm.cap;
+		context.beginPath();
+		context.moveTo(this.x, this.y);
+		context.lineTo(this.getEndX(), this.getEndY());
+		context.stroke();
+	},
+	pointAt: function(x, y) {
+		var dx = x - this.x,
+			dy = y - this.y;
+		this.angle = Math.atan2(dy, dx);
+	},
+
+	drag: function(x, y) {
+		this.pointAt(x, y);
+		this.x = x - Math.cos(this.angle) * this.length;
+		this.y = y - Math.sin(this.angle) * this.length;
+		if (this.parent) {
+			this.parent.drag(this.x, this.y);
+		}
+	}
+
+};
+
+
+const IKSystem = {
+	x: 0,
+	y: 0,
+	arms: null,
+	lastArm: null,
+	create: function(x, y) {
+		var obj = Object.create(this);
+		obj.init(x, y);
+		return obj;
+	},
+	init: function(x, y) {
+		this.x = x;
+		this.y = y;
+		this.arms = [];
+	},
+	addArm: function(length) {
+		var arm = Arm.create(0, 0, length, 0);
+		if (this.lastArm) {
+			arm.x = this.lastArm.getEndX();
+			arm.y = this.lastArm.getEndY();
+			arm.parent = this.lastArm;
+		}
+		else {
+			arm.x = this.x;
+			arm.y = this.y;
+		}
+		this.arms.push(arm);
+		this.lastArm = arm;
+	},
+	render: function(context) {
+		for (var i = 0; i < this.arms.length; i++) {
+			this.arms[i].render(context);
+		}
+	},
+	drag: function(x, y) {
+		this.lastArm.drag(x, y);
+	},
+	nudge: function() {
+		const x = this.lastArm.x;
+		const y = this.lastArm.y;
+		const p0 = Waypoint.current;
+		const p1 = new Point(x, y);
+		const a0 = p1.angleTo(p0);
+		let a1 = this.lastArm.angle;
+		const diff = a1 - a0;
+		if (Math.abs(diff) < Settings.nudge_rate) {
+			a1 = a0;
+		}
+		else {
+			a1 += Settings.nudge_rate;
+		}
+		// console.log(a0, a1);
+		const nudgex = x + Math.cos(a1) * Settings.nudge_length;
+		const nudgey = y + Math.sin(a1) * Settings.nudge_length;
+		this.drag(nudgex, nudgey);
+		const p2 = new Point(nudgex, nudgey);
+		const dist = p2.lengthTo(p0);
+		return (dist < Arm.length);
+	}
+};
+
+
+class Point {
+	constructor(x, y) {
+		this.x = x;
+		this.y = y;
+	}
+	length() {
+		return Math.hypot(this.x, this.y);
+	}
+	angle() {
+		return Math.atan2(this.y, this.x);
+	}
+	lengthTo(pt) {
+		const xdelta = this.x - pt.x;
+		const ydelta = this.y - pt.y;
+		return Math.hypot(xdelta, ydelta);
+	}
+	angleTo(pt) {
+		const xdelta = this.x - pt.x;
+		const ydelta = this.y - pt.y;
+		return Math.atan2(ydelta, xdelta);
+	}
+	render(context) {
+		context.strokeStyle = context.fillStyle = Settings.point.style;
+		context.beginPath();
+		context.arc(this.x, this.y, Settings.point.radius, 0, 2*Math.PI);
+		context.stroke();
+		context.fill();
+	}
+}
+
+
+const Waypoint = {
+	current : null ,
+	index   : 0    ,
+	points  : []   ,
+	next: function() {
+		const me = Waypoint;
+		const count = me.points.length;
+		const i = me.index = (me.index + 1) % count;
+		me.current = me.points[i];
+	},
+	init: function() {
+		const me = Waypoint;
+		me.index = 0;
+		me.points = [];
+		const w = Settings.screen.width;
+		const h = Settings.screen.height;
+		[
+			[ 0.10, 0.30 ],
+			[ 0.90, 0.20 ],
+			[ 0.80, 0.90 ],
+			[ 0.20, 0.70 ],
+			[ 0.80, 0.90 ],
+			[ 0.90, 0.20 ]
+		].forEach(add);
+		function add(point) {
+			const x = point[0] * w;
+			const y = point[1] * h;
+			me.points.push(new Point(x, y));
+		}
+		me.current = me.points[me.index];
+	},
+	render: function(context) {
+		Waypoint.current.render(context);
+	}
+};
+
+function main() {
+	let canvas = document.getElementById("canvas"),
+	context = canvas.getContext("2d");
+	const w = Settings.screen.width  = canvas.width  = window.innerWidth;
+	const h = Settings.screen.height = canvas.height = window.innerHeight;
+	let iks = IKSystem.create(w / 2, h / 2);
+	for (let i = 0; i < 20; i++) {
+		iks.addArm(30);
+	}
+	Waypoint.init();
+	update();
+	function update() {
+		if (iks.nudge()) Waypoint.next();
+		context.clearRect(0, 0, Settings.screen.width, Settings.screen.height);
+		Waypoint.render(context);
+		iks.render(context);
+		requestAnimationFrame(update);
+	}
+}
+
+window.onload = main;
+
+</script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+

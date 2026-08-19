@@ -50,6 +50,8 @@
 > [`🧨` Turtle 001](./web/turtle/turtle-001.html)
 > [`🧨` Turtle Graph](./web/turtle/turtle-graph.html)
 
+> [`🧨` Snake Hunt](./web/snake-hunt/snake-hunt.html)
+
 ----------------------------------------------------------------
 
 ## `🗂️` Workspaces
