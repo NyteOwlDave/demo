@@ -126,7 +126,7 @@ HTML Files, either individually or in batches.
 [g-sites]: <https://sites.google.com>
 [g-site]: <https://sites.google.com/view/dorothys-rockets>
 
-More notes can be found in the [Official Google Site][g-sites]
+More notes can be found in the [Official Google Site][g-site]
 for __Dorothy__.
 
 > `🤩` Enjoy!
