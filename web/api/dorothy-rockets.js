@@ -17,6 +17,37 @@ function store() {
 
 ops.storekey = "dorothy-rockets.json";
 
+ops.index = function( rex ) {
+    let m = Object.keys( _rockets ).sort();
+    if ( rex = str( rex ) ) {
+        rex = new RegExp( rex );
+        m = m.filter( 
+            ( k ) => ( rex.test( k ) ) 
+        );
+    }
+    return ( m );
+};
+
+ops.compose = function( key ) {
+    let o;
+    if ( key = str( key ) ) {
+        o = ( _rockets[ key ] || {} );
+    } else {
+        o = _rockets;        
+    }
+    return JSON.stringify( o, null, 2 );
+};
+
+ops.parse = function( json ) {
+    const o = JSON.parse( json );
+    if ( o instanceof Object ) {
+        _rockets = ( o );
+        return ( o );
+    } else {
+        throw new TypeError( `Expected an Object` );
+    }
+};
+
 ops.persist = function() {
     const db = store();
     if (! db ) { return; }
@@ -58,20 +89,6 @@ ops.request = function( url ) {
     return ( req );
 };
 
-ops.compose = function() {
-    return JSON.stringify( _rockets, null, 2 );
-};
-
-ops.parse = function( json ) {
-    const o = JSON.parse( json );
-    if ( o instanceof Object ) {
-        _rockets = ( o );
-        return ( o );
-    } else {
-        throw new TypeError( `Expected an Object` );
-    }
-};
-
 ops.tabulate = function( index ) {
     function entry( k ) {
         return ops.tabulate.entry( k );
@@ -82,8 +99,9 @@ ops.tabulate = function( index ) {
     return ( v );
 };
 
-ops.tabulate.entry = function( k ) {
-    const v = _rockets[ k ];
+ops.tabulate.entry = function( key ) {
+    const k = str( key );
+    const v = ( _rockets[ k ] || {} );
     const t = str( v.title   );
     const a = str( v.address );
     const d = str( v.decal   );
@@ -125,6 +143,7 @@ ops.insert = function( key, entry ) {
 };
 
 ops.update = function( key, entry ) {
+    entry = ( entry || ops.prepare() );
     key = str( key );
     if ( key.length < 1 ) {
         throw new TypeError( `Expected a Rocket Key` );
@@ -157,10 +176,6 @@ ops.select = function( rex ) {
     return ( results );
 };
 
-ops.index = function() {
-    return Object.keys( _rockets ).sort();
-};
-
 ops.launch = function( key ) {
     if ( "function" !== typeof visit ) {
         throw new Error( "Visit Method is Unavailable" );
@@ -190,7 +205,7 @@ ops.edit = function( ed ) {
 
 ops.needs = [ "ged", "gid", "visit", "str" ];
 
-ops.helps = [ "riccola.js" ];
+ops.helps = [ "riccola" ];
 
 } ) ( dorothy );
 
