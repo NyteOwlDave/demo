@@ -918,6 +918,7 @@ vstats.inspect = function( o ) {
 
 <script id="madge.js">
 
+// Prepare Drawing Surface
 function Surface() {
     const ops = Surface;
     const srf = surface;
@@ -941,8 +942,10 @@ function Surface() {
     return ( srf );
 }
 
+// Debug Mode
 Surface.debug = ( false );
 
+// Prepare Surface Metrics
 Surface.metrics = function() {
 	const srf = Surface();
 	const w = srf.width;
@@ -953,12 +956,19 @@ Surface.metrics = function() {
     return { srf, w, h, cx, cy, aspect };
 };
 
+// Prepare 2D Transform
+Surface.xform = function( xo, yo, scale ) {
+   return { xo, yo, scale };
+};
+
+// Acquire Graphics Engine
 function Graphics() {
     return (
         Surface().getContext( "2d" )
     );
 };
 
+// Capture Pixel Map
 Graphics.pixmap = function( x, y, w, h ) {
     if ( "undefined" === typeof x ) {
         const m = Surface.metrics();
@@ -970,6 +980,7 @@ Graphics.pixmap = function( x, y, w, h ) {
     return gfx.getImageData( x, y, w, h );
 };
 
+// Draw Sprite from Pixel Map
 Graphics.sprite = function( dx, dy, pixmap ) {
     const mw = ( pixmap.width  );
     const mh = ( pixmap.height );
@@ -980,6 +991,7 @@ Graphics.sprite = function( dx, dy, pixmap ) {
     return ( gfx );
 };
 
+// Draw Sprite from MIP Map
 Graphics.mip = function( dx, dy, rc, mipmap ) {
     mw = ( rc.w || rc.width  || mipmap.width  );
     mh = ( rc.h || rc.height || mipmap.height );
@@ -992,6 +1004,7 @@ Graphics.mip = function( dx, dy, rc, mipmap ) {
     return ( gfx );
 };
 
+// Capture Picture as Canvas
 function Snapshot( x, y, w, h ) {
     const m = Surface.metrics();
     w = ( w || m.w );
@@ -1005,6 +1018,7 @@ function Snapshot( x, y, w, h ) {
     return ( pic );
 }
 
+// Draw Picture to Surface
 function Picture( pic, x, y, w, h ) {
     const m = Surface.metrics();
     w = ( w || m.w );
@@ -1016,6 +1030,7 @@ function Picture( pic, x, y, w, h ) {
     return ( gfx );
 }
 
+// Fill Background
 function Background( c ) {
     const m = Surface.metrics();
     const gfx = Graphics();
@@ -1024,6 +1039,7 @@ function Background( c ) {
     return ( gfx );
 }
 
+// Set Pen Color
 function Pen( style ) {
     const gfx = Graphics();
     const old = gfx.strokeStyle;
@@ -1031,6 +1047,7 @@ function Pen( style ) {
     return ( old );
 }
 
+// Set Pen Thickness
 Pen.thickness = function( n ) {
     const gfx = Graphics();
     n = ( parseInt( n ) || 1 );
@@ -1039,6 +1056,7 @@ Pen.thickness = function( n ) {
     return ( old );
 };
 
+// Draw Single Pixel
 Pen.dot = function( x, y, c ) {
     const gfx = Graphics();
     gfx.beginPath();
@@ -1049,6 +1067,7 @@ Pen.dot = function( x, y, c ) {
     return ( gfx );
 };
 
+// Draw Line Segment
 Pen.lineseg = function( p0, p1, c ) {
     const gfx = Graphics();
     gfx.strokeStyle = ( c || gfx.strokeStyle );
@@ -1059,6 +1078,38 @@ Pen.lineseg = function( p0, p1, c ) {
     return ( gfx );
 };
 
+// Draw Line Using y = mx + b
+Pen.line = function( m, b, xform, c ) {
+   const mx = Surface.metrics();
+   const xo = xform.xo;
+   const yo = xform.yo;
+   const scale = xform.scale;
+   let x1,y1,x2,y2;
+   const xx =( x )=> ( xo + x );
+   const yy =( y )=> ( yo - y*scale );
+   const f  =( x )=>  ( m * x + b );
+   const lineseg =()=> {
+      const pt0 = Point( xx( x1 ), yy( y1 ) );
+      const pt1 = Point( xx( x2 ), yy( y2 ) );
+      Pen.lineseg( pt0, pt1, c );
+   };
+   x1 = 0;         y1 = f( x1 );
+   x2 = x1 + mx.w; y2 = f( x2 );
+   // Draw Trend Line Segment
+   lineseg();
+   // Draw Y-Intercept Marker
+   Pen.circle( xx( x1 ), yy( y1) , 10, c );
+};
+
+// Draw Regression Trend Line
+Pen.trend = function( stats, xo=10, yo=266, h=256, c ) {
+   const m = stats.m;
+   const b = stats.b;
+   const xform = Surface.xform( xo, yo, h );
+   Pen.line( m, b, xform, c );
+};
+
+// Draw Rectangle Border
 Pen.rect = function( x, y, w, h, c ) {
     const gfx = Graphics();
     gfx.strokeStyle = ( c || gfx.strokeStyle );
@@ -1068,6 +1119,7 @@ Pen.rect = function( x, y, w, h, c ) {
     return ( gfx );
 };
 
+// Draw Circle Border
 Pen.circle = function( x, y, r, c ) {
     const gfx = Graphics();
     gfx.strokeStyle = ( c || gfx.strokeStyle );
@@ -1076,6 +1128,7 @@ Pen.circle = function( x, y, r, c ) {
     gfx.stroke();
 };
 
+// Draw Polygon Border
 Pen.poly = function( points, c ) {
     const sides = points.length;
     if ( sides < 1 ) { return; }
@@ -1103,14 +1156,17 @@ Pen.poly = function( points, c ) {
     gfx.stroke();
 };
 
+// Prepare 2D Point
 function Point( x, y ) {
     return { x, y };
 }
 
+// Prepare 3D Vertex
 function Vertex( x, y, z ) {
     return { x, y, z };
 }
 
+// Flatten 3D Vertex to 2D Point
 Vertex.flatten = function( v, scale ) {
     scale = ( scale || 1.0 );
     const k = scale / ( v.z || 1.0 );
@@ -1119,37 +1175,46 @@ Vertex.flatten = function( v, scale ) {
     return Point( x, y );
 };
 
+// Acquire RGBA Palette
 function Palette() {
     return colors_rgba;
 }
 
+// Write RGBA Palette from Hex Palette
 Palette.from_hex = function( source ) {
     colors_rgba = source.map( rgba_from_hex );
 };
 
+// Read Palette Index
 function Color( index ) {
     return ( Palette() [ index ] );
 }
 
+// Convert Hex Color to RGBA Color
 Color.from_hex = function( source ) {
     return rgba_from_hex( source );
 };
 
+// Convert Discrete ( r, g, b ) to RGB Color
 Color.from_rgb = function( r, g, b ) {
     const c = ( `${r},${g},${b}` );
     return [ "rgb(", c, ")" ].join( "" );
 };
 
+// Convert Discrete ( r, g, b, a ) to RGBA Color
 Color.from_rgba = function( r, g, b, a ) {
     const c = ( `${r},${g},${b},${a}` );
     return [ "rgba(", c, ")" ].join( "" );
 };
 
+// Convert 32-bit UINT to RGBA Color
 Color.from_int = function( n ) {
     const s = "#" + Number( n ).toString( 16 );
     return Color.from_hex( s );
 };
 
+// Convert Vec3 to RGB Color
+// Channel Bounds : [ 0.0 ... 1.0 ]
 Color.from_vec3 = function( v ) {
     function byte( n ) {
         n = round( n * 255 );
@@ -1161,6 +1226,8 @@ Color.from_vec3 = function( v ) {
     return Color.from_rgb( r, g, b );
 };
 
+// Convert Vec4 to RGB Color
+// Channel Bounds : [ 0.0 ... 1.0 ]
 Color.from_vec4 = function( v ) {
     function byte( n ) {
         n = round( n * 255 );
@@ -1176,17 +1243,25 @@ Color.from_vec4 = function( v ) {
     return Color.from_rgba( r, g, b, a );
 };
 
-Color.from_pixel = function( x, y, img ) {
-    if (! ( img instanceof ImageData ) ) {
-        img = Graphics.pixmap();
+// Read Pixel as RGB Color
+Color.from_pixel = function( x, y, pixmap ) {
+    if (! ( pixmap instanceof ImageData ) ) {
+        pixmap = Graphics.pixmap();
     }
-    const w = img.width;
-    const data = img.data;
+    const w = pixmap.width;
+    const data = pixmap.data;
     const index = 4 * ( w * y + x );
     const r = data[ 0 + index ];
     const g = data[ 1 + index ];
     const b = data[ 2 + index ];
     return Color.from_rgb( r, g, b );
+};
+
+// Read Surface Point as RGB Color
+Color.from_dot = function( x, y ) {
+    const gfx = Graphics();
+    const pixmap = gfx.getImageData( x, y, 1, 1 );
+    return Color.from_pixel( 0, 0, pixmap );
 };
 
 </script>
@@ -1358,21 +1433,15 @@ function draw_axes_negative( xo, yo, w, h ) {
     draw_axes( xo, yo, w, 0, h )
 }
 
+C_CRIMSON = _RGB( 42, 12, 12 );
+
 function crimson_love() {
-   Background( _RGB( 42, 12, 12 ) );
+   Background( C_CRIMSON );
    draw_axes( 10, 300, 500, 290, 290 );
 };
 
-function test_01() {
-    const colors = Palette();
-    const v = colors.map( c => c.r );
-    const r = vstats( v );
-    vstats.inspect( r );
-}
-
 ;
 ; ( 0 ) && crimson_love()
-; ( 0 ) && test_01()
 ;
 
 </script>

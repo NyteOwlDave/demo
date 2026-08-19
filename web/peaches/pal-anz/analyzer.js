@@ -157,16 +157,8 @@ function crimson_love() {
    draw_axes( 10, 300, 500, 290, 290 );
 };
 
-function test_01() {
-    const colors = Palette();
-    const v = colors.map( c => c.r );
-    const r = vstats( v );
-    vstats.inspect( r );
-}
-
 ;
-; ( 1 ) && crimson_love()
-; ( 0 ) && test_01()
+; ( 0 ) && crimson_love()
 ;
 
 
