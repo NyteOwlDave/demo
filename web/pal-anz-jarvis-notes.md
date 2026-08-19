@@ -59,7 +59,6 @@ __Components of Interest:__
 
 | Alias | Original   | Comments |
 |-------|------------|------------------------------|
-| `iwm` | n/a        | Initial Window Members       |
 | `doc` | `document` | Document Object              |
 
 ----------------------------------------------------------------
@@ -78,6 +77,8 @@ __Components of Interest:__
 | `ColorOps`   | Color Methods                   |
 | `SupportOps` | Support Methods                 |
 | `DebugOps`   | Debug Methods                   |
+| `StoreOps`   | Local Storage Methods           |
+| `SessionOps` | Session Storage Methods         |
 
 ----------------------------------------------------------------
 
@@ -85,6 +86,7 @@ __Components of Interest:__
 
 | Property      | Type         | Purpose |
 |---------------|--------------|---------------------------|
+| `iwm`         | String Array | Initial Window Members    |
 | `colors_rgba` | String Array | RGBA Palette              |
 | `colors_hex`  | String Array | HTML Hexadecimal Palette  |
 | `math`        | Object       | Math Constants            |

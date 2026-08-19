@@ -88,9 +88,9 @@ img { max-width: 100%; }
 <td>Inspect Core Table</td>
 </tr>
 <tr>
-<td><code>inspect_size</code></td>
-<td><code>title, w, h</code></td>
-<td>Inspect Size Metrics</td>
+<td><code>examine</code></td>
+<td><code>id</code></td>
+<td>Load Script Into SCE Editor</td>
 </tr>
 <tr>
 <td><code>mine</code></td>
@@ -122,6 +122,11 @@ img { max-width: 100%; }
 <td><code>o</code></td>
 <td>Toggle Element O Visibility</td>
 </tr>
+<tr>
+<td><code>input_key</code></td>
+<td><code>msg, suggest</code></td>
+<td>Input Key Name with Dialog</td>
+</tr>
 </tbody>
 </table>
 <hr>
@@ -140,13 +145,59 @@ img { max-width: 100%; }
 <td><code>o</code></td>
 <td>Prepare Core Table</td>
 </tr>
+<tr>
+<td><code>scripts</code></td>
+<td><code>rex</code></td>
+<td>Inspect Scripts with IDs</td>
+</tr>
+<tr>
+<td><code>size</code></td>
+<td><code>title, w, h</code></td>
+<td>Inspect Size Metrics</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2>Extended <code>examine</code> Methods</h2>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Args</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>analyzer</code></td>
+<td></td>
+<td>Load <code>analyzer.js</code> into SCE Editor</td>
+</tr>
 </tbody>
 </table>
 <hr>
 <h2>Extended <code>crunch</code> Methods</h2>
-<ul>
-<li>( <code>pending</code> )</li>
-</ul>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Args</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>decode</code></td>
+<td><code>sender</code></td>
+<td>Decode Button into JavaScript</td>
+</tr>
+<tr>
+<td><code>init</code></td>
+<td></td>
+<td>Initialize Buttons</td>
+</tr>
+</tbody>
+</table>
 <hr>
 <h2>Extended Properties</h2>
 <table>

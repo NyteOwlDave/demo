@@ -190,6 +190,8 @@ __These components need their own sections:__
 - `SupportOps`
 - `NavOps`
 - `ColorOps`
+- `SessionOps`
+- `StoreOps`
 
 ## `✔️` Completed Topics
 

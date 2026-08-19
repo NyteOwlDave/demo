@@ -135,13 +135,6 @@ function draw_axes_negative( xo, yo, w, h ) {
     draw_axes( xo, yo, w, 0, h )
 }
 
-function test_01() {
-    const colors = Palette();
-    const v = colors.map( c => c.r );
-    const r = vstats( v );
-    vstats.inspect( r );
-}
-
 // seeker( rex )
 // inspect( "Madge Operations", MadgeOps )
 
@@ -150,21 +143,30 @@ function test_01() {
 // Background( _RGB( 42, 12, 12 ) );
 // draw_axes( 10, 300, 500, 290, 290 );
 
-_RGB=(x,y,z)=>Color.from_rgb(x,y,z);
-
-crimson_love = function() {
-   Background( _RGB( 42, 12, 12 ) );
-   draw_axes( 10, 300, 500, 290, 290 );
-};
-
 // o = gid("surface").parentElement;
 // o = gid("sce").parentElement;
 // hide( o );
 // show( o );
 // console.log( o.classList );
 
+
+_RGB =(x,y,z)=> Color.from_rgb(x,y,z);
+
+function crimson_love() {
+   Background( _RGB( 42, 12, 12 ) );
+   draw_axes( 10, 300, 500, 290, 290 );
+};
+
+function test_01() {
+    const colors = Palette();
+    const v = colors.map( c => c.r );
+    const r = vstats( v );
+    vstats.inspect( r );
+}
+
 ;
 ; ( 1 ) && crimson_love()
+; ( 0 ) && test_01()
 ;
 
 

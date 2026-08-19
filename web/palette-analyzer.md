@@ -119,24 +119,26 @@ footer {
   <div class="tray">
     <button onclick="crunch(event)">🏍️</button>
     <button onclick="crunch(event)">🧼</button>
+    <button onclick="crunch(event)">💠</button>
     <button onclick="crunch(event)">🗒️</button>
     <button onclick="crunch(event)">👥</button>
     <button onclick="crunch(event)">📟</button>
+    <button onclick="crunch(event)">🚀</button>
     <button onclick="crunch(event)">🏠</button>
   </div>
 </footer>
 
 ----------------------------------------------------------------
 
-<script>
+<script id="iwm.js">
 ; iwm = Object.keys( window ).sort()
 </script>
 
-<script>
+<script id="doc.js">
 ; doc = document
 </script>
 
-<script id="debug-helpers.js">
+<script id="debug.js">
 cls =()=> console.clear();
 agn =()=> location.reload();
 </script>
@@ -144,8 +146,35 @@ agn =()=> location.reload();
 <script src="./gems/core-ops.js"></script>
 <script src="./gems/json-ops.js"></script>
 <script src="./gems/toggle.js"></script>
+<script src="./api/dorothy-rockets.js"></script>
 
-<script>
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script id="main.js">
+function main( event ) {
+	try {
+        doc = document;
+        doc . title = ( `Palette Analyzer` );
+		prepare_rgba_colors();
+        Background( "black" );
+        crunch.init();
+		examine.analyzer();
+        if ( null !== localStorage ) {
+            dorothy.recover();
+        }
+	} catch ( e ) {
+		crashed ( e );
+	}
+}
+</script>
+
+<script id="page-load.js">
+addEventListener( "load", main );
+</script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script id="colors-hex.js">
 colors_hex = [
 	'#ff00ff',
 	'#000000',
@@ -406,11 +435,13 @@ colors_hex = [
 ];
 </script>
 
-<script>
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script id="colors-rgba.js">
 colors_rgba = [];
 </script>
 
-<script>
+<script id="rgba-from-hex.js">
 function rgba_from_hex( s ) {
 	s = str( s ).slice( 1 );
 	const n = parseInt( `0x${s}` );
@@ -422,46 +453,29 @@ function rgba_from_hex( s ) {
 }
 </script>
 
-<script>
+<script id="prepare-rgba-colors.js">
 function prepare_rgba_colors() {
 	colors_rgba = colors_hex.map( rgba_from_hex );
 }
 </script>
 
-<script>
-function main( event ) {
-	try {
-        doc = document;
-        doc . title = ( `Palette Analyzer` );
-		prepare_rgba_colors();
-        Background( "black" );
-		sce.value = gid( "analyzer.js" ).innerText;
-        crunch.init();
-	} catch ( e ) {
-		crashed ( e );
-	}
-}
-</script>
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
-<script>
-addEventListener( "load", main );
-</script>
-
-<script>
+<script id="crashed.js">
 function crashed( e ) {
 	alert ( e );
 	throw ( e );
 }
 </script>
 
-<script>
+<script id="incomplete.js">
 function incomplete( s ) {
     s = ( `The "${s}" feature is incomplete` );
 	alert ( s );
 }
 </script>
 
-<script>
+<script id="mine.js">
 function mine( ev ) {
     ev.preventDefault();
     ev.stopPropagation();
@@ -469,7 +483,33 @@ function mine( ev ) {
 }
 </script>
 
-<script>
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script id="examine.js">
+
+function examine( id ) {
+    const ed = gid( "sce" );
+    const se = one( `SCRIPT[id="${id}"]` );
+    if ( se ) {
+        ed.sessionkey = ( id );
+        ed.value = ( se.innerText );
+    } else {
+        let m = all( "SCRIPT[id]" ).map( ( o )=> o.id );
+        ed.sessionkey = ( "script.list" );
+        ed.value = m.sort().join( "\n" );
+    }
+    ed.focus();
+}
+
+examine.analyzer = function() {
+    examine( "analyzer.js" );
+};
+
+</script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script id="perform.js">
 function perform( event ) {
     const ops = perform;
 	try {
@@ -484,7 +524,9 @@ function perform( event ) {
 }
 </script>
 
-<script>
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script id="exec.js">
 function exec( js ) {
     const ops = exec;
 	try {
@@ -505,7 +547,9 @@ function exec( js ) {
 ;
 </script>
 
-<script>
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script id="macro.js">
 function macro( cmd ) {
     const ops = macro;
 	try {
@@ -531,7 +575,9 @@ function macro( cmd ) {
 }
 </script>
 
-<script>
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script id="seeker.js">
 function seeker( rex ) {
     let r, m = Object.keys( window );
     m = m.filter( k => (! iwm.includes( k ) ) );
@@ -543,17 +589,10 @@ function seeker( rex ) {
 }
 </script>
 
-<script>
-function inspect_size( title, w, h ) {
-    const t = [
-        ( `Width : ${w}`  )
-      , ( `Height : ${h}` )
-    ];
-    inspect( title, t );
-}
-</script>
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
-<script>
+<script id="inspect.js">
+
 function inspect( title, t ) {
     const ops = inspect;
     t = ops.tabulate( t );
@@ -562,9 +601,15 @@ function inspect( title, t ) {
     c.table( t );
     c.groupEnd();
 }
-</script>
 
-<script>
+inspect.size = function( title, w, h ) {
+    const t = [
+        ( `Width : ${w}`  )
+      , ( `Height : ${h}` )
+    ];
+    inspect( title, t );
+};
+
 inspect.tabulate = function( o ) {
     if ( o instanceof Object ) {
         if ( Array.isArray( o ) ) {
@@ -574,7 +619,19 @@ inspect.tabulate = function( o ) {
     }
     return [ String( o ) ];
 };
+
+inspect.scripts = function( rex ) {
+    const q = "SCRIPT[id]";
+    let m = all( q ).map( ( o ) => o.id );
+    if ( rex = str( rex ) ) {
+        m = m.filter( k => ( rex.test( k ) ) );
+    }
+    inspect( "Scripts", m );
+};
+
 </script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
 <script id="math.js">
 
@@ -627,32 +684,7 @@ function constants() {
 
 </script>
 
-<script id="math-props.js">
-
-MathProps = {
-  _E
-, _PI, _PHI, _TAU
-, _PSI
-, _SR2, _SR3, _SR5
-};
-
-</script>
-
-<script id="math-ops.js">
-
-MathOps = {
-  abs, sgn
-, min, max, mid
-, round, trunc, floor, ceil
-, pow, rootn
-, sqrt, cbrt
-, square, cube
-, exp, log, logn
-, rnd, irnd, crnd, arnd
-, constants
-};
-
-</script>
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
 <script id="trig.js">
 
@@ -681,18 +713,7 @@ xpose = function( n ) {
 
 </script>
 
-<script id="trig-ops.js">
-
-TrigOps = {
-  sin, cos, tan
-, asin, acos, atan
-, atan2, hypot
-, sinh, cosh, tanh
-, asinh, acosh, atanh
-, xpose
-};
-
-</script>
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
 <script id="stats.js">
 
@@ -893,18 +914,7 @@ vstats.inspect = function( o ) {
 
 </script>
 
-<script id="stat-ops.js">
-
-StatOps = {
-  vfill, vzero
-, vmax, vmin, vsum, vavg
-, vbounds, vmedian, vlerp
-, vhalf, vrange, vdiff, vnorm
-, vmse, vstd
-, vstats
-};
-
-</script>
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
 <script id="madge.js">
 
@@ -915,7 +925,7 @@ function Surface() {
     let w = parseInt( rc.width  );
     let h = parseInt( rc.height );
     if ( ops.debug ) {
-        inspect_size( `Viewport`, w, h );
+        inspect.size( `Viewport`, w, h );
     }
     if ( srf.width !== w ) {
         srf.width = w;
@@ -926,7 +936,7 @@ function Surface() {
     w = srf.width;
     h = srf.height;
     if ( ops.debug ) {
-        inspect_size( `Surface`, w, h );
+        inspect.size( `Surface`, w, h );
     }
     return ( srf );
 }
@@ -1181,7 +1191,9 @@ Color.from_pixel = function( x, y, img ) {
 
 </script>
 
-<script>
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script id="shapes.js">
 
 function RegPoly( center, radius, angle, sides ) {
     if ( sides < 3 ) {
@@ -1207,20 +1219,9 @@ function RegPoly( center, radius, angle, sides ) {
 
 </script>
 
-<script>
-
-MadgeOps = {
-  Surface, Graphics
-, Background
-, Pen, Palette, Color
-, Point, Vertex
-, Snapshot, Picture
-, RegPoly
-};
-
-</script>
-
 <script id="analyzer.js">
+
+_RGB =(x,y,z)=> Color.from_rgb(x,y,z);
 
 yAxis = 10;     // X for Y-axis
 xAxis = 266;    // Y for X-axis
@@ -1357,12 +1358,28 @@ function draw_axes_negative( xo, yo, w, h ) {
     draw_axes( xo, yo, w, 0, h )
 }
 
-// seeker( rex )
-// inspect( "Madge Operations", MadgeOps )
+function crimson_love() {
+   Background( _RGB( 42, 12, 12 ) );
+   draw_axes( 10, 300, 500, 290, 290 );
+};
+
+function test_01() {
+    const colors = Palette();
+    const v = colors.map( c => c.r );
+    const r = vstats( v );
+    vstats.inspect( r );
+}
+
+;
+; ( 0 ) && crimson_love()
+; ( 0 ) && test_01()
+;
 
 </script>
 
-<script>
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script id="crunch.js">
 
 function crunch( event ) {
     try {
@@ -1379,10 +1396,12 @@ crunch.decode = function( sender ) {
     switch( k ) {
     case "🏍️" : return "run()";
     case "🧼" : return "Background()";
-    case "🏠" : return "home()";
+    case "💠" : return "zoom(sce)";
     case "🗒️" : return "notes()";
-    case "📟" : return "jax()";
     case "👥" : return "macro('?')";
+    case "📟" : return "jax()";
+    case "🚀" : return "dot.ide()";
+    case "🏠" : return "home()";
     }
     throw new Error( "Unknown Action : " + k );
 };
@@ -1394,28 +1413,36 @@ crunch.init = function() {
         switch( k ) {
         case "🏍️" : return _run();
         case "🧼" : return _bgnd();
+        case "💠" : return _zoom();
         case "🏠" : return _home();
         case "🗒️" : return _notes();
         case "📟" : return _jax();
+        case "🚀" : return _dot_ide();
         case "👥" : return _help();
         }
         function _run() {
             btn.title = "🏍️ Run Script";
         }
+        function _zoom() {
+            btn.title = "💠 Zoom Editor";
+        } 
         function _bgnd() {
             btn.title = "🧼 Erase Background";
-        }
-        function _home() {
-            btn.title = "🏠 View in Browser";
         }
         function _notes() {
             btn.title = "🗒️ Palette Analyzer Notes";
         }
+        function _help() {
+            btn.title = "👥 Inspect Globals";
+        }
         function _jax() {
             btn.title = "📟 Math Jax Editor";
         }
-        function _help() {
-            btn.title = "👥 Inspect Globals";
+        function _dot_ide() {
+            btn.title = "🚀 Dorothy's Rockets";
+        }
+        function _home() {
+            btn.title = "🏠 View in Browser";
         }
         console.warn( `Ignoring Button:`, k );
     }
@@ -1424,7 +1451,9 @@ crunch.init = function() {
 
 </script>
 
-<script>
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script id="visit.js">
 function visit( url ) {
     url = str( url );
     if (! url ) {
@@ -1446,19 +1475,43 @@ function visit( url ) {
 ;
 </script>
 
-<script>
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script id="dot.js">
+
 function dot( filename ) {
-    incomplete( "dot()" );
+    const key = str( filename );
+    const entries = dorothy.select( key );
+    if ( entries.length > 0 ) {
+        console.debug( `Using Dorothy Entry:`, key );
+        const entry = entries[ 0 ];
+        visit( entry.address );
+    } else {
+        console.debug( `Using File System Rocket:`, key );
+        const p = location.origin;
+        const s = "dot";
+        const k = key;
+        visit( [ p, s, k ].join( "/" ) );
+    }
 }
+
+dot.ide = function() {
+    visit( "dorothy-rockets.html" );
+};
+
 </script>
 
-<script>
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script id="veer.js">
 function veer( hostname ) {
     location.hostname = hostname;
 }
 </script>
 
-<script>
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script id="home.js">
 function home() {
     visit( home.address );
 }
@@ -1469,7 +1522,9 @@ function home() {
 ;
 </script>
 
-<script>
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script id="notes.js">
 function notes() {
     visit( notes.address );
 }
@@ -1480,7 +1535,9 @@ function notes() {
 ;
 </script>
 
-<script>
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script id="jax.js">
 function jax() {
     visit( jax.address );
 }
@@ -1491,39 +1548,291 @@ function jax() {
 ;
 </script>
 
-<script>
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script id="input-key.js">
+function input_key( msg, suggest ) {
+    const s = str( window.prompt( msg, suggest ) );
+    if ( s ) { return ( s ); }
+}
+</script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script id="session.js">
+
+function get_session() {
+    const db = sessionStorage;
+    if ( null === db ) {
+        alert( "Session Store is Unavailable" );
+    }
+    return ( db );
+}
+
+function tsave( key ) {
+    const db = get_session();
+    if (! db ) { return; }
+    const ed = gid( "sce" );
+    key = ( str( key ) || str( ed.sessionkey ) );
+    if (! key ) {
+        key = input_key( "Session Key" );
+        if (! key ) { return; }
+    }
+    ed.sessionkey = ( key );
+    const value = ( ed.value );
+    db.setItem( key, value );
+    console.log( `Wrote "${key}" to Session Store` );
+}
+
+function tload( key ) {
+    const db = get_session();
+    if (! db ) { return; }
+    const ed = gid( "sce" );
+    key = ( str( key ) || str( ed.sessionkey ) );
+    if (! key ) {
+        key = input_key( "Session Key" );
+        if (! key ) { return; }
+    }
+    const value = db.getItem( key );
+    if ( null === value ) {
+        console.warn( "Missing Session Key:", key );
+        return;
+    }
+    ed.sessionkey =( key );
+    ed.value = ( value );
+    ed.focus();
+    console.log( `Read "${key}" from Session Store` );
+}
+
+function tlist( rex ) {
+    const m = tlist.members( rex );
+    if (! m ) { return; }
+    const ed = gid( "sce" );
+    ed.sessionkey = ( "session-key.list" );
+    ed.value = m.join( "\n" );
+    console.log( `Read Keys from Session Store` );
+}
+
+tlist.members = function( rex ) {
+    const db = get_session();
+    if (! db ) { return; }
+    let m = mem( db );
+    if ( rex = str( rex ) ) {
+        rex = new RegExp( rex );
+        m = m.filter( k => ( rex.test( k ) ) );
+    }
+    return ( m );
+};
+
+tlist.inspect = function( key ) {
+    const db = sessionStorage;
+    if ( null === db ) { return; }
+    const c = console;
+    if ( key = str( key ) ) {
+        c.group( "Session Entry" );
+        c.log( "Key:", key );
+        c.log( "Value:", db.getItem( key ) );
+        c.groupEnd();
+    } else {
+        c.group( "Session Keys" );
+        c.table( mem( db ) );
+        c.groupEnd();
+    }
+};
+
+</script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script id="store.js">
+
+function get_store() {
+    const db = localStorage;
+    if ( null === db ) {
+        alert( "Local Store is Unavailable" );
+    }
+    return ( db );
+}
+
+function ssave( key ) {
+    const db = get_store();
+    if (! db ) { return; }
+    const ed = gid( "sce" );
+    key = ( str( key ) || str( ed.storekey ) );
+    if (! key ) {
+        key = input_key( "Store Key" );
+        if (! key ) { return; }
+    }
+    ed.storekey = ( key );
+    const value = ( ed.value );
+    db.setItem( key, value );
+    console.log( `Wrote "${key}" to Local Store` );
+}
+
+function sload( key ) {
+    const db = get_store();
+    if (! db ) { return; }
+    const ed = gid( "sce" );
+    key = ( str( key ) || str( ed.storekey ) );
+    if (! key ) {
+        key = input_key( "Store Key" );
+        if (! key ) { return; }
+    }
+    const value = db.getItem( key );
+    if ( null === value ) {
+        console.warn( "Missing Store Key:", key );
+        return;
+    }
+    ed.storekey = ( key );
+    ed.value = ( value );
+    ed.focus();
+    console.log( `Read "${key}" from Local Store` );
+}
+
+function slist( rex ) {
+    const m = slist.members( rex );
+    if (! m ) { return; }
+    const ed = gid( "sce" );
+    ed.storekey = ( "store-key.list" );
+    ed.value = m.join( "\n" );
+    console.log( `Read Keys from Session Store` );
+}
+
+slist.members = function( rex ) {
+    const db = get_store();
+    if (! db ) { return; }
+    let m = mem( db );
+    if ( rex = str( rex ) ) {
+        rex = new RegExp( rex );
+        m = m.filter( k => ( rex.test( k ) ) );
+    }
+    return ( m );
+};
+
+slist.inspect = function( key ) {
+    const db = localStorage;
+    if ( null === db ) { return; }
+    const c = console;
+    if ( key = str( key ) ) {
+        c.group( "Store Entry" );
+        c.log( "Key:", key );
+        c.log( "Value:", db.getItem( key ) );
+        c.groupEnd();
+    } else {
+        c.group( "Store Keys" );
+        c.table( mem( db ) );
+        c.groupEnd();
+    }
+};
+
+</script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script id="session-ops.js">
+SessionOps = {
+  get_session
+, tsave, tload, tlist
+};
+</script>
+
+<script id="store-ops.js">
+StoreOps = {
+  get_store
+, ssave, sload, slist
+};
+</script>
+
+<script id="nav-ops.js">
 NavOps = {
-   dot, visit, home, notes, jax, veer
+  dot, visit, home, notes, jax, veer
 };
 </script>
 
-<script>
+<script id="json-ops.js">
 JsonOps = {
-    jst, jsx, jso, jsp
+  jst, jsx, jso, jsp
 };
 </script>
 
-<script>
+<script id="color-ops.js">
 ColorOps = {
   rgba_from_hex
 , prepare_rgba_colors
 };
 </script>
 
-<script>
+<script id="debug-ops.js">
 DebugOps = {
   cls, agn
 };
 </script>
 
-<script>
+<script id="support-ops.js">
 SupportOps = {
   seeker, crashed, crunch
 , perform, exec, macro, run
-, inspect, inspect_size
+, inspect, examine
 , mine, incomplete
 , zoom, show, hide
 , toggle
+, input_key
+};
+</script>
+
+<script id="madge-ops.js">
+MadgeOps = {
+  Surface, Graphics
+, Background
+, Pen, Palette, Color
+, Point, Vertex
+, Snapshot, Picture
+, RegPoly
+};
+</script>
+
+<script id="stat-ops.js">
+StatOps = {
+  vfill, vzero
+, vmax, vmin, vsum, vavg
+, vbounds, vmedian, vlerp
+, vhalf, vrange, vdiff, vnorm
+, vmse, vstd
+, vstats
+};
+</script>
+
+<script id="trig-ops.js">
+TrigOps = {
+  sin, cos, tan
+, asin, acos, atan
+, atan2, hypot
+, sinh, cosh, tanh
+, asinh, acosh, atanh
+, xpose
+};
+</script>
+
+<script id="math-props.js">
+MathProps = {
+  _E
+, _PI, _PHI, _TAU
+, _PSI
+, _SR2, _SR3, _SR5
+};
+</script>
+
+<script id="math-ops.js">
+MathOps = {
+  abs, sgn
+, min, max, mid
+, round, trunc, floor, ceil
+, pow, rootn
+, sqrt, cbrt
+, square, cube
+, exp, log, logn
+, rnd, irnd, crnd, arnd
+, constants
 };
 </script>
 
@@ -1536,6 +1845,7 @@ Jarvis.Ops = {
 , MadgeOps
 , MathOps, StatOps, TrigOps
 , ColorOps, SupportOps, DebugOps
+, StoreOps, SessionOps
 };
 
 Jarvis.Aliases = {
@@ -1549,3 +1859,4 @@ Jarvis.Props = {
 };
 
 </script>
+
