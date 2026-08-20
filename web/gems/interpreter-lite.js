@@ -88,7 +88,9 @@ macro.lite = function( cmd ) {
     try {
         cmd = str( cmd );
         if (! cmd ) { return true; }
-        incomplete( `macro()` );
+        if ( "function" === typeof incomplete ) {
+	        incomplete( `macro()` );
+	   	}
     } catch ( e ) {
         alert ( e );
         throw ( e );
@@ -99,5 +101,6 @@ macro.lite = function( cmd ) {
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-console.log( `Loaded "interpreter-lite.js" API module` );
+console.log( `Loaded "interpreter-lite.js" Gem` );
+
 

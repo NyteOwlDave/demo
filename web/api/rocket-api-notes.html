@@ -13,21 +13,56 @@ img { max-width: 100%; }
 </style>
 </head>
 <body>
+<p><head>
+  <link rel="icon" href="favicon.ico" />
+</head></p>
 <hr>
-<h1>Dorothy Rockets API</h1>
+<h1><a href="http://dave-tower/demo/web/api/rocket-api-notes.html" title="Tower Edition"><code>🚀</code> Dorothy Rockets API</a></h1>
 <blockquote>
-<p>( <code>rocket-api-notes.md</code> )</p>
+<p>( <code>rocket-api-notes.md</code> ~ <code>2026-AUG-20</code> )</p>
 </blockquote>
+<hr>
+<h3><code>&gt;&gt;&gt;</code> FEATURING <code>&lt;&lt;&lt;</code></h3>
+<h3><a href="http://tiny.cc/dorothy-rockets"><code>🌐</code> Dorothy Home</a></h3>
 <hr>
 <table>
 <thead>
 <tr>
 <th>Manuscript Filename</th>
+<th>Comment</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>dorothy-rockets.json</td>
+<td><code>dorothy-rockets.json</code></td>
+<td>Recommended</td>
+</tr>
+</tbody>
+</table>
+<h3>Registered Documents</h3>
+<table>
+<thead>
+<tr>
+<th>TiKey</th>
+<th>TiDate</th>
+<th>Title</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>(pending)</td>
+<td>(pending)</td>
+<td><code>dorothy-rockets.json</code></td>
+</tr>
+<tr>
+<td>(pending)</td>
+<td>(pending)</td>
+<td><code>dorothy-rockets.md</code></td>
+</tr>
+<tr>
+<td>(pending)</td>
+<td>(pending)</td>
+<td><code>dorothy-rockets.html</code></td>
 </tr>
 </tbody>
 </table>
@@ -130,8 +165,8 @@ img { max-width: 100%; }
 </tr>
 <tr>
 <td><code>compose</code></td>
-<td></td>
-<td>Compose Rocket Manuscript as JSON</td>
+<td><code>※</code></td>
+<td>Compose as JSON (Manuscript or Entry)</td>
 </tr>
 <tr>
 <td><code>parse</code></td>
@@ -145,8 +180,8 @@ img { max-width: 100%; }
 </tr>
 <tr>
 <td><code>inspect</code></td>
-<td><code>key</code></td>
-<td>Show Entry Table in Console</td>
+<td><code>※</code></td>
+<td>Show in Console (Manuscript or Entry)</td>
 </tr>
 <tr>
 <td><code>contains</code></td>
@@ -157,6 +192,11 @@ img { max-width: 100%; }
 <td><code>prepare</code></td>
 <td><code>※</code></td>
 <td>Prepare Entry from Field Values</td>
+</tr>
+<tr>
+<td><code>validate</code></td>
+<td><code>entry</code></td>
+<td>Ensure Entry Structure is Valid</td>
 </tr>
 <tr>
 <td><code>delete</code></td>
@@ -176,41 +216,57 @@ img { max-width: 100%; }
 <tr>
 <td><code>read</code></td>
 <td><code>key</code></td>
-<td>Read Existing Rockey Entry</td>
+<td>Read Existing Rocket Entry</td>
 </tr>
 <tr>
 <td><code>select</code></td>
 <td><code>rex</code></td>
-<td>Search for Matching Rocket Entries</td>
+<td>Select Matching Rocket Entries</td>
 </tr>
 <tr>
 <td><code>index</code></td>
 <td><code>rex</code></td>
-<td></td>
+<td>Select Matching Rocket Keys</td>
 </tr>
 <tr>
 <td><code>launch</code></td>
 <td><code>key</code></td>
-<td></td>
+<td>Launch a Rocket</td>
 </tr>
 <tr>
 <td><code>save</code></td>
-<td><code>filename</code></td>
-<td></td>
+<td><code>※</code></td>
+<td>Save Manuscript to JSON File</td>
+</tr>
+<tr>
+<td><code>copy</code></td>
+<td><code>※</code></td>
+<td>Copy to Clipbd (Manuscript or Entry)</td>
+</tr>
+<tr>
+<td><code>accept</code></td>
+<td><code>ed</code></td>
+<td>Read and Parse Manuscript from Editor</td>
 </tr>
 <tr>
 <td><code>edit</code></td>
 <td><code>ed</code></td>
-<td></td>
+<td>Compose Manuscript &amp; Write to Editor</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h3><code>※</code> Notes</h3>
+<h3><code>※</code> NOTES:</h3>
 <ul>
 <li>Args for <code>prepare</code> match <code>entry</code> properties (below)</li>
 <li>Args for <code>insert</code> are ( <code>key</code>, <code>entry</code> )</li>
 <li>Args for <code>update</code> are ( <code>key</code>, <code>entry</code> )</li>
+<li>The <code>save</code> method accepts a <code>filename</code>(same as a <code>key</code>)</li>
+<li>Some methods allow an optional <code>key</code> argument</li>
+<li>Optional <code>keys</code> override the entire Manuscript default</li>
+<li>The <code>compose</code> method allows an optional <code>key</code></li>
+<li>The <code>copy</code> method allows an optional <code>key</code></li>
+<li>The <code>inspect</code> method allows an optional <code>key</code></li>
 </ul>
 <hr>
 <h1>Extended <code>tabulate</code> Methods</h1>
@@ -227,16 +283,91 @@ img { max-width: 100%; }
 <tr>
 <td><code>entry</code></td>
 <td><code>key</code></td>
-<td></td>
+<td>Tabulate a Single Entry (Record)</td>
 </tr>
 </tbody>
 </table>
 <hr>
-<h1>Entry Properties</h1>
-<p>| title 
-| address
-| decal
-| icon</p>
+<h1>Entry Structure Properties</h1>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>title</code></td>
+<td>String</td>
+<td>Friendly Name</td>
+<td>Example Web Page</td>
+</tr>
+<tr>
+<td><code>address</code></td>
+<td>String</td>
+<td>URL Address</td>
+<td><code>https://example.com</code></td>
+</tr>
+<tr>
+<td><code>decal</code></td>
+<td>String</td>
+<td>Unicode Decal</td>
+<td><code>🌐</code></td>
+</tr>
+<tr>
+<td><code>icon</code></td>
+<td>String</td>
+<td>Icon Filename</td>
+<td><code>example.png</code></td>
+</tr>
+<tr>
+<td><code>filename</code></td>
+<td>String</td>
+<td>Rocket File Name</td>
+<td><code>example.html</code></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><code>※</code> NOTES:</h3>
+<blockquote>
+<p>Only <code>title</code> and <code>address</code> are required. Others are optional.</p>
+</blockquote>
+<hr>
+<footer>
+  <input id="footer_input" onchange="perform(event)" />
+</footer>
+
+<hr>
+<style>
+@import url("./../../style/every-page.css");
+</style>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script>
+;
+; iwm = Object.keys( window ).sort()
+;
+</script>
+
+<script>
+;
+; doc = document
+; doc . title = ( `Rocket API Notes` )
+;
+</script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script src="./../gems/core-ops.js"></script>
+<script src="./../gems/veer.js"></script>
+<script src="./../gems/interpreter-lite.js"></script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
 </body>
 </html>

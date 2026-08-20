@@ -126,13 +126,29 @@ ops.delete = function( key ) {
     return ( delete _rockets[ key ] );
 };
 
-ops.prepare = function( title, address, decal, icon ) {
-    title   = str( title   );
-    address = str( address );
-    decal   = str( decal   );
-    icon    = str( icon    );
-    return { title, address, decal, icon };
+ops.prepare = function( title, address, decal, icon, filename ) {
+    title    = str( title    );
+    address  = str( address  );
+    decal    = str( decal    );
+    icon     = str( icon     );
+    filename = str( filename );
+    return { title, address, decal, icon, filename };
 };
+
+ops.validate = function( entry ) {
+    let s;
+    if ( entry instanceof Object) {
+        s = str( entry.address );
+        if (! s ) { missing( "address" ); }
+        s = str( entry.title );
+        if (! s ) { missing( "title" ); }
+    } else {
+        throw new TypeError( `Expected an Object` );
+    }
+    function missing( k ) {
+        throw new Error( `Missing Field : ${k}` );
+    }
+}
 
 ops.insert = function( key, entry ) {
     key = str( key );
@@ -203,9 +219,65 @@ ops.edit = function( ed ) {
     ed.focus();
 };
 
-ops.needs = [ "ged", "gid", "visit", "str" ];
+ops.accept = function( ed ) {
+    function read( o ) {
+        if ( o ) {
+            if ( ged( o ) ) {
+                return ( o.value );
+            }
+            if ( gvw( o ) ) {
+                return ( o.innerText )
+            }
+            if ( gad( o ) ) {
+                return ( o.innerHTML )
+            }
+            o = gid( o );
+            if ( o ) {
+                return read( o )
+            }
+        }
+        throw new TypeError( `Expected an HTML Element or ID` );
+    }
+    const json = str( read( ed ) );
+    if (! json ) {
+        console.warn( `Ignoring Empty Element` );
+        return;
+    }
+    ops.parse( json );
+};
 
-ops.helps = [ "riccola" ];
+ops.copy = function( key ) {
+    ops.copy.error = ( "" );
+    const json = ops.compose( key );
+    if (! json ) {
+        console.warn( `Unknown Rocket:`, key );
+        return;
+    }
+    const ed = elx( "TEXTAREA" );
+    const boo = document.body;
+    boo.appendChild( ed );
+    try {
+        const st = ed.style;
+        st.position = "fixed";
+        st.left = "-2000px";
+        st.opacity = "0";
+        ed.value = json;
+        ed.focus();
+        ed.select();
+        document.execCommand( "copy" );
+        return ( true );
+    } catch ( e ) {
+        console.error( e );
+        ops.copy.error = ( e.message );
+        return ( false );
+    } finally {
+        boo.removeChild( ed );
+    }
+};
+
+ops.needs = [ "gad", "ged", "gid", "gvw", "elx", "str" ];
+
+ops.helps = [ "riccola", "visit" ];
 
 } ) ( dorothy );
 
