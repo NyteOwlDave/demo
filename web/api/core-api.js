@@ -199,9 +199,10 @@ inspect.prepare = function( o ) {
 	}
 	if ( o instanceof Object ) {
 		const m = Object.keys( o ).sort();
+		let v, t;
 		return m.map(
 			( k ) => {
-				v = m[ k ];
+				v = o[ k ];
 				t = ( typeof v );
 				v = String( v ).trim();
 				return [ t, k, v ];
