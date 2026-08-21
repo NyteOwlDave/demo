@@ -18,18 +18,7 @@ img { max-width: 100%; }
 </style>
 
 <style>
-details, summary {
-    height      : unset;
-    font        : unset;
-    font-height : unset;
-    line-height : unset;
-    text-align  : unset;
-    margin-top  : unset;
-    margin-bottom : unset;
-}
-summary {
-    margin-left : 10px;
-}
+@import url("./../../style/treeview.css");
 </style>
 
 <hr>
@@ -80,10 +69,11 @@ summary {
 </table>
 <hr>
 <h1>Navigation</h1>
-<ul>
-<li><a href="./">Folder Tree</a></li>
-<li><a href="./">File System</a></li>
-</ul>
+<blockquote>
+<p><a href="./../web-menu.html">Web Menu</a></p>
+<p><a href="./">Folder Tree</a>
+<a href="./">File System</a></p>
+</blockquote>
 <hr>
 <footer id="footer">
   <input id="footer_input" onchange="perform(event)" />
@@ -93,35 +83,58 @@ summary {
   <div id="messages"></div>
 </header>
 
-<textarea id="sce" class="hide"></textarea>
-
-<style>
-#sce {
-    z-index    : 99999;
-    box-sizing : border-box;
-    outline    : none;
-    border     : none;
-    margin     : 0;
-    padding    : 0.5ch 1.2ch;
-    position   : fixed;
-    left       : 1px;
-    top        : 45px;
-    width      : calc( 100vw - 19px  );
-    height     : calc( 50vh );
-    max-height : calc( 100vh - 102px );
-    font       : 13pt monospace;
-    resize     : vertical;
-    overflow   : scroll;
-}
-#sce ,
-#sce:hover ,
-#sce:focus {
-    background : mintcream;
-    color : midnightblue;
-}
-</style>
-
 <hr>
+<script>
+;
+; iwm = Object.keys( window ).sort()
+;
+</script>
+
+<script>
+;
+; prolog = {}
+; prolog . title = ( `TreeView Gadget` )
+;
+</script>
+
+<script>
+;
+; cls =()=> console.clear()
+; agn =()=> location.reload()
+;
+</script>
+
+<script>
+;
+; doc = document
+;
+</script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script src="./../gems/core-ops.js"></script>
+<script src="./../api/core-api.js"></script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script>
+function main( event ) {
+    try {
+        doc . title = ( prolog . title );
+        footer_input.value = "hud()";
+    } catch ( e ) {
+        alert ( e )
+        throw ( e )
+    }
+}
+</script>
+
+<script>
+addEventListener( "load", main );
+</script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
 <script>
 function tick( event ) {
     _wtc( time, now() );
@@ -145,6 +158,8 @@ function tick( event ) {
 setInterval( tick, 420 );
 </script>
 
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
 <script>
 function now() {
     const dt = ( new Date() );
@@ -152,10 +167,22 @@ function now() {
 }
 </script>
 
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
 <script>
 function _rtc( o    ) { return o.textContent.trim(); }
 function _wtc( o, v ) { o.textContent =    v.trim(); }
 </script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<style>
+@import url("./../../style/sce-hud.css");
+</style>
+<textarea id="sce" class="hide"></textarea>
+<script src="./../api/hud.js"></script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
 </body>
 </html>
