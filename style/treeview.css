@@ -1,0 +1,17 @@
+
+/* treeview.css */
+
+details, summary {
+	height      : unset;
+	font        : unset;
+	font-height : unset;
+	line-height : unset;
+	text-align  : unset;
+	margin-top  : unset;
+	margin-bottom : unset;
+}
+
+summary {
+	margin-left : 10px;
+}
+

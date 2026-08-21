@@ -1,0 +1,15 @@
+
+/* snake-style.css */
+
+html, body {
+    margin: 0px;
+    background : gold;
+}
+
+canvas {
+    display: block;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+

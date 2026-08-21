@@ -27,20 +27,69 @@ img { max-width: 100%; }
 <p><a href="./palette-analyzer.html">Palette Analyzer</a></p>
 </blockquote>
 <hr>
-<h2><code>🧨</code> Demo App`s</h2>
-<ul>
-<li><a href="./claude/simple-swimmer.html"><code>🧨</code> Kurt's Swimmer</a></li>
-<li><a href="./claude/gabriel-horn.html"><code>🧨</code> Gabriel's Horn</a></li>
-<li><a href="./destiny/destiny.html"><code>🧨</code> Dial of Destiny</a></li>
-<li><a href="./dodec/dodec.html"><code>🧨</code> Dodecahedron</a></li>
-<li><a href="./explode/explode-deux.html"><code>🧨</code> Explode Deux</a></li>
-<li><a href="./explode/explode.html"><code>🧨</code> Explode</a></li>
-<li><a href="./turtle/turtle-001.html"><code>🧨</code> Turtle Demo #001</a></li>
-<li><a href="./turtle/turtle-graph.html"><code>🧨</code> Turtle Math Graph</a></li>
-<li><a href="./pixmap/mandelbulb.html"><code>🧨</code> Mandelbulb</a></li>
-<li><a href="./pixmap/pixmap.html"><code>🧨</code> Pixel Map</a></li>
-<li><a href="./pixmap/poincare-disc.html"><code>🧨</code> Poincare Disc</a></li>
-</ul>
+<h1><code>🧨</code> Demo Apps ~ Coming Soon!</h1>
+<hr>
+<div class="cool-icons">
+  <div class="cool-icon" url="./snake-hunt/snake-hunt.html" onclick="visit.demo(event)">
+    <img src="./snake-hunt/snake-hunt.png" class="todo">
+    <label> Snake Hunt </label>
+  </div>
+  <div class="cool-icon" url="./dodec/dodec.html" onclick="visit.demo(event)">
+    <img src="./dodec/favicon.ico" class="todo">
+    <label> Dodecahedron </label>
+  </div>
+  <div class="cool-icon" url="./explode/explode-deux.html" onclick="visit.demo(event)">
+    <img src="./explode/favicon.ico" class="todo">
+    <label> Explode Deux </label>
+  </div>
+  <div class="cool-icon" url="./turtle/turtle-graph.html" onclick="visit.demo(event)">
+    <img src="./turtle/favicon.ico" class="todo">
+    <label> Turtle Graph </label>
+  </div>
+  <div class="cool-icon" url="./pixmap/mandelbulb.html" onclick="visit.demo(event)">
+    <img src="./pixmap/mandelbulb.png" class="todo">
+    <label> Mandelbulb </label>
+  </div>
+</div>
+
+<h2> 🥁 Ported to BASIC </h2>
+
+<div class="cool-icons">
+  <div class="cool-icon" url="./claude/gabriel-horn.html" onclick="visit.demo(event)">
+    <img src="./claude/gabriel-horn.png">
+    <label> Gabriel's Horn </label>
+  </div>
+  <div class="cool-icon" url="./destiny/destiny.html" onclick="visit.demo(event)">
+    <img src="./destiny/favicon.ico">
+    <label> Dial of Destiny </label>
+  </div>
+  <div class="cool-icon" url="./pixmap/poincare-disc.html" onclick="visit.demo(event)">
+    <img src="./pixmap/poincare-disc.png">
+    <label> Poincare Disc </label>
+  </div>
+  <div class="cool-icon" url="./turtle/turtle-001.html" onclick="visit.demo(event)">
+    <img src="./turtle/favicon.ico">
+    <label> Turtle </label>
+  </div>
+</div>
+
+<h2> ⌛ On Hold </h2>
+
+<div class="cool-icons">
+  <div class="cool-icon" url="./pixmap/pixmap.html" onclick="visit.demo(event)">
+    <img src="./pixmap/favicon.ico">
+    <label> Pixel Map </label>
+  </div>
+  <div class="cool-icon" url="./explode/explode.html" onclick="visit.demo(event)">
+    <img src="./explode/favicon.ico">
+    <label> Explode </label>
+  </div>
+  <div class="cool-icon" url="./claude/simple-swimmer.html" onclick="visit.demo(event)">
+    <img src="./claude/swimmer.png">
+    <label> Kurt's Swimmer </label>
+  </div>
+</div>
+
 <hr>
 <h2><code>🗒️</code> Demo Notes</h2>
 <ul>
@@ -80,12 +129,17 @@ img { max-width: 100%; }
 <a href="./pixmap/pixmap-menu.html"><code>☰</code> Pixmap Menu</a>
 <a href="./../demo-menu.html"><code>☰</code> Demo Menu</a></p>
 <p><a href="./../demo-checklist.html"><code>✅</code> Demo Checklist</a></p>
+<p><a href="./gadgets/cool-icons.html"><code>🃏</code> Cool Icons Gadget</a></p>
 <p><a href="./tree.php"><code>🌲</code> Folder Tree</a>
 <a href="./"><code>🗃️</code> File System</a></p>
 </blockquote>
 <hr>
 <style>
 @import url("./../style/every-page.css");
+</style>
+
+<style>
+@import url("./../style/cool-icons.css");
 </style>
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
@@ -118,6 +172,10 @@ img { max-width: 100%; }
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
+<script src="./gems/core-ops.js"></script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
 <script>
 function main( event ) {
     try {
@@ -131,6 +189,37 @@ function main( event ) {
 
 <script>
 addEventListener( "load", main );
+</script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script>
+function visit( url ) {
+    if ( null === localStorage ) {
+        const a = elx( "A" );
+        a . href = ( url );
+        a . click();
+    } else {
+        const w = window;
+        w.open( url, url );
+    }
+}
+</script>
+
+<script>
+visit.demo = function( event ) {
+    try {
+        let sender = event.target;
+        if (! sender.classList.contains( "cool-icon" ) ) {
+            sender = sender.parentElement;
+        }
+        const url = sender.getAttribute( "url" );
+        visit( url );
+    } catch ( e ) {
+        alert ( e )
+        throw ( e )
+    }
+};
 </script>
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->

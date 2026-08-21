@@ -44,13 +44,6 @@
 > [`🧨` Stochastic Font](./fusion/stochastic-font-bf.html)
 > [`🧨` Quiverbloom Web](./qb64/quiverbloom.html)
 > [`🧨` Quiverbloom QB64](./qb64/quiverbloom-bas.html)
-> [`🧨` Pixel Map](./web/pixmap/pixmap.html)
-> [`🧨` Poincare Disc](./web/pixmap/poincare-disc.html)
-
-> [`🧨` Turtle 001](./web/turtle/turtle-001.html)
-> [`🧨` Turtle Graph](./web/turtle/turtle-graph.html)
-
-> [`🧨` Snake Hunt](./web/snake-hunt/snake-hunt.html)
 
 ----------------------------------------------------------------
 

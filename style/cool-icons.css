@@ -1,0 +1,48 @@
+
+/*
+    id      | cool-icons.css
+    project | demo
+    group   | web
+*/
+
+.todo {
+    border-radius : 20px;
+    border : 2px dashed gold;
+}
+
+.cool-icons {
+    display : block;
+    text-align : center;
+}
+
+.cool-icon {
+    display : inline-block;
+    width   : 200px;
+    height  : 220px;
+    padding : 20px;
+    padding-bottom : 0px;
+    margin  : 0;
+}
+
+.cool-icon  ,
+.cool-icons {
+    box-sizing : border-box;
+    text-align : center;
+}
+
+.cool-icon img {
+    box-sizing : border-box;
+    display : inline-block;
+    width   : 120px;
+    height  : 120px;
+    padding : 0;
+    margin  : 0;
+}
+
+.cool-icon label {
+    display : block;
+    text-align : center;
+    padding : 0;
+    margin  : 0;
+    font    : 9pt monospace;
+}

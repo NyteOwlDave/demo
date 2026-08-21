@@ -33,7 +33,7 @@ summary {
 </style>
 
 <hr>
-<h1>TreeView Gadget Demo</h1>
+<h1><a href="http://dave-omega/demo/web/gadgets/treeview.html">TreeView Gadget Demo</a></h1>
 <hr>
 <details> <summary>Root</summary>
   <details> <summary>Top Level #1</summary> </details>
@@ -78,6 +78,49 @@ summary {
 </tr>
 </tbody>
 </table>
+<hr>
+<h1>Navigation</h1>
+<ul>
+<li><a href="./">Folder Tree</a></li>
+<li><a href="./">File System</a></li>
+</ul>
+<hr>
+<footer id="footer">
+  <input id="footer_input" onchange="perform(event)" />
+</footer>
+
+<header id="footer">
+  <div id="messages"></div>
+</header>
+
+<textarea id="sce" class="hide"></textarea>
+
+<style>
+#sce {
+    z-index    : 99999;
+    box-sizing : border-box;
+    outline    : none;
+    border     : none;
+    margin     : 0;
+    padding    : 0.5ch 1.2ch;
+    position   : fixed;
+    left       : 1px;
+    top        : 45px;
+    width      : calc( 100vw - 19px  );
+    height     : calc( 50vh );
+    max-height : calc( 100vh - 102px );
+    font       : 13pt monospace;
+    resize     : vertical;
+    overflow   : scroll;
+}
+#sce ,
+#sce:hover ,
+#sce:focus {
+    background : mintcream;
+    color : midnightblue;
+}
+</style>
+
 <hr>
 <script>
 function tick( event ) {

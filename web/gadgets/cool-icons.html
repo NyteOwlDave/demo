@@ -1,0 +1,213 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<style type="text/css">
+td, th { border: 1px solid #c3c3c3; padding: 0 3px 0 3px; }
+table { border-collapse: collapse; }
+img { max-width: 100%; }
+</style>
+<meta name="generator" content="ReText 7.2.3">
+<title>cool-icons</title>
+<style type="text/css">
+</style>
+</head>
+<body>
+<style>
+@import url("./../../style/every-page.css");
+@import url("./../../style/cool-icons.css");
+</style>
+
+<hr>
+<h1>Cool Icons Gadget</h1>
+<hr>
+<h2>Places</h2>
+<div class="cool-icons">
+
+  <div class="cool-icon" url="./dot/basic-group.html" onclick="ignite(event)">
+    <img src="./icons/basic.png">
+    <label> BASIC Group </label>
+  </div>
+
+  <div class="cool-icon" url="./dot/jarvis.html" onclick="ignite(event)">
+    <img src="./icons/jarvis.png">
+    <label> Jarvis </label>
+  </div>
+
+  <div class="cool-icon" url="./dot/ffmpeg.html" onclick="ignite(event)">
+    <img src="./icons/ffmpeg.png">
+    <label> FFMPEG </label>
+  </div>
+
+  <div class="cool-icon" url="./dot/mathjs.html" onclick="ignite(event)">
+    <img src="./icons/mathjs.png">
+    <label> Math JS </label>
+  </div>
+
+</div>
+
+<h2>Projects</h2>
+<div class="cool-icons">
+
+  <div class="cool-icon" url="./dot/json-editor.html" onclick="ignite(event)">
+    <img src="./icons/json-editor.png" class="todo">
+    <label> JSON Editor </label>
+  </div>
+
+  <div class="cool-icon" url="./dot/json-editor.html" onclick="ignite(event)">
+    <img src="./icons/dorothy.png" class="todo">
+    <label> Dorothy Rockets </label>
+  </div>
+
+  <div class="cool-icon" url="./dot/json-editor.html" onclick="ignite(event)">
+    <img src="./icons/serpentine.png" class="todo">
+    <label> Serpentine Port </label>
+  </div>
+
+</div>
+
+<h2>Tools</h2>
+<div class="cool-icons">
+
+  <div class="cool-icon" url="./dot/manuscript-editor.html" onclick="ignite(event)">
+    <img src="./icons/manuscript-editor.png">
+    <label> Manuscript Editor </label>
+  </div>
+
+  <div class="cool-icon" url="./dot/mathjax.html" onclick="ignite(event)">
+    <img src="./icons/mathjax.png">
+    <label> Math Jax Editor </label>
+  </div>
+
+  <div class="cool-icon" url="./dot/jsfiddle.html" onclick="ignite(event)">
+    <img src="./icons/jsfiddle.png">
+    <label> JS Fiddle </label>
+  </div>
+
+  <div class="cool-icon" url="./dot/codepen.html" onclick="ignite(event)">
+    <img src="./icons/codepen.png">
+    <label> Code Pen </label>
+  </div>
+
+  <div class="cool-icon" url="./dot/code-lab.html" onclick="ignite(event)">
+    <img src="./icons/code-lab.png">
+    <label> Code Lab </label>
+  </div>
+
+  <div class="cool-icon" url="./dot/code-sandbox.html" onclick="ignite(event)">
+    <img src="./icons/code-sandbox.png">
+    <label> Code Sandbox </label>
+  </div>
+
+  <div class="cool-icon" url="./dot/p5.html" onclick="ignite(event)">
+    <img src="./icons/p5js.png">
+    <label> P5 Sketches </label>
+  </div>
+
+  <div class="cool-icon" url="./dot/w3-spaces.html" onclick="ignite(event)">
+    <img src="./icons/w3-spaces.png">
+    <label> W3 Spaces </label>
+  </div>
+
+  <div class="cool-icon" url="./dot/trinkets.html" onclick="ignite(event)">
+    <img src="./icons/trinkets.png">
+    <label> Trinkets </label>
+  </div>
+
+</div>
+
+<hr>
+<h1>Navigation</h1>
+<blockquote>
+<p><a href="./../web-menu.html">Web Menu</a></p>
+<p><a href="./">Folder Tree</a>
+<a href="./">File System</a></p>
+</blockquote>
+<hr>
+<footer id="footer">
+  <input id="footer_input" onchange="perform(event)" />
+</footer>
+
+<header id="footer">
+  <div id="messages"></div>
+</header>
+
+<hr>
+<script>
+;
+; iwm = Object.keys( window ).sort()
+;
+</script>
+
+<script>
+;
+; prolog = {}
+; prolog . title = ( `Cool Icons Gadget` )
+;
+</script>
+
+<script>
+;
+; cls =()=> console.clear()
+; agn =()=> location.reload()
+;
+</script>
+
+<script>
+;
+; doc = document
+;
+</script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script src="./../gems/core-ops.js"></script>
+<script src="./../api/core-api.js"></script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script>
+function main( event ) {
+    try {
+        doc . title = ( prolog . title );
+        footer_input.value = "hud()";
+    } catch ( e ) {
+        alert ( e )
+        throw ( e )
+    }
+}
+</script>
+
+<script>
+addEventListener( "load", main );
+</script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script>
+function ignite( event ) {
+    try {
+        let sender = event.target;
+        if (! sender.classList.contains( "cool-icon" ) ) {
+            sender = sender.parentElement;
+        }
+        const url = sender.getAttribute( "url" );
+        visit( url );
+    } catch ( e ) {
+        crashed( e );
+    }
+};
+</script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<style>
+@import url("./../../style/sce-hud.css");
+</style>
+<textarea id="sce" class="hide"></textarea>
+<script src="./../api/hud.js"></script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+</body>
+</html>

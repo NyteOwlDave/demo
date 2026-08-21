@@ -27,19 +27,70 @@
 
 ----------------------------------------------------------------
 
-## `🧨` Demo App`s
+# `🧨` Demo Apps ~ Coming Soon!
 
-- [`🧨` Kurt's Swimmer](./claude/simple-swimmer.html)
-- [`🧨` Gabriel's Horn](./claude/gabriel-horn.html)
-- [`🧨` Dial of Destiny](./destiny/destiny.html)
-- [`🧨` Dodecahedron](./dodec/dodec.html)
-- [`🧨` Explode Deux](./explode/explode-deux.html)
-- [`🧨` Explode](./explode/explode.html)
-- [`🧨` Turtle Demo #001](./turtle/turtle-001.html)
-- [`🧨` Turtle Math Graph](./turtle/turtle-graph.html)
-- [`🧨` Mandelbulb](./pixmap/mandelbulb.html)
-- [`🧨` Pixel Map](./pixmap/pixmap.html)
-- [`🧨` Poincare Disc](./pixmap/poincare-disc.html)
+----------------------------------------------------------------
+
+<div class="cool-icons">
+  <div class="cool-icon" url="./snake-hunt/snake-hunt.html" onclick="visit.demo(event)">
+    <img src="./snake-hunt/snake-hunt.png" class="todo">
+    <label> Snake Hunt </label>
+  </div>
+  <div class="cool-icon" url="./dodec/dodec.html" onclick="visit.demo(event)">
+    <img src="./dodec/favicon.ico" class="todo">
+    <label> Dodecahedron </label>
+  </div>
+  <div class="cool-icon" url="./explode/explode-deux.html" onclick="visit.demo(event)">
+    <img src="./explode/favicon.ico" class="todo">
+    <label> Explode Deux </label>
+  </div>
+  <div class="cool-icon" url="./turtle/turtle-graph.html" onclick="visit.demo(event)">
+    <img src="./turtle/favicon.ico" class="todo">
+    <label> Turtle Graph </label>
+  </div>
+  <div class="cool-icon" url="./pixmap/mandelbulb.html" onclick="visit.demo(event)">
+    <img src="./pixmap/mandelbulb.png" class="todo">
+    <label> Mandelbulb </label>
+  </div>
+</div>
+
+<h2> 🥁 Ported to BASIC </h2>
+
+<div class="cool-icons">
+  <div class="cool-icon" url="./claude/gabriel-horn.html" onclick="visit.demo(event)">
+    <img src="./claude/gabriel-horn.png">
+    <label> Gabriel's Horn </label>
+  </div>
+  <div class="cool-icon" url="./destiny/destiny.html" onclick="visit.demo(event)">
+    <img src="./destiny/favicon.ico">
+    <label> Dial of Destiny </label>
+  </div>
+  <div class="cool-icon" url="./pixmap/poincare-disc.html" onclick="visit.demo(event)">
+    <img src="./pixmap/poincare-disc.png">
+    <label> Poincare Disc </label>
+  </div>
+  <div class="cool-icon" url="./turtle/turtle-001.html" onclick="visit.demo(event)">
+    <img src="./turtle/favicon.ico">
+    <label> Turtle </label>
+  </div>
+</div>
+
+<h2> ⌛ On Hold </h2>
+
+<div class="cool-icons">
+  <div class="cool-icon" url="./pixmap/pixmap.html" onclick="visit.demo(event)">
+    <img src="./pixmap/favicon.ico">
+    <label> Pixel Map </label>
+  </div>
+  <div class="cool-icon" url="./explode/explode.html" onclick="visit.demo(event)">
+    <img src="./explode/favicon.ico">
+    <label> Explode </label>
+  </div>
+  <div class="cool-icon" url="./claude/simple-swimmer.html" onclick="visit.demo(event)">
+    <img src="./claude/swimmer.png">
+    <label> Kurt's Swimmer </label>
+  </div>
+</div>
 
 ----------------------------------------------------------------
 
@@ -84,6 +135,8 @@
 
 > [`✅` Demo Checklist](./../demo-checklist.html)
 
+> [`🃏` Cool Icons Gadget](./gadgets/cool-icons.html)
+
 > [`🌲` Folder Tree](./tree.php)
 > [`🗃️` File System](./)
 
@@ -91,6 +144,10 @@
 
 <style>
 @import url("./../style/every-page.css");
+</style>
+
+<style>
+@import url("./../style/cool-icons.css");
 </style>
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
@@ -123,6 +180,10 @@
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
+<script src="./gems/core-ops.js"></script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
 <script>
 function main( event ) {
     try {
@@ -140,3 +201,33 @@ addEventListener( "load", main );
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
+<script>
+function visit( url ) {
+    if ( null === localStorage ) {
+        const a = elx( "A" );
+        a . href = ( url );
+        a . click();
+    } else {
+        const w = window;
+        w.open( url, url );
+    }
+}
+</script>
+
+<script>
+visit.demo = function( event ) {
+    try {
+        let sender = event.target;
+        if (! sender.classList.contains( "cool-icon" ) ) {
+            sender = sender.parentElement;
+        }
+        const url = sender.getAttribute( "url" );
+        visit( url );
+    } catch ( e ) {
+        alert ( e )
+        throw ( e )
+    }
+};
+</script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->

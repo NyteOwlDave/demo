@@ -4,23 +4,15 @@
 </style>
 
 <style>
-details, summary {
-	height      : unset;
-	font        : unset;
-	font-height : unset;
-	line-height : unset;
-	text-align  : unset;
-	margin-top  : unset;
-	margin-bottom : unset;
-}
-summary {
-	margin-left : 10px;
-}
+@import url("./../../style/treeview.css");
 </style>
+
+[me-omega]:
+<http://dave-omega/demo/web/gadgets/treeview.html>
 
 ----------------------------------------------------------------
 
-# TreeView Gadget Demo
+# [TreeView Gadget Demo][me-omega]
 
 ----------------------------------------------------------------
 
@@ -55,6 +47,78 @@ summary {
 
 ----------------------------------------------------------------
 
+# Navigation
+
+> [Web Menu](./../web-menu.html)
+
+> [Folder Tree](./)
+> [File System](./)
+
+----------------------------------------------------------------
+
+<footer id="footer">
+  <input id="footer_input" onchange="perform(event)" />
+</footer>
+
+<header id="footer">
+  <div id="messages"></div>
+</header>
+
+----------------------------------------------------------------
+
+----------------------------------------------------------------
+
+<script>
+;
+; iwm = Object.keys( window ).sort()
+;
+</script>
+
+<script>
+;
+; prolog = {}
+; prolog . title = ( `TreeView Gadget` )
+;
+</script>
+
+<script>
+;
+; cls =()=> console.clear()
+; agn =()=> location.reload()
+;
+</script>
+
+<script>
+;
+; doc = document
+;
+</script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script src="./../gems/core-ops.js"></script>
+<script src="./../api/core-api.js"></script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script>
+function main( event ) {
+    try {
+        doc . title = ( prolog . title );
+        footer_input.value = "hud()";
+    } catch ( e ) {
+        alert ( e )
+        throw ( e )
+    }
+}
+</script>
+
+<script>
+addEventListener( "load", main );
+</script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
 <script>
 function tick( event ) {
 	_wtc( time, now() );
@@ -78,6 +142,8 @@ function tick( event ) {
 setInterval( tick, 420 );
 </script>
 
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
 <script>
 function now() {
 	const dt = ( new Date() );
@@ -85,9 +151,19 @@ function now() {
 }
 </script>
 
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
 <script>
 function _rtc( o    ) { return o.textContent.trim(); }
 function _wtc( o, v ) { o.textContent =    v.trim(); }
 </script>
 
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
+<style>
+@import url("./../../style/sce-hud.css");
+</style>
+<textarea id="sce" class="hide"></textarea>
+<script src="./../api/hud.js"></script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
