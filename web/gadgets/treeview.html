@@ -24,26 +24,6 @@ img { max-width: 100%; }
 <hr>
 <h1><a href="http://dave-omega/demo/web/gadgets/treeview.html">TreeView Gadget Demo</a></h1>
 <hr>
-<details> <summary>Root</summary>
-  <details> <summary>Top Level #1</summary> </details>
-  <details> <summary>Top Level #2</summary>
-    <details> <summary>Mid Level #A</summary>
-      <details> <summary>Lower Level #A-1</summary> </details>
-      <details> <summary>Lower Level #A-2</summary> </details>
-      <details> <summary>Lower Level #A-3</summary> </details>
-    </details>
-    <details> <summary>Mid Level #B</summary>
-      <details> <summary>Lower Level #B-1</summary> </details>
-    </details>
-    <details> <summary>Mid Level #C</summary>
-      <details> <summary>Lower Level #C-1</summary> </details>
-      <details> <summary>Lower Level #C-2</summary> </details>
-    </details>
-  </details>
-  <details> <summary>Top Level #3</summary> </details>
-</details>
-
-<hr>
 <h1>Active Element</h1>
 <table>
 <thead>
@@ -67,6 +47,36 @@ img { max-width: 100%; }
 </tr>
 </tbody>
 </table>
+<hr>
+<h1>Dynamic Tree</h1>
+<hr>
+<section id="dynamic_tree">
+</section>
+
+<hr>
+<h1>Static Tree</h1>
+<hr>
+<section id="static_tree">
+<details> <summary>Root</summary>
+  <details> <summary>Top Level #1</summary> </details>
+  <details> <summary>Top Level #2</summary>
+    <details> <summary>Mid Level #A</summary>
+      <details> <summary>Lower Level #A-1</summary> </details>
+      <details> <summary>Lower Level #A-2</summary> </details>
+      <details> <summary>Lower Level #A-3</summary> </details>
+    </details>
+    <details> <summary>Mid Level #B</summary>
+      <details> <summary>Lower Level #B-1</summary> </details>
+    </details>
+    <details> <summary>Mid Level #C</summary>
+      <details> <summary>Lower Level #C-1</summary> </details>
+      <details> <summary>Lower Level #C-2</summary> </details>
+    </details>
+  </details>
+  <details> <summary>Top Level #3</summary> </details>
+</details>
+</section>
+
 <hr>
 <h1>Navigation</h1>
 <blockquote>
@@ -114,6 +124,7 @@ img { max-width: 100%; }
 
 <script src="./../gems/core-ops.js"></script>
 <script src="./../api/core-api.js"></script>
+<script src="./../api/treeview.js"></script>
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
@@ -122,6 +133,8 @@ function main( event ) {
     try {
         doc . title = ( prolog . title );
         footer_input.value = "hud()";
+        let owner = dynamic_tree;
+        treeview( "HUD", hud, owner, "hud_tree" );
     } catch ( e ) {
         alert ( e )
         throw ( e )

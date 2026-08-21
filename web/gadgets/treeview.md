@@ -16,6 +16,30 @@
 
 ----------------------------------------------------------------
 
+# Active Element
+
+| Property | Value                        |
+|----------|------------------------------|
+| Time     | <code id="time"></code>      |
+| Type     | <var id="active_type"></var> |
+| Text     | <var id="active_text"></var> |
+
+----------------------------------------------------------------
+
+# Dynamic Tree
+
+----------------------------------------------------------------
+
+<section id="dynamic_tree">
+</section>
+
+----------------------------------------------------------------
+
+# Static Tree
+
+----------------------------------------------------------------
+
+<section id="static_tree">
 <details> <summary>Root</summary>
   <details> <summary>Top Level #1</summary> </details>
   <details> <summary>Top Level #2</summary>
@@ -34,16 +58,7 @@
   </details>
   <details> <summary>Top Level #3</summary> </details>
 </details>
-
-----------------------------------------------------------------
-
-# Active Element
-
-| Property | Value                        |
-|----------|------------------------------|
-| Time     | <code id="time"></code>      |
-| Type     | <var id="active_type"></var> |
-| Text     | <var id="active_text"></var> |
+</section>
 
 ----------------------------------------------------------------
 
@@ -96,6 +111,7 @@
 
 <script src="./../gems/core-ops.js"></script>
 <script src="./../api/core-api.js"></script>
+<script src="./../api/treeview.js"></script>
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
@@ -104,6 +120,8 @@ function main( event ) {
     try {
         doc . title = ( prolog . title );
         footer_input.value = "hud()";
+		let owner = dynamic_tree;
+		treeview( "HUD", hud, owner, "hud_tree" );
     } catch ( e ) {
         alert ( e )
         throw ( e )
