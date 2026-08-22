@@ -19,6 +19,10 @@ img { max-width: 100%; }
 
 <style>
 @import url("./../../style/treeview.css");
+.active {
+    color : lemonchiffon !important;
+    background : #040412 !important;
+}
 </style>
 
 <hr>
@@ -78,11 +82,40 @@ img { max-width: 100%; }
 </section>
 
 <hr>
+<h1>HTML Source Example</h1>
+<pre><code class="language-html">
+&lt;details&gt; &lt;summary&gt;Root&lt;/summary&gt;
+  &lt;details&gt; &lt;summary&gt;Top Level #1&lt;/summary&gt; &lt;/details&gt;
+  &lt;details&gt; &lt;summary&gt;Top Level #2&lt;/summary&gt;
+    &lt;details&gt; &lt;summary&gt;Mid Level #A&lt;/summary&gt;
+      &lt;details&gt; &lt;summary&gt;Lower Level #A-1&lt;/summary&gt; &lt;/details&gt;
+      &lt;details&gt; &lt;summary&gt;Lower Level #A-2&lt;/summary&gt; &lt;/details&gt;
+      &lt;details&gt; &lt;summary&gt;Lower Level #A-3&lt;/summary&gt; &lt;/details&gt;
+    &lt;/details&gt;
+    &lt;details&gt; &lt;summary&gt;Mid Level #B&lt;/summary&gt;
+      &lt;details&gt; &lt;summary&gt;Lower Level #B-1&lt;/summary&gt; &lt;/details&gt;
+    &lt;/details&gt;
+    &lt;details&gt; &lt;summary&gt;Mid Level #C&lt;/summary&gt;
+      &lt;details&gt; &lt;summary&gt;Lower Level #C-1&lt;/summary&gt; &lt;/details&gt;
+      &lt;details&gt; &lt;summary&gt;Lower Level #C-2&lt;/summary&gt; &lt;/details&gt;
+    &lt;/details&gt;
+  &lt;/details&gt;
+  &lt;details&gt; &lt;summary&gt;Top Level #3&lt;/summary&gt; &lt;/details&gt;
+&lt;/details&gt;
+
+</code></pre>
+<hr>
 <h1>Navigation</h1>
 <blockquote>
 <p><a href="./../web-menu.html">Web Menu</a></p>
 <p><a href="./">Folder Tree</a>
 <a href="./">File System</a></p>
+</blockquote>
+<hr>
+<h1>References</h1>
+<blockquote>
+<p><a href="http://dave-omega/app/jarvis/auto/notes-menu.html" title="Omega Edition">Notes Menu</a>
+<a href="http://dave-omega/demo/web/api/treeview-api-notes.html">Treeview API Notes</a></p>
 </blockquote>
 <hr>
 <footer id="footer">
@@ -151,11 +184,13 @@ addEventListener( "load", main );
 <script>
 function tick( event ) {
     _wtc( time, now() );
+    treeview.activate( null );
     let ce = document.activeElement;
     if ( ce ) {
         const t = ce.nodeName;
         _wtc( active_type, t );
         if ( t !== "BODY" ) {
+            treeview.activate( ce );
             _wtc( active_text, _rtc( ce )  );
         } else {
             _wtc( active_text, "( html ... )"  );

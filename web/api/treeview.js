@@ -9,6 +9,14 @@ function treeview( title, contents, parent, id ) {
     return ( top );
 }
 
+;
+; treeview.active_node = ( null )
+; treeview.types  = [ "DETAILS", "SUMMARY" ]
+; treeview.cnames = [
+  "root", "node", "leaf", "treeview", "active"
+]
+;
+
 treeview.details = function( title, contents, parent ) {
 	const ops = treeview;
     const det = ops.node( "DETAILS", null, null, parent );
@@ -44,3 +52,21 @@ treeview.node = function( type, title, contents, parent ) {
     if ( parent ) { parent.appendChild( elm ); }
     return ( elm );
 };
+
+treeview.activate = function( node ) {
+    const ops = treeview;
+    const old = ops.active_node;
+    if ( old ) {
+        old.classList.remove( "active" );
+        ops.active_node = ( null );
+    }
+    if ( node ) {
+        const cl = node.classList;
+        if ( cl.contains( "treeview" ) ) {
+            cl.add( "active" );
+            ops.active_node = ( node );
+        }
+    }
+    return ( node );
+};
+

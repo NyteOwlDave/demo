@@ -1,0 +1,275 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<style type="text/css">
+td, th { border: 1px solid #c3c3c3; padding: 0 3px 0 3px; }
+table { border-collapse: collapse; }
+img { max-width: 100%; }
+</style>
+<meta name="generator" content="ReText 7.2.3">
+<title>treeview-api-notes</title>
+<style type="text/css">
+</style>
+</head>
+<body>
+<style>
+@import url("./../../style/every-page.css");
+</style>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<hr>
+<h1><a href="http://dave-omega/demo/web/api/hud-api-notes.html" title="Omega Edition">TreeView API Notes</a></h1>
+<hr>
+<blockquote>
+<p>( <code>Web Demos</code> )</p>
+</blockquote>
+<hr>
+<h1>Description</h1>
+<hr>
+<p>The <a href="./treeview.js" title="TreeView API Source Code"><code>TreeView API</code></a> supports
+the <a href="http://dave-omega/demo/web/gadgets/treeview.html" title="TreeView Gadget Example"><code>TreeView Gadget</code></a>.</p>
+<hr>
+<h1>Accessor Method</h1>
+<hr>
+<pre><code class="language-javascript">
+function treeview( title, contents, parent, id )
+
+/*
+title    : String      =&gt; Root Node's Title
+contents : Object      =&gt; Object for Tree Nodes
+parent   : HTMLElement =&gt; Parent Element
+id       : String      =&gt; Optional ID for Root Node
+returns  : HTMLElement =&gt; Root DETAILS Element
+*/
+
+</code></pre>
+<hr>
+<p>The main (global) method is <code>treeview()</code>. This method constructs
+a complete <strong>TreeView Gadget</strong>.</p>
+<p>This gadget is comprised of a hierarchy of <code>DETAILS</code> elements.</p>
+<p>Each element has a <code>SUMMARY</code> child for the title.</p>
+<hr>
+<h2>Contents Property</h2>
+<p>Each <code>SUMMARY</code> element has a <code>contents</code> property as a <strong>leaf</strong>.</p>
+<p>This Property can be accessed at run time to examine the contents
+used to create the Leaf.</p>
+<p>Primitive types are duplicated.</p>
+<p>Object Types are References, so any alteration modifies the
+original Object.</p>
+<hr>
+<h2>CSS Classes</h2>
+<p>Each node (any type) has a CSS Class of <code>treeview</code>.</p>
+<p>The <code>SUMMARY</code> nodes have a <code>leaf</code> class.</p>
+<p>The <code>DETAILS</code> nodes have a <code>node</code> class.</p>
+<p>The <strong>Root</strong> <code>DETAILS</code> node has a <code>root</code> class.</p>
+<p>The <strong>Active</strong> node has an <code>active</code> class.</p>
+<hr>
+<h1>Properties</h1>
+<hr>
+<blockquote>
+<p>These Properties are Members of the <code>treeview</code> accessor.</p>
+</blockquote>
+<hr>
+<ul>
+<li><strong>Class names</strong> are listed in <code>cnames</code></li>
+<li><strong>Element Types</strong> are listed in <code>types</code></li>
+<li><strong>Active Node</strong> is stored in <code>active_node</code></li>
+</ul>
+<hr>
+<h1>Usage Hints</h1>
+<hr>
+<h2>Code Spelunking</h2>
+<p>You can use <code>TreeView Gadgets</code> for <strong>code spelunking</strong>. This is
+useful for hierarchical data that has more then one level of
+depth.</p>
+<p>Alternatively, you can use the <code>mapper</code> accessor from the
+<code>Core API</code> for creating a <code>TABLE</code> gadget to display flat data.
+That is, an Object that has only a single level of depth.</p>
+<p>Both of these tools are useful for Run Time Hints any for
+Documenting Source Code.</p>
+<hr>
+<h2>Active Node Tracking</h2>
+<p>At present, the <strong>Active Node</strong> must be set <strong>manually</strong>.</p>
+<p>This might be handled by a <strong>Timer</strong> (like the demo does), or
+some other means.</p>
+<p>To set the <strong>Active Node</strong>, invoke the <code>activate()</code> method
+for the <code>treeview</code> accessor. Pass in a Reference to the
+active <strong>Leaf Node</strong> (<code>SUMMARY</code>).</p>
+<p>Generally, this can be detected using <code>document.activeElement</code>.
+Assuming that the leaf has input focus.</p>
+<p>As mentioned above, this reference is stored in the<code></code>active_node<code>Property for</code>treeview`.</p>
+<hr>
+<h1>Example TreeView</h1>
+<p>For an example of the <code>TreeView</code>
+gadget, <a href="http://dave-omega/demo/web/gadgets/treeview.html" title="TreeView Gadget Example">Click Here</a>.</p>
+<hr>
+<h1>Example Details Table</h1>
+<section id="details_section"></section>
+
+<div>
+<h3>Hints</h3>
+<pre>
+<code>details_table.edit();</code>
+</pre>
+<article>
+Issue the above command to edit the script.
+</article>
+<pre>
+<code>details_table.notes();</code>
+</pre>
+<article>
+Issue the above command to edit the notes.
+</article>
+</div>
+
+<script id="details-table.js">
+function details_table( o, title ) {
+    try {
+        title = ( str( title ) || "Details" );
+        if (! o ) {
+            o = treeview;
+            title = ( "TreeView Details" );
+        }
+        const se = details_section;
+        se.innerHTML = "";
+        const te = elx( "TABLE" );
+        const ce = te.createCaption();
+        ce.textContent = ( title );
+        se.appendChild( te );
+        const m = mapper( o );
+        mapper.tabulate( m, te );
+    } catch ( e ) {
+        alert ( e );
+        throw ( e );
+    }
+}
+</script>
+
+<script>
+details_table.edit = function() {
+    const ed = hud.editor();
+    const se = gid( "details-table.js" );
+    ed.value = se.innerText;
+    hud.show();
+};
+</script>
+
+<script>
+details_table.notes = function() {
+    const ops = details_table;
+    const ed = hud.editor();
+    ed.value = ( ops.hints );
+    hud.show();
+};
+</script>
+
+<script>
+details_table.hints = ( `
+
+/*
+  To Show Accessor Details:
+*/
+
+_caption = "Details Table";
+_accessor = details_table;
+
+details_table( _accessor, _caption );
+
+` );
+</script>
+
+<script>
+addEventListener(
+  "load" ,
+  ( e ) => { details_table(); }
+);
+</script>
+
+<hr>
+<h1>References</h1>
+<blockquote>
+<p><a href="http://dave-omega/app/jarvis/auto/notes-menu.html" title="Omega Edition">Notes Menu</a></p>
+</blockquote>
+<hr>
+<h1>Navigation</h1>
+<blockquote>
+<p><a href="./../web-menu.html">Web Menu</a></p>
+<p><a href="./">Folder Tree</a>
+<a href="./">File System</a></p>
+</blockquote>
+<hr>
+<footer id="footer">
+  <input id="footer_input" onchange="perform(event)" />
+</footer>
+
+<header id="footer">
+  <div id="messages"></div>
+</header>
+
+<hr>
+<script>
+;
+; iwm = Object.keys( window ).sort()
+;
+</script>
+
+<script>
+;
+; prolog = {}
+; prolog . title = ( `TreeView API Notes` )
+;
+</script>
+
+<script>
+;
+; cls =()=> console.clear()
+; agn =()=> location.reload()
+;
+</script>
+
+<script>
+;
+; doc = document
+;
+</script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script src="./../gems/core-ops.js"></script>
+<script src="./core-api.js"></script>
+<script src="./treeview.js"></script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script>
+function main( event ) {
+    try {
+        doc . title = ( prolog . title );
+        footer_input.value = "hud()";
+    } catch ( e ) {
+        alert ( e )
+        throw ( e )
+    }
+}
+</script>
+
+<script>
+addEventListener( "load", main );
+</script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<style>
+@import url("./../../style/sce-hud.css");
+</style>
+<textarea id="sce" class="hide"></textarea>
+<script src="./hud.js"></script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+</body>
+</html>
