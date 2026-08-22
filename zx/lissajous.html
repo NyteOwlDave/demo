@@ -15,25 +15,78 @@ img { max-width: 100%; }
 <body>
 <p><head> <link rel="icon" href="favicon.ico" /> </head></p>
 <hr>
-<h1><a href="http://dave-omega/demo/zx/lissajous.html" title="Omega Edition">Lissajous Demo</a></h1>
+<h1><a href="http://dave-omega/demo/zx/lissajous.html" title="Omega Edition">Lissajous Editor</a></h1>
 <hr>
-<pre><code class="language-basic">1 REMark ~ 'lissajous' 3d wave knot
-2 REMark ~ Author : David Mainprize
-3 REMark ~ For : BASIC Programming Language
-4 REMark ~ Platform : Sinclair QL
-10 SCALE 2, -2, -1
-20 PAPER 1 : INK 7 : CLS : CLS#0
-30 A=0 : t=0
-40 x-0 : y=0
-50 inc=0
-60 REPeat loop
-70 x=sin(2*t)*cos(A) - cos(3*t)*sin(A)
-80 x=sin(2*t)*sin(A) + cos(3*t)*cos(A)
-90 POINT x,y
-100 t=t+1
-110 A=A+0.5
-120 inc=inc+1 : IF inc=2000 THEN EXIT loop
-130 END REPeat loop
+<h2>Toroid Demo</h2>
+<pre><code class="language-basic">
+
+' Toroid Shape
+' Sinclair QL
+' Jonathan D. Gilbert
+' David Mainprize
+' NyteOwl Dave
+
+_Title &quot;Toroid ~ D. Gilbert&quot;
+
+SW = 800: SH = 600
+
+Screen _NewImage(SW, SH, 32)
+
+Window (-2, 1.5)-(2, -1.5)
+
+Color _RGB32(255, 215, 12), _RGB32(8, 8, 64)
+Cls
+
+TAU = 2 * _Pi
+
+
+CAMDIST = 4.5
+
+' Presentation angle: 30 degrees
+A3 = -30 * TAU / 360
+C3 = Cos(A3): S3 = Sin(A3)
+
+'Presentation offset: move up a bit
+OY = .75
+A1 = 0: A2 = 0
+
+' Loop Counter and Bound
+limit = 150000: inc = 0
+
+Do
+    A1 = A1 + .1
+    If A1 &gt;= TAU Then A1 = A1 - TAU
+
+    A2 = A2 + (Cos(A1) + 1.2) * 2E-2
+    If A2 &gt;= PI2 Then A2 = A2 - PI2
+
+    ' Generate pointo n surface of tube at angle 0
+    X1 = Cos(A1) + 3: Y = Sin(A1)
+
+    ' Rotate (top-down) to correct position in tube. Y is unchanged.
+    C2 = Cos(A2): S2 = Sin(A2)
+    X = X1 * C2
+    Z = X1 * S2
+
+    ' Rotate (from side) for presentation. X is unchanged.
+    YY = Y * C3 - Z * S3
+    ZZ = Y * S3 + Z * C3
+
+    ' Vertical offset.
+    YY = YY + OY
+
+    ' Project
+    SZ = ZZ + CAMDIST
+    SX = X / SZ: SY = YY / SZ + 0.5
+
+    PSet (SX, SY)
+
+    inc = inc + 1: If inc &gt; limit Then Exit Do
+
+    If InKey$ &lt;&gt; &quot;&quot; Then Exit Do
+
+Loop
+
 </code></pre>
 <hr>
 <h1>JavaScript Source Code</h1>
@@ -43,34 +96,79 @@ img { max-width: 100%; }
 </div>
 
 <script>
-lissajous_source = ( `
+js_source = ( `
+
+/* toroid-lumina-demo.js */
 
 function setup() {
-   const sw = sh = 600;
-   Xform.scale( sw / 3.4, sh / 2.4, 1 );
-   Xform.xlate( sw / 2.0, sh / 2.0, 0 );
-   Background( "black" );
-   Pen( "gold" );
+    const vw = 2.0;
+    const vh = 1.5;
+    const sw = sh = 600;
+    Xform.scale( sw / vw, sh / vh, 1 );
+    Xform.xlate( sw / 2.0, sh / 2.0, 0 );
+    Background( "black" );
+    Pen( "gold" );
 }
 
 function render( erase=true ) {
-   const pt={};
-   let A=0, t=0;
-   let inc = 2000;
-   if ( erase ) { Background(); }
-   while ( --inc > 0 ) {
-     pt.x = sin( 2*t )*cos( A ) - cos( 3*t )*sin( A );
-     pt.y = sin( 2*t )*sin( A ) + cos( 3*t )*cos( A );
-     Xform.apply( pt, pt );
-     Pen.dot( pt.x, pt.y );
-     t = t + 1;
-     A = A + 0.5;
-   }
+
+    if ( erase ) { Background(); }
+
+    const pt = {};
+
+    CAMDIST = 6;
+
+    // Presentation angle: 30 degrees
+    A3 = -30 * _TAU / 360;
+    C3 = cos( A3 ); S3 = sin( A3 );
+
+    // Presentation offset: move up a bit
+    OY = .75; A1 = 0; A2 = 0;
+
+    // Loop Counter and Bound
+    LIMIT = 50000; INC = 0;
+
+    // TODO : Draw Toroid
+    while ( ++INC < LIMIT ) {
+
+        A1 = A1 + 0.1;
+        if ( A1 >= _TAU ) { A1 = A1 - _TAU; }
+
+        A2 = A2 + ( cos( A1 ) + 1.2 ) * 2e-2;
+        if ( A2 >= _TAU ) { A2 = A2 - _TAU; }
+
+        // Generate point on surface of tube at angle 0
+        X1 = cos( A1 ) + 3; Y = sin( A1 );
+
+        // Rotate (top-down) to correct position in tube. Y is unchanged.
+        C2 = cos( A2 ); S2 = sin( A2 );
+        X = X1 * C2;
+        Z = X1 * S2;
+
+        // Rotate (from side) for presentation. X is unchanged.
+        YY = Y * C3 - Z * S3;
+        ZZ = Y * S3 + Z * C3;
+
+        // Vertical offset.
+        YY = YY + OY;
+
+        // Project
+        SZ = ZZ + CAMDIST;
+        pt.x = X  / SZ;
+        pt.y = - ( YY / SZ );
+
+        // Center and Scale
+        Xform.apply( pt, pt );
+
+        // Draw Point
+        Pen.dot( pt.x, pt.y );
+
+    }
 };
 
 ;
 ; ( 1 ) && setup()
-; ( 1 ) && render()
+; ( 0 ) && render()
 ;
 ; console.log( "OK!" )
 ;
@@ -170,6 +268,13 @@ footer div {
 </style>
 
 <style>
+.flasher {
+    background : gold;
+    color : #040422;
+}
+</style>
+
+<style>
 .fill {
     display : inline-block;
     width   : calc( 100% - 10ch );
@@ -236,7 +341,6 @@ footer div {
 function main( event ) {
     try {
         doc . title = "Lissajous Demo";
-        sce.value = lissajous_source;
         init_buttons();
         init_tex_all();
         prepare_rgba_colors();
@@ -244,6 +348,7 @@ function main( event ) {
             surface.requestFullscreen();
             surface.focus();
         };
+        edit_javascript();
     } catch ( e ) {
         crashed ( e );
     }
@@ -267,15 +372,34 @@ function crashed( e ) {
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
 <script>
-function edit_basic() {}
+function flash_gadget( ge ) {
+    ge.classList.add( "flasher" );
+    setTimeout( (e)=>{
+        ge.classList.remove( "flasher" );
+    }, 700 );
+}
 </script>
 
 <script>
-function edit_javascript() {}
+function edit_basic() {
+    const vw = one( `.language-basic` );
+    sce.value = vw.textContent;
+    flash_gadget( sce );
+}
 </script>
 
 <script>
-function accept_javascript() {}
+function edit_javascript() {
+    sce.value = js_source;
+    flash_gadget( sce );
+}
+</script>
+
+<script>
+function accept_javascript() {
+    js_source = sce.value;
+    flash_gadget( sce );
+}
 </script>
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
@@ -372,6 +496,17 @@ function add_tex( url ) {
     const grp = texture_section;
     return ( grp.appendChild( tex ) );
 }
+</script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script>
+console.info( `DES-II Has Great Event Logging!` );
+console.info( `See: NCS Tools for Jarvis` );
+</script>
+
+<script>
+des_ii_url = ( `http://dave-omega/app/jarvis/toolkit/ncs/desiree/des-ii.html` )
 </script>
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->

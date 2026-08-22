@@ -927,3 +927,15 @@ Jarvis.Props = {
 
 </script>
 
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script>
+console.info( `DES-II Has Great Event Logging!` );
+console.info( `See: NCS Tools for Jarvis` );
+</script>
+
+<script>
+des_ii_url = ( `http://dave-omega/app/jarvis/toolkit/ncs/desiree/des-ii.html` )
+</script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
