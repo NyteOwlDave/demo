@@ -96,6 +96,14 @@ function render( erase=true ) {
 </section>
 
 <hr>
+<h1>References</h1>
+<hr>
+<blockquote>
+<p><a href="./../web/api/hud-api-notes.html">HUD API Notes</a>
+<a href="./../web/api/core-api-notes.html">Core API Notes</a>
+<a href="./../web/api/rocket-api-notes.html">Rocket API Notes</a></p>
+</blockquote>
+<hr>
 <footer>
  <input id="footer_input" onchange="perfect(event)" />
  <div id="btn_run" action="run()" onclick="action(event)">▶️</div>
@@ -334,10 +342,16 @@ function init_tex( tex ) {
     tex.classList.add( "texture" );
     const st = tex.style;
     st.cursor = "pointer";
-    st.onclick = function( e ) {
+    tex.onclick = function( e ) {
         mine( e );
-        const tex = ( e.target );
-        Texture.render( tex );
+        if ( e.altKey ) {
+            e.target.remove();
+            return;
+        } else {
+            const tex = ( e.target );
+            Texture.render( tex );
+            return;
+        }
     };
 }
 </script>

@@ -106,6 +106,16 @@ function render( erase=true ) {
 
 ----------------------------------------------------------------
 
+# References
+
+----------------------------------------------------------------
+
+> [HUD API Notes](./../web/api/hud-api-notes.html)
+> [Core API Notes](./../web/api/core-api-notes.html)
+> [Rocket API Notes](./../web/api/rocket-api-notes.html)
+
+----------------------------------------------------------------
+
 <footer>
  <input id="footer_input" onchange="perfect(event)" />
  <div id="btn_run" action="run()" onclick="action(event)">▶️</div>
@@ -347,8 +357,14 @@ function init_tex( tex ) {
     st.cursor = "pointer";
     tex.onclick = function( e ) {
         mine( e );
-        const tex = ( e.target );
-        Texture.render( tex );
+        if ( e.altKey ) {
+            e.target.remove();
+            return;
+        } else {
+            const tex = ( e.target );
+            Texture.render( tex );
+            return;
+        }
     };
 }
 </script>
