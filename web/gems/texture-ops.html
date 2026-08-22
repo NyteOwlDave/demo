@@ -1,0 +1,98 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<style type="text/css">
+td, th { border: 1px solid #c3c3c3; padding: 0 3px 0 3px; }
+table { border-collapse: collapse; }
+img { max-width: 100%; }
+</style>
+<meta name="generator" content="ReText 7.2.3">
+<title>texture-ops</title>
+<style type="text/css">
+</style>
+</head>
+<body>
+<p>/<em>
+    texture-ops.js
+    Dave's Demo Gems
+</em>/</p>
+<p>Texture = {};</p>
+<p>Texture.all = function() {
+    return all( ".texture" );
+};</p>
+<p>Texture.pick = function( index ) {
+    const ops = Texture;
+    const m = ops.all();
+    index = parseInt( index );
+    return ( m[ index ] );
+};</p>
+<p>Texture.picture = function( index, srf ) {
+    const ops = Texture;
+    const tex = ops.pick( index );
+    if (! srf ) {
+        const srf = new OffscreenCanvas();
+        srf.width  = tex.naturalWidth;
+        srf.height = tex.naturalHeight;
+    }
+    return ops.render( tex, srf );
+};</p>
+<p>Texture.render = function( tex, srf ) {
+    const ops = Texture;
+    srf = ( srf || Surface() );
+    tex = ( tex || ops.pick( 0 ) );
+    const tw = tex.naturalWidth;
+    const th = tex.naturalHeight;
+    const sw = srf.width;
+    const sh = srf.height;
+    const ctx = srf.getContext( "2d" );
+    ctx.drawImage( tex, 0, 0, sw, sh );
+    return ( srf );
+};</p>
+<p>Texture.folder = function( url ) {
+    const parts = url.split( "/" );
+    if ( parts.length &gt; 1 ) {
+        parts.pop();
+        return parts.join( "/" );
+    }
+    return ( url );
+};</p>
+<p>Texture.filename = function( url ) {
+    const parts = url.split( "/" );
+    if ( parts.length &gt; 1 ) {
+        return parts.pop();
+    }
+    if ( url.includes( ":" ) ) {
+        return ( "unknown" );
+    }
+    return ( url );
+};</p>
+<p>Texture.basename = function( url ) {
+    const ops = Texture;
+    url = ops.filename( url );
+    const parts = url.split( "." );
+    if ( parts.length &gt; 1 ) {
+        parts.pop();
+        return parts.join( "." );
+    }
+    return ( url );
+};</p>
+<p>Texture.extension = function( url ) {
+    const ops = Texture;
+    url = ops.filename( url );
+    const parts = url.split( "." );
+    if ( parts.length &gt; 1 ) {
+        return parts.pop();
+    }
+    return ( "" );
+};</p>
+<p>Texture.mem = function() {
+    const ops = Texture;
+    return Object.keys( ops ).sort();
+};</p>
+<p>;
+; console.log( <code>Loaded "texture-ops.js" Gem</code> )
+;</p>
+
+</body>
+</html>

@@ -13,40 +13,52 @@ function hud( show ) {
 }
 
 ;
+; hud.title    = ( "Heads-Up Editor" )
+; hud.tikey    = ( "8e314b66-9e0c-11f1-b5f8-e3977ca2d89c" )
+; hud.updated  = ( "2026-AUG-22" )
 ; hud.storekey = ( "heads-up-editor.js" )
+; hud.template = ( "http://dave-omega/demo/web/gadgets/hud-app.html" )
+; hud.cnames = [ "hide" ]
+; hud.types  = [ "TEXTAREA" ]
 ;
 
-hud.show = function() {
-    const ed = hud.editor();
+hud.show = function( o ) {
+    const ed = ( o || hud.editor() );
     ed.classList.remove( "hide" );
     return ( ed );
 };
 
-hud.hide = function() {
-    const ed = hud.editor();
+hud.hide = function( o ) {
+    const ed = ( o || hud.editor() );
     ed.classList.add( "hide" );
     return ( ed );
 };
 
-hud.toggle = function() {
-    if ( hud.hidden() ) {
-        return hud.show();
+hud.toggle = function( o ) {
+    if ( hud.hidden( o ) ) {
+        return hud.show( o );
     } else {
-        return hud.hide();
+        return hud.hide( o );
     }
 };
 
-hud.hidden = function() {
-    const ed = hud.editor();
+hud.hidden = function( o ) {
+    const ed = ( o || hud.editor() );
     return ( ed.classList.contains( "hide" ) );
 };
 
 hud.editor = function() {
-    return ( document.getElementById( "sce" ) );
+    const doc = document;
+    const gid =( i )=> ( doc.getElementById( i ) );
+    return (
+          gid( "sce" )
+       || gid( "hud_editor" )
+       || gid( "hud-editor" )
+    );
 };
 
-hud.zoom = function() {
-    const ed = hud.editor();
+hud.zoom = function( o ) {
+    const ed = ( o || hud.editor() );
     ed.classList.remove( "hide" );
     ed.requestFullscreen();
     ed.focus();
@@ -54,7 +66,7 @@ hud.zoom = function() {
 
 hud.assist = function() {
     const m = hud.members();
-    m.shift( "[ HUD Members ]\n" );
+    m.unshift( "〖 HUD Members 〗\n" );
     alert( m.join( "\n" ) );
 }
 
@@ -69,6 +81,20 @@ hud.inspect = function() {
 hud.members = function() {
     return Object.keys( hud ).sort();
 }
+
+hud.peek = function( key, session ) {
+    const store = (
+          ( session )
+        ? ( sessionStorage )
+        : ( localStorage   )
+    );
+    if (! store ) {
+        message( `Store is Unavailable` );
+        return;
+    }
+    key = ( str( key ) || ( hud.storekey ) );
+    return ( store.getItem( key ) );
+};
 
 hud.persist = function( key, session ) {
     const store = (
@@ -97,20 +123,20 @@ hud.recover = function( key, session ) {
         : ( localStorage   )
     );
     if (! store ) {
-        message( `Store is Unavailable` );
+        hud.jot( `Store is Unavailable` );
         return;
     }
     key = ( str( key ) || ( hud.storekey ) );
     const value = store.getItem( key );
     if ( null === value ) {
-        message( `No Entry for Key : "${key}"` );
+        hud.message( `No Entry for Key : "${key}"` );
         return;
     }
     hud.editor().value = ( value );
     if ( session ) {
-        message( `Read "${key}" from Session` );
+        hud.message( `Read "${key}" from Session` );
     } else {
-        message( `Read "${key}" from Store` );
+        hud.message( `Read "${key}" from Store` );
     }
 }
 
@@ -257,5 +283,46 @@ hud.tmp = function( rex ) {
 
 hud.hello = function() {
     return hud.mem( hud );
+};
+
+hud.message = function( s ) {
+    if ( "function" === typeof message ) {
+        return message( s );
+    };
+    s = str( s );
+    if (! s ) { return; }
+    hud.jot( s );
+    return ( s );
+};
+
+hud.blurt = function( s ) {
+    hud.jot( s );
+    window.alert( s );
+    return ( s );
+};
+
+hud.jit = function( s ) {
+    console.info( s );
+    return ( s );
+};
+
+hud.jot = function( s ) {
+    console.log( s );
+    return ( s );
+};
+
+hud.jut = function( s ) {
+    console.warn( s );
+    return ( s );
+};
+
+hud.jyt = function( s ) {
+    console.debug( s );
+    return ( s );
+};
+
+hud.jet = function( e ) {
+    console.error( e );
+    return ( e );
 };
 

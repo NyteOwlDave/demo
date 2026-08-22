@@ -79,17 +79,28 @@ function render( erase=true ) {
 </script>
 
 <hr>
-<h1>Result</h1>
+<h1>Surface</h1>
 <hr>
 <div center>
   <canvas id="surface"></canvas>
 </div>
 
 <hr>
+<h1><a href="http://dave-omega/demo/web/art/texture/texture-menu.html" title="Omega Edition">Textures</a></h1>
+<hr>
+<section id="texture_section">
+ <img class="texture" src="./../web/art/texture/triples.png" />
+ <img class="texture" src="./../web/art/texture/lattice-001x.png" />
+ <img class="texture" src="./../web/art/texture/shield-001x.png" />
+ <img class="texture" src="./../web/art/texture/shield-002x.png" />
+</section>
+
+<hr>
 <footer>
  <input id="footer_input" onchange="perfect(event)" />
  <div id="btn_run" action="run()" onclick="action(event)">▶️</div>
  <div id="btn_hud" action="hud()" onclick="action(event)">◩</div>
+ <div id="btn_zms" action="zms()" onclick="action(event)">💠</div>
 </footer>
 
 <header>
@@ -134,8 +145,9 @@ footer * {
     font  : 11pt monospace;
 }
 footer input {
-    width : calc( 100% - 100px );
+    width : calc( 100% - 160px );
     padding : 4px 1ch;
+    margin-right : 10px;
 }
 footer div {
     width  : 4ch;
@@ -176,6 +188,15 @@ footer div {
 }
 </style>
 
+<style>
+.texture {
+    display : inline-block;
+    margin  : 5px;
+    width   : 100px;
+    height  : auto;
+}
+</style>
+
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
 <script>
@@ -195,6 +216,8 @@ footer div {
 
 <script src="./../web/gems/core-ops.js"></script>
 <script src="./../web/gems/json-ops.js"></script>
+<script src="./../web/gems/texture-ops.js"></script>
+
 <script src="./../web/api/core-api.js"></script>
 <script src="./../web/api/hud.js"></script>
 <script src="./../web/api/lumina-gfx.js"></script>
@@ -207,6 +230,7 @@ function main( event ) {
         doc . title = "Lissajous Demo";
         sce.value = lissajous_source;
         init_buttons();
+        init_tex_all();
         prepare_rgba_colors();
         Surface.zoom = function() {
             surface.requestFullscreen();
@@ -252,6 +276,21 @@ function accept_javascript() {}
 function init_buttons() {
     btn_run.title = "▶️ Run HUD Script";
     btn_hud.title = "◩ Toggle HUD Editor";
+    btn_zms.title = "💠 Zoom Surface";
+}
+</script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script>
+function zms() {
+    try {
+        const srf = Surface();
+        hud.zoom( srf );
+    } catch ( e ) {
+        zms.error = ( e );
+        throw ( e );
+    }
 }
 </script>
 
@@ -279,11 +318,49 @@ function action( event ) {
 }
 </script>
 
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
 <script>
 function perfect( event ) {
     perform( event );
 }
 </script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script>
+function init_tex( tex ) {
+    tex.title = tex.alt = Texture.filename( tex.src );
+    tex.classList.add( "texture" );
+    const st = tex.style;
+    st.cursor = "pointer";
+    st.onclick = function( e ) {
+        mine( e );
+        const tex = ( e.target );
+        Texture.render( tex );
+    };
+}
+</script>
+
+<script>
+function init_tex_all() {
+    const grp = texture_section;
+    const m = arr( grp.querySelectorAll( "IMG" ) );
+    m.forEach( init_tex );
+}
+</script>
+
+<script>
+function add_tex( url ) {
+    const tex = elx( "img" );
+    tex.src = ( url );
+    init_tex( tex );
+    const grp = texture_section;
+    return ( grp.appendChild( tex ) );
+}
+</script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
 </body>
 </html>
