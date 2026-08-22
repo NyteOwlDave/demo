@@ -1,0 +1,114 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<style type="text/css">
+td, th { border: 1px solid #c3c3c3; padding: 0 3px 0 3px; }
+table { border-collapse: collapse; }
+img { max-width: 100%; }
+</style>
+<meta name="generator" content="ReText 7.2.3">
+<title>3d-plot-funcs</title>
+<style type="text/css">
+</style>
+</head>
+<body>
+<p><head><link rel="icon" href="./gemini.png" /></head></p>
+<style>
+html, body {
+    background : rgb( 180, 205, 255 );
+}
+* { color : #424200 !important; }
+</style>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<hr>
+<h1><a href="http://dave-tower/demo/web/gemini/3d-plot-funcs.html">3D Plot Functions</a></h1>
+<blockquote>
+<p>( <code>Gemini AI</code> )</p>
+</blockquote>
+<hr>
+<h1>Prompt</h1>
+<pre><code>
+I recenty wrote an Isometric 3D plotter for Web Dev usage.
+It can plot any 3D function using a call-back function of the
+form z = fn( x, y ). I'd like a few 3D functions to exercize
+the code. Assume a cubic virtual space where each axis is
+clipped to the visible range [ -50 ... +50 ].
+
+For example:
+
+// Callbacks
+func = [];
+
+// First Example Callback
+func[1] =( x, y )=&gt; ( 50 * sin( 1.2*y ) - 45 * cos( 1.4*x ) );
+
+By the way, assume all methods for the JavaScript `Math` object
+exist in abbreviated form (as seen in `sin` and `cos` above).
+
+Lets do sets of 10 examples. Do just the first set for now.
+I'll bookmark this chat and return later for more sets.
+
+</code></pre>
+<hr>
+<h1>Response</h1>
+<pre><code>
+// 101. Damped Concentric Ripple (Droplet effect)
+func[ 101 ] = (x, y) =&gt; {
+    let r = SelfDot( x, y );
+    return 160 * sin(3 + r / 4) / (4 + r / 15);
+};
+
+// 102. Classic Egg-Crate Surface
+func[ 102 ] = (x, y) =&gt; 25 * (sin(x / 10) * cos(y / 10));
+
+// 103. Inverted Cone / Funnel
+func[ 103 ] = (x, y) =&gt; 200 - 50 * sqrt(x*x + y*y);
+
+// 104. Hyperbolic Saddle with Wave Modulation
+func[ 104 ] = (x, y) =&gt; (x*x - y*y) / 45 + 12 * sin(x / 6);
+
+// 105. Spiral Vortex Wave
+func[ 105 ] = (x, y) =&gt; 30 * sin(sqrt(x*x + y*y) - x / 3);
+
+// 106. Gaussian-Faded Ripple Dome
+func[ 106 ] = (x, y) =&gt; 45 * exp(-(x*x + y*y) / 2500) * cos(sqrt(x*x + y*y) / 3);
+
+// 107. Diagonal Interference Grid
+func[ 107 ] = (x, y) =&gt; 30 * sin((x + y) / 10) * cos((x - y) / 10);
+
+// 108. Pyramid Peaks
+func[ 108 ] = (x, y) =&gt; 50 - abs(x) - abs(y);
+
+// 109. Crossed Troughs
+func[ 109 ] = (x, y) =&gt; 35 * (sin(x / 8) / (1 + abs(y) / 25) + cos(y / 8) / (1 + abs(x) / 25));
+
+// 110. Multi-Frequency Harmonic Landscape
+func[ 110 ] = (x, y) =&gt; (
+   30 * sin(x / 3) - 20 * cos(y / 3) + 25 * sin((x + y) / 5) 
+);
+
+</code></pre>
+<hr>
+<h1>References</h1>
+<blockquote>
+<p><a href="https://share.gemini.google/507pdWtJAmBl">Gemini Chat Invite</a>
+<a href="https://gemini.google.com/app/97f8de5892036e16">Gemini Chat Main</a></p>
+</blockquote>
+<hr>
+<h1>Navigation</h1>
+<blockquote>
+<p><a href="./">File System</a></p>
+</blockquote>
+<hr>
+<script>
+doc = document;
+doc . title = "3D Plotter Functions";
+</script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+</body>
+</html>
