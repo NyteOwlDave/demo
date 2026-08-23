@@ -1,0 +1,121 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<style type="text/css">
+td, th { border: 1px solid #c3c3c3; padding: 0 3px 0 3px; }
+table { border-collapse: collapse; }
+img { max-width: 100%; }
+</style>
+<meta name="generator" content="ReText 7.2.3">
+<title>details-table</title>
+<style type="text/css">
+</style>
+</head>
+<body>
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<hr>
+<h1><a href="http://dave-tower/demo/web/gadgets/details-table.html" title="Tower Edition">Details Table Gadget</a></h1>
+<hr>
+<section id="details_section"></section>
+
+<hr>
+<script>
+addEventListener(
+  "load" ,
+  ( e ) => { details_table(); }
+);
+</script>
+
+<hr>
+<h1>References</h1>
+<blockquote>
+<p><a href="http://dave-omega/app/jarvis/auto/notes-menu.html" title="Omega Edition">Notes Menu</a></p>
+</blockquote>
+<hr>
+<h1>Navigation</h1>
+<blockquote>
+<p><a href="./../web-menu.html">Web Menu</a></p>
+<p><a href="./">Folder Tree</a>
+<a href="./">File System</a></p>
+</blockquote>
+<hr>
+<footer id="footer">
+  <input id="footer_input" onchange="perform(event)" />
+</footer>
+
+<header id="footer">
+  <div id="messages"></div>
+</header>
+
+<hr>
+<style>
+@import url("./../../style/every-page.css");
+</style>
+
+<script>
+;
+; iwm = Object.keys( window ).sort()
+;
+</script>
+
+<script>
+;
+; prolog = {}
+; prolog . title = ( `Details Table Gadget` )
+;
+</script>
+
+<script>
+;
+; cls =()=> console.clear()
+; agn =()=> location.reload()
+;
+</script>
+
+<script>
+;
+; doc = document
+;
+</script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script src="./../gems/core-ops.js"></script>
+<script src="./../api/core-api.js"></script>
+<script src="./../api/lumina-gfx.js"></script>
+<script src="./../api/treeview.js"></script>
+
+<script src="./details-table.js"></script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script>
+function main( event ) {
+    try {
+        doc . title = ( prolog . title );
+        footer_input.value = "hud()";
+    } catch ( e ) {
+        alert ( e )
+        throw ( e )
+    }
+}
+</script>
+
+<script>
+addEventListener( "load", main );
+</script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<style>
+@import url("./../../style/sce-hud.css");
+</style>
+<textarea id="sce" class="hide"></textarea>
+<script src="./../api/hud.js"></script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+</body>
+</html>

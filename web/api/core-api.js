@@ -320,7 +320,7 @@ mapper.details = function( map ) {
 	let v;
 	for ( let k of map.keys() ) {
 		v = map.get( k );
-		t = ( typeof t );
+		t = ( typeof v );
 		details.push( [ t, k, v, w ] );
 	}
 	return ( details );
@@ -401,6 +401,16 @@ mapper.controls = function() {
 
 ;
 ; console.log( `Loaded "core-api.js" API Module` )
+;
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+;
+; console.info( `Consider My Notepad API` )
+; console.info( `Consider Rockets API` )
+; console.info( `Consider HUD Editor API` )
+; console.info( `Consider Lumina Graphics API` )
+; console.info( `Consider Making a "Jester the Suggester" API for These HINTS!` )
 ;
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

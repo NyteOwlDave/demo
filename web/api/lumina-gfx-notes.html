@@ -1,0 +1,218 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<style type="text/css">
+td, th { border: 1px solid #c3c3c3; padding: 0 3px 0 3px; }
+table { border-collapse: collapse; }
+img { max-width: 100%; }
+</style>
+<meta name="generator" content="ReText 7.2.3">
+<title>lumina-gfx-notes</title>
+<style type="text/css">
+</style>
+</head>
+<body>
+<style>
+@import url("./../../style/every-page.css");
+</style>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<hr>
+<h1><a href="http://dave-omega/demo/web/api/lumina-gfx-notes.html" title="Omega Edition">Lumina Gfx API Notes</a></h1>
+<hr>
+<div center>
+  <img src="./lumina-gfx.png" />
+</div>
+
+<hr>
+<blockquote>
+<p>( <code>Web Demos</code> )</p>
+</blockquote>
+<hr>
+<h1>Description</h1>
+<hr>
+<p>The <a href="./lumina-gfx.js" title="Lumina Gfx API Source Code"><code>Lumina Gfx API</code></a> supports a wide array of
+Wb-based demos.</p>
+<p>The <a href="http://dave-omega/demo/web/palette-analyzer.html" title="Omega Edition"><code>Palette Analyzer</code></a> was first. Though the concepts
+existed with <code>Midge API</code> and <code>Madge Gfx App</code>, the palette
+analyzer served as a sandbox for a fresh new implementation of
+the "Line Plotter" style Graphics Engine.</p>
+<p>Eventually, the embedded code was extracted and given the name
+<code>Lumina</code>. Though it remains closely related to <code>Midge</code>.</p>
+<p>After extraction, the <a href="http://dave-omega/demo/zx/lissajous.html" title="Omega Edition"><code>Lissajous Demo</code></a> imported the API
+and became another powerful example of the usefulness of this
+<strong>Graphics and Math</strong> module.</p>
+<hr>
+<h1>Primary Accessor Methods</h1>
+<hr>
+<pre><code class="language-javascript">
+function Surface()
+function Graphics()
+
+</code></pre>
+<hr>
+<p>This document is incomplete. Need to thoroughly discuss the
+API. A good place to find for related information is in the
+extensive <a href="http://dave-omega/demo/web/palette-analyzer-notes.html" title="Omega Edition">Notes for Palette Analyzer</a>.</p>
+<hr>
+<h1>Details Tables</h1>
+<hr>
+<blockquote>
+<p>See <a href="./treeview-api-notes.html">TreeView API Notes</a> for
+Usage Hints</p>
+</blockquote>
+<hr>
+<section id="details_section"></section>
+
+<script id="details-table.js">
+function details_table( o, title ) {
+    try {
+        title = ( str( title ) || "Details" );
+        if (! o ) {
+            o = Pen;
+            title = ( "Pen Details" );
+        }
+        const se = details_section;
+        se.innerHTML = "";
+        const te = elx( "TABLE" );
+        const ce = te.createCaption();
+        ce.textContent = ( title );
+        se.appendChild( te );
+        const m = mapper( o );
+        mapper.tabulate( m, te );
+    } catch ( e ) {
+        alert ( e );
+        throw ( e );
+    }
+}
+</script>
+
+<script>
+details_table.edit = function() {
+    const ed = hud.editor();
+    const se = gid( "details-table.js" );
+    ed.value = se.innerText;
+    hud.show();
+};
+</script>
+
+<script>
+details_table.notes = function() {
+    const ops = details_table;
+    const ed = hud.editor();
+    ed.value = ( ops.hints );
+    hud.show();
+};
+</script>
+
+<script>
+details_table.hints = ( `
+
+/*
+  To Show Accessor Details:
+*/
+
+_caption = "Details Table";
+_accessor = details_table;
+
+details_table( _accessor, _caption );
+
+` );
+</script>
+
+<script>
+addEventListener(
+  "load" ,
+  ( e ) => { details_table(); }
+);
+</script>
+
+<hr>
+<h1>References</h1>
+<blockquote>
+<p><a href="http://dave-omega/app/jarvis/auto/notes-menu.html" title="Omega Edition">Notes Menu</a></p>
+</blockquote>
+<hr>
+<h1>Navigation</h1>
+<blockquote>
+<p><a href="./../web-menu.html">Web Menu</a></p>
+<p><a href="./">Folder Tree</a>
+<a href="./">File System</a></p>
+</blockquote>
+<hr>
+<footer id="footer">
+  <input id="footer_input" onchange="perform(event)" />
+</footer>
+
+<header id="footer">
+  <div id="messages"></div>
+</header>
+
+<hr>
+<script>
+;
+; iwm = Object.keys( window ).sort()
+;
+</script>
+
+<script>
+;
+; prolog = {}
+; prolog . title = ( `Lumina Gfx API Notes` )
+;
+</script>
+
+<script>
+;
+; cls =()=> console.clear()
+; agn =()=> location.reload()
+;
+</script>
+
+<script>
+;
+; doc = document
+;
+</script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script src="./../gems/core-ops.js"></script>
+<script src="./core-api.js"></script>
+<script src="./lumina-gfx.js"></script>
+<script src="./treeview.js"></script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script>
+function main( event ) {
+    try {
+        doc . title = ( prolog . title );
+        footer_input.value = "hud()";
+    } catch ( e ) {
+        alert ( e )
+        throw ( e )
+    }
+}
+</script>
+
+<script>
+addEventListener( "load", main );
+</script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<style>
+@import url("./../../style/sce-hud.css");
+</style>
+<textarea id="sce" class="hide"></textarea>
+<script src="./hud.js"></script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+</body>
+</html>

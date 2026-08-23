@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<style type="text/css">
+td, th { border: 1px solid #c3c3c3; padding: 0 3px 0 3px; }
+table { border-collapse: collapse; }
+img { max-width: 100%; }
+</style>
+<meta name="generator" content="ReText 7.2.3">
+<title>voogle-18-bas</title>
+<style type="text/css">
+</style>
+</head>
+<body>
+<style>
+@import url("./../style/every-page.css");
+</style>
+
+<hr>
+<h1><a href="http://dave-tower/demo/pc-basic/voogle-18-bas.html">Voogle-18</a></h1>
+<hr>
+<ul>
+<li>TODO : Port the QB64pe version to JS</li>
+</ul>
+<hr>
+<ul>
+<li>Author : Richard Keijzer</li>
+</ul>
+<hr>
+<h1><a href="./voogle-18.bas">Source Code</a></h1>
+<hr>
+<pre><code class="language-basic">100 REM *****************
+110 REM * Voogel8.BAS   *
+115 REM * GW-BASIC      *
+120 REM *****************
+130 CLS:SCREEN 9:KEY OFF
+140 DIM X(13),Y(13)
+150 WINDOW (0,0)-(640,350) :REM O,0 lower left
+160 Z=2.1
+170 XL=245:YL=152:REM **THE LURE
+180 CIRCLE(XL,YL),3,2
+190 FOR N=1 TO 13:READ X(N),Y(N):NEXT N
+200 FOR YB=15 TO 350 STEP 25
+210 FOR XB=20 TO 620 STEP 35
+220 XD=XL-XB:YD=YL-YB
+230 IF XD=0 THEN THETA=1.571 ELSE THETA=ATN(YD/XD)-3.14159
+240 IF XD&lt;0 THEN THETA=THETA-3.14159
+250 COST=COS(THETA):SINT=SIN(THETA)
+260 FOR N=1 TO 13
+270 X2=X(N):Y2=Y(N)
+280 XT=X2*COST-Y2*SINT
+290 YT=X2*SINT+Y2*COST
+300 X3=Z*XT*1.4+XB:Y3=Z*YT+YB
+310 IF N&gt;1 THEN LINE (X3,Y3)-(XA,YA),11
+320 XA=X3:YA=Y3
+330 NEXT N
+340 NEXT XB:NEXT YB
+350 END
+360 DATA -5,0,-3.5,0.7,0.5,0.3,1,4,2,4,3,1,5,0
+370 DATA 3,-1,2,-4,1,-4,0.5,-0.3,-3.5,-0.7,-5,0
+</code></pre>
+<hr>
+
+</body>
+</html>
