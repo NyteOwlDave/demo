@@ -1,0 +1,126 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<style type="text/css">
+td, th { border: 1px solid #c3c3c3; padding: 0 3px 0 3px; }
+table { border-collapse: collapse; }
+img { max-width: 100%; }
+</style>
+<meta name="generator" content="ReText 7.2.3">
+<title>intersection-notes</title>
+<style type="text/css">
+</style>
+</head>
+<body>
+<style>
+@import url("./../../style/every-page.css");
+pre {
+    max-width : calc( 100vw - 120px );
+    margin-left : 30px;
+}
+</style>
+
+<hr>
+<h1>( <code>===&gt;&gt;&gt;</code> IMPORTANT <code>&lt;&lt;&lt;===</code> )</h1>
+<hr>
+<blockquote>
+<p>The <code>Gems</code> folder contains more notes, plus the Source Code 
+in JavaScript.</p>
+</blockquote>
+<hr>
+<ul>
+<li>Migrate those files to this folder ASAP!</li>
+</ul>
+<hr>
+<h1>Line Intersection</h1>
+<hr>
+<h1>Introduction</h1>
+<p>This is a pretty important concept in 2D and 3D graphics. With
+3D, it's more common to look for line-plane or line shape
+intersections, so we'll focus on 2D for now.</p>
+<hr>
+<h1>Class Definitions</h1>
+<p>In cases like this, it can be helpful to use the OOP paradigm
+to define geometric constructs as classes.</p>
+<p>We need only two and they can be very simple, with just a few
+basic methods and properties.</p>
+<p>We'll need a <code>Point</code> (vector) and a <code>Line</code> (segment).</p>
+<hr>
+<h1>Point Class</h1>
+<p>This class needs two properties. One for each coordinate. It
+also need a few methods.</p>
+<pre><code class="language-javascript">
+class Point {
+    constructor( x, y ) {
+        this.x = ( x || 0 );
+        this.y = ( y || 0 );
+    }
+    add( other ) {
+        const x = this.x + other.x;
+        const y = this.y + other.y;
+        return new Point( x, y );
+    }
+    sub( other ) {
+        const x = this.x - other.x;
+        const y = this.y - other.y;
+        return new Point( x, y );
+    }
+    dot( other ) {
+        const xx = this.x * other.x;
+        const yy = this.y * other.y;
+        return ( xx + yy );
+    }
+    perp( other ) {
+        const xx = this.x * other.y;
+        const yy = this.y * other.x;
+        return ( xy - yx );
+    }
+    project( mu, norm ) {
+        const x = this.x + mu * norm.x;
+        const y = this.y + mu * norm.y;
+        return new Point( x, y );
+    }
+}
+
+Point.clone = function( other ) {
+    return new Point( other.x, other.y );
+};
+
+Point.delta = function( va, vb ) {
+    return va.perp( vb );
+};
+
+Point.mu = function( pa, pb, pc, pd, va, vb, delta ) {
+    const nx = ( ( pc.x - pa.y ) * va.x );
+    const ny = ( ( pd.y - pa.x ) * vb.y );
+    return ( ( nx - ny ) / delta );
+};
+
+</code></pre>
+<hr>
+<h1>Intersection Function</h1>
+<pre><code class="language-javascript">const intersection = function(line0, line1) {
+    const ops = intersection
+    const v1 = line0.p0;
+    const v2 = line0.p1.minus(v1);
+    const v3 = line1.p0;
+    const v4 = line1.p1.minus(v3);
+    const delta = v2.x*v4.y - v2.y*v4.x;
+    if ( Math.abs( delta ) &lt; ops.TINY ) {
+      console.log(&quot;Parallel&quot;);
+      return null; // Lines are parallel
+    }
+    const mu = ( ((v3.x-v1.x)*v4.y) - ((v3.y-v1.y)*v4.x) ) / delta;
+    return new Point(
+        v1.x + mu * v2.x,
+        v1.y + mu * v2.y
+    );
+}
+
+intersection.TINY = 1e-8;
+</code></pre>
+<hr>
+
+</body>
+</html>

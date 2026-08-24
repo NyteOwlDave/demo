@@ -1,0 +1,50 @@
+  
+  body {
+    font: 14pt verdana, tahoma;
+    color: #ABCDEF;
+    background-color: #543210;
+  }
+  
+  fieldset {
+    font: inherit;
+    color: inherit;
+    background-color: inherit;
+  }
+  
+  legend, a {
+    color: black;
+    background-color: yellow;
+  }
+
+  fieldset, legend, a {
+    border: 2px solid gold;
+    border-radius: 0.2em 0.3em 0.2em 0.3em;
+    padding: 0.45em;
+  }
+
+  fieldset,a {
+    margin-top: 1em;
+  }
+
+  canvas {
+    border: 1px solid gold;
+  }
+  
+  footer {
+    font: 9pt arial;
+  }
+  
+  #idCanvas {
+    background-color: gray;
+  }
+
+  .hi {
+    color: lemonchiffon;
+  }
+
+  input, select, button {
+    padding: 10px;
+    font-size: larger;
+  }
+
+  

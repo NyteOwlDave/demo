@@ -1,0 +1,434 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<style type="text/css">
+td, th { border: 1px solid #c3c3c3; padding: 0 3px 0 3px; }
+table { border-collapse: collapse; }
+img { max-width: 100%; }
+</style>
+<meta name="generator" content="ReText 7.2.3">
+<title>line-math</title>
+<style type="text/css">
+</style>
+
+<script>
+MathJax = {
+  options: {
+    renderActions: {
+      find: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+  }
+};
+</script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script></head>
+<body>
+<style>
+@import url("./../../style/every-page.css");
+pre {
+    max-width : calc( 100vw - 120px );
+    margin-left : 30px;
+}
+canvas {
+    background : black;
+    border     : 1px dashed gold;
+    width      : 640px;
+    height     : 480px;
+}
+</style>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script>
+; iwm = Object.keys( window ).sort()
+</script>
+
+<hr>
+<h1>Line Math</h1>
+<script>
+; doc = document
+; doc . title = ( `Line Math` )
+</script>
+
+<hr>
+<blockquote>
+<p><a href="http://dave-omega/demo/web/lines/line-math.html" title="Omega Edition">Omega</a>
+<a href="http://dave-tower/demo/web/lines/line-math.html" title="Tower Edition">Tower</a>
+<a href="./">File System</a></p>
+</blockquote>
+<hr>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Group</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>POI</code></td>
+<td>Point</td>
+<td>Result</td>
+<td>Point of Intersection</td>
+</tr>
+<tr>
+<td><code>A0</code></td>
+<td>Point</td>
+<td>Origin</td>
+<td>Line 0 Start Point</td>
+</tr>
+<tr>
+<td><code>A1</code></td>
+<td>Point</td>
+<td>Origin</td>
+<td>Line 0 End Point</td>
+</tr>
+<tr>
+<td><code>B0</code></td>
+<td>Point</td>
+<td>Subject</td>
+<td>Line 1 Start Point</td>
+</tr>
+<tr>
+<td><code>B1</code></td>
+<td>Point</td>
+<td>Subject</td>
+<td>Line 1 End Point</td>
+</tr>
+<tr>
+<td><code>L0</code></td>
+<td>Line</td>
+<td>Origin</td>
+<td A0 A1 _=",">Line 0</td>
+</tr>
+<tr>
+<td><code>L1</code></td>
+<td>Line</td>
+<td>Subject</td>
+<td B0 B1 _=",">Line 1</td>
+</tr>
+<tr>
+<td><code>U</code></td>
+<td>Vec</td>
+<td>Origin</td>
+<td>Line 0 Vector</td>
+</tr>
+<tr>
+<td><code>V</code></td>
+<td>Vec</td>
+<td>Subject</td>
+<td>Line 1 Vector</td>
+</tr>
+<tr>
+<td><code>μ</code></td>
+<td>Real</td>
+<td>Slope</td>
+<td>Scale for Ray Projection</td>
+</tr>
+<tr>
+<td><code>Δ</code></td>
+<td>Real</td>
+<td>Denom</td>
+<td>Denominator for mu</td>
+</tr>
+<tr>
+<td><code>p</code></td>
+<td>Real</td>
+<td>Numer</td>
+<td>LHS Numerator for mu</td>
+</tr>
+<tr>
+<td><code>q</code></td>
+<td>Real</td>
+<td>Numer</td>
+<td>RHS Numerator for mu</td>
+</tr>
+</tbody>
+</table>
+<script>
+Tables = [ "Line Intersection Table" ];
+</script>
+
+<hr>
+<h1>Symbols</h1>
+<table>
+<thead>
+<tr>
+<th>Symbol</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>μ</code></td>
+<td>Mu (Slope)</td>
+</tr>
+<tr>
+<td><code>Δ</code></td>
+<td>Delta</td>
+</tr>
+<tr>
+<td><code>⟂</code></td>
+<td>Perp-Dot Product</td>
+</tr>
+<tr>
+<td><code>∥</code></td>
+<td>Parallel Lines</td>
+</tr>
+</tbody>
+</table>
+<script>
+Tables.push( "Symbols" );
+</script>
+
+<hr>
+<h1>Calculate <code>U</code> and <code>V</code></h1>
+<hr>
+<p>
+<script type="math/tex; mode=display">
+\overrightarrow{U} = ( A1 - A0 )
+</script>
+</p>
+<hr>
+<p>
+<script type="math/tex; mode=display">
+\overrightarrow{V} = ( B1 - B0 )
+</script>
+</p>
+<hr>
+<h1>Calculate Delta ( <code>Δ</code> )</h1>
+<hr>
+<p>
+<script type="math/tex; mode=display">
+\Delta = ( \overrightarrow{U} ⟂ \overrightarrow{V} )
+</script>
+</p>
+<hr>
+<h1>Check for Parallel Lines ( L0 <code>∥</code> L1 )</h1>
+<p>
+<script type="math/tex; mode=display">
+\text{if  } ( \Delta \approx 0 ) \text {  error()}
+</script>
+</p>
+<hr>
+<h1>Calculate Numerator ( <code>p</code> and <code>q</code> )</h1>
+<p>
+<script type="math/tex; mode=display">
+F(a,b,c) = ((a-b) \cdot c)
+</script>
+</p>
+<p>
+<script type="math/tex; mode=display">
+p = F( B0_x, A0_x, V_x )
+</script>
+</p>
+<p>
+<script type="math/tex; mode=display">
+q = F( B0_y, A0_y, V_y )
+</script>
+</p>
+<hr>
+<h1>Calculate Mu ( <code>μ</code> )</h1>
+<hr>
+<p>
+<script type="math/tex; mode=display">
+\mu = \frac { ( p - q ) } { \Delta }
+</script>
+</p>
+<hr>
+<h1>Calculate Intersection ( POI )</h1>
+<hr>
+<p>
+<script type="math/tex; mode=display">
+F(O,t,R) = ( O + t \cdot R )
+</script>
+</p>
+<p>
+<script type="math/tex; mode=display">
+POI = F( A0, \mu, V )
+</script>
+</p>
+<hr>
+<h1>Try It Out</h1>
+<hr>
+<h2>POI</h2>
+<blockquote>
+<p><code id="poi">?</code></p>
+</blockquote>
+<hr>
+<h2>Variable Values</h2>
+<table>
+<thead>
+<tr>
+<th>🔑</th>
+<th>X</th>
+<th>Y</th>
+<th>Hint</th>
+<th>Color</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>A0</code></td>
+<td>10</td>
+<td>470</td>
+<td>Line 0 Start Point</td>
+<td><input type="color" /></td>
+</tr>
+<tr>
+<td><code>A1</code></td>
+<td>630</td>
+<td>10</td>
+<td>Line 0 End Point</td>
+<td><input type="color" /></td>
+</tr>
+<tr>
+<td><code>B0</code></td>
+<td>400</td>
+<td>410</td>
+<td>Line 1 Start Point</td>
+<td><input type="color" /></td>
+</tr>
+<tr>
+<td><code>B1</code></td>
+<td>60</td>
+<td>80</td>
+<td>Line 1 End Point</td>
+<td><input type="color" /></td>
+</tr>
+</tbody>
+</table>
+<script>
+Tables.push( "Variable Values" );
+</script>
+
+<hr>
+<h2>Rendered Sample</h2>
+<div center>
+<canvas id="surface"></canvas>
+</div>
+
+<hr>
+<h2>Derived Lines</h2>
+<table>
+<thead>
+<tr>
+<th>🔑</th>
+<th>P0</th>
+<th>P1</th>
+<th>Hint</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>L0</code></td>
+<td>?</td>
+<td>?</td>
+<td>Line 0 ( A0, A1 )</td>
+</tr>
+<tr>
+<td><code>L1</code></td>
+<td>?</td>
+<td>?</td>
+<td>Line 1 ( B0, B1 )</td>
+</tr>
+</tbody>
+</table>
+<script>
+Tables.push( "Derived Lines" );
+</script>
+
+<hr>
+<h2>Derived Vectors</h2>
+<table>
+<thead>
+<tr>
+<th>🔑</th>
+<th>X</th>
+<th>Y</th>
+<th>Hint</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>U</code></td>
+<td>?</td>
+<td>?</td>
+<td>Line 0 Vector</td>
+</tr>
+<tr>
+<td><code>V</code></td>
+<td>?</td>
+<td>?</td>
+<td>Line 1 Vector</td>
+</tr>
+</tbody>
+</table>
+<script>
+Tables.push( "Derived Vectors" );
+</script>
+
+<hr>
+<h2>Derived Scalars</h2>
+<table>
+<thead>
+<tr>
+<th>🔑</th>
+<th>Value</th>
+<th>Hint</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>p</code></td>
+<td>?</td>
+<td>LHS Numerator</td>
+</tr>
+<tr>
+<td><code>q</code></td>
+<td>?</td>
+<td>RHS Numerator</td>
+</tr>
+<tr>
+<td><code>Δ</code></td>
+<td>?</td>
+<td>Denominator</td>
+</tr>
+<tr>
+<td><code>μ</code></td>
+<td>?</td>
+<td>Mu (Slope)</td>
+</tr>
+</tbody>
+</table>
+<script>
+Tables.push( "Derived Scalars" );
+</script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script>
+function find_table( title ) {
+    const i = Tables.indexOf( title );
+    if ( i < 0 ) { return; }
+    const m = all( "TABLE" );
+    return m[ i ];
+}
+</script>
+
+<script src="./../gems/core-ops.js"></script>
+
+</body>
+</html>
