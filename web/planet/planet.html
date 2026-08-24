@@ -1,0 +1,180 @@
+<!DOCTYPE HTML>
+<!-- Updated: 2020-APR-01 -->
+<html>
+<meta charset="utf-8"/>
+<head>
+<!--
+  <script name="Auto Header" src="/api/head.js"></script>
+-->
+  <script name="P5 API" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.10.2/p5.js"></script>
+  <style>
+      * {
+          font-size: 18pt;
+      }
+      table, tr, td {
+          border : 0
+      }
+  </style>
+</head>
+<body onload="App.onLoad()">
+
+<header>
+    <table>
+        <tr onclick="planet_home()">
+            <td><img src="art/logo.png"></td>
+            <td><h2>Planet Example</h2></td>
+        </tr>
+    </table>
+</header>
+
+<main>
+
+<section name="Planet Section">
+
+<fieldset id="idPlanetSection">
+<legend>Planet</legend>
+<div>
+  <canvas width="256" height="256" id="idCanvas"></canvas>
+</div>
+<div name="Planet Buttons"">
+  <button onclick="App.onLoadPlanet()">Load</button>
+  <button onclick="App.onSavePlanet()">Save</button>
+  <button onclick="App.onSnapshotPlanet()">Snapshot</button>
+</div>
+<div name="Spin Rate Input">
+  <input id="idSpinRate" type="number" value="-1" min="-5" max="5" />
+  <label for="idSpinRate">&nbsp;Spin Rate</label>
+</div>
+<div name="Pitch Angle Input">
+  <input id="idRotateX" type="number" home="12" min="-360" max="360" />
+  <label for="idRotateX">&nbsp;Pitch Angle</label>
+</div>
+<div name="Roll Angle Input">
+  <input id="idRotateY" type="number" home="15" min="-360" max="360" />
+  <label for="idRotateY">&nbsp;Roll Angle</label>
+</div>
+<div name="Yaw Angle Input">
+  <input id="idRotateZ" type="number" home="7" min="-360" max="360" />
+  <label for="idRotateZ">&nbsp;Yaw Angle</label>
+</div>
+<div name="Rotation Buttons">
+    <button onclick="App.onRotatePlanet()">Apply</button>
+    <button onclick="App.onRotatePlanetDefault()">Default</button>
+    <button onclick="App.onRotatePlanetClear()">Clear</button>
+</div>
+</fieldset>
+
+</section>
+
+<section name="Texture Section">
+<fieldset id="idTextureSection"><legend>Texture</legend>
+    <div><canvas width="256" height="256" id="idTexture"></canvas></div>
+    <div name="Choose Texture" id="idStandardTextures">
+        <select id="idSelectTexture"></select>
+        <button onclick="App.onSelectTexture()">Select</button>
+    </div>
+    <div name="Texture Scale Input">
+        <button onclick="App.onCaptureTexture()">Capture</button>
+        <button onclick="App.onApplyTexture()">Apply</button>
+        <button onclick="App.onLoadTexture()">Load</button>
+        <button onclick="App.onSaveTexture()">Save</button>
+        <button onclick="App.onImportTexture()">Import</button>
+        <button onclick="App.onSnapshotTexture()">Snapshot</button>
+    </div>
+    <div name="Texture Scale Input">
+        <input id="idScale" type="number" value="3" min="1" max="5" />
+        <label for="idScale">&nbsp;Texture Scale</label>
+    </div>
+    <div name="Texture Scale Input">
+        <input id="idHemi" type="checkbox" checked />
+        <label for="idHemi">&nbsp;Hemisphere</label>
+    </div>
+</fieldset>
+</section>
+
+<section name="Palette Section">
+<fieldset id="idPaletteSection"><legend>Palette</legend>
+    <div><canvas width="256" height="256" id="idPalette"></canvas></div>
+    <div name="Palette Buttons">
+        <button onclick="App.onCapturePalette()">Capture</button>
+        <button onclick="App.onApplyPalette()">Apply</button>
+        <button onclick="App.onLoadPalette()">Load</button>
+        <button onclick="App.onSavePalette()">Save</button>
+        <button onclick="App.onSnapshotPalette()">Snapshot</button>
+        <button onclick="App.onGreyPalette()">Gray Scale</button>
+    </div>
+</fieldset>
+</section>
+
+<section name="Documentation">
+  <fieldset>
+  <legend>Welcome!</legend>
+  <div>
+  <p>
+      If you're new to the app, you might want to read the
+      <a href="./doc/intro.html">Introduction</a>.
+  </p>
+  <p>
+      If you're an old hat, and just want to refresh your memory on something,
+      here are the primary sections:
+  </p>
+  <ul>
+      <li><a href="./doc/planet.html">Planet Operations</a></li>
+      <li><a href="./doc/texture.html">Texture Operations</a></li>
+      <li><a href="./doc/palette.html">Palette Operations</a></li>
+      <li><a href="./doc/formats.html">File Formats</a></li>
+      <li><a href="./doc/tech.html">Technical Details</a></li>
+  </ul>
+  </div>
+  </fieldset>
+</section>
+
+</main>
+
+<footer>
+    <!-- AUTO -->
+</footer>
+
+<section name="Library">
+<script name="Automatic Footer" src="/api/footer.js"></script>
+<script name="Vector Math API" src="./api/vec.js"></script>
+<script name="Matrix Math API" src="./api/mtx.js"></script>
+<script name="Color API" src="./api/color.js"></script>
+<script name="Grafix API" src="./api/grafix.js"></script>
+<script name="Image Loader API" src="./api/loadimg.js"></script>
+<script name="Dialog API" src="./api/dlg.js"></script>
+<script name="Palette Optimization API" src="./api/optpal.js"></script>
+<script name="Texture Map API" src="./api/texmap.js"></script>
+<script name="Documents API" src="./api/docs.js"></script>
+<script name="Planet API" src="./api/planet.js"></script>
+</section>
+
+<section name="Application">
+<script name="User Interface" src="./app/planet-ui.js"></script>
+<script name="Application" src="./app/planet-app.js"></script>
+<script name="Diagnostic Tests" src="./app/diags.js"></script>
+</section>
+
+<script>
+// http://dave-omega/demo/web/planet/planet.html
+// http://dave-legacy/graphics/examples/planet/planet.html
+function planet_home() {
+    const u = planet_home.url;
+    if ( null === localStorage ) {
+        const doc = document;
+        const a = doc.createElement( "A" );
+        a . href = ( u );
+        a . click();
+    } else {
+        window.open( u, u );
+    }
+}
+;
+; planet_home.url = (
+  "http://dave-omega/demo/web/planet/planet.html"
+);
+;
+</script>
+
+</body>
+</html>

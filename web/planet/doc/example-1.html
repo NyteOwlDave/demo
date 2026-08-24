@@ -1,0 +1,417 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="generator" content="ReText 7.0.1">
+<title>example-1</title>
+</head>
+<body>
+<p><link rel="stylesheet" href="help.css">
+<style> 
+.r { color: #FF2020; }
+.g { color: #20FF20; }
+.b { color: #2020FF; }
+.icon {
+    font-style: normal;
+    font: 16pt sans-serif;
+}
+</style></p>
+<h1>Texture and Palette Example</h1>
+<h2>Warning</h2>
+<blockquote>
+<p>This gets a little hairy.</p>
+</blockquote>
+<hr>
+<h1>RGB Color Model</h1>
+<p>See: <a href="https://en.wikipedia.org/wiki/RGB_color_model">RGB Color Model</a>.</p>
+<p>As you know, a <strong>palette</strong> is nothing more than an <em>ordered list</em> of color
+definitions. A color may be defined in many different ways. We use
+what's known as the <strong>RGB Color Model</strong>.</p>
+<aside> RGB is an acronym for Red, Green, and Blue.</aside>
+
+<p>Internally a palette is stored as an array of one or more <strong>RGB triplets</strong>. </p>
+<p>Each value in the triplet is called a <strong>component</strong> (or a <em>channel</em>). In
+other words, there's a <em>red component</em>, a <em>green component</em>, and a
+<em>blue component</em>. Together they form a <em>triplet</em>.</p>
+<p>In other words, any color is represented by a combination of different
+amounts of these three <q>primary</q> colors. No these aren't the primary
+colors you learned about while mixing paints in art class. But the concept
+is the same.</p>
+<p>Each component is stored as an integer. These numbers range from
+0 to 255 which is also 2<sup>0</sup> to 2<sup>8</sup>-1. All the possible
+values that can be represented in a <em>byte</em> (or 8 <em>bits</em>) of data. </p>
+<p>By choosing these triplet values, you can define any of 
+<code>256*256*256 = 2<sup>24</sup> = 16,777,216</code>
+colors. Wow! That's nearly 17 million colors.</p>
+<p>This range is known formally as <strong>true color</strong> because it
+represents the full gamut of colors distinguishable by the human eye.
+To put it a different way, there are theoretically an infinite number
+of possible colors. But the human eye can't tell the difference between
+colors that are too similar. A range of 2<sup>24</sup> is about all
+our eyes can handle.</p>
+<p>Let's play with an example. Shown below is a very basic <em>color picker</em>
+tool. Play around with the controls to make various colors.
+Observe which mixtures of numbers produce various colors.</p>
+<div id="idColorPicker">
+<!-- AUTO FILLED -->
+</div>
+
+<p>The above tool allows you to create a <dfn>color definition</dfn>.
+In the RGB color model, this is just three integers. Each integer 
+is from the number series <code>[0, 1 ... 255]</code>. So there
+are exactly <var>256</var> (<var>2<sup>8</sup></var>) possible
+values to chose from.</p>
+<p>The number at the bottom-left in the color picker is a 
+<a href="https://en.wikipedia.org/wiki/Hexadecimal">hexadecimal</a>
+representation of the color.</p>
+<p>Programmers use hexadecimal a lot. We call it <em>hex</em> for short.</p>
+<p>This is the format used by 
+<a href="https://en.wikipedia.org/wiki/Web_colors#HTML_color_names">HTML</a> 
+-- the language of most web sites. </p>
+<p>Its format is 
+#<span class="r">RR</span>
+<span class="g">GG</span>
+<span class="b">BB</span>, where:</p>
+<pre>
+ # is a prefix indicating base-16 (hex)
+ <span class="r">RR</span> is the red component (2 hex digits)
+ <span class="g">GG</span> is the green component (2 hex digits)
+ <span class="b">BB</span> is the blue component (2 hex digits)
+</pre>
+
+<p>For example, I know from experience that the color <strong>cerulean</strong> is:<br></p>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Decimal Value</th>
+<th>Hex Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Red</td>
+<td>5</td>
+<td>#05</td>
+</tr>
+<tr>
+<td>Green</td>
+<td>184</td>
+<td>#B8</td>
+</tr>
+<tr>
+<td>Blue</td>
+<td>204</td>
+<td>#CC</td>
+</tr>
+</tbody>
+</table>
+<p>I could write it in <strong>set notation</strong> as <var>(5, 184, 204)</var> or 
+in <strong>HTML notation</strong> as <var>#05B8CC</var>. Try it in the color 
+picker and see for yourself.</p>
+<p>There are lots of ways RGB color definitions may be expressed.
+Here are a few:</p>
+<table>
+<thead>
+<tr>
+<th>Example</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>5 184 204</td>
+<td>Space separated integers</td>
+</tr>
+<tr>
+<td>5,184,204</td>
+<td>Comma separated integers</td>
+</tr>
+<tr>
+<td>(5,184,204)</td>
+<td>Set notation</td>
+</tr>
+<tr>
+<td>{5,184,204}</td>
+<td>Set notation</td>
+</tr>
+<tr>
+<td>[5,184,204]</td>
+<td>Set notation</td>
+</tr>
+<tr>
+<td>#05B8CC</td>
+<td>Hexadecimal integer (HTML)</td>
+</tr>
+<tr>
+<td>0x05B8CC</td>
+<td>Hexadecimal integer (C)</td>
+</tr>
+<tr>
+<td>&amp;H05B8CC</td>
+<td>Hexadecimal integer (BASIC)</td>
+</tr>
+<tr>
+<td>05B8CCh</td>
+<td>Hexadecimal integer (MASM)</td>
+</tr>
+<tr>
+<td>374988</td>
+<td>Decimal integer</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<p>Some of the notations are of the 
+<a href="https://en.wikipedia.org/wiki/Tuple">N-Tuple</a> variety.
+These are all some form of <strong>set notation</strong>. Also sometimes 
+called:</p>
+<ul>
+<li>List</li>
+<li>Group</li>
+<li>Collection</li>
+<li>Array</li>
+<li>etc.</li>
+</ul>
+<p>Essentially these all have three separate values to consider.</p>
+<p>The other notations are various ways to express the color as a 
+single integer value. In general, the single number variety uses 
+this formula to combine individual R, G and B components into a
+single integer value:</p>
+<pre><code class="javascript">
+total = red * 65536
+      + green * 256
+      + blue
+
+  -- For Example --
+
+374988 = 5 * 65536
+       + 184 * 256  
+       + 204
+
+</code></pre>
+
+<p>This single number may then be converted to hexadecimal and back
+as needed:</p>
+<pre><code class="text">
+hex(374988) =&gt; 0x05B8CC
+dec(0x05B8CC) =&gt; 374988
+
+</code></pre>
+
+<p>The above expression assumes some unspecified function 
+named <code>hex</code> that accepts a decimal integer and converts
+it into hexadecimal form. And another named <code>dec</code> that 
+accepts a hexadecimal integer and converts it into decimal form.</p>
+<p>Many modern calculators have these functions. Especially those that
+offer a <strong>programmer mode</strong>.</p>
+<p>Not only can the notation vary, but within any given notation each
+of the color components may be expressed in a different
+number system or a different scale. In the table below, all of
+the examples show ways to define <strong>cerulean</strong> in RGB. They all
+use <em>set notation</em>.</p>
+<table>
+<thead>
+<tr>
+<th>Example</th>
+<th>Range</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>(5,184,204)</td>
+<td>Decimal integers [0 ... 255]</td>
+</tr>
+<tr>
+<td>(0.020,0.722,0.800)</td>
+<td>Decimal real numbers [0.0 ... 1.0]</td>
+</tr>
+<tr>
+<td>(2.0%,72.2%,80.0%)</td>
+<td>Decimal real numbers [0.0% ... 100.0%]</td>
+</tr>
+<tr>
+<td>(0x05,0xB8,0xCC)</td>
+<td>Hex integers [0x00 ... 0xFF]</td>
+</tr>
+</tbody>
+</table>
+<p>The fractional numbers (shown on the second row) have been 
+calculated using a technique called <em>normalization</em>. This is
+accomplished by dividing each component by its maximum possible
+value (<code>number/255</code>). The result is then a real number
+in the range <code>[0.0 ... 1.0]</code>. We don't need a lot of
+precision, so we've round each component to three decimal places.</p>
+<p>The percentages (shown on the third row) are arrived at in a
+similar manner. The difference is that we multiplied each
+component by 100% (<code>number/255*100%</code>) before rounding
+to one decimal place.</p>
+<p>You might recognize this as first finding the ratio of a color
+component to it's maximum value, then converting that ratio to
+a percentage. With some rounding for compactness.</p>
+<p>Now that you know how colors are defined, we can talk about lists
+of colors. Also known as <em>palettes</em>.</p>
+<hr>
+<h1>Palette</h1>
+<p>See: <a href="https://en.wikipedia.org/wiki/Palette_(computing)">Palette</a></p>
+<p>A palette is just a collection of <em>color definitions</em>. Even so, there
+are some rules and typical usages. Technically speaking, a palette
+could be thought of as a very simple bitmap. But it's not meant to
+represent some image to a person (other than to show the colors 
+themselves; paint/sketch apps allow the user to choose a color to
+draw with, for example).</p>
+<p>The primary rule of a palette is that the color definitions are
+<em>ordered</em>. In other words, each of the entries in the palette has
+an index number assigned to it. This allows colors to be
+<em>looked up</em> by their index.</p>
+<p>Different size palettes are possible. Some common sizes include:
+2, 16, 256 and 65536 colors. These became standardized in early
+computer hardware (video adapters) and so this was reflected in
+how images were represented in image file formats.</p>
+<p>PhotoPlanet uses fixed-size palettes having 256 colors. It just so
+happens that this is 16*16 as well, which makes the palette easy
+to preview in a square screen area.</p>
+<aside>
+We won't try to do anything fancy here like gamma correction.
+We'll just use a plain old linear luminosity model.
+</aside>
+
+<p>So, let's look at a <em>gray scale</em> palette. This shows shades of gray
+from pure black to pure white. </p>
+<p>Also, we'll just use a 16 color palette to save space. Imagine one
+with 16 columns and 16 rows (256 total colors). That's what the app
+would use.</p>
+<div id="idGrayTable">
+<!-- AUTO FILLED -->
+</div>
+
+<p>Notice how we've laid out the colors in a 2D table. So we could in fact
+<em>look up</em> a color using <code>(x, y)</code> coordinates. That is, by a
+column number and a row number. But because the app stores the palette
+internally as a single long row, that would require extra math.</p>
+<p>We'll show the equation anyway, just for practice with bitmaps or textures.
+Those do use <var>x</var> and <var>y</var> coordinate pairs, but are also
+stored internally as a single long row of dots (pixels or texels).</p>
+<p>What we need is a single <strong>index number</strong> -- an integer that shows how
+far into the palette (or other image) the desired entry exists. In other
+words, we want to flatten the palette or image into a single line -- just
+one row of colors. Preserving the proper order of course.</p>
+<aside>
+<div>
+<span class="icon">🙄
+</span>
+What's that? Why are the values one
+less than their positions? Because the coordinates start at 0
+rather than 1. So the 2<sup>nd</sup> column is at <var>x</var>=1
+and the 3<sup>rd</sup> row is at <var>y</var>=2.
+</div>
+<div>
+<span class="icon">🤔
+</span>
+This use of 0 or 1 as a starting point for counting things is always
+an issue in math and computer programming. 
+</div>
+<div>
+
+<span class="icon">👍
+</span>
+But we can handle it. We just have to known about it. Now we do.
+</div>
+</aside>
+
+<p>So let's say we want the color at the 2<sup>nd</sup> column and the
+3<sup>rd</sup> row. We'll call <var>x</var> our column number 
+and <var>y</var> our row number.</p>
+<p>So <var>x</var>=1 and <var>y</var>=2. Or in set notation, 
+<var>location</var> = (1,2).</p>
+<p>The <q>actual</q> index (or <em>ordinal position</em>) of each entry is from a 
+series that begins with 0 at the top-left corner and fills in the top row
+first, then wraps around to the next row and continues. This counting
+pattern repeats until all entries have been assigned an index.</p>
+<p>The equation for converting 2D location to 1D index is:</p>
+<pre><code class="javascript">
+i = y * w + x
+
+   -- OR --
+
+index = row number 
+      * number of columns 
+      + column number
+
+</code></pre>
+
+<p>In the terse equation, <var>w</var> stands for <q>width</q>.</p>
+<p>The important thing to understand here is that color <var>i</var> in
+1D space is the same as color <var>(x,y)</var> in 2D space. We're just
+using a different set of numbers to specify its location.</p>
+<p>Plugging our (1,2) example into the equation yields:</p>
+<pre><code class="javascript">
+i = y * w + x
+
+  x = 1 (column number)
+  y = 2 (row number)
+  w = 4 (columns per row)
+
+   -- SO --
+
+i = 2 * 4 + 1
+i = 9
+
+</code></pre>
+
+<p>Using our gray scale color table, the actual color at this 
+index of <var>i</var>=9 would be <var>(153,153,153)</var>.</p>
+<p>One major difference between a palette and a bitmap is that the
+palette shouldn't contain any duplicate entries. All of the colors
+should be unique.</p>
+<p>Beyond this, palettes may be sorted and sectioned into ranges of
+similar colors. This allows for certain special effects. Some palettes
+may be changed dynamically (while an app is running). Again this is
+how some special effects are accomplished.</p>
+<p>For example, shown below is a very famous palette. It's the 256 color
+palette from the very first
+<a href="https://en.wikipedia.org/wiki/Video_Graphics_Array">VGA</a>
+video adapters. These were considered a breakthrough because they
+allowed a much greater level of realism than the EGA adapter's 
+16 color palettes.</p>
+<div>
+<img src="vga-256.png" />
+</div>
+
+<p>You'll notice that the final 8 entries are black. The reason is that
+this allowed some customization without breaking any images that relied
+on the preprogrammed colors. Although all entries could be modified, this
+took a lot of extra work to do properly without causing clashes with
+other apps. A lot of <em>color remapping</em> took place in those old days when
+the hardware itself required palettes. Nowadays this is merely a historical
+curiosity. Almost all modern video hardware uses 24-bpp full color images.
+Palettes in hardware are still often an option. But their use has all but
+vanished.</p>
+<p>Even in software (in apps), the use of palettes is a dying practice. But
+for our little rotating ball app, they're quite advantageous.</p>
+<p>In summary, remember that although both palettes and bitmaps contain
+color definitions, they serve different purposes.</p>
+<hr>
+<h1>Bitmaps</h1>
+<p>Digitized photographic images are represented as <strong>bitmaps</strong>. More accurately,
+<strong>pixmaps</strong> (but that term was never popularized in the public).</p>
+<p>There are a wide range of ways that bitmaps may be represented in memory or
+in files. Some of these formats use palettes and some have each pixel contain
+a color definition.</p>
+<aside>* <strong>bpp</strong> is an acronym that stands
+for <strong>bits per pixel</strong>.
+</aside>
+
+<p>The bitmap format we're interested in is the so-called 24 bpp<sup>*</sup> true
+color format. That is to say, each pixel consists of 24 bits of data. This is
+further broken down into 3 color components (R,G,B). Each color component is
+8-bits = 1-byte wide.</p>
+<div>
+<img id="idPreviewImage" alt="pending"/>
+</div>
+
+<script src="http://localhost/nyteowl/api/2020/v8/require.js"></script>
+
+<script src="example-1.js"></script>
+</body>
+</html>

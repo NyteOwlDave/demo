@@ -1,0 +1,176 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="generator" content="ReText 7.0.1">
+<title>intro</title>
+</head>
+<body>
+<p><link rel="stylesheet" href="help.css"></p>
+<h1>Introduction</h1>
+<hr>
+<p>➡ <a href="#Index">Index</a></p>
+<hr>
+<h1>What is PhotoPlanet?</h1>
+<p>It's a ball with a photo on it that spins around. Not too tough.
+But it's a little more than that.</p>
+<p>It's an app that can be used to create these balls, animate them
+on the screen of any computing device, and share them with other
+people.</p>
+<p>In other words, once you create your own PhotoPlanet, you can save
+it to a file or files and share these with others. The files use
+very simple text <a href="formats.html">formats</a> that can be modified
+using any 
+<a href="https://en.wikipedia.org/wiki/Text_editor">plain text editor</a> app.</p>
+<p>Not only that, but future enhancements will give the app the 
+capability to do special effects like text message marquee, 
+bump-maps, fractals, fire, video or other cool stuff.</p>
+<hr>
+<h1>Buzz Words</h1>
+<p>Like most tech stuff, we use a few fancy words here to describe 
+things. Nothing tough. But we need to get familiar with some of
+the words and what they mean before we can learn to use the app
+to the fullest.</p>
+<p>You've probably heard these words used before. Possibly in
+different contexts or situations where they meant other things.
+Here we're using the terms primarily from a <em>computer graphics</em>
+point of view.</p>
+<p>The four primary words are:</p>
+<ul>
+<li><a href="#bitmap">Bitmap</a></li>
+<li><a href="#planet">Planet</a></li>
+<li><a href="#texture">Texture</a></li>
+<li><a href="#palette">Palette</a></li>
+</ul>
+<hr>
+<p><a id="bitmap"></a></p>
+<h1>Bitmap</h1>
+<p>See: <a href="https://en.wikipedia.org/wiki/Bitmap">Bitmap</a></p>
+<p>This is a very general term from computer graphics. It's basically
+just a digitized photo image stored as an array of color dots called
+<em>pixels</em> (short for <em>picture elements</em>). This is what modern cameras
+and computing devices with camera capability produce. Older paper
+photos may also be <em>digitized</em> by a <strong>scanner</strong> to produce bitmaps.</p>
+<p>The PhotoPlanet app can <strong>import</strong> bitmap images (photos) and
+separate them into the <em>texture</em> and <em>palette</em> information it needs
+to draw on the spinning ball.</p>
+<hr>
+<p><a id="planet"></a></p>
+<h1>Planet</h1>
+<p>This is basically the whole ball of wax (pardon the pun). It's all
+the information needed to generate the spinning ball on the screen
+with an image mapped on the surface. Some of this information is
+<em>static</em> and some <em>dynamic</em>.</p>
+<dt>Static</dt>
+
+<dd>Persistent when stored to a file and shared</dd>
+
+<dt>Dynamic</dt>
+
+<dd>Recreated each time the planet is loaded into the app</dd>
+
+<p>The <strong>static</strong> information consists of:</p>
+<ul>
+<li>Orientation (pitch, yaw and roll angles)</li>
+<li>Scale (vertical texture repeat count)</li>
+<li>Slices (number of horizontal slices)</li>
+<li>Palette (colors used)</li>
+<li>Texture (indexed 2D color map)</li>
+</ul>
+<p>The <strong>dynamic</strong> information consists of:</p>
+<ul>
+<li>Animation map (indexed 3D color map)</li>
+<li>Spin angle</li>
+<li>Spin rate</li>
+<li>Texture aspect ratio</li>
+</ul>
+<aside>
+If this is all making your head spin, don't fret! You don't need
+to understand all the details to use the app. They're here for
+you if and/or when you might want to know more.
+</aside>
+
+<p>The <strong>static</strong> information is what gets written to a file and shared
+or just saved for later. The <strong>dynamic</strong> information is generated
+as needed when the planet is being used.</p>
+<hr>
+<p><a id="texture"></a></p>
+<h1>Texture</h1>
+<p>See: <a href="https://en.wikipedia.org/wiki/Texture_mapping">Texture Mapping</a></p>
+<p>This is just a fancy word for the <q>pattern</q> portion of the imagery
+drawn on the planet. Technical this is only the <em>color index map</em> part.
+But we use the term loosely. For example, when you import a photo
+into the app to be applied to the planet, we say you're pulling in
+a texture. But internally the app separates the color index part of
+the photo from the actual color definitions. We don't want to get too
+technical here, but this is what's known as using a <em>paletted image</em>.</p>
+<p>We can't get too deeply into an understanding of this without first
+discussing palettes. Just try to understand these facts:</p>
+<ul>
+<li>When imported, photo <strong>bitmaps</strong> are separated into palettes and textures</li>
+<li>A <strong>bitmap</strong> is a 2D array of <strong>pixels</strong> (picture elements)</li>
+<li>A <strong>pixel</strong> has a color and a location</li>
+<li>A <strong>palette</strong> is just a simple list of colors, each with an index number</li>
+<li>A <strong>texture</strong> decides which color is used for each dot in an image</li>
+<li>A <strong>texture</strong> is a 2D array of <strong>texels</strong> (texture elements)</li>
+<li>A <strong>texel</strong> has a color index number and a location</li>
+<li>Each <strong>texel</strong> is used to look up a <strong>color</strong> from a palette</li>
+<li>That <strong>color</strong> then becomes a <strong>pixel</strong> again</li>
+</ul>
+<hr>
+<p><a id="palette"></a></p>
+<h1>Palette</h1>
+<p>See: <a href="https://en.wikipedia.org/wiki/Palette_(computing)">Palettes</a></p>
+<p>The palette is the set of colors used to draw the image on the ball.
+The app is designed to <em>import</em> full color images (up to 16,777,216
+possible colors). But it can't use all of those colors. Instead, it
+tries to intelligently choose the most important 256 colors from any
+image. This is known as <em>palette optimization</em>.
+See: <a href="https://en.wikipedia.org/wiki/Palette_(computing)#Adaptive_palette">Adaptive Palette</a>.</p>
+<p>Once the optimal palette for an image is determined, another technique
+called <em>color matching</em> is used to extract a texture (the bumpiness)
+from the photo. Basically, each full color <em>pixel</em> (picture element) in
+the original image is examined and matched to the most similar color in
+the optimized palette. This results in what we call a <em>texel</em> (texture
+element). Texture elements are just index values. They tell which color
+from the palette to select when recreating a <em>pixel</em> from the <em>texel</em>.
+See: <a href="https://en.wikipedia.org/wiki/Color_management">Color Management</a>.</p>
+<p>In other words, think of the palette as a collection of colored pencils.
+Each one is assigned a number (index) from 0 to 255. The texel value is
+then the pencil number to choose when selecting a color for a "bump" in
+the texture. See: 
+<a href="https://en.wikipedia.org/wiki/Palette_(computing)">Indexed Color</a>.</p>
+<p>Internally palettes are stored as RGB (Red, Green, Blue) triplets.
+In other words, any color is represented by a combination of different
+amounts of these three primary colors.
+For more details, see 
+<a href="https://en.wikipedia.org/wiki/RGB_color_model">RGB Color Model</a>.</p>
+<hr>
+<p><a id="example"></a></p>
+<h1>Example</h1>
+<hr>
+<p>We realize all this palette and texture and bitmap business can be
+quite a headache for the novice. You really don't need to understand
+it all in detail. However doing so will make it easier for you to
+grasp why certain actions require certain steps. And what all that
+info in the files means (if you decide to check them out).</p>
+<p>So, here's an <a href="example-1.html">example</a> to show how this palette and
+texture business all words. A very simple example.</p>
+<hr>
+<p><a id="Index"></a></p>
+<h1>Index</h1>
+<ul>
+<li><a href="intro.html">Introduction</a></li>
+<li><a href="planet.html">Planet Operations</a></li>
+<li><a href="texture.html">Texture Operations</a></li>
+<li><a href="palette.html">Palette Operations</a></li>
+<li><a href="formats.html">File Formats</a></li>
+<li><a href="../index.html">Application</a></li>
+</ul>
+<hr>
+<p><footer>
+Copright &copy; Dave Wellsted<br>
+<a href="https://nyteowl-computer-software.business.site">NyteOwl Computer Software</a>
+</footer></p>
+</body>
+</html>
