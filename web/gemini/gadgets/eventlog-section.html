@@ -1,0 +1,93 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<style type="text/css">
+td, th { border: 1px solid #c3c3c3; padding: 0 3px 0 3px; }
+table { border-collapse: collapse; }
+img { max-width: 100%; }
+</style>
+<link rel="stylesheet" type="text/css" href="eventlog-section.css">
+<meta name="generator" content="ReText 7.2.3">
+<title>eventlog-section</title>
+<style type="text/css">
+</style>
+</head>
+<body>
+<p>/*</p>
+<pre><code>
+    [ ] input-footer
+    [x] eventlog-section
+    [ ] script-section
+    [ ] comments-section
+
+</code></pre>
+<pre><code>[ ] .css
+[x] .js
+</code></pre>
+<p>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+*/</p>
+<p>event_log = {};</p>
+<p>event_log.id = "event-log";</p>
+<p>function create_event_log() {
+    const ops = event_log;
+    const id = "event-log";
+    let log = gid( id );
+    if ( log ) { return log; };
+    const owner = gid( "eventlog_section" );
+    log = elx( "UL" );
+    log . id = ( id );
+    return ( owner.appendChild( log ) );
+}</p>
+<p>event_log.gadget  = function() {
+    return create_event_log();
+};</p>
+<p>event_log.section = function() {
+    return gid( "eventlog_section" );
+};</p>
+<p>event_log.length = function() {
+    const ops = event_log;
+    const  gadget = ops.gadget();
+    const  items = gadget.querySelectorAll( "LI" )
+    return ( items . length );
+};</p>
+<p>event_log.add = function( o ) {
+    const ops = event_log;
+    if ( o instanceof Object ) {
+        if ( Array.isArray( o ) ) {
+            o.forEach(
+                ( t ) =&gt; ops.add( t )
+            );
+            return;
+        }
+        return ops.add( mem( o ) );
+    }
+    const pe = event_log.gadget();
+    const ce = elx( "LI" );
+    ce . textContent = String( o ).trim();
+    return pe.appendChild( ce );
+};</p>
+<p>event_log.clear = function() {
+    const ops = event_log;
+};</p>
+<p>event_log.banner = function( s ) {
+    const ops = event_log;
+    ops.clear();
+    const pe = event_log.gadget();
+    const ce = elx( "LI" );
+    ce.classList.add( "banner" );
+    s = ( str( s ) || "Results" );
+    ce . textContent = ( s );
+    return pe.appendChild( ce );
+};</p>
+<p>event_log.list = function( o, caption ) {
+    const ops = event_log;
+    ops.banner( caption );
+    ops.add( o );
+};</p>
+<p>;
+; console.log( <code>UNTESTED : "eventlog-section.js"</code> )
+;</p>
+
+</body>
+</html>

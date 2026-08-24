@@ -1,0 +1,387 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<style type="text/css">
+td, th { border: 1px solid #c3c3c3; padding: 0 3px 0 3px; }
+table { border-collapse: collapse; }
+img { max-width: 100%; }
+</style>
+<meta name="generator" content="ReText 7.2.3">
+<title>rainbow-refraction</title>
+<style type="text/css">
+</style>
+</head>
+<body>
+<style>
+@import url("./../../style/every-page.css");
+</style>
+
+<hr>
+<h1>Gemini Chat for Rainbow Colors</h1>
+<blockquote>
+<p><a href="https://gemini.google.com">Gemini</a>
+<a href="https://gemini.google.com/app/fdae9a074a0134b7">Chat</a>
+<a href="http://dave-omega/demo/web/gemini/rainbow-refraction.html" title="Omega Edition">Omega</a>
+<a href="http://dave-tower/demo/web/gemini/rainbow-refraction.html" title="Tower Edition">Tower</a>
+<a href="./">File System</a></p>
+</blockquote>
+<hr>
+<h1>Prompt</h1>
+<hr>
+<p>Please fill in the RGB column with suitable colors
+to match what a rainbow might look like on a modern
+LED monitor.</p>
+<p>The six-digit hexadecimal format from CSS will do nicely.</p>
+<table>
+<thead>
+<tr>
+<th>Color</th>
+<th>Wavelength (nm)</th>
+<th>IOR</th>
+<th>RGB</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Violet</td>
+<td>380-450</td>
+<td>1.522</td>
+<td></td>
+</tr>
+<tr>
+<td>Indigo</td>
+<td>450-475</td>
+<td>1.528</td>
+<td></td>
+</tr>
+<tr>
+<td>Blue</td>
+<td>475-495</td>
+<td>1.523</td>
+<td></td>
+</tr>
+<tr>
+<td>Green</td>
+<td>495-570</td>
+<td>1.519</td>
+<td></td>
+</tr>
+<tr>
+<td>Yellow</td>
+<td>570-590</td>
+<td>1.516</td>
+<td></td>
+</tr>
+<tr>
+<td>Orange</td>
+<td>590-620</td>
+<td>1.514</td>
+<td></td>
+</tr>
+<tr>
+<td>Red</td>
+<td>620-750</td>
+<td>1.511</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h1>Response</h1>
+<hr>
+<ul>
+<li>There were multiple responses. This was the desired result.</li>
+</ul>
+<hr>
+<table>
+<thead>
+<tr>
+<th>Color</th>
+<th>Wavelength (nm)</th>
+<th>IOR</th>
+<th>RGB</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Violet</td>
+<td>380-450</td>
+<td>1.522</td>
+<td>#8B00FF</td>
+</tr>
+<tr>
+<td>Indigo</td>
+<td>450-475</td>
+<td>1.528</td>
+<td>#4B0082</td>
+</tr>
+<tr>
+<td>Blue</td>
+<td>475-495</td>
+<td>1.523</td>
+<td>#0000FF</td>
+</tr>
+<tr>
+<td>Green</td>
+<td>495-570</td>
+<td>1.519</td>
+<td>#008000</td>
+</tr>
+<tr>
+<td>Yellow</td>
+<td>570-590</td>
+<td>1.516</td>
+<td>#FFFF00</td>
+</tr>
+<tr>
+<td>Orange</td>
+<td>590-620</td>
+<td>1.514</td>
+<td>#FFA500</td>
+</tr>
+<tr>
+<td>Red</td>
+<td>620-750</td>
+<td>1.511</td>
+<td>#FF0000</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h1>Other Responses</h1>
+<hr>
+<h2>Python</h2>
+<hr>
+<pre><code class="language-python">
+def wavelength_to_rgb(wavelength):
+    # Wavelength in nm (380 - 750)
+    gamma = 0.8
+
+    if 380 &lt;= wavelength &lt;= 440:
+        r = -(wavelength - 440) / (440 - 380)
+        g = 0.0
+        b = 1.0
+    elif 440 &lt; wavelength &lt;= 490:
+        r = 0.0
+        g = (wavelength - 440) / (490 - 440)
+        b = 1.0
+    elif 490 &lt; wavelength &lt;= 510:
+        r = 0.0
+        g = 1.0
+        b = -(wavelength - 510) / (510 - 490)
+    elif 510 &lt; wavelength &lt;= 580:
+        r = (wavelength - 510) / (580 - 510)
+        g = 1.0
+        b = 0.0
+    elif 580 &lt; wavelength &lt;= 645:
+        r = 1.0
+        g = -(wavelength - 645) / (645 - 580)
+        b = 0.0
+    elif 645 &lt; wavelength &lt;= 750:
+        r = 1.0
+        g = 0.0
+        b = 0.0
+    else:
+        r = 0.0
+        g = 0.0
+        b = 0.0
+
+    # Intensity correction near limits
+    if 380 &lt;= wavelength &lt;= 420:
+        factor = 0.3 + 0.7 * (wavelength - 380) / (420 - 380)
+    elif 420 &lt; wavelength &lt;= 700:
+        factor = 1.0
+    elif 700 &lt; wavelength &lt;= 750:
+        factor = 0.3 + 0.7 * (750 - wavelength) / (750 - 700)
+    else:
+        factor = 0.0
+
+    r = round(255 * (r * factor) ** gamma)
+    g = round(255 * (g * factor) ** gamma)
+    b = round(255 * (b * factor) ** gamma)
+
+    return f&quot;#{r:02x}{g:02x}{b:02x}&quot;
+
+# Let's test with central wavelengths of each band
+bands = [
+    (&quot;Violet&quot;, 415),
+    (&quot;Indigo&quot;, 462),
+    (&quot;Blue&quot;, 485),
+    (&quot;Green&quot;, 532),
+    (&quot;Yellow&quot;, 580),
+    (&quot;Orange&quot;, 605),
+    (&quot;Red&quot;, 685)
+]
+
+for name, wl in bands:
+    print(f&quot;{name} ({wl} nm): {wavelength_to_rgb(wl)}&quot;)
+
+</code></pre>
+<hr>
+<script>
+; iwm = Object.keys( window ).sort()
+</script>
+
+<script>
+; doc = document
+</script>
+
+<script>
+; cls =()=> console.clear();
+; agn =()=> location.reload();
+</script>
+
+<script src="./../gems/core-ops.js"></script>
+<script src="./../api/core-api.js"></script>
+
+<hr>
+<h1>Test Colors</h1>
+<div style="text-align : center">
+<canvas id="surface" width="500" height="500"></canvas>
+</div>
+
+<hr>
+<script>
+Colorizer = {};
+</script>
+
+<script>
+Colorizer.entries = {};
+</script>
+
+<script>
+Colorizer.schema = [
+  "color"
+, "wavelength"
+, "ior"
+, "rgb"
+];
+</script>
+
+<script>
+Colorizer.rainbow = function() {
+    const ops = Colorizer;
+    const srf = gid( "surface" );
+    const w = srf.width;
+    const h = srf.height;
+    const gfx = srf.getContext( "2d" );
+    const colors = mem( ops.entries );
+    const bands = colors.length;
+    const band_height = Math.floor( h / bands );
+    let y = 0;
+    for ( let j=0; j<bands; j += 1, y += band_height ) {
+        gfx.fillColor = colors[ j ].rgb;
+        gfx.fillRect( 0, y, w - 1, y + band_height );
+    }
+};
+</script>
+
+<script>
+Colorizer.read_table = function( index ) {
+    const ops = Colorizer;
+    const m = all( "TABLE" );
+    const te = m[ index ];
+    const be = te.tBodies[ 0 ];
+    const rows = arr( be.rows );
+    rows . forEach(
+        ( re ) => {
+            entry = ops.read_cells( re.cells );
+            ops.add_entry( entry );
+        }
+    );
+};
+</script>
+
+<script>
+Colorizer.read_cells = function( cells ) {
+    const ops = Colorizer;
+    const _s =( ce )=> str( ce.textContent )
+    const _v =( i  )=> _s( cells[ i ] );
+    const _x = ops.schema
+    const _r = {};
+    _r[ _x[ 0 ] ] = _v( 0 );
+    _r[ _x[ 1 ] ] = _v( 1 );
+    _r[ _x[ 2 ] ] = _v( 2 );
+    _r[ _x[ 3 ] ] = _v( 3 );
+    _r.key = ( _r[ _x[ 0 ] ] ).toLowerCase();
+    return ( _r );
+};
+</script>
+
+<script>
+Colorizer.add_entry = function( entry ) {
+    const ops = Colorizer;
+    const key = entry.key
+    ops.entries[ key ] = entry;
+};
+</script>
+
+<hr>
+<h1>Comments</h1>
+<style>
+@import url("./gadgets/comments-section.css");
+</style>
+<section id="comments_section"></section>
+<script src="./gadgets/comments-section.js"></script>
+
+<hr>
+<h1>Script</h1>
+<style>
+@import url("./gadgets/script-section.css");
+</style>
+<section id="script_section"></section>
+<script src="./gadgets/script-section.js"></script>
+
+<hr>
+<h1>Event Log</h1>
+<style>
+@import url("./gadgets/comments-section.css");
+</style>
+<section id="eventlog_section"></section>
+<script src="./gadgets/eventlog-section.js"></script>
+
+<hr>
+<style>
+@import url("./gadgets/input-footer.css");
+</style>
+<footer id="footer"></footer>
+<script src="./gadgets/input-footer.js"></script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script>
+function main( event ) {
+    try {
+        test();
+    } catch ( e ) {
+        alert ( e );
+        throw ( e );
+    }
+}
+</script>
+
+<script>
+addEventListener( "load", main );
+</script>
+
+<script>
+function test_001() {
+    alert( "Test #001" );
+}
+function test_002() {
+    alert( typeof event_log );
+}
+function test_003() {
+    event_log.add( typeof event_log );
+}
+</script>
+
+<script>
+function test() {
+    test_003();
+}
+</script>
+
+</body>
+</html>
