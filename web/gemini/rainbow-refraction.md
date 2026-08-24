@@ -161,6 +161,12 @@ for name, wl in bands:
 
 # Test Colors
 
+<style>
+#surface {
+    border : 1px dashed gold;
+}
+</style>
+
 <div style="text-align : center">
 <canvas id="surface" width="500" height="500"></canvas>
 </div>
@@ -191,12 +197,19 @@ Colorizer.rainbow = function() {
 	const w = srf.width;
 	const h = srf.height;
 	const gfx = srf.getContext( "2d" );
-	const colors = mem( ops.entries );
+	const colors = Object.keys( ops.entries );
 	const bands = colors.length;
 	const band_height = Math.floor( h / bands );
-	let y = 0;
-	for ( let j=0; j<bands; j += 1, y += band_height ) {
-		gfx.fillColor = colors[ j ].rgb;
+    say( `Bands : ${bands}` );
+    mention( `Size : ${w} x ${h}` );
+	let entry, t, c, y = 0;
+	for ( let j = 0; j < bands; j += 1, y += band_height ) {
+		c = colors[ j ];
+        entry = ops.entries[ c ];
+        c = entry.rgb;
+        t = entry.color;
+        mention( `Color : ${c} ( ${t} )` );
+        gfx.fillStyle = ( c );
 		gfx.fillRect( 0, y, w - 1, y + band_height );
 	}
 };
@@ -239,6 +252,18 @@ Colorizer.add_entry = function( entry ) {
 	const ops = Colorizer;
 	const key = entry.key
 	ops.entries[ key ] = entry;
+};
+</script>
+
+<script>
+Colorizer.clear = function( color ) {
+	const ops = Colorizer;
+	const srf = gid( "surface" );
+	const w = srf.width;
+	const h = srf.height;
+	const gfx = srf.getContext( "2d" );
+    gfx.fillStyle = ( color || "gold" );
+    gfx.fillRect( 0, 0, w, h );
 };
 </script>
 
@@ -285,7 +310,9 @@ Colorizer.add_entry = function( entry ) {
 <script>
 function main( event ) {
 	try {
-		test();
+        const ops = Colorizer;
+        ops.read_table( 1 );
+        test( 6 );
 	} catch ( e ) {
 		alert ( e );
 		throw ( e );
@@ -307,11 +334,69 @@ function test_002() {
 function test_003() {
 	event_log.add( typeof event_log );
 }
-</script>
-
-<script>
-function test() {
-	test_003();
+function test_004() {
+    const ops = Colorizer;
+    ops.read_table( 1 );
+    const m = mem( ops.entries );
+    const v = m.map( k => ops.entries[ k ].color );
+	event_log.list( v, "Color Names"  );
+}
+function test_005() {
+    const ops = Colorizer;
+    const entries = ops.entries;
+    const color = entries.green.rgb;
+    event_log.add( color );
+    ops.clear( color );
+}
+function test_006() {
+    const ops = Colorizer;
+    ops.rainbow();
 }
 </script>
 
+<script>
+Tests = [
+  test_001
+, test_002
+, test_003
+, test_004
+, test_005
+, test_006
+];
+</script>
+
+<script>
+function test( n=5 ) {
+    try {
+        n = parseInt( n );
+        const fn = Tests[ n - 1 ];
+        if (! fn ) {
+            throw new Error( `Invalid Test Index: ${n}` );
+        }
+        fn();
+    } catch ( e ) {
+        bummer( e );
+    }
+}
+</script>
+
+<script>
+function bummer( e ) {
+    console.error( e );
+    event_log.add( `ERROR : ${e.message}` );
+}
+</script>
+
+<script>
+function mention( s ) {
+    console.log( s );
+    event_log.add( s );
+}
+</script>
+
+<script>
+function say( s ) {
+    event_log.clear();
+    mention( s );
+}
+</script>
