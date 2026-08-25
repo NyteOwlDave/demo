@@ -73,13 +73,13 @@ class Point {
         return ( xx + yy );
     }
     perp( other ) {
-        const xx = this.x * other.y;
-        const yy = this.y * other.x;
+        const xy = this.x * other.y;
+        const yx = this.y * other.x;
         return ( xy - yx );
     }
     project( mu, norm ) {
-        const x = this.x + mu * norm.x;
-        const y = this.y + mu * norm.y;
+        const x = ( this.x + mu * norm.x );
+        const y = ( this.y + mu * norm.y );
         return new Point( x, y );
     }
 }
@@ -92,12 +92,96 @@ Point.delta = function( va, vb ) {
     return va.perp( vb );
 };
 
-Point.mu = function( pa, pb, pc, pd, va, vb, delta ) {
-    const nx = ( ( pc.x - pa.y ) * va.x );
-    const ny = ( ( pd.y - pa.x ) * vb.y );
-    return ( ( nx - ny ) / delta );
+Point.mu = function( pa, pb, pc, pd ) {
+	const u = pb.sub( pa );
+	const v = pd.sub( pc );
+	const delta = u.perp( v );
+	if ( delta < 1e-08 ) { return NaN; }
+	const w = pc.sub( pa );
+	return ( w.perp( v ) / delta );
 };
 
+```
+
+---------------------------------------------------------------
+
+# Line Class
+
+```javascript
+class Line {
+	constructor( ps, pe ) {
+		this.origin = ps;
+		this.terminus = pe;
+	}
+	get origin() {
+		return Line.point( this.ps );
+	}
+	set origin( p ) {
+		this.ps = Line.point( p );
+	}
+	get terminus() {
+		return Line.point( this.pe );
+	}
+	set terminus( p ) {
+		this.pe = Line.point( p );
+	}
+	sub vector() {
+		const ps = this.origin;
+		const pe = this.terminus;
+		return ( pe.sub( ps ) );
+	}
+	sub length() {
+		const v = this.vector();
+		return Math.hypot( vy. v.x );
+	}
+	sub angle() {
+		const v = this.vector();
+		return Math.atan2( vy. v.x );
+	}
+	sub slope_dydx() {
+		const v = this.vector();
+		return ( v.y / v.x );
+	}
+	sub slope_dxdy() {
+		const v = this.vector();
+		return ( v.x / v.y );
+	}
+}
+Line.point = function( o ) {
+    if ( o instanceof Point  ) { return o; }
+    let x=0, y=0;
+    if ( o instanceof Object ) {
+        x = ( o.x || 0 );
+        y = ( o.y || 0 );
+    }
+    return new Point( x, y );
+};
+Line.vector = function( xs, ys, xe, ye ) {
+	const dx = ( xe - xs );
+	const dy = ( xe - xs );
+    return new Point( dx, dy );
+};
+Line.distance = function( xs, ys, xe, ye ) {
+	const dx = ( xe - xs );
+	const dy = ( xe - xs );
+    return Math.hypot( dy, dx );
+};
+Line.angle = function( xs, ys, xe, ye ) {
+	const dx = ( xe - xs );
+	const dy = ( xe - xs );
+    return Math.atan2( dy, dx );
+};
+Line.polar = function( xs, ys, xe, ye ) {
+	const dx = ( xe - xs );
+	const dy = ( xe - xs );
+    const rho = Math.atan2( dy, dx );
+    const theta = Math.atan2( dy, dx );
+	return { rho, theta };
+};
+Line.cartes = function( xs, ys, rho, theta ) {
+	return xs + rho * Math.cos( theta );
+	return ys + rho * Math.sin( theta );
+};
 ```
 
 ---------------------------------------------------------------
@@ -105,10 +189,10 @@ Point.mu = function( pa, pb, pc, pd, va, vb, delta ) {
 # Intersection Function
 
 ```javascript
-const intersection = function(line0, line1) {
-	const ops = intersection
-    const v1 = line0.p0;
-    const v2 = line0.p1.minus(v1);
+const intersection = function( line0, line1 ) {
+	const ops = intersection;
+    const v1 = line0.origin;
+    const v2 = line0.vector();
     const v3 = line1.p0;
     const v4 = line1.p1.minus(v3);
     const delta = v2.x*v4.y - v2.y*v4.x;
@@ -127,4 +211,34 @@ intersection.TINY = 1e-8;
 ```
 
 ---------------------------------------------------------------
+
+# BASIC Version
+
+```
+
+Sub Intersect (la As Line2, lb As Line2, poi As Point2)
+    Dim S As Point2: S.x = la.xs: S.y = la.ys
+    Dim T As Point2: T.x = lb.xs: T.y = lb.ys
+    Dim U As Vec2: VecLine la, U
+    Dim V As Vec2: VecLine lb, V
+    Dim W As Vec2: VecSub T, S, W
+    delta# = VecPerpDot#(U, V)
+    ' Ignore Parallel Lines
+    If (Abs(delta#) < TINY#) Then Exit Sub
+    mu# = VecPerpDot#(W, V) / delta#
+    VecProj S, mu#, U, poi
+End Sub
+
+```
+
+---------------------------------------------------------------
+
+# LaTex Version
+
+$$
+\text ( pending )
+$$
+
+---------------------------------------------------------------
+
 

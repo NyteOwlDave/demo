@@ -1,18 +1,21 @@
-1 IF p% >=16 THEN 
+REM -- There's a Screenshot for This
+REM -- No Source Code or Repo
+
+1 IF p% >=16 THEN
     GOTO 3
-  ELSE 
+  ELSE
     IF p% = 0 THEN
        RANDOMIZE TIMER
        SCREEN 12
     ELSE
        PALETTE p% - 1, b&
     END IF
-  END IF   
+  END IF
 2 READ p%, b&
 3 IF p% < 16 THEN
     GOTO 9
   ELSE
-    a$ = MKI$(RND * 640 + 1) 
+    a$ = MKI$(RND * 640 + 1)
        + MKI$(RND * 480)
        + MKI$((RND*60)+20)
        + MKI$(INT(RND * 4) * 4)
