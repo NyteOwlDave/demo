@@ -1,0 +1,238 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<style type="text/css">
+td, th { border: 1px solid #c3c3c3; padding: 0 3px 0 3px; }
+table { border-collapse: collapse; }
+img { max-width: 100%; }
+</style>
+<meta name="generator" content="ReText 7.2.3">
+<title>file-format-notes</title>
+<style type="text/css">
+</style>
+</head>
+<body>
+<style>
+@import url("./../../../style/every-page.css");
+pre {
+    max-width : calc( 100vw - 120px );
+    margin-left : 30px;
+}
+</style>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<hr>
+<h1>File Formats</h1>
+<blockquote>
+<p>( <code>3D Planet Demo</code> )</p>
+</blockquote>
+<hr>
+<h1>3DP Format</h1>
+<hr>
+<p>This format represents a complete <strong>3D Planet Definition</strong>.</p>
+<p>It's encoded as <i>plain text</i>.</p>
+<hr>
+<pre><code class="language-3dp">ncs planet 2020
+pitch n
+roll n
+yaw n
+scale n
+slices n
+begin palette
+r g b
+...
+end palette
+begin texture
+size n
+texel
+...
+end texture
+</code></pre>
+<hr>
+<h2>NOTES:</h2>
+<ul>
+<li>Empty lines are removed</li>
+<li>Leading/trailing whitespace (per line) is removed</li>
+<li>Any line beginning with "#" is a comment</li>
+<li>Comments are removed</li>
+<li>(required) Version string must be exact (all tokens match)</li>
+<li>(optional) Spin rate is an integer in [-5 ... +5]</li>
+<li>Pitch, roll and yaw are integers in [-360 ... +360]</li>
+<li>Color r, g, b are integers in [0 ... 255]</li>
+<li>Scale is an integer in [1 ... 5]</li>
+<li>Slices in an integer in [0 ... 2]</li>
+<li>Internally, aspect = 1/(slices+1)</li>
+<li>The size is an integer in [64, 128, 256]</li>
+<li>Size represents both w and h of the texture (w=size, h=size)</li>
+<li>Total texel count = size*size</li>
+<li>Each texel is a decimal integer (an index into the palette)</li>
+<li>Each texture line contains 20 texels (typically)</li>
+<li>Whitespace is ignored except as a token separator (when applicable)</li>
+<li>Unrecognized/missing tokens throw an exception</li>
+<li>Out of range numbers are clamped to sane limits</li>
+<li>Missing/malformed numbers are provided a default</li>
+<li>Extra colors are ignored</li>
+<li>Missing/malformed colors are provided a default</li>
+<li>If entire palette is missing, the default is gray scale</li>
+<li>Extra texels are ignored</li>
+<li>Missing/malformed texels are provided a default</li>
+<li>If entire texture is missing, the default is an NCS Logo</li>
+</ul>
+<hr>
+<h1>Header</h1>
+<pre><code>ncs planet 2020
+</code></pre>
+<hr>
+<p>Every <code>3DP</code> file must contain the above header signature
+validation purposes.</p>
+<hr>
+<h1>Schema</h1>
+<hr>
+<h2>State Variables</h2>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Format</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>pitch</td>
+<td>Integer</td>
+<td>Planet's Pitch (X rotation)</td>
+</tr>
+<tr>
+<td>roll</td>
+<td>Integer</td>
+<td>Planet's Roll (Y rotation)</td>
+</tr>
+<tr>
+<td>yaw</td>
+<td>Integer</td>
+<td>Planet's Yaw (Z rotation)</td>
+</tr>
+<tr>
+<td>scale</td>
+<td>Integer</td>
+<td>Planet's Scale</td>
+</tr>
+<tr>
+<td>slices</td>
+<td>Integer</td>
+<td>Number of Vertical Slices</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2>Number Ranges</h2>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Format</th>
+<th>Min</th>
+<th>Max</th>
+<th>Typical</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>pitch</td>
+<td>Integer</td>
+<td>-360</td>
+<td>+360</td>
+<td>0</td>
+</tr>
+<tr>
+<td>roll</td>
+<td>Integer</td>
+<td>-360</td>
+<td>+360</td>
+<td>0</td>
+</tr>
+<tr>
+<td>yaw</td>
+<td>Integer</td>
+<td>-360</td>
+<td>+360</td>
+<td>0</td>
+</tr>
+<tr>
+<td>scale</td>
+<td>Integer</td>
+<td>0</td>
+<td>5</td>
+<td>1</td>
+</tr>
+<tr>
+<td>slices</td>
+<td>Integer</td>
+<td>0</td>
+<td>2</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h1>Palette Structure (<code>PAL</code> File)</h1>
+<hr>
+<pre><code>begin palette
+r g b
+...
+end palette
+</code></pre>
+<hr>
+<p>The <strong>Palette Block</strong> is limited with <code>begin</code> and <code>end</code> 
+keywords.</p>
+<hr>
+<p>To identify the block as a palette, the <code>palette</code> keyword
+must follow each delimiter.</p>
+<hr>
+<p>Within the block are <code>RGB</code> colors. There must be 256 for
+proper scene rendering.</p>
+<hr>
+<h1>RGB Structure</h1>
+<hr>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>r</td>
+<td>Integer</td>
+<td>Red Component</td>
+</tr>
+<tr>
+<td>g</td>
+<td>Integer</td>
+<td>Green Component</td>
+</tr>
+<tr>
+<td>b</td>
+<td>Integer</td>
+<td>Blue Component</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h1>Texture Format (<code>TEX</code> File)</h1>
+<hr>
+<pre><code>begin texture
+size n
+texel
+...
+end texture
+</code></pre>
+<hr>
+
+</body>
+</html>

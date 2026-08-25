@@ -1,15 +1,30 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!doctype html>
 <html>
 <head>
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
-<meta name="generator" content="ReText 7.0.1">
+<style type="text/css">
+td, th { border: 1px solid #c3c3c3; padding: 0 3px 0 3px; }
+table { border-collapse: collapse; }
+img { max-width: 100%; }
+</style>
+<meta name="generator" content="ReText 7.2.3">
 <title>intro</title>
+<style type="text/css">
+</style>
 </head>
 <body>
 <p><link rel="stylesheet" href="help.css"></p>
+<style>
+body { margin  : 0px;  }
+body { padding : 20px; }
+</style>
+
+<hr>
 <h1>Introduction</h1>
 <hr>
+<blockquote>
 <p>➡ <a href="#Index">Index</a></p>
+</blockquote>
 <hr>
 <h1>What is PhotoPlanet?</h1>
 <p>It's a ball with a photo on it that spins around. Not too tough.
@@ -62,15 +77,14 @@ the information needed to generate the spinning ball on the screen
 with an image mapped on the surface. Some of this information is
 <em>static</em> and some <em>dynamic</em>.</p>
 <dt>Static</dt>
-
 <dd>Persistent when stored to a file and shared</dd>
 
 <dt>Dynamic</dt>
-
 <dd>Recreated each time the planet is loaded into the app</dd>
 
 <p>The <strong>static</strong> information consists of:</p>
 <ul>
+<li>Size [64, 128, or 256]</li>
 <li>Orientation (pitch, yaw and roll angles)</li>
 <li>Scale (vertical texture repeat count)</li>
 <li>Slices (number of horizontal slices)</li>
@@ -107,20 +121,19 @@ technical here, but this is what's known as using a <em>paletted image</em>.</p>
 <p>We can't get too deeply into an understanding of this without first
 discussing palettes. Just try to understand these facts:</p>
 <ul>
-<li>When imported, photo <strong>bitmaps</strong> are separated into palettes and textures</li>
-<li>A <strong>bitmap</strong> is a 2D array of <strong>pixels</strong> (picture elements)</li>
-<li>A <strong>pixel</strong> has a color and a location</li>
-<li>A <strong>palette</strong> is just a simple list of colors, each with an index number</li>
-<li>A <strong>texture</strong> decides which color is used for each dot in an image</li>
-<li>A <strong>texture</strong> is a 2D array of <strong>texels</strong> (texture elements)</li>
-<li>A <strong>texel</strong> has a color index number and a location</li>
-<li>Each <strong>texel</strong> is used to look up a <strong>color</strong> from a palette</li>
-<li>That <strong>color</strong> then becomes a <strong>pixel</strong> again</li>
+<li>When imported, photo <strong>bitmaps</strong> are separated into <em>palettes</em> and <em>textures</em></li>
+<li>A <strong>bitmap</strong> is a 2D array of <em>pixels</em> (picture elements)</li>
+<li>A <strong>pixel</strong> has a <em>color definition</em> and a <em>2D location</em></li>
+<li>A <strong>palette</strong> is just a simple <em>list of colors</em></li>
+<li>A <strong>palette entry</strong> is a <em>color index number</em> and a <em>color definition</em></li>
+<li>A <strong>texture</strong> is a 2D array of <em>texels</em> (texture elements)</li>
+<li>A <strong>texel</strong> has a <em>color index number</em> and a <em>2D location</em></li>
+<li>Each <strong>texel</strong> is used to look up a <em>color definition</em> from a <em>palette</em></li>
+<li>That <strong>color definition</strong> then becomes a <em>pixel</em> again</li>
 </ul>
 <hr>
 <p><a id="palette"></a></p>
 <h1>Palette</h1>
-<p>See: <a href="https://en.wikipedia.org/wiki/Palette_(computing)">Palettes</a></p>
 <p>The palette is the set of colors used to draw the image on the ball.
 The app is designed to <em>import</em> full color images (up to 16,777,216
 possible colors). But it can't use all of those colors. Instead, it
@@ -140,11 +153,6 @@ Each one is assigned a number (index) from 0 to 255. The texel value is
 then the pencil number to choose when selecting a color for a "bump" in
 the texture. See: 
 <a href="https://en.wikipedia.org/wiki/Palette_(computing)">Indexed Color</a>.</p>
-<p>Internally palettes are stored as RGB (Red, Green, Blue) triplets.
-In other words, any color is represented by a combination of different
-amounts of these three primary colors.
-For more details, see 
-<a href="https://en.wikipedia.org/wiki/RGB_color_model">RGB Color Model</a>.</p>
 <hr>
 <p><a id="example"></a></p>
 <h1>Example</h1>
@@ -168,9 +176,10 @@ texture business all words. A very simple example.</p>
 <li><a href="../index.html">Application</a></li>
 </ul>
 <hr>
-<p><footer>
+<footer>
 Copright &copy; Dave Wellsted<br>
-<a href="https://nyteowl-computer-software.business.site">NyteOwl Computer Software</a>
-</footer></p>
+[NyteOwl Computer Software](https://nyteowl-computer-software.business.site)
+</footer>
+
 </body>
 </html>

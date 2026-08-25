@@ -5,70 +5,74 @@
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
 [me-omega]:
-<http://dave-omega/demo/web/planet/planet-assets.html>
+<http://dave-omega/demo/web/planet/planet-menu.html>
 "Omega Edition"
 
 [me-tower]:
-<http://dave-tower/demo/web/planet/planet-assets.html>
+<http://dave-tower/demo/web/planet/planet-menu.html>
 "Tower Edition"
 
 ----------------------------------------------------------------
 
-# Planet Assets
+# Planet Demo Menu
 
 ----------------------------------------------------------------
 
 > [Omega][me-omega]
 > [Tower][me-tower]
-> [Menu](./planet-menu.html)
+> [Planet App](./planet.html)
+> [Assets](./planet-assets.html)
 > [File System](./)
 
 ----------------------------------------------------------------
 
-## API Modules
+# Introduction
 
-- [Vector Math API](./api/vec.js)
-- [Matrix Math API](./api/mtx.js)
-- [Color API](./api/color.js)
-- [Grafix API](./api/grafix.js)
-- [Image Loader API](./api/loadimg.js)
-- [Dialog API](./api/dlg.js)
-- [Palette Optimization API](./api/optpal.js)
-- [Texture Map API](./api/texmap.js)
-- [Documents API](./api/docs.js)
-- [Planet API](./api/planet.js)
+There's an official [Introduction](./doc/intro.html) page.
 
 ----------------------------------------------------------------
 
-## App Modules
+# Documentation Pages
 
-<section name="Application">
-<script name="User Interface" src="./app/planet-ui.js"></script>
-<script name="Application" src="./app/planet-app.js"></script>
-<script name="Diagnostic Tests" src="./app/diags.js"></script>
-</section>
-
-----------------------------------------------------------------
-
-> __NOTE__ : This should be populated at load time
-
-----------------------------------------------------------------
-
-## Style Modules
+- [example-1](./doc/example-1.html)
+- [formats](./doc/formats.html)
+- [markdown-menu](./doc/markdown-menu.html)
+- [page-menu](./doc/page-menu.html)
+- [palette](./doc/palette.html)
+- [planet](./doc/planet.html)
+- [tech](./doc/tech.html)
+- [texture](./doc/texture.html)
 
 ----------------------------------------------------------------
 
-- ( `pending` )
+# [File Format Pages](./data/)
+
+- [file-format-list](./data/file-format-list.html)
+- [file-format-notes](./data/file-format-notes.html)
+- [folder-list](./data/folder-list.html)
 
 ----------------------------------------------------------------
 
-# More Assets
+# Markdown Snippets
 
-- ( `pending` )
+- [markdown-templates](./data/markdown-templates.md)
 
 ----------------------------------------------------------------
 
-# References
+# [Project Folders](./)
+
+- [api](./api)
+- [app](./app/)
+- [art](./art/)
+- [assets](./assets/)
+- [data](./data/)
+- [doc](./doc/)
+- [icons](./icons/)
+- [style](./style/)
+
+----------------------------------------------------------------
+
+# Project To-Do Notes
 
 - ( `pending` )
 
@@ -87,6 +91,6 @@
 
 <script>
 ; doc = document
-; doc . title = ( `Planet Demo Assets` )
+; doc . title = ( `Planet Demo Menu` )
 </script>
 
