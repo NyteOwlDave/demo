@@ -121,12 +121,24 @@ F(a,b,c) = ((a-b) \cdot c)
 $$
 
 $$
-p = F( B0_x, A0_x, V_x )
+p = F( B0_x, A0_x, V_y )
 $$
 
 $$
-q = F( B0_y, A0_y, V_y )
+q = F( B0_y, A0_y, V_x )
 $$
+
+----------------------------------------------------------------
+
+Note the this implies ( `p` - `q` ) is a __perpdot__ product
+between vector `W` (`B0` - `A0`) and vector `V`.
+
+$$
+( p - q ) = ( \overrightarrow{W} ⟂ \overrightarrow{V} )
+$$
+
+I haven't defined `W` until now, though I sensed there was
+an easier way to think about this as a __perpdot__.
 
 ----------------------------------------------------------------
 
