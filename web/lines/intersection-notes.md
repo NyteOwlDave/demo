@@ -191,20 +191,18 @@ Line.cartes = function( xs, ys, rho, theta ) {
 ```javascript
 const intersection = function( line0, line1 ) {
 	const ops = intersection;
-    const v1 = line0.origin;
-    const v2 = line0.vector();
-    const v3 = line1.p0;
-    const v4 = line1.p1.minus(v3);
-    const delta = v2.x*v4.y - v2.y*v4.x;
+    const v1 = line0.origin;   // O
+    const v2 = line0.vector(); // U
+    const v3 = line1.origin(); // Q
+    const v4 = line1.vector(); // V
+    const delta = v2.perp( v4 );
     if ( Math.abs( delta ) < ops.TINY ) {
       console.log("Parallel");
       return null; // Lines are parallel
     }
-    const mu = ( ((v3.x-v1.x)*v4.y) - ((v3.y-v1.y)*v4.x) ) / delta;
-    return new Point(
-        v1.x + mu * v2.x,
-        v1.y + mu * v2.y
-    );
+    const w = v3.sub( v1 );
+    const mu = w.perp( v4 ) / delta;
+    return v1.proj( mu, v2 );
 }
 
 intersection.TINY = 1e-8;
@@ -217,8 +215,8 @@ intersection.TINY = 1e-8;
 ```
 
 Sub Intersect (la As Line2, lb As Line2, poi As Point2)
-    Dim S As Point2: S.x = la.xs: S.y = la.ys
-    Dim T As Point2: T.x = lb.xs: T.y = lb.ys
+    Dim O As Point2: O.x = la.xs: O.y = la.ys
+    Dim P As Point2: P.x = lb.xs: P.y = lb.ys
     Dim U As Vec2: VecLine la, U
     Dim V As Vec2: VecLine lb, V
     Dim W As Vec2: VecSub T, S, W
@@ -226,7 +224,7 @@ Sub Intersect (la As Line2, lb As Line2, poi As Point2)
     ' Ignore Parallel Lines
     If (Abs(delta#) < TINY#) Then Exit Sub
     mu# = VecPerpDot#(W, V) / delta#
-    VecProj S, mu#, U, poi
+    VecProj O, mu#, U, poi
 End Sub
 
 ```
@@ -235,9 +233,34 @@ End Sub
 
 # LaTex Version
 
+```latex
 $$
-\text ( pending )
+POI = \mu \cdot U + O
 $$
+$$
+\mu = \frac {W \perp V} {U \perp V} = \frac {\alpha}{\Delta}
+$$
+$$
+U = P-O, V=R-Q, W=Q-O
+$$
+```
+---------------------------------------------------------------
+
+# Diagram
+
+$$
+POI = \mu \cdot U + O
+$$
+$$
+\mu = \frac {W \perp V} {U \perp V} = \frac {\alpha}{\Delta}
+$$
+$$
+U = P-O, V=R-Q, W=Q-O
+$$
+
+<div style="text-align:center">
+<img src="http://dave-tower/demo/web/art/fig/isect-2.png" width=400>
+</div>
 
 ---------------------------------------------------------------
 

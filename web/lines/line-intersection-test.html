@@ -1,40 +1,52 @@
- 
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<style type="text/css">
+td, th { border: 1px solid #c3c3c3; padding: 0 3px 0 3px; }
+table { border-collapse: collapse; }
+img { max-width: 100%; }
+</style>
+<meta name="generator" content="ReText 7.2.3">
+<title>line-intersection-test</title>
+<style type="text/css">
+</style>
+</head>
+<body>
 <style>
 
 * {
-  	color: white;
-  	background: black;
+    color: white;
+    background: black;
 }
 
 html, body {
-	box-sizing : border-box;
-	margin  : 0;
-	padding : 0;
-	border  : none;
+    box-sizing : border-box;
+    margin  : 0;
+    padding : 0;
+    border  : none;
 }
 
 body {
-	height : 100vh;
+    height : 100vh;
 }
 
 #idCanvas {
-	box-sizing : border-box;
-	position : fixed;
-	top    : 0;
+    box-sizing : border-box;
+    position : fixed;
+    top    : 0;
     left   : 0;
-	width  : 50vw;
+    width  : 50vw;
     height : calc( 100vh - 100px );
-	border : 1px dashed gold;
+    border : 1px dashed gold;
 }
 
 </style>
 
-----------------------------------------------------------------
-
+<hr>
 <canvas id="idCanvas"></canvas>
 
-----------------------------------------------------------------
-
+<hr>
 <script src="./../gems/line-intersection.js"></script>
 
 <script>
@@ -65,12 +77,12 @@ const get_canvas_size = function() {
 
 const set_canvas_size = function( w=0, h=0 ) {
     const srf = idCanvas;
-	const rc = srf.getBoundingClientRect();
-	w = ( w || 0 ); h = ( h || 0 );
+    const rc = srf.getBoundingClientRect();
+    w = ( w || 0 ); h = ( h || 0 );
     if ( w < 1 ) { w = rc.width;  }
     if ( h < 1 ) { h = rc.height; }
     srf.width  = ( w );
-	srf.height = ( h );
+    srf.height = ( h );
     return { w, h };
 }
 
@@ -128,3 +140,5 @@ addEventListener( "load", main );
 
 </script>
 
+</body>
+</html>
