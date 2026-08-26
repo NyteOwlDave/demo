@@ -13,6 +13,10 @@ img { max-width: 100%; }
 </style>
 </head>
 <body>
+<style>
+@import url("./../style/every-page.css");
+</style>
+
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
@@ -28,7 +32,7 @@ img { max-width: 100%; }
 <hr>
 <h1><a href="http://dave-omega/demo/notes/basic-editions.html" title="Omega Edition">BASIC Editions</a></h1>
 <hr>
-<h2>HAL Links</h2>
+<h2><a href="http://dave-tower/app/jarvis/toolkit/ncs/hikaru/" title="Tower Edition">HAL Links</a></h2>
 <pre><code class="language-hal">
 http://www.vintage-basic.net
 https://basic256.org
@@ -87,7 +91,7 @@ https://run.basic256.org/
 
 </code></pre>
 <hr>
-<h2>NAV Links</h2>
+<h2><a href="http://dave-ryzen/nav/sulu.html">NAV Links</a></h2>
 <pre><code class="language-nav">
 + 3D Basic
 @ https://threedbasic.wixsite.com/3d-basic
@@ -268,12 +272,20 @@ https://run.basic256.org/
 </div>
 
 <hr>
-<h1>Edition Links</h1>
+<h1><a href="http://dave-tower/app/jarvis/toolkit/ncs/venus/" title="Tower Edition">Edition Links</a></h1>
 <blockquote>
-<p>( Recommended : <code>basic-edition-table.html</code> )</p>
+<p>( Recommended Store Key : <code>basic-edition-table.html</code> )</p>
 </blockquote>
+<hr>
+<div center>
+  <button onclick="action(event)" action="minnie.assist()">
+    Mouse Actions Help
+  </button>
+</div>
+
+<hr>
 <div>
-<section id="table_section"></section>
+  <section id="table_section"></section>
 </div>
 
 <hr>
@@ -285,7 +297,7 @@ https://run.basic256.org/
 <a href="https://en.softonic.com" title="Softonic Download">Softonic</a></p>
 </blockquote>
 <hr>
-<h1>References</h1>
+<h1><a href="https://app.raindrop.io/my/45357558">References</a></h1>
 <blockquote>
 <p><a href="https://en.wikipedia.org/wiki/BASIC" title="BASIC Wiki">BASIC Wiki</a>
 <a href="https://en.wikipedia.org/wiki/List_of_BASIC_dialects" title="BASIC Dialects Wiki">BASIC Dialects Wiki</a></p>
@@ -326,10 +338,6 @@ https://run.basic256.org/
 </footer>
 
 <hr>
-<style>
-@import url("./../style/every-page.css");
-</style>
-
 <style>
 thead {
     cursor : pointer;
@@ -696,6 +704,25 @@ addEventListener( "click", minnie );
 </script>
 
 <script>
+minnie.assist = function() {
+    visit( `./basic-edition-mouse-actions.html` );
+};
+</script>
+
+<script>
+minnie.tabulate = function( o, sort ) {
+    let m;
+    if ( sort ) {
+        m = Object.keys( o ).sort();
+    } else {
+        m = Object.keys( o );
+    }
+    const t = ( m.map( k => [ k, o[ k ] ] ) );
+    return ( t );
+};
+</script>
+
+<script>
 minnie.th = function( event ) {
     const th = event.target;
     const re = th.parentElement;
@@ -708,18 +735,51 @@ minnie.th = function( event ) {
     if ( event.metaKey ) { return; }
     if ( event.ctrlKey ) {
         if ( event.shiftKey ) {
-            recover_table( te );
+            persist_table( te );
             return;
         } else if ( event.altKey ) {
             save_table( te );
             return;
         } else {
-            persist_table( te );
+            recover_table( te );
             return;
         }
     }
     toggle_table_edit_mode( te );
 }
+</script>
+
+<script>
+minnie.th.hints = {
+  "CLICK"            : "Toggle Edit Mode"
+, "CTRL+SHIFT+CLICK" : "Persist Store Entry"
+, "CTRL+ALT+CLICK"   : "Save to File"
+, "CTRL+CLICK"       : "Recover Store Entry"
+};
+</script>
+
+<script>
+minnie.th.inspect = function() {
+    const ops = minnie;
+    const t = ops.tabulate( ops.th.hints );
+    const c = console;
+    c.group( "Header Hotkeys" );
+    c.table( t );
+    c.groupEnd();
+};
+</script>
+
+<script>
+minnie.th.show = function() {
+    const ops = minnie;
+    const t = ops.tabulate( ops.th.hints );
+    const v = (
+        ( t )
+        . map( a => a.join( " :=  " ) )
+    );
+    ( v ).unshift( "[ Header Hotkeys ]\n" );
+    alert( v.join( "\n" ) );
+};
 </script>
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->

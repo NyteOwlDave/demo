@@ -1,3 +1,6 @@
+<style>
+@import url("./../style/every-page.css");
+</style>
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
@@ -67,6 +70,14 @@
 <http://dave-tower/ramdisk/basic/basic-editions.html>
 "Tower Edition"
 
+[hikaru]:
+<http://dave-tower/app/jarvis/toolkit/ncs/hikaru/>
+"Tower Edition"
+
+[venus]:
+<http://dave-tower/app/jarvis/toolkit/ncs/venus/>
+"Tower Edition"
+
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
 [sulu]:          <http://dave-ryzen/nav/sulu.html>
@@ -85,6 +96,7 @@
 [jimbo-cloud]:   <http://tiny.cc/ncs-jimbo>
 [clip-db]:       <http://tiny.cc/ncs-clip-db>
 [luminous]:      <http://tiny.cc/jarvis-snipper-101>
+[i-drive]:       <https://idrive.com>
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
@@ -102,7 +114,7 @@
 
 ----------------------------------------------------------------
 
-## HAL Links
+## [HAL Links][hikaru]
 
 ```hal
 
@@ -168,7 +180,7 @@ https://run.basic256.org/
 
 ----------------------------------------------------------------
 
-## NAV Links
+## [NAV Links][sulu]
 
 ```nav
 
@@ -356,13 +368,24 @@ https://run.basic256.org/
 
 ----------------------------------------------------------------
 
-# Edition Links
+# [Edition Links][venus]
 
-> ( Recommended : `basic-edition-table.html` )
+> ( Recommended Store Key : `basic-edition-table.html` )
+
+----------------------------------------------------------------
+
+<div center>
+  <button onclick="action(event)" action="minnie.assist()">
+    Mouse Actions Help
+  </button>
+</div>
+
+----------------------------------------------------------------
 
 <div>
-<section id="table_section"></section>
+  <section id="table_section"></section>
 </div>
+
 
 ----------------------------------------------------------------
 
@@ -376,7 +399,7 @@ https://run.basic256.org/
 
 ----------------------------------------------------------------
 
-# References
+# [References][raindrop]
 
 > [BASIC Wiki][basic-wiki]
 > [BASIC Dialects Wiki][dialects-wiki]
@@ -426,10 +449,6 @@ https://run.basic256.org/
 </footer>
 
 ----------------------------------------------------------------
-
-<style>
-@import url("./../style/every-page.css");
-</style>
 
 <style>
 thead {
@@ -806,6 +825,25 @@ addEventListener( "click", minnie );
 </script>
 
 <script>
+minnie.assist = function() {
+    visit( `./basic-edition-mouse-actions.html` );
+};
+</script>
+
+<script>
+minnie.tabulate = function( o, sort ) {
+    let m;
+    if ( sort ) {
+        m = Object.keys( o ).sort();
+    } else {
+        m = Object.keys( o );
+    }
+    const t = ( m.map( k => [ k, o[ k ] ] ) );
+    return ( t );
+};
+</script>
+
+<script>
 minnie.th = function( event ) {
 	const th = event.target;
 	const re = th.parentElement;
@@ -818,18 +856,51 @@ minnie.th = function( event ) {
 	if ( event.metaKey ) { return; }
 	if ( event.ctrlKey ) {
 		if ( event.shiftKey ) {
-			recover_table( te );
+			persist_table( te );
 			return;
 		} else if ( event.altKey ) {
 			save_table( te );
 			return;
 		} else {
-			persist_table( te );
+			recover_table( te );
 			return;
 		}
 	}
 	toggle_table_edit_mode( te );
 }
+</script>
+
+<script>
+minnie.th.hints = {
+  "CLICK"            : "Toggle Edit Mode"
+, "CTRL+SHIFT+CLICK" : "Persist Store Entry"
+, "CTRL+ALT+CLICK"   : "Save to File"
+, "CTRL+CLICK"       : "Recover Store Entry"
+};
+</script>
+
+<script>
+minnie.th.inspect = function() {
+    const ops = minnie;
+    const t = ops.tabulate( ops.th.hints );
+    const c = console;
+    c.group( "Header Hotkeys" );
+    c.table( t );
+    c.groupEnd();
+};
+</script>
+
+<script>
+minnie.th.show = function() {
+    const ops = minnie;
+    const t = ops.tabulate( ops.th.hints );
+    const v = (
+        ( t )
+        . map( a => a.join( " :=  " ) )
+    );
+    ( v ).unshift( "[ Header Hotkeys ]\n" );
+    alert( v.join( "\n" ) );
+};
 </script>
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->

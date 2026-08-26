@@ -1,0 +1,205 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<style type="text/css">
+td, th { border: 1px solid #c3c3c3; padding: 0 3px 0 3px; }
+table { border-collapse: collapse; }
+img { max-width: 100%; }
+</style>
+<meta name="generator" content="ReText 7.2.3">
+<title>basic-edition-mouse-actions</title>
+<style type="text/css">
+</style>
+</head>
+<body>
+<style>
+@import url("./../style/every-page.css");
+</style>
+
+<hr>
+<h1>Mouse Actions</h1>
+<hr>
+<blockquote>
+<p>( <code>BASIC Editions</code> )</p>
+</blockquote>
+<hr>
+<h1>Modifier Key Legend</h1>
+<hr>
+<table>
+<thead>
+<tr>
+<th>Letter</th>
+<th>Modifier</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>〖A〗</td>
+<td>ALT Key</td>
+</tr>
+<tr>
+<td>〖C〗</td>
+<td>CTRL Key</td>
+</tr>
+<tr>
+<td>〖M〗</td>
+<td>META Key</td>
+</tr>
+<tr>
+<td>〖S〗</td>
+<td>SHIFT Key</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<blockquote>
+<p>These letters are used for brevity.</p>
+</blockquote>
+<hr>
+<h1>Table Header Click Actions</h1>
+<hr>
+<table>
+<thead>
+<tr>
+<th>〖A〗</th>
+<th>〖C〗</th>
+<th>〖M〗</th>
+<th>〖S〗</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>🔴</code></td>
+<td><code>🔴</code></td>
+<td><code>🔴</code></td>
+<td><code>🔴</code></td>
+<td>Toggle Edit Mode</td>
+</tr>
+<tr>
+<td><code>🔴</code></td>
+<td><code>🟢</code></td>
+<td><code>🔴</code></td>
+<td><code>🔴</code></td>
+<td>Recover Store Entry</td>
+</tr>
+<tr>
+<td><code>🔴</code></td>
+<td><code>🟢</code></td>
+<td><code>🔴</code></td>
+<td><code>🟢</code></td>
+<td>Persist Store Entry</td>
+</tr>
+<tr>
+<td><code>🟢</code></td>
+<td><code>🟢</code></td>
+<td><code>🔴</code></td>
+<td><code>🔴</code></td>
+<td>Save as File</td>
+</tr>
+</tbody>
+</table>
+<!--
+`🔴`  Red
+`🟢`  Green
+-->
+
+<hr>
+<blockquote>
+<p>Actions are invoked by clicking on the Table's Header.</p>
+</blockquote>
+<hr>
+<h1>Key Handler Members ( <code>minnie</code> )</h1>
+<hr>
+<p>All of the below items are members of the <code>minnie()</code> Accessor.</p>
+<hr>
+<p>The <strong>Accessor</strong> doubles as an Event Handler for <code>mousedown</code> 
+events. It detects the <strong>Element Node Name</strong> and dispatches 
+events for <strong>Custom Handling</strong> based on this type.</p>
+<hr>
+<h2>Properties</h2>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Contents</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>th.hints</code></td>
+<td>Object</td>
+<td>Mouse Action Hints Map</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2>Methods</h2>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Args</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>assist</code></td>
+<td></td>
+<td>Show This Help Page</td>
+</tr>
+<tr>
+<td><code>tabulate</code></td>
+<td>o</td>
+<td>Convert Object to Core Table (read entries)</td>
+</tr>
+<tr>
+<td><code>th</code></td>
+<td>event</td>
+<td>Header Click Event Handler</td>
+</tr>
+<tr>
+<td><code>th.inspect</code></td>
+<td></td>
+<td>Show Mouse Actions in Console</td>
+</tr>
+<tr>
+<td><code>th.show</code></td>
+<td></td>
+<td>Show Mouse Action in Popup Dialog</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h1>Usage Notes</h1>
+<hr>
+<p>There are two ways to trigger these <strong>Mouse Actions</strong>:</p>
+<hr>
+<ul>
+<li>1) Click the <strong>Table's Header</strong> ( <code>THEAD</code> ) Element</li>
+<li>2) Call Methods from the <strong>Console</strong> or <strong>Footer Input</strong></li>
+</ul>
+<hr>
+<h2>Mouse Clicks</h2>
+<p>Position the <strong>Mouse Cursor</strong> over the <strong>Table's Header</strong>, hold
+down the proper <strong>Modifer Key(s)</strong>, then <strong>Left Click</strong>.</p>
+<hr>
+<h2>Console</h2>
+<p>Open the Browser's <strong>Debug Console</strong> and run the desired
+<code>JavaScipt</code> command.</p>
+<hr>
+<h2>Footer Input</h2>
+<p>The <code>INPUT</code> Gadget located in the <code>FOOTER</code> also
+runs <code>JavaScript</code> commands. You can enter code here and
+press the <code>〖ENTER〗</code> key.</p>
+<hr>
+<script>
+; doc = document
+; doc . title = ( `BASIC Edition Mouse Actions` )
+</script>
+
+</body>
+</html>
