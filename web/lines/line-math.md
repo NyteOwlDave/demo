@@ -154,7 +154,7 @@ $$
 
 $$
 \mu = \frac
- { \overrightarrow{W} ⟂ \overrightarrow{U} }
+ { \overrightarrow{W} ⟂ \overrightarrow{V} }
  { \overrightarrow{U} ⟂ \overrightarrow{V} }
 $$
 

@@ -1,0 +1,10 @@
+
+/*
+	KEY : to-be-added.css
+	FOR : every-page.css
+*/
+
+pre {
+    max-width : calc( 100vw - 120px );
+    margin-left : 30px;
+}

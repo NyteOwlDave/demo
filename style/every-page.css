@@ -1,10 +1,15 @@
 
-/* 
+/*
+
+----------------------------------------------------------------
 
 # Every Page's Style
 
+----------------------------------------------------------------
+
 > ( `every-page.css` )
 
+----------------------------------------------------------------
 
 */
 
@@ -16,6 +21,9 @@
 @import url("./jefr/just/rainbow.css");
 @import url("./jefr/just/active-header.css");
 @import url("./decal-icon.css");
+
+/* IMPORTANT : Make These Permanent */
+@import url("./to-be-added.css");
 
 [center] ,
 *.center {
