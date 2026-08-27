@@ -202,7 +202,6 @@ function circle( x, y, r, c, gfx ) {
 }
 </script>
 
-
 <script>
 circle.test = function( limit ) {
 	const srf = surface;
@@ -216,4 +215,6 @@ circle.test = function( limit ) {
 	}
 };
 </script>
+
+
 

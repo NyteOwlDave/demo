@@ -121,9 +121,17 @@ function render() {
 
 ----------------------------------------------------------------
 
-> [HUD API Notes](./../web/api/hud-api-notes.html)
-> [Core API Notes](./../web/api/core-api-notes.html)
-> [Rocket API Notes](./../web/api/rocket-api-notes.html)
+> [HUD API Notes](./../api/hud-api-notes.html)
+> [Core API Notes](./../api/core-api-notes.html)
+> [Rocket API Notes](./../api/rocket-api-notes.html)
+> [BASIC Editions](http://dave-omega/demo/basic-edition-menu.html)
+> [QB64 Phoenix](https://qb64phoenix.com/qb64wiki/index.php/Main_Page)
+> [Mark-Ed](https://markdowneditor.org/)
+> [Math Jax](http://dave-legacy/math/latex/mathjax.html)
+> [WebGL](https://webglfundamentals.org/)
+> [Graphics Universe](http://dave-legacy/graphics/menu/graphics-universe.html)
+> [YouTube](https://www.youtube.com/results?search_query=computer+graphics+programming)
+> [Wikipedia](https://en.wikipedia.org/wiki/Computer_graphics)
 > [DES Shortcut](./des/lissajous.desktop)
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
@@ -502,18 +510,89 @@ function recover_viewer() {
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
 <script id="devops-hints.js">
-console.info( `DES-II Has Great Event Logging!` );
-console.info( `SEE: NCS Tools for Jarvis`       );
-console.info( `SEE: Palette Analyzer`           );
-console.info( `SEE: Luminosity Gfx Tool`        );
-console.info( `SEE: Luminous Gfx API`           );
-</script>
 
-<script id="des-ii-url.js">
-des_ii_url = (
-  `http://dave-omega/app/jarvis/toolkit/ncs/desiree/des-ii.html` 
-);
+devops_hints = ( `
+SEE: NCS Tools for Jarvis
+SEE: Luminosity Gfx Tool
+SEE: Lumina Gfx API
+SEE: Palette Analyzer Notes
+SEE: DES-II (Great Event Logging!)
+SEE: Embedded "nav-links.js" doc
+` );
+
+console.info( `SEE: Embedded "devops-hints.js" doc` );
+
 </script>
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script id="nav-links.js">
+
+nav_links = ( `
+
+# Nav Links
+
++ Venus
+@ http://dave-omega/app/jarvis/toolkit/ncs/venus/venus-v1p5.html
+
++ File-Tray Gadget
+@ http://dave-omega/app/jarvis/gadgets/file-tray/file-tray.html
+
++ Mark-Ed
+@ http://dave-legacy/app/mark-ed/mark-ed-menu.html
+
++ Snek
+@ http://dave-legacy/app/hysteresis/pen.html
+
++ JSON Editor
+@ http://dave-omega/venus/json-tree-editor.html
+
++ Editors
+@ https://sites.google.com/view/morning-swill/links/editors
+
++ Des II
+@ http://dave-omega/app/jarvis/toolkit/ncs/desiree/des-ii.html
+
++ Dorothy
+@ http://dave-omega/demo/web/dorothy-rockets.html
+
++ SKNM
+@ http://dave-tower/jefr/sknm/sknm.html
+
++ Locutus
+@ http://dave-legacy/app/locutus/locutus.html
+
++ Shirley
+@ http://dave-omega/app/sinkro/notes/rt/shirley.html
+
++ Demos
+@ http://dave-tower/demo/demo-menu.html
+
++ RAM Disk
+@ http://dave-tower/ramdisk/ramdisk-menu.html
+
++ Jarvis
+@ http://dave-tower/app/jarvis/jarvis-menu.html
+
++ SinKro
+@ http://dave-omega/app/sinkro/
+
++ Daves Notes
+@ http://tiny.cc/daves-notes
+
++ Sulu
+@ http://dave-ryzen/nav/
+
++ McCloud
+@ http://dave-legacy/mccloud/drive/menu-md.html
+
++ Luminosity
+@ http://dave-tower/demo/web/pixmap/luminosity.html
+
+` );
+
+</script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
 

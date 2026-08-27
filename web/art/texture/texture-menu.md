@@ -2,19 +2,38 @@
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
+[pinterest]:
+<https://www.pinterest.com/bigbluefox/game-texture-reference/>
+"Pinterest Game Textures"
+
 [me-omega]:
 <http://dave-omega/demo/web/art/texture/texture-menu.html>
 "Omega Edition"
 
+[me-tower]:
+<http://dave-tower/demo/web/art/texture/texture-menu.html>
+"Tower Edition"
+
+[me-legacy]:
+<http://dave-legacy/demo/web/art/texture/texture-menu.html>
+"Legacy Edition"
+
 ----------------------------------------------------------------
 
-# [Texture Menu][me-omega]
+# [Texture Menu][pinterest]
 
 ----------------------------------------------------------------
 
 <div center>
   <img src="favicon.ico" class="texture" />
 </div>
+
+----------------------------------------------------------------
+
+> [File System](./)
+> [Omega][me-omega]
+> [Tower][me-tower]
+> [Legacy][me-legacy]
 
 ----------------------------------------------------------------
 
