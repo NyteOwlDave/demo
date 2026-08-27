@@ -1,0 +1,12 @@
+[Desktop Entry]
+
+Version=1.0
+Type=Application
+Terminal=false
+
+Name=Lissajous Editor
+Exec=firefox http://dave-omega/demo/web/lissajous/lissajous.html
+Icon=/home/dave/Icons/logo/lissajous.png
+
+# lissajous.desktop
+

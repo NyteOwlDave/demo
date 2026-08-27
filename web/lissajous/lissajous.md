@@ -1,4 +1,4 @@
-<head> <link rel="icon" href="favicon.ico" /> </head>
+<head> <link rel="icon" href="./favicon.ico" /> </head>
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
@@ -124,6 +124,7 @@ function render() {
 > [HUD API Notes](./../web/api/hud-api-notes.html)
 > [Core API Notes](./../web/api/core-api-notes.html)
 > [Rocket API Notes](./../web/api/rocket-api-notes.html)
+> [DES Shortcut](./des/lissajous.desktop)
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
