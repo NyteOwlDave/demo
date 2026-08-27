@@ -1,6 +1,8 @@
 
 /* hud.js */
 
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
 function hud( show ) {
     if ( "undefined" === typeof show ) {
         return hud.toggle();
@@ -12,6 +14,8 @@ function hud( show ) {
     }
 }
 
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
 ;
 ; hud.title    = ( "Heads-Up Editor" )
 ; hud.tikey    = ( "8e314b66-9e0c-11f1-b5f8-e3977ca2d89c" )
@@ -21,6 +25,15 @@ function hud( show ) {
 ; hud.cnames = [ "hide" ]
 ; hud.types  = [ "TEXTAREA" ]
 ;
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
+hud.zoom = function( o ) {
+    const ed = ( o || hud.editor() );
+    ed.classList.remove( "hide" );
+    ed.requestFullscreen();
+    ed.focus();
+}
 
 hud.show = function( o ) {
     const ed = ( o || hud.editor() );
@@ -47,6 +60,8 @@ hud.hidden = function( o ) {
     return ( ed.classList.contains( "hide" ) );
 };
 
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
 hud.editor = function() {
     const doc = document;
     const gid =( i )=> ( doc.getElementById( i ) );
@@ -57,12 +72,7 @@ hud.editor = function() {
     );
 };
 
-hud.zoom = function( o ) {
-    const ed = ( o || hud.editor() );
-    ed.classList.remove( "hide" );
-    ed.requestFullscreen();
-    ed.focus();
-}
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
 hud.assist = function() {
     const m = hud.members();
@@ -77,6 +87,8 @@ hud.inspect = function() {
     c.table( m );
     c.groupEnd();
 }
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
 hud.members = function() {
     return Object.keys( hud ).sort();
@@ -95,6 +107,8 @@ hud.peek = function( key, session ) {
     key = ( str( key ) || ( hud.storekey ) );
     return ( store.getItem( key ) );
 };
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
 hud.persist = function( key, session ) {
     const store = (
@@ -140,6 +154,8 @@ hud.recover = function( key, session ) {
     }
 }
 
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
 hud.run = function() {
     const ed = hud.editor();
     try {
@@ -160,6 +176,8 @@ hud.clear = function() {
     ed.value = "";
     return ( ed );
 };
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
 hud.memo = function() {
     const ed = hud.editor();
@@ -191,6 +209,8 @@ hud.memo.swap = function() {
     ed.memo = ( old );
     return ( ed );
 };
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
 hud.stack = function() {
     const ed = hud.editor();
@@ -251,6 +271,8 @@ hud.stack.reverse = function() {
     return ( ed );
 };
 
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
 hud.mem = function( o, rex ) {
     o = ( o || window );
     let m = Object.keys( o ).sort();
@@ -281,9 +303,13 @@ hud.tmp = function( rex ) {
     }
 };
 
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
 hud.hello = function() {
     return hud.mem( hud );
 };
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
 hud.message = function( s ) {
     if ( "function" === typeof message ) {
@@ -300,6 +326,8 @@ hud.blurt = function( s ) {
     window.alert( s );
     return ( s );
 };
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
 hud.jit = function( s ) {
     console.info( s );
@@ -326,3 +354,106 @@ hud.jet = function( e ) {
     return ( e );
 };
 
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
+( ( ops )=> {
+
+ops.modkeys = function( event ) {
+    const a = ( event.altKey   ? 0x01 : 0 );
+    const c = ( event.ctrlKey  ? 0x02 : 0 );
+    const m = ( event.metaKey  ? 0x04 : 0 );
+    const s = ( event.shiftKey ? 0x08 : 0 );
+    const k = ( a | c | m | s );
+    return ( k );
+};
+
+ops.modkeys.ZERO  = 0x00;
+ops.modkeys.ALT   = 0x01;
+ops.modkeys.CTRL  = 0x02;
+ops.modkeys.META  = 0x04;
+ops.modkeys.SHIFT = 0x08;
+ops.modkeys.MASK  = 0x0F;
+
+ops.modkey = function( code ) {
+    if ( code instanceof Event ) {
+        code = code.keyCode;
+    }
+    const codes = ops.modkey.codes;
+    return ( codes.includes( code ) );
+};
+
+ops.modkey.codes = [ 16, 17, 18, 91, 92 ];
+
+ops.mine = function( ev ) {
+    if ( ev instanceof Event ) {
+        ( ev ).preventDefault();
+        ( ev ).stopPropagation();
+    }
+    return ( ev )
+};
+
+ops.insert =
+function insert( s ) {
+    const ed = ops.editor();
+    const t  = ( ed ).value;
+    const n  = ( s  ).length;
+    const lo = ( ed ).selectionStart;
+    ed.value = [
+        t.slice( 0, lo ) ,
+        t.slice( ed.selectionEnd )
+    ].join( s );
+    ed.selectionStart = (
+        ed.selectionEnd = ( lo + n )
+    );
+    ed.focus();
+    return ( ed );
+};
+
+function keifer( event ) {
+    const sender = event.target;
+    const code = event.keyCode;
+    const mods = ops.modkeys( event );
+    if ( code === 145 ) {
+        if ( mods ) { return; }
+        ops.mine( event )
+        hud();
+        return;
+    }
+    if ( sender !== ops.editor() ) {
+        return;
+    }
+    if ( mods & ops.modkeys.ALT ) {
+        if ( code == 13 ) {
+            ops.mine( event );
+            ops.run();
+            return;
+        }
+    }
+    if ( code === 9 ) {
+        if ( mods ) { return; }
+        ops.mine( event )
+        ops.insert( "\t" );
+    }
+}
+
+function init() {
+    const ed = ops.editor();
+    const st = ed.style;
+    st.tabSize = "4";
+    ed.spellcheck = false;
+};
+
+addEventListener( "load", init );
+
+addEventListener( "keydown", keifer );
+
+} ) ( hud );
+
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
+;
+; console.log( `Loaded "hud.js" API Module` );
+;
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */

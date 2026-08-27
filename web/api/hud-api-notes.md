@@ -7,9 +7,13 @@
 <http://dave-omega/demo/web/api/hud-api-notes.html>
 "Omega Edition"
 
+[me-legacy]:
+<http://dave-legacy/demo/web/api/hud-api-notes.html>
+"Omega Edition"
+
 ----------------------------------------------------------------
 
-# [HUD Editor API Notes][me-omega]
+# [HUD Editor API Notes][me-legacy]
 
 ----------------------------------------------------------------
 
@@ -19,7 +23,13 @@
 
 # Description
 
-- ( `pending` )
+- Heads-Up Editor
+
+----------------------------------------------------------------
+
+# Source Files
+
+> [hud.js](./hud.js)
 
 ----------------------------------------------------------------
 
