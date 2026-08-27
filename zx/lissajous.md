@@ -14,77 +14,16 @@
 
 ----------------------------------------------------------------
 
-## Toroid Demo
+## BASIC Source Code
 
 ```basic
 
-
-' Toroid Shape
-' Sinclair QL
-' Jonathan D. Gilbert
-' David Mainprize
-' NyteOwl Dave
-
-_Title "Toroid ~ D. Gilbert"
-
-SW = 800: SH = 600
-
-Screen _NewImage(SW, SH, 32)
-
-Window (-2, 1.5)-(2, -1.5)
-
-Color _RGB32(255, 215, 12), _RGB32(8, 8, 64)
-Cls
-
-TAU = 2 * _Pi
-
-
-CAMDIST = 4.5
-
-' Presentation angle: 30 degrees
-A3 = -30 * TAU / 360
-C3 = Cos(A3): S3 = Sin(A3)
-
-'Presentation offset: move up a bit
-OY = .75
-A1 = 0: A2 = 0
-
-' Loop Counter and Bound
-limit = 150000: inc = 0
-
-Do
-    A1 = A1 + .1
-    If A1 >= TAU Then A1 = A1 - TAU
-
-    A2 = A2 + (Cos(A1) + 1.2) * 2E-2
-    If A2 >= PI2 Then A2 = A2 - PI2
-
-    ' Generate pointo n surface of tube at angle 0
-    X1 = Cos(A1) + 3: Y = Sin(A1)
-
-    ' Rotate (top-down) to correct position in tube. Y is unchanged.
-    C2 = Cos(A2): S2 = Sin(A2)
-    X = X1 * C2
-    Z = X1 * S2
-
-    ' Rotate (from side) for presentation. X is unchanged.
-    YY = Y * C3 - Z * S3
-    ZZ = Y * S3 + Z * C3
-
-    ' Vertical offset.
-    YY = YY + OY
-
-    ' Project
-    SZ = ZZ + CAMDIST
-    SX = X / SZ: SY = YY / SZ + 0.5
-
-    PSet (SX, SY)
-
-    inc = inc + 1: If inc > limit Then Exit Do
-
-    If InKey$ <> "" Then Exit Do
-
-Loop
+' ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+' Helper Commands
+' ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+' recover_viewer()
+' persist_viewer()
+' ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ```
 
@@ -101,80 +40,22 @@ Loop
 <script>
 js_source = ( `
 
-/* toroid-lumina-demo.js */
-
 function setup() {
-    const vw = 2.0;
-    const vh = 1.5;
-    const sw = sh = 600;
-    Xform.scale( sw / vw, sh / vh, 1 );
-    Xform.xlate( sw / 2.0, sh / 2.0, 0 );
-    Background( "black" );
-    Pen( "gold" );
+   Background();
+   // ...
 }
 
-function render( erase=true ) {
-
-    if ( erase ) { Background(); }
-
-    const pt = {};
-
-    CAMDIST = 6;
-
-    // Presentation angle: 30 degrees
-    A3 = -30 * _TAU / 360;
-    C3 = cos( A3 ); S3 = sin( A3 );
-
-    // Presentation offset: move up a bit
-    OY = .75; A1 = 0; A2 = 0;
-
-    // Loop Counter and Bound
-    LIMIT = 50000; INC = 0;
-
-    // TODO : Draw Toroid
-    while ( ++INC < LIMIT ) {
-
-        A1 = A1 + 0.1;
-        if ( A1 >= _TAU ) { A1 = A1 - _TAU; }
-
-        A2 = A2 + ( cos( A1 ) + 1.2 ) * 2e-2;
-        if ( A2 >= _TAU ) { A2 = A2 - _TAU; }
-
-        // Generate point on surface of tube at angle 0
-        X1 = cos( A1 ) + 3; Y = sin( A1 );
-
-        // Rotate (top-down) to correct position in tube. Y is unchanged.
-        C2 = cos( A2 ); S2 = sin( A2 );
-        X = X1 * C2;
-        Z = X1 * S2;
-
-        // Rotate (from side) for presentation. X is unchanged.
-        YY = Y * C3 - Z * S3;
-        ZZ = Y * S3 + Z * C3;
-
-        // Vertical offset.
-        YY = YY + OY;
-
-        // Project
-        SZ = ZZ + CAMDIST;
-        pt.x = X  / SZ;
-        pt.y = - ( YY / SZ );
-
-        // Center and Scale
-        Xform.apply( pt, pt );
-
-        // Draw Point
-        Pen.dot( pt.x, pt.y );
-
-    }
-};
+function render() {
+   // ...
+}
 
 ;
+; ( 0 ) && hud.persist()
 ; ( 1 ) && setup()
 ; ( 0 ) && render()
 ;
-; console.log( "OK!" )
-;
+
+"OK!";
 
 ` );
 </script>
@@ -236,11 +117,20 @@ body {
     margin-top    : 64px;
     margin-bottom : 42vh;
 }
+</style>
+
+<style>
 .center ,
 [center] { text-align : center; }
 .hide ,
 [hide] {
     display : none !important;
+}
+</style>
+
+<style>
+pre {
+    padding : 1ch;
 }
 </style>
 
@@ -354,6 +244,8 @@ footer div {
 function main( event ) {
     try {
         doc . title = "Lissajous Demo";
+        footer_input . value = "hud()";
+        init_viewer();
         init_buttons();
         init_tex_all();
         prepare_rgba_colors();
@@ -508,6 +400,46 @@ function add_tex( url ) {
     init_tex( tex );
     const grp = texture_section;
     return ( grp.appendChild( tex ) );
+}
+</script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script>
+function init_viewer() {
+   vip = one( "PRE" );
+   vip.id = "vip";
+   vip.storekey = "lissajous-viewer.js";
+   vip.setAttribute( "contenteditable", "true" );
+   vip.clear =()=> ( vip.innerText="" );
+   console.log( "Assigned ID to Viewer ( 'vip' )" );
+   return ( vip );
+}
+</script>
+
+<script>
+function persist_viewer() {
+   const stg = localStorage;
+   const vip = init_viewer();
+   const k = vip.storekey;
+   const v = vip.innerText;
+   stg.setItem( k, v );
+   console.log( `Wrote "${k}" to Store` );
+}
+</script>
+
+<script>
+function recover_viewer() {
+   const stg = localStorage;
+   const vip = init_viewer();
+   const k = vip.storekey;
+   const v = stg.getItem( k );
+   if ( null === v ) {
+      console.warn( "Missing Store Key:", k );
+      return;
+   }
+   vip.innerText = ( v );
+   console.log( `Read "${k}" from Store` );
 }
 </script>
 

@@ -14,82 +14,29 @@ img { max-width: 100%; }
 </head>
 <body>
 <p><head> <link rel="icon" href="favicon.ico" /> </head></p>
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
 <hr>
-<h1><a href="http://dave-omega/demo/zx/lissajous.html" title="Omega Edition">Lissajous Editor</a></h1>
+<h1><a href="http://dave-omega/demo/web/lissajous/lissajous.html" title="Omega Edition">Lissajous Editor</a></h1>
+<h3>
+( ===> Test and Port Graphics Demos <=== )
+</h3>
+
 <hr>
-<h2>Toroid Demo</h2>
+<h2><a href="http://dave-omega/demo/basic-edition-menu.html" title="BASIC Editions ~ Omega">BASIC Source Code</a></h2>
 <pre><code class="language-basic">
-
-' Toroid Shape
-' Sinclair QL
-' Jonathan D. Gilbert
-' David Mainprize
-' NyteOwl Dave
-
-_Title &quot;Toroid ~ D. Gilbert&quot;
-
-SW = 800: SH = 600
-
-Screen _NewImage(SW, SH, 32)
-
-Window (-2, 1.5)-(2, -1.5)
-
-Color _RGB32(255, 215, 12), _RGB32(8, 8, 64)
-Cls
-
-TAU = 2 * _Pi
-
-
-CAMDIST = 4.5
-
-' Presentation angle: 30 degrees
-A3 = -30 * TAU / 360
-C3 = Cos(A3): S3 = Sin(A3)
-
-'Presentation offset: move up a bit
-OY = .75
-A1 = 0: A2 = 0
-
-' Loop Counter and Bound
-limit = 150000: inc = 0
-
-Do
-    A1 = A1 + .1
-    If A1 &gt;= TAU Then A1 = A1 - TAU
-
-    A2 = A2 + (Cos(A1) + 1.2) * 2E-2
-    If A2 &gt;= PI2 Then A2 = A2 - PI2
-
-    ' Generate pointo n surface of tube at angle 0
-    X1 = Cos(A1) + 3: Y = Sin(A1)
-
-    ' Rotate (top-down) to correct position in tube. Y is unchanged.
-    C2 = Cos(A2): S2 = Sin(A2)
-    X = X1 * C2
-    Z = X1 * S2
-
-    ' Rotate (from side) for presentation. X is unchanged.
-    YY = Y * C3 - Z * S3
-    ZZ = Y * S3 + Z * C3
-
-    ' Vertical offset.
-    YY = YY + OY
-
-    ' Project
-    SZ = ZZ + CAMDIST
-    SX = X / SZ: SY = YY / SZ + 0.5
-
-    PSet (SX, SY)
-
-    inc = inc + 1: If inc &gt; limit Then Exit Do
-
-    If InKey$ &lt;&gt; &quot;&quot; Then Exit Do
-
-Loop
+' ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+' Helper Commands
+' ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+' recover_viewer()
+' persist_viewer()
+' ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 </code></pre>
 <hr>
-<h1>JavaScript Source Code</h1>
+<h1><a href="https://javascript.info/" title="JavaScript Info">JavaScript Source Code</a></h1>
 <hr>
 <div center>
   <textarea id="sce" wrap="off" class="fill"></textarea>
@@ -98,86 +45,28 @@ Loop
 <script>
 js_source = ( `
 
-/* toroid-lumina-demo.js */
-
 function setup() {
-    const vw = 2.0;
-    const vh = 1.5;
-    const sw = sh = 600;
-    Xform.scale( sw / vw, sh / vh, 1 );
-    Xform.xlate( sw / 2.0, sh / 2.0, 0 );
-    Background( "black" );
-    Pen( "gold" );
+   Background();
+   // ...
 }
 
-function render( erase=true ) {
-
-    if ( erase ) { Background(); }
-
-    const pt = {};
-
-    CAMDIST = 6;
-
-    // Presentation angle: 30 degrees
-    A3 = -30 * _TAU / 360;
-    C3 = cos( A3 ); S3 = sin( A3 );
-
-    // Presentation offset: move up a bit
-    OY = .75; A1 = 0; A2 = 0;
-
-    // Loop Counter and Bound
-    LIMIT = 50000; INC = 0;
-
-    // TODO : Draw Toroid
-    while ( ++INC < LIMIT ) {
-
-        A1 = A1 + 0.1;
-        if ( A1 >= _TAU ) { A1 = A1 - _TAU; }
-
-        A2 = A2 + ( cos( A1 ) + 1.2 ) * 2e-2;
-        if ( A2 >= _TAU ) { A2 = A2 - _TAU; }
-
-        // Generate point on surface of tube at angle 0
-        X1 = cos( A1 ) + 3; Y = sin( A1 );
-
-        // Rotate (top-down) to correct position in tube. Y is unchanged.
-        C2 = cos( A2 ); S2 = sin( A2 );
-        X = X1 * C2;
-        Z = X1 * S2;
-
-        // Rotate (from side) for presentation. X is unchanged.
-        YY = Y * C3 - Z * S3;
-        ZZ = Y * S3 + Z * C3;
-
-        // Vertical offset.
-        YY = YY + OY;
-
-        // Project
-        SZ = ZZ + CAMDIST;
-        pt.x = X  / SZ;
-        pt.y = - ( YY / SZ );
-
-        // Center and Scale
-        Xform.apply( pt, pt );
-
-        // Draw Point
-        Pen.dot( pt.x, pt.y );
-
-    }
-};
+function render() {
+   // ...
+}
 
 ;
+; ( 0 ) && hud.persist()
 ; ( 1 ) && setup()
 ; ( 0 ) && render()
 ;
-; console.log( "OK!" )
-;
+
+"OK!";
 
 ` );
 </script>
 
 <hr>
-<h1>Surface</h1>
+<h1><a href="http://dave-omega/demo/web/api/lumina-gfx-notes.html" title="Lumina Graphics Notes">Surface</a></h1>
 <hr>
 <div center>
   <canvas id="surface"></canvas>
@@ -187,21 +76,22 @@ function render( erase=true ) {
 <h1><a href="http://dave-omega/demo/web/art/texture/texture-menu.html" title="Omega Edition">Textures</a></h1>
 <hr>
 <section id="texture_section">
- <img class="texture" src="./../web/art/texture/triples.png" />
- <img class="texture" src="./../web/art/texture/lattice-001x.png" />
- <img class="texture" src="./../web/art/texture/shield-001x.png" />
- <img class="texture" src="./../web/art/texture/shield-002x.png" />
+ <img class="texture" src="./../art/texture/triples.png" />
+ <img class="texture" src="./../art/texture/lattice-001x.png" />
+ <img class="texture" src="./../art/texture/shield-001x.png" />
+ <img class="texture" src="./../art/texture/shield-002x.png" />
 </section>
 
 <hr>
-<h1>References</h1>
+<h1><a href="https://app.raindrop.io/my/0" title="Raindrop Bookmarks">References</a></h1>
 <hr>
 <blockquote>
 <p><a href="./../web/api/hud-api-notes.html">HUD API Notes</a>
 <a href="./../web/api/core-api-notes.html">Core API Notes</a>
 <a href="./../web/api/rocket-api-notes.html">Rocket API Notes</a></p>
 </blockquote>
-<hr>
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
 <footer>
  <input id="footer_input" onchange="perfect(event)" />
  <div id="btn_run" action="run()" onclick="action(event)">▶️</div>
@@ -223,11 +113,24 @@ body {
     margin-top    : 64px;
     margin-bottom : 42vh;
 }
+hr {
+    margin-bottom : 42px;
+    opacity : 0.22;
+}
+</style>
+
+<style>
 .center ,
 [center] { text-align : center; }
 .hide ,
 [hide] {
     display : none !important;
+}
+</style>
+
+<style>
+pre {
+    padding : 1ch;
 }
 </style>
 
@@ -310,37 +213,55 @@ footer div {
 }
 </style>
 
+<style>
+h1, h2, h3,
+h4, h5, h6 {
+    text-align : center;
+}
+</style>
+
+<style>
+a, a:visited {
+    background : #080842;
+    color : lemonchiffon;
+    text-decoration : none;
+    padding : 4px 1.42ch;
+    border-radius : 2ch;
+    display : inline-block;
+}
+</style>
+
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
-<script>
+<script id="iwm.js">
 ; iwm = Object.keys( window ).sort()
 </script>
 
-<script>
+<script id="doc.js">
 ; doc = document
 </script>
 
-<script>
+<script id="debug.js">
 ; cls =()=> console.clear()
 ; agn =()=> location.reload();
 </script>
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
-<script src="./../web/gems/core-ops.js"></script>
-<script src="./../web/gems/json-ops.js"></script>
-<script src="./../web/gems/texture-ops.js"></script>
+<script src="./../gems/core-ops.js"></script>
+<script src="./../gems/json-ops.js"></script>
+<script src="./../gems/texture-ops.js"></script>
 
-<script src="./../web/api/core-api.js"></script>
-<script src="./../web/api/hud.js"></script>
-<script src="./../web/api/lumina-gfx.js"></script>
+<script src="./../api/core-api.js"></script>
+<script src="./../api/hud.js"></script>
+<script src="./../api/lumina-gfx.js"></script>
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
-<script>
+<script id="main.js">
 function main( event ) {
     try {
-        doc . title = "Lissajous Demo";
+        doc . title = "Lissajous Editor";
         footer_input . value = "hud()";
         init_viewer();
         init_buttons();
@@ -357,13 +278,13 @@ function main( event ) {
 }
 </script>
 
-<script>
+<script id="load-event.js">
 addEventListener( "load", main );
 </script>
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
-<script>
+<script id="crashed.js">
 function crashed( e ) {
     crashed.error = ( e );
     alert ( e );
@@ -373,7 +294,7 @@ function crashed( e ) {
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
-<script>
+<script id="flash-gadget.js">
 function flash_gadget( ge ) {
     ge.classList.add( "flasher" );
     setTimeout( (e)=>{
@@ -382,7 +303,7 @@ function flash_gadget( ge ) {
 }
 </script>
 
-<script>
+<script id="edit-basic.js">
 function edit_basic() {
     const vw = one( `.language-basic` );
     sce.value = vw.textContent;
@@ -390,14 +311,14 @@ function edit_basic() {
 }
 </script>
 
-<script>
+<script id="edit-javascript.js">
 function edit_javascript() {
     sce.value = js_source;
     flash_gadget( sce );
 }
 </script>
 
-<script>
+<script id="accept-javascript.js">
 function accept_javascript() {
     js_source = sce.value;
     flash_gadget( sce );
@@ -406,7 +327,7 @@ function accept_javascript() {
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
-<script>
+<script id="init-buttons.js">
 function init_buttons() {
     btn_run.title = "▶️ Run HUD Script";
     btn_hud.title = "◩ Toggle HUD Editor";
@@ -416,7 +337,7 @@ function init_buttons() {
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
-<script>
+<script id="zms.js">
 function zms() {
     try {
         const srf = Surface();
@@ -430,7 +351,7 @@ function zms() {
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
-<script>
+<script id="action.js">
 function action( event ) {
     const ops = action;
     try {
@@ -454,7 +375,7 @@ function action( event ) {
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
-<script>
+<script id="perfect.js">
 function perfect( event ) {
     perform( event );
 }
@@ -462,7 +383,7 @@ function perfect( event ) {
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
-<script>
+<script id="init-tex.js">
 function init_tex( tex ) {
     tex.title = tex.alt = Texture.filename( tex.src );
     tex.classList.add( "texture" );
@@ -482,7 +403,7 @@ function init_tex( tex ) {
 }
 </script>
 
-<script>
+<script id="init-all.js">
 function init_tex_all() {
     const grp = texture_section;
     const m = arr( grp.querySelectorAll( "IMG" ) );
@@ -490,7 +411,7 @@ function init_tex_all() {
 }
 </script>
 
-<script>
+<script id="add-tex.js">
 function add_tex( url ) {
     const tex = elx( "img" );
     tex.src = ( url );
@@ -502,7 +423,7 @@ function add_tex( url ) {
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
-<script>
+<script id="init-viewer.js">
 function init_viewer() {
    vip = one( "PRE" );
    vip.id = "vip";
@@ -514,7 +435,7 @@ function init_viewer() {
 }
 </script>
 
-<script>
+<script id="persist-viewer.js">
 function persist_viewer() {
    const stg = localStorage;
    const vip = init_viewer();
@@ -525,7 +446,7 @@ function persist_viewer() {
 }
 </script>
 
-<script>
+<script id="recover-viewer.js">
 function recover_viewer() {
    const stg = localStorage;
    const vip = init_viewer();
@@ -542,13 +463,18 @@ function recover_viewer() {
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
-<script>
+<script id="devops-hints.js">
 console.info( `DES-II Has Great Event Logging!` );
-console.info( `See: NCS Tools for Jarvis` );
+console.info( `SEE: NCS Tools for Jarvis`       );
+console.info( `SEE: Palette Analyzer`           );
+console.info( `SEE: Luminosity Gfx Tool`        );
+console.info( `SEE: Luminous Gfx API`           );
 </script>
 
-<script>
-des_ii_url = ( `http://dave-omega/app/jarvis/toolkit/ncs/desiree/des-ii.html` )
+<script id="des-ii-url.js">
+des_ii_url = (
+  `http://dave-omega/app/jarvis/toolkit/ncs/desiree/des-ii.html` 
+);
 </script>
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
