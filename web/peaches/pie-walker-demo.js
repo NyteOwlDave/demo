@@ -126,6 +126,6 @@ function blurt_sample( pt, title ) {
 ; ( 1 ) && setup()
 ; ( 0 ) && render()
 ;
-
-"OK!";
+; "OK!"
+;
 

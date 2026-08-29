@@ -1,0 +1,182 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<style type="text/css">
+td, th { border: 1px solid #c3c3c3; padding: 0 3px 0 3px; }
+table { border-collapse: collapse; }
+img { max-width: 100%; }
+</style>
+<meta name="generator" content="ReText 7.2.3">
+<title>random-hearts</title>
+<style type="text/css">
+</style>
+</head>
+<body>
+<style>
+@import url("./../style/every-page.css");
+</style>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<hr>
+<h1>Random Hearts</h1>
+<hr>
+<blockquote>
+<p><a href="http://dave-omega/demo/spectrum/random-hearts.html" title="Omega Edition">Omega</a>
+<a href="http://dave-tower/demo/spectrum/random-hearts.html" title="Tower Edition">Tower</a>
+<a href="http://dave-legacy/demo/spectrum/random-hearts.html" title="Legacy Edition">Legacy</a></p>
+<p><a href="./">File System</a></p>
+</blockquote>
+<hr>
+<blockquote>
+<p><a href="http://dave-omega/demo/demo-menu.html" title="Omega Edition">BASIC Demos</a>
+<a href="https://www.facebook.com/groups/2057165187928233" title="BASIC Programming Group">BASIC Group</a>
+<a href="https://www.facebook.com/groups/2057165187928233/user/100000879515133" title="Aurel Wizzard">Author</a></p>
+</blockquote>
+<hr>
+<h1><a href="./random-hearts.bas">Source Code</a></h1>
+<pre><code class="language-basic">
+' AUTHOR   : Aurel Wizzard
+' GROUP    : BASIC Programming
+' FILENAME : random-hearts.bas
+' LANGUAGE : Spectrum ZX
+' IDE      : SpecBAS
+
+var x,y,i,p,j,w,h,turn,x1,y1,rc,gc,bc
+
+wcolor 60,0,0 : fcolor 220,200,0
+
+w=800 : h=800 : j=1
+
+while turn &lt; 70
+
+  i = 0
+  rc = rand(250)
+  gc = rand(250)
+
+  fcolor rc,gc,0
+
+  p = rand(50)
+
+  while i &lt; 1.78
+
+    j = -j
+    x = x1 + w/16 + p*j*i
+    y = y1 + h/16 + ( sqr(cos(i)) * cos(313*i) - sqr(i) )
+    pset x, y
+
+    i = i + 0.0005
+
+  wend
+
+  swap
+
+  turn = turn + 1
+  x1 = rand(w)
+  y1 = rand(h)
+
+wend
+
+</code></pre>
+<hr>
+<h1>Project Details</h1>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AUTHOR</td>
+<td>Aurel Wizzard</td>
+</tr>
+<tr>
+<td>GROUP</td>
+<td>BASIC Programming</td>
+</tr>
+<tr>
+<td>FILENAME</td>
+<td>random-hearts.bas</td>
+</tr>
+<tr>
+<td>LANGUAGE</td>
+<td>Spectrum ZX</td>
+</tr>
+<tr>
+<td>IDE</td>
+<td>SpecBAS</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h1>Author Details</h1>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AUTHOR</td>
+<td>Aurel Wizzard</td>
+</tr>
+<tr>
+<td>USER-ID</td>
+<td>100000879515133</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h1>Group Details</h1>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PROVIDER</td>
+<td>Facebook</td>
+</tr>
+<tr>
+<td>GROUP</td>
+<td>BASIC Programming</td>
+</tr>
+<tr>
+<td>GROUP-ID</td>
+<td>2057165187928233</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h1>Toolkit</h1>
+<ul>
+<li><a href="./auto/" title="( pending )">SpecBAS IDE</a></li>
+</ul>
+<hr>
+<h1>References</h1>
+<ul>
+<li><a href="./auto/" title="( pending )">Spectrum ZX</a></li>
+<li><a href="./auto/" title="( pending )">Spectrum Basic</a></li>
+</ul>
+<hr>
+<script>
+; doc = document
+; doc . title = ( `Random Hearts Demo` )
+</script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+</body>
+</html>

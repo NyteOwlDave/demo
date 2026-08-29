@@ -1,5 +1,11 @@
 <head> <link rel="icon" href="./favicon.ico" /> </head>
 
+<style>
+blockquote {
+    text-align : center;
+}
+</style>
+
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
 [textures]:
@@ -22,6 +28,10 @@
 <http://dave-omega/demo/basic-edition-menu.html>
 "BASIC Editions ~ Omega"
 
+[gfx-depot]:
+<https://sites.google.com/view/graphics-depot>
+"Graphics Depot"
+
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
 [me-omega-zx]:
@@ -36,9 +46,13 @@
 <http://dave-tower/demo/web/lissajous/lissajous.html>
 "Tower Edition"
 
+[me-legacy]:
+<http://dave-legacy/demo/web/lissajous/lissajous.html>
+"Legacy Edition"
+
 ----------------------------------------------------------------
 
-# [Lissajous Editor][me-omega]
+# Lissajous Editor
 
 <h3>
 ( ===> Test and Port Graphics Demos <=== )
@@ -117,22 +131,45 @@ function render() {
 
 ----------------------------------------------------------------
 
+# [Providers][gfx-depot]
+
+> [Omega][me-omega]
+> [Tower][me-tower]
+> [Legacy][me-legacy]
+
+> [File System](./)
+
+----------------------------------------------------------------
+
 # [References][raindrop]
 
 ----------------------------------------------------------------
 
+[mathjax]: <http://dave-legacy/math/latex/mathjax.html>
+[basic-editions]: <http://dave-omega/demo/basic-edition-menu.html>
+[mark-ed]: <https://markdowneditor.org/>
+[qb64pe]: <https://qb64phoenix.com/qb64wiki/index.php/Main_Page>
+[gfx-universe]: <https://dave-legacy/graphics/>
+[gfx-youtube]: <https://www.youtube.com/results?search_query=computer+graphics+programming>
+[gfx-wiki]: <https://en.wikipedia.org/wiki/Computer_graphics>
+[web-gl]: <https://webglfundamentals.org/>
+
+
+> [DES Shortcut](./des/lissajous.desktop)
+
 > [HUD API Notes](./../api/hud-api-notes.html)
 > [Core API Notes](./../api/core-api-notes.html)
 > [Rocket API Notes](./../api/rocket-api-notes.html)
-> [BASIC Editions](http://dave-omega/demo/basic-edition-menu.html)
-> [QB64 Phoenix](https://qb64phoenix.com/qb64wiki/index.php/Main_Page)
-> [Mark-Ed](https://markdowneditor.org/)
-> [Math Jax](http://dave-legacy/math/latex/mathjax.html)
-> [WebGL](https://webglfundamentals.org/)
-> [Graphics Universe](http://dave-legacy/graphics/menu/graphics-universe.html)
-> [YouTube](https://www.youtube.com/results?search_query=computer+graphics+programming)
-> [Wikipedia](https://en.wikipedia.org/wiki/Computer_graphics)
-> [DES Shortcut](./des/lissajous.desktop)
+
+> [Math Jax][mathjax]
+> [Graphics Universe][gfx-universe]
+> [BASIC Editions][basic-editions]
+
+> [Mark-Ed][mark-ed]
+> [QB64 Phoenix][qb64pe]
+> [WebGL][web-gl]
+> [YouTube][gfx-youtube]
+> [Wikipedia][gfx-wiki]
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
@@ -299,6 +336,7 @@ a, a:visited {
 <script src="./../gems/texture-ops.js"></script>
 
 <script src="./../api/core-api.js"></script>
+<script src="./../api/my-notepad-v1p0.js"></script>
 <script src="./../api/hud.js"></script>
 <script src="./../api/lumina-gfx.js"></script>
 

@@ -1,5 +1,9 @@
 <head> <link rel="icon" href="./icons/palette-analyzer.png" /> </head>
 
+<style>
+@import url("./../style/every-page.css");
+</style>
+
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
 [sulu]:     <http://dave-ryzen/nav/sulu.html>
@@ -105,9 +109,6 @@ __Components of Interest:__
 
 ----------------------------------------------------------------
 
-<style>
-@import url("./../style/every-page.css");
-</style>
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
