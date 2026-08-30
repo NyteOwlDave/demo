@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+	<link rel="icon" href="./rolling-cube.png" />
+    <link rel="stylesheet" href="./rolling-cube.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rolling Cube Demo</title>
+  </head>
+  <body>
+    <canvas id="canvas"></canvas>
+    <script type="module" src="./rolling-cube-api.js"></script>
+
+    <!-- VertexShader code here -->
+<script id="vertexShader" type="x-shader/x-vertex">#version 300 es
+precision highp float;
+  in vec4 position;
+  void main() {
+    gl_Position = vec4( position );
+  }
+</script>
+
+<!-- FragmentShader code here -->
+<script id="fragmentShader" type="x-shader/x-fragment">#version 300 es
+#if __VERSION__ < 130
+#define TEXTURE2D texture2D
+#else
+#define TEXTURE2D texture
+#endif
+precision highp float;
+out vec4 fragColor;
+uniform vec2 u_resolution;
+uniform vec4 u_mouse;
+uniform float u_time;
+uniform sampler2D iChannel0;
+uniform sampler2D iChannel1;
+  
+#define R          u_resolution
+#define T          u_time
+#define M          u_mouse
+
+#define P9          1.57078
+#define PI          3.14159
+#define PI2         6.28318
+
+#define MIN_DIST    1e-4
+#define MAX_DIST    50.
+
+// global variables
+vec3 hp,hitpoint;
+float gid,sid;
+float hspeed=0.,tspeed=0.,fspeed=0.,tmod=0.,ga1=0.,ga2=0.,ga3=0.,ga4=0.;
+mat2 ra1,ra2,ra3,ra4;
+
+// size
+const float csize = 3.;
+const float dsize = 12.;//csize*4.;
+const float xsize = 24.;//dsize*2.;
+const float psize = 1.5;//csize/2.;
+
+// color selection
+const vec3 clr = vec3(0.063,0.259,0.357);
+const vec3 act = vec3(0.063,0.620,0.553);
+const vec3 tne = vec3(0.310,0.161,0.376);
+
+/**
+Some other nice variations
+
+// watermellon
+const vec3 clr = vec3(0.376,0.686,0.541);
+const vec3 act = vec3(0.157,0.467,0.322);
+const vec3 tne = vec3(0.784,0.373,0.573);
+
+// strawberry
+const vec3 clr = vec3(0.110,0.110,0.110);
+const vec3 act = vec3(0.459,0.000,0.000);
+const vec3 tne = vec3(0.784,0.373,0.573);
+
+// country
+const vec3 clr = vec3(0.039,0.318,0.580);
+const vec3 act = vec3(0.459,0.000,0.000);
+const vec3 tne = vec3(0.639,0.553,0.122);
+
+// summer 
+const vec3 clr = vec3(0.522,0.180,0.325);
+const vec3 act = vec3(0.063,0.553,0.620);
+const vec3 tne = vec3(0.592,0.686,0.255);
+
+// default - blueberry
+const vec3 clr = vec3(0.063,0.259,0.357);
+const vec3 act = vec3(0.063,0.620,0.553);
+const vec3 tne = vec3(0.310,0.161,0.376);
+*/
+
+// rotation
+const vec2[4] ps4 = vec2[4](vec2(csize,-csize),vec2(csize,csize),vec2(-csize,csize),vec2(-csize,-csize));
+void rov(inout vec2 q, int ct, mat2 ga){q-=ps4[ct];q*=ga;q+=ps4[ct];}
+
+// utils
+mat2 rot(float a){ return mat2(cos(a),sin(a),-sin(a),cos(a)); }
+float hash21(vec2 a) {return fract(sin(dot(a,vec2(21.23,41.232)))*4123.2323);}
+
+// timing functions - lerp and ease in
+float lsp(float b, float e, float t){return clamp((t-b)/(e-b),0.,1.); }
+float ezin(float n) {n = n*n*n; return n;}
+
+// @iq box sdf
+float box(vec3 p, vec3 b) { vec3 q=abs(p)-b; return length(max(q,0.)) + min(max(q.x,max(q.y,q.z)),0.);}
+
+// scene
+vec2 map(vec3 p) {
+    vec2 res = vec2(1e5,0.);
+
+    p.x+=fspeed;
+    
+    vec3 q = p-vec3(csize-4.,csize-1.,csize+2.);
+
+    // rotation functions based on timing
+    if(ga1>0.) rov(q.xy,0,ra1);
+    if(ga2>0.) rov(q.xy,1,ra2);
+    if(ga3>0.) rov(q.xy,2,ra3);
+    if(ga4>0.) rov(q.xy,3,ra4);
+
+    // snake cube
+    float d1 = box(vec3(abs(q.xy)-2.,q.z),vec3(1,1,3));
+    float d2 = box(vec3(q.x,abs(q.y)-2.,q.z+2.),vec3(1));
+    float d3 = box(vec3(abs(q.x)-2.,q.y,q.z-2.),vec3(1));
+    d1=min(d1,min(d2,d3));
+    
+    if(d1<res.x) {
+        res=vec2(d1,1.);
+        hp=q;
+        gid=1.;
+    }
+
+    // static floor
+    float d4 = p.y+1.;
+    if(d4<res.x) {
+        res=vec2(d4,2.);
+        hp=p;
+        gid=0.;
+    }
+    return res;
+}
+
+
+// why can you be normal つ◉益◉)つ 
+
+vec3 normal(vec3 p, float t) {
+    t*=MIN_DIST;
+    float d = map(p).x;
+    vec2 e = vec2(t,0);
+    vec3 n = d - vec3(
+        map(p-e.xyy).x,
+        map(p-e.yxy).x,
+        map(p-e.yyx).x
+    );
+    return normalize(n);
+}
+
+vec2 marcher(vec3 ro, vec3 rd) {
+    float d = 0., m = 0.;
+    for(int i=0;i<128;i++){
+        vec2 ray = map(ro + rd * d);
+        if(ray.x<MIN_DIST*d||d>MAX_DIST) break;
+        d += i<24?ray.x*.3:ray.x;
+        m  = ray.y;
+    }
+    return vec2(d,m);
+}
+
+vec2 getFace(vec2 p) {
+
+    vec2 id = floor(p);
+    vec2 uv = fract(p)-.5;
+
+    float rnd = fract(hash21(id+sid));
+    if(rnd<.45) uv.x=-uv.x;
+
+    vec2 gx = length(uv-.5)<length(uv+.5) ? vec2(uv-.5) : vec2(uv+.5);
+    
+    // truchet
+    float cx = length(gx)-.5;
+    if(rnd>.85) cx = min(length(uv.x)-.005,length(uv.y)-.005);
+    cx=abs(cx)-.2;
+    
+    // lines
+    float d5 = abs(max(abs(uv.x),abs(uv.y))-.5)-.05;
+
+    return vec2(cx,d5);
+}
+        
+vec4 render(inout vec3 ro, inout vec3 rd, inout vec3 ref, float last, inout float d, vec2 uv) {
+
+    vec3 C = vec3(0);
+    
+    vec2 ray = marcher(ro,rd);
+    d = ray.x;
+
+    hitpoint = hp; sid = gid;
+    
+    if(d<MAX_DIST) {
+        vec3 p = ro + rd * d;
+        vec3 n = normal(p,d);
+        vec3 lpos = vec3(-15,12,22);
+        vec3 l = normalize(lpos-p);
+        float diff = clamp(dot(n,l),0.,1.);
+
+        float shdw = 1.;
+        for( float t=.01; t < 12.; ) {
+            float h = map(p + l*t).x;
+            if( h<MIN_DIST ) { shdw = 0.; break; }
+            shdw = min(shdw, 12.*h/t);
+            t += h;
+            if( shdw<MIN_DIST ) break;
+        }
+        
+        diff = mix(diff,diff*shdw,.75);
+
+        vec2 cv;
+        vec3 tn = n;
+        int face = 0;
+
+        vec3 h = clr;
+        float px = R.x>2400.? 24./R.x : 12./R.x;
+        
+        if(ray.y==1.) {
+
+            if(ga1>0.) tn.xy*=ra1;
+            if(ga2>0.) tn.xy*=ra2;
+            if(ga3>0.) tn.xy*=ra3;
+            if(ga4>0.) tn.xy*=ra4;
+            
+            //@Shane https://www.shadertoy.com/view/3sVBDd
+            //finding the face of a cube using normal
+            vec3 aN = abs(tn);
+            ivec3 idF = ivec3(tn.x<-.25? 0 : 5, tn.y<-.25? 1 : 4, tn.z<-.25? 2 : 3);
+            face = aN.x>.5? idF.x : aN.y>.5? idF.y : idF.z;
+
+            if(face==0) cv = hitpoint.zy+4.;
+            if(face==1) cv = hitpoint.zx-4.;
+            if(face==2) cv = hitpoint.xy+12.;
+            if(face==3) cv = hitpoint.xy-12.;
+            if(face==4) cv = hitpoint.zx+8.;
+            if(face==5) cv = hitpoint.zy-8.;
+
+            cv -= .5;
+            cv-=psize;
+    
+            vec2 d = getFace(cv);
+            
+            vec2 id = floor(cv);
+            float rnd = mod(id.x+id.y,2.)*2.-1.;
+            if(rnd <.5) h = act;
+  
+            h = mix(h,tne,smoothstep(px,-px,d.x));
+            h = mix(h,vec3(.8),smoothstep(px,-px,abs(d.x)-.02));
+             
+            ref = mix(h*.45,vec3(0),smoothstep(px,-px,d.x));
+        };
+        if(ray.y==2.) {
+            // floor movement 
+            vec2 uz = p.xz-vec2(-hspeed,0.)-1.;
+  
+            h = tne;
+            vec2 id = floor(uz);
+            float rnd = mod(id.x+id.y,2.)*2.-1.;
+            if(rnd <.5) h = act;
+            
+            vec2 d = getFace(uz);
+
+            h = mix(h,clr,smoothstep(px,-px,d.x));
+            h = mix(h,vec3(.8),smoothstep(px,-px,abs(d.x)-.02));
+            
+            ref = mix(vec3(0),h*.45,smoothstep(px,-px,d.x));
+        };
+        
+        C = h * diff;
+
+        ro = p+n*.005;
+        rd = reflect(rd,n);
+    } 
+    if(last>0.) C = mix(clr*vec3(.75,1,.5),C,exp(-.0001*d*d*d));
+    return vec4(C,d);
+}   
+
+void main()
+{
+    vec2 F = gl_FragCoord.xy;
+
+    tspeed = T*.9;
+    tmod = mod(tspeed,10.);
+    if(tmod==10.) { fspeed -=dsize; hspeed -=dsize;}
+    fspeed = fract(tspeed*.1)*xsize;
+    hspeed = (tspeed*.1)*xsize;
+    
+    // timing
+    ga1 = ezin(lsp(0.,1.5,tmod));
+    ga2 = ezin(lsp(1.5,3.,tmod));
+    ga3 = ezin(lsp(3.,4.5,tmod));
+    ga4 = ezin(lsp(4.5,6.,tmod));
+
+    // rotation precal
+    if(ga1>0.) ra1 = rot(-ga1*P9);
+    if(ga2>0.) ra2 = rot(-ga2*P9);
+    if(ga3>0.) ra3 = rot(-ga3*P9);
+    if(ga4>0.) ra4 = rot(-ga4*P9);
+    
+    // uv ro + rd
+    vec2 uv = (2.* F.xy-R.xy)/max(R.x,R.y);
+    vec3 ro = vec3(csize-1.,csize,8.5);
+    vec3 rd = normalize(vec3(uv,-1));
+    
+    // mouse //
+    float x = M.xy==vec2(0) || M.z<1. ? 0. : (M.y/R.y*.2-.1)*PI;
+    float y = M.xy==vec2(0) || M.z<1. ? 0. : (M.x/R.x*.5-.25)*PI;
+    
+    float ff = (.13*sin(T*.2));
+    mat2 rx = rot(-.4-x), ry = rot(-(2.45+y)-ff);
+    
+    ro.zy*=rx; ro.xz*=ry;
+    rd.zy*=rx; rd.xz*=ry;
+
+    vec3 C = vec3(0);
+    vec3 ref = vec3(0), fil = vec3(1);
+    float d = 0., a = 0.;
+
+    for(float i=0.; i<2.; i++) {
+        vec4 pass = render(ro, rd, ref, i, d, uv);
+        C += pass.rgb*fil;
+        fil *= ref;
+        if(i==0.) a = pass.w;
+    }
+
+    C = mix(clr*vec3(.75,1,.5),C,exp(-.0001*a*a*a));
+    C = pow(C,vec3(.4545));
+    fragColor = vec4(C,1.);
+}
+</script>
+
+<script>
+console.group( `[ Jester Suggestions ]` );
+console.info( `* Run codepen() to open the source Pen` );
+console.info( `* Run codepen.dave() to open Dave's Pens` );
+console.groupEnd();
+</script>
+
+<script>
+function codepen( relpath, options ) {
+	relpath = ( relpath || codepen.cubedemo );
+	const p = ( codepen.home );
+	const u = [ p, relpath ].join( "/" );
+	window.open( u, u, options );
+}
+;
+; codepen.home = ( `https://codepen.io` )
+; codepen.cubedemo = ( `editor/pjkarlik/pen/01a02be4-5b1d-7381-93ce-c06df0bb7a2e` )
+;
+codepen.dave = function() {
+	 codepen( `your-work` );
+}
+</script>
+
+  </body>
+</html>
+

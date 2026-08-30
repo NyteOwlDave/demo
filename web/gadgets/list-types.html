@@ -1,0 +1,254 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<style type="text/css">
+td, th { border: 1px solid #c3c3c3; padding: 0 3px 0 3px; }
+table { border-collapse: collapse; }
+img { max-width: 100%; }
+</style>
+<meta name="generator" content="ReText 7.2.3">
+<title>list-types</title>
+<style type="text/css">
+</style>
+</head>
+<body>
+<p><head> <link rel="icon" href="./rolling-cube.png" /> </head></p>
+<style>
+@import url("./../../style/every-page.css");
+</style>
+
+<hr>
+<h1>Multiselect</h1>
+<div center>
+<select name="languages" multiple>
+  <option value="">Select a Language</option>
+  <option value="en">English</option>
+  <option value="fr">French</option>
+  <option value="es">Spanish</option>
+  <option value="pt">Portuguese</option>
+  <option value="en">Irish</option>
+  <option value="cy">Welsh</option>
+</select>
+</div>
+
+<hr>
+<h1>Option Groups</h1>
+<div center>
+<select name="languages">
+  <optgroup label="Germanic">
+    <option value="en">English</option>
+  </optgroup>
+  <optgroup label="Romance">
+   <option value="fr">French</option>
+   <option value="es">Spanish</option>
+   <option value="pt">Portuguese</option>
+  </optgroup>
+  <optgroup label="Celtic">
+   <option value="en">Irish</option>
+   <option value="cy">Welsh</option>
+  </optgroup>
+</select>
+</div>
+
+<hr>
+<h1>Sizing Limits</h1>
+<div center>
+<select name="languages" size="4" multiple>
+  <optgroup label="Germanic">
+    <option value="en">English</option>
+  </optgroup>
+  <hr />
+  <optgroup label="Romance">
+   <option value="fr">French</option>
+   <option value="es">Spanish</option>
+   <option value="pt">Portuguese</option>
+  </optgroup>
+  <hr />
+  <optgroup label="Celtic">
+   <option value="en">Irish</option>
+   <option value="cy">Welsh</option>
+  </optgroup>
+  <hr />
+  <optgroup label="Afroasiatic">
+   <option value="he">Hebrew</option>
+   <option value="ar">Arabic</option>
+  </optgroup>
+</select>
+</div>
+
+<hr>
+<h1>Data List*</h1>
+<p><datalist id="languages">
+ <br>
+<option>English</option></p>
+<option>French</option>
+<option>Spanish</option>
+<option>Portuguese</option>
+<option>Irish</option>
+<option>Welsh</option>
+<option>Hebrew</option>
+<option>Arabic</option>
+<p></datalist></p>
+<div center>
+<input name="language" list="languages">
+</div>
+
+<h2>* ReText Doesn't support datalists</h2>
+<hr>
+<h1>Data List Aliasing</h1>
+<p><datalist id="languages">
+ <br>
+<option value="en">English</option></p>
+<option value="fr">French</option>
+<option value="es">Spanish</option>
+<option value="pt">Portuguese</option>
+<option value="en">Irish</option>
+<option value="cy">Welsh</option>
+<option value="he">Hebrew</option>
+<option value="ar">Arabic</option>
+<p></datalist></p>
+<div center>
+<input name="language" list="languages">
+</div>
+
+<hr>
+<h1>Custom Input Types</h1>
+<div center>
+<label for="camp-week">Choose a week</label>
+
+<input
+  type="week"
+  name="week"
+  id="camp-week"
+  min="2026-W2"
+  max="2026-W51"
+  list="preferred-weeks"
+/>
+</div>
+
+<p><datalist id="preferred-weeks">
+<br>
+<option>2026-W22</option></p>
+<option>2026-W23</option>
+<option>2026-W24</option>
+<option>2026-W25</option>
+<p></datalist></p>
+<hr>
+<div center>
+<div class="rangeField">
+<label for="tips">Tip Percentage</label>
+
+<input
+  type="range"
+  name="tips"
+  id="tips"
+  min="0"
+  max="50"
+  step="1"
+  list="recommended-tips"
+   />
+</div>
+</div>
+
+<p><datalist id="recommended-tips">
+<br>
+<option value="10" label="10%"></option></p>
+<option value="18" label="18%"></option>
+<option value="30" label="30%"></option>
+<option value="45" label="45%"></option>
+<p></datalist></p>
+<style>
+.rangeField {
+
+/* 
+container for the two things
+ch is the width of the 0 in computed font. 
+Very precise for numbers */
+  width: 50ch; 
+}
+
+/*same width for input and datalist*/
+#recommended-tips,
+#tips {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+ #recommended-tips {
+  position: relative;
+  display: block;
+  writing-mode: vertical-lr;
+ }
+
+</style>
+</div>
+<hr>
+<h1>Ordered List</h1>
+<div center>
+<ol>
+  <li>Pre-heat oven to 350 degrees and grease  a 9x5 pan.</li>
+  <li>Combine flour, baking soda, and salt in large bowl with beaten brown sugar, butter, eggs, and mashed bananas</li>
+  <li>If oven is pre-heated, pour batter into pan</li>
+  <li>Bake for 60 minutes or until a toothpick inserted into the center comes out clean.</li>
+  <li>Let cool on a wire rack</li>
+</ol>
+</div>
+
+<hr>
+<h1>Nested Lists</h1>
+<div style="text-align : left">
+<ol>
+  <li>Prepare:
+    <ul>
+      <li>Preheat oven to 350 degrees</li>
+      <li>Lightly grease a 9x5 pan</li>
+      <li>Gather all ingredients</li>
+    </ul>
+  </li>
+  <li>Mix:
+    <ol>
+      <li>Prepare bowl 1: Combine flour, baking soda, and salt in a large bowl
+      </li>
+      <li>Prepare bowl 2: 
+         <ol>
+            <li>Beat brown sugar and butter</li>
+            <li>Stir in eggs and mashed bananas</li>
+         </ol>
+      </li>
+      <li>Stir bowl 2 into bowl 1</li>
+    </ol>
+ </li>
+  <li>Pour: Batter goes into pre-greased pan</li>
+  <li>Bake:
+    <ul>
+      <li>Bake for 60 minutes&hellip;</li>
+      <li>Or when a toothpick inserted in the center comes out clean</li>
+    </ul>
+  </li>
+  <li>Cool:
+    <ol>
+      <li>let cool in the pan for 10 minutes</li>
+      <li>Place on wire rack to finish cooling</li>
+    </ol>
+  </li>
+</ol>
+</div>
+
+<hr>
+<blockquote>
+<p><a href="https://blog.frankmtaylor.com/2026/05/13/you-dont-know-html-lists/" title="CodePen Article">Codepen Article</a></p>
+</blockquote>
+<hr>
+<blockquote>
+<p><a href="http://dave-tower/demo/web/gadgets/list-types.html" title="Tower Edition">Tower</a></p>
+</blockquote>
+<hr>
+<blockquote>
+<p><a href="./">File System</a></p>
+</blockquote>
+<hr>
+
+</body>
+</html>

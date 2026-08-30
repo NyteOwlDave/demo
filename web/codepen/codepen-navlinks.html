@@ -1,0 +1,94 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<style type="text/css">
+td, th { border: 1px solid #c3c3c3; padding: 0 3px 0 3px; }
+table { border-collapse: collapse; }
+img { max-width: 100%; }
+</style>
+<meta name="generator" content="ReText 7.2.3">
+<title>codepen-navlinks</title>
+<style type="text/css">
+</style>
+</head>
+<body>
+<p><head> <link rel="icon" href="./nav.png" /> </head></p>
+<style>
+@import url("./../../style/every-page.css");
+</style>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<hr>
+<div center>
+  <img class="logo2" src="./nav.png" />
+</div>
+
+<h1>CodePen NavLinks</h1>
+<hr>
+<blockquote>
+<p><a href="http://dave-ryzen/nav/">Sulu</a>
+<a href="https://codepen.io/">Codepen</a></p>
+<p><a href="http://dave-tower/demo/web/codepen/codepen-navlinks.html" title="Tower Edition">Tower</a>
+<a href="./">File System</a></p>
+</blockquote>
+<hr>
+<pre contenteditable id="navlinks">
+
++ Infinite Ball Roll
+@ https://codepen.io/editor/amit_sheen/pen/01a02b4d-a460-72ae-ad11-69ce77d5eb2e
+
++ Infinite Gallery
+@ https://codepen.io/editor/daniel-mu-oz/pen/019ff149-8cea-7d08-bc76-29a54cd08f79
+
++ Storage Form
+@ https://darn.es/storage-form-web-component/#storage-form
+
++ Mail Form
+@ https://codepen.io/editor/team/codepen/pen/019fc95c-0c74-7a17-876e-30c4e0731af6
+
+</pre>
+
+<hr>
+<!-- [[ NEEDS: header-footer.js ]] -->
+<header id="header"></header>
+<footer id="footer"></footer>
+
+<hr>
+<!-- [[ RESERVER FOR HUD EDITOR ]] -->
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script>
+; doc = document
+; doc . title = ( `Code Pen Nav Links` )
+</script>
+
+<script>
+console.group( `[ Jester Suggestions ]` );
+console.info( `* Run codepen() to open the source Pen` );
+console.info( `* Run codepen.dave() to open Dave's Pens` );
+console.groupEnd();
+</script>
+
+<script>
+function codepen( relpath, options ) {
+    relpath = ( relpath || codepen.cubedemo );
+    const p = ( codepen.home );
+    const u = [ p, relpath ].join( "/" );
+    window.open( u, u, options );
+}
+;
+; codepen.home = ( `https://codepen.io` )
+; codepen.cubedemo = ( `editor/pjkarlik/pen/01a02be4-5b1d-7381-93ce-c06df0bb7a2e` )
+;
+codepen.dave = function() {
+     codepen( `your-work` );
+}
+</script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+</body>
+</html>
