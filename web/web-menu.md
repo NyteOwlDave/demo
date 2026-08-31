@@ -3,6 +3,18 @@
 [sulu]: <http://dave-ryzen/nav/sulu.html>
 [raindrop]: <https://app.raindrop.io/my/45357558>
 
+[mynotepad]:
+<https://nyteowldave.github.io/notes/mynotepad.html>
+"Morpheus Edition"
+
+[ncs-tools]:
+<http://dave-tower/app/jarvis/toolkit/ncs/ncs-menu.html>
+"Tower Edition"
+
+[x-lane]:
+<http://tiny.cc/express-lane>
+"Express Lane"
+
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
 [me-tower]:
@@ -24,12 +36,26 @@
 ## `🧰` Toolkit
 
 > [Palette Analyzer](./palette-analyzer.html)
+> [My Notepad][mynotepad]
+> [NCS Tools][ncs-tools]
+> [Express Lane][x-lane]
 
 ----------------------------------------------------------------
 
 # `🧨` Demo Apps ~ Coming Soon!
 
 ----------------------------------------------------------------
+
+<!--
+
+[x] destiny		[x] dodec 		[x] explode
+[x] lines		[x] lissajous	[x] pixmap
+[x] planet		[x] polyhedra	[x] snake-hunt
+[ ] sprites		[x] turtle		[ ] zephyr
+
+[ ] sprites		[ ] zephyr
+
+-->
 
 <div class="cool-icons">
   <div class="cool-icon" url="./snake-hunt/snake-hunt.html" onclick="visit.demo(event)">
@@ -51,6 +77,34 @@
   <div class="cool-icon" url="./pixmap/mandelbulb.html" onclick="visit.demo(event)">
     <img src="./pixmap/mandelbulb.png" class="todo">
     <label> Mandelbulb </label>
+  </div>
+</div>
+
+<div class="cool-icons">
+[TODO]
+  <div class="cool-icon" url="./snake-hunt/snake-hunt.html" onclick="visit.demo(event)">
+    <img src="./lines/snake-hunt.png" class="todo">
+    <label> lines </label>
+  </div>
+[TODO]
+  <div class="cool-icon" url="./dodec/dodec.html" onclick="visit.demo(event)">
+    <img src="./dodec/favicon.ico" class="todo">
+    <label> lissajous </label>
+  </div>
+[TODO]
+  <div class="cool-icon" url="./explode/explode-deux.html" onclick="visit.demo(event)">
+    <img src="./explode/favicon.ico" class="todo">
+    <label> pixmap </label>
+  </div>
+[TODO]
+  <div class="cool-icon" url="./turtle/turtle-graph.html" onclick="visit.demo(event)">
+    <img src="./turtle/favicon.ico" class="todo">
+    <label> planet </label>
+  </div>
+[TODO]
+  <div class="cool-icon" url="./pixmap/mandelbulb.html" onclick="visit.demo(event)">
+    <img src="./pixmap/mandelbulb.png" class="todo">
+    <label> polyhedra </label>
   </div>
 </div>
 
@@ -105,15 +159,36 @@
 
 ## `🗂️` Workspaces
 
-- [`📁` art](./art/)
-- [`📁` claude](./claude/)
+### Featured
+
 - [`📁` destiny](./destiny/)
 - [`📁` dodec](./dodec/)
 - [`📁` explode](./explode/)
-- [`📁` gems](./gems/)
+- [`📁` lines](.lines/)
+- [`📁` lissajous](./lissajous/)
 - [`📁` pixmap](./pixmap/)
 - [`📁` polyhedra](./polyhedra/)
+- [`📁` snake-hunt](./snake-hunt/)
+- [`📁` sprites](./sprites/)
 - [`📁` turtle](./turtle/)
+- [`📁` zephyr](./zephyr/)
+
+### Resources
+
+- [`📁` claude](./claude/)
+- [`📁` codepen](./codepen/)
+- [`📁` gemini](./gemini/)
+
+### Assets
+
+- [`📁` api](./api/)
+- [`📁` app](./app/)
+- [`📁` art](./art/)
+- [`📁` gadgets](./gadgets/)
+- [`📁` gems](./gems/)
+- [`📁` icons](./icons/)
+- [`📁` peaches](./peaches)
+- [`📁` templates](./templates/)
 
 ----------------------------------------------------------------
 

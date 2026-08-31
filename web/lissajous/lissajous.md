@@ -161,6 +161,8 @@ function render() {
 > [Core API Notes](./../api/core-api-notes.html)
 > [Rocket API Notes](./../api/rocket-api-notes.html)
 
+> [Palette Analyzer](./../palette-analyzer.html)
+> [Zephyr](./../zephyr/zephyr.html)
 > [Math Jax][mathjax]
 > [Graphics Universe][gfx-universe]
 > [BASIC Editions][basic-editions]
