@@ -1,0 +1,132 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<style type="text/css">
+td, th { border: 1px solid #c3c3c3; padding: 0 3px 0 3px; }
+table { border-collapse: collapse; }
+img { max-width: 100%; }
+</style>
+<meta name="generator" content="ReText 7.2.3">
+<title>garcia-002-notes</title>
+<style type="text/css">
+</style>
+</head>
+<body>
+<hr>
+<h1>Garcia Demo #002 Notes</h1>
+<blockquote>
+<p><a href="http://dave-omega/demo/web/peaches/garcia-002-notes.html" title="Omega Edition">Omega</a>
+<a href="./">File System</a></p>
+</blockquote>
+<hr>
+<h1>Color Scales</h1>
+<pre><code>ck[ 0 ] = ( 158.80142  );
+ck[ 1 ] = ( 191.584643 );
+ck[ 2 ] = ( 208.12137  );
+</code></pre>
+<hr>
+<table>
+<thead>
+<tr>
+<th>Index</th>
+<th>Channel</th>
+<th>Scale</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>Red</td>
+<td>158.80142</td>
+</tr>
+<tr>
+<td>1</td>
+<td>Green</td>
+<td>191.584643</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Blue</td>
+<td>208.12137</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h1>Radius Constants</h1>
+<pre><code>rho[ 0 ] = ( -2179.50995  );
+rho[ 1 ] = ( -587.752974  );
+rho[ 2 ] = ( -5.564929291 );
+
+rho[ 3 ] = ( 1.0     );
+rho[ 4 ] = ( -2500.0 );
+rho[ 5 ] = ( -2500.0 );
+
+rho[ 6 ] = ( -2179.50995  );
+rho[ 7 ] = ( -5.564929291 );
+rho[ 8 ] = ( -2179.50995  );
+
+rho[  9 ] = ( 1.0              );
+rho[ 10 ] = ( -3690.7116488281 );
+rho[ 11 ] = ( -4577.45827      );
+</code></pre>
+<hr>
+<h1>Angles</h1>
+<pre><code>theta[ 0 ] = 0.9999 * k;
+theta[ 1 ] = 0.6666 * k;
+theta[ 2 ] = 0.3333 * k;
+</code></pre>
+<hr>
+<h1>End Point Coordinates</h1>
+<pre><code>x1k
+= ( rho[ 0 ] ) * ( cos( theta[ 0 ] ) / pi )
++ ( rho[ 1 ] ) * ( cos( theta[ 0 ] )      )
++ ( rho[ 2 ] ) * ( sin( theta[ 2 ] )      );
+
+y1k
+= ( rho[ 3 ] ) * ( sin( theta[ 2 ] ) / pi )
+- ( rho[ 4 ] ) * ( sin( theta[ 1 ] )      )
++ ( rho[ 5 ] ) * ( cos( theta[ 1 ] )      );
+
+x2k
+= ( rho[ 6 ] ) * ( cos( theta[ 0 ] ) / pi )
++ ( rho[ 7 ] ) * ( cos( theta[ 0 ] )      )
++ ( rho[ 8 ] ) * ( sin( theta[ 2 ] )      );
+
+y2k
+= ( rho[  9 ] ) * ( sin( theta[ 2 ] ) / pi )
+- ( rho[ 10 ] ) * ( sin( theta[ 1 ] )      )
++ ( rho[ 11 ] ) * ( cos( theta[ 1 ] )      );
+</code></pre>
+<hr>
+<h1>Color Channels</h1>
+<pre><code>fx2k = frac( x2k );
+fy2k = frac( y2k );
+py2k =100 * fy2k;
+
+mx1y2 = midpt( x1k, y2k );
+fx1y2 = abs( trunc( mx1y2 ) );
+
+r = ( ck[ 0 ] ) + ( py2k )  * ( mx1y2 - fx1y2 );
+g = ( ck[ 1 ] ) + ( py2k )  * ( fy2k ) ;
+b = ( ck[ 2 ] ) + ( py2k )  * ( fx2k ) ;
+</code></pre>
+<hr>
+<script>
+; doc = document
+</script>
+
+<script>
+function h1( i ) {
+    const arr =( o )=> Array.from( o );
+    const m = arr( doc.querySelectorAll( "H1" ) );
+    return ( m[ i ] );
+}
+</script>
+
+<script>
+; doc . title = h1( 0 ).textContent;
+</script>
+
+</body>
+</html>
