@@ -31,6 +31,9 @@
 "Omega Edition"
 
 > [Omega][me-omega]
+> [Notes](./notes/notes-menu.html)
+> [To-Do](./zephyr-todo.html)
+> [Peaches](./../peaches/)
 > [Menu](./../web-menu.html)
 > [File System](./)
 
@@ -530,7 +533,7 @@ function jsom( o, rex, ed ) {
 <script id="main.js">
 function main( event ) {
     try {
-        doc . title = "Zephyr Graphics";
+        doc . title = "🌬️ Zephyr Graphics";
         init_figure();
         init_surface();
         init_theme();

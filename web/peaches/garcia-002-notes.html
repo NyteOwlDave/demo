@@ -13,6 +13,10 @@ img { max-width: 100%; }
 </style>
 </head>
 <body>
+<style>
+@import url("./../../style/every-page.css");
+</style>
+
 <hr>
 <h1>Garcia Demo #002 Notes</h1>
 <blockquote>
@@ -71,6 +75,91 @@ rho[ 10 ] = ( -3690.7116488281 );
 rho[ 11 ] = ( -4577.45827      );
 </code></pre>
 <hr>
+<table>
+<thead>
+<tr>
+<th>Index</th>
+<th>Value</th>
+<th>Coord</th>
+<th>Term</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>-2179.50995</td>
+<td>x1k</td>
+<td>cos( theta[ 0 ] ) / pi</td>
+</tr>
+<tr>
+<td>1</td>
+<td>-587.752974</td>
+<td>x1k</td>
+<td>cos( theta[ 0 ] )</td>
+</tr>
+<tr>
+<td>2</td>
+<td>-5.564929291</td>
+<td>x1k</td>
+<td>sin( theta[ 2 ] )</td>
+</tr>
+<tr>
+<td>3</td>
+<td>1.0</td>
+<td>y1k</td>
+<td>sin( theta[ 2 ] ) / pi</td>
+</tr>
+<tr>
+<td>4</td>
+<td>-2500.0</td>
+<td>y1k</td>
+<td>sin( theta[ 1 ] )</td>
+</tr>
+<tr>
+<td>5</td>
+<td>-2500.0</td>
+<td>y1k</td>
+<td>cos( theta[ 1 ] ) / pi</td>
+</tr>
+<tr>
+<td>6</td>
+<td>-2179.50995</td>
+<td>x2k</td>
+<td>cos( theta[ 0 ] ) / pi</td>
+</tr>
+<tr>
+<td>7</td>
+<td>-5.564929291</td>
+<td>x2k</td>
+<td>cos( theta[ 0 ] )</td>
+</tr>
+<tr>
+<td>8</td>
+<td>-2179.50995</td>
+<td>x2k</td>
+<td>sin( theta[ 2 ] )</td>
+</tr>
+<tr>
+<td>9</td>
+<td>1.0</td>
+<td>y2k</td>
+<td>sin( theta[ 2 ] ) / pi</td>
+</tr>
+<tr>
+<td>10</td>
+<td>-3690.7116488281</td>
+<td>y2k</td>
+<td>sin( theta[ 1 ] )</td>
+</tr>
+<tr>
+<td>11</td>
+<td>-4577.45827</td>
+<td>y2k</td>
+<td>cos( theta[ 1 ] ) / pi</td>
+</tr>
+</tbody>
+</table>
+<hr>
 <h1>Angles</h1>
 <pre><code>theta[ 0 ] = 0.9999 * k;
 theta[ 1 ] = 0.6666 * k;
@@ -86,7 +175,7 @@ theta[ 2 ] = 0.3333 * k;
 y1k
 = ( rho[ 3 ] ) * ( sin( theta[ 2 ] ) / pi )
 - ( rho[ 4 ] ) * ( sin( theta[ 1 ] )      )
-+ ( rho[ 5 ] ) * ( cos( theta[ 1 ] )      );
++ ( rho[ 5 ] ) * ( cos( theta[ 1 ] ) / pi );
 
 x2k
 = ( rho[ 6 ] ) * ( cos( theta[ 0 ] ) / pi )
@@ -96,7 +185,7 @@ x2k
 y2k
 = ( rho[  9 ] ) * ( sin( theta[ 2 ] ) / pi )
 - ( rho[ 10 ] ) * ( sin( theta[ 1 ] )      )
-+ ( rho[ 11 ] ) * ( cos( theta[ 1 ] )      );
++ ( rho[ 11 ] ) * ( cos( theta[ 1 ] ) / pi );
 </code></pre>
 <hr>
 <h1>Color Channels</h1>
@@ -110,6 +199,75 @@ fx1y2 = abs( trunc( mx1y2 ) );
 r = ( ck[ 0 ] ) + ( py2k )  * ( mx1y2 - fx1y2 );
 g = ( ck[ 1 ] ) + ( py2k )  * ( fy2k ) ;
 b = ( ck[ 2 ] ) + ( py2k )  * ( fx2k ) ;
+</code></pre>
+<hr>
+<h1>Peach Details</h1>
+<pre><code>PEACH_KEY = ( `garcia-002.js` );
+PRIMARY_HOST = ( `dave-tower` );
+RECENT_HOST  = ( `dave-omega` );
+</code></pre>
+<hr>
+<h1>Math Methods</h1>
+<pre><code>
+midpt =( a, b )=&gt; abs( ( a + b ) / 2 );
+
+frac =( n )=&gt; ( abs( n ) - abs( trunc( n ) ) );
+
+int =( n )=&gt; Math.round( n );
+
+pnt =( x, y )=&gt; ( { x, y } );
+
+</code></pre>
+<hr>
+<h1>Color Conversion Method</h1>
+<pre><code>
+rgb =( r, g, b )=&gt; (
+    Color.from_rgb(
+        int( r ) % 225 ,
+        int( g ) % 225 ,
+        int( b ) % 225
+    )
+);
+
+</code></pre>
+<hr>
+<h1>Transform Methods</h1>
+<pre><code>
+xform =( xc, yc, scale, aspect )=&gt; {
+    xform.xc     = xc;
+    xform.yc     = yc;
+    xform.scale  = scale;
+    xform.aspect = aspect;
+};
+
+xform.apply = function( pts ) {
+    function apply( pt ) {
+        const m = xform;
+        const x = m.xc + pt.x * m.scale * m.aspect;
+        const y = m.yc + pt.y * m.scale;
+        return pnt( x, y );
+    }
+    return pts.map( apply );
+};
+
+</code></pre>
+<hr>
+<h1>Bezier Method</h1>
+<pre><code>
+gfx = Graphics();
+
+bezier =( pts )=&gt; {
+    gfx . beginPath()
+    gfx . moveTo( pts[ 0 ].x, pts[ 0 ].y );
+    gfx . bezierCurveTo(
+        pts[ 1 ].x, pts[ 1 ].y,
+        pts[ 2 ].x, pts[ 2 ].y,
+        pts[ 3 ].x, pts[ 3 ].y
+    );
+    gfx . closePath()
+    gfx . stroke();
+};
+
 </code></pre>
 <hr>
 <script>

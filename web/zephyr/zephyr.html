@@ -14,36 +14,7 @@ img { max-width: 100%; }
 </head>
 <body>
 <style>
-textarea, canvas {
-    box-sizing : border-box;
-    display : inline-block;
-    margin  : 0;
-    border  : 1px dotted black;
-    outline : none;
-}
-canvas {
-    width   : calc( 100vw - 32px );
-}
-textarea {
-    font       : 12pt monospace;
-    padding    : 0.25ch 1.25ch;
-    resize     : none;
-    height     : 80vh;
-    tab-size   : 4;
-    overflow   : scroll;
-}
-textarea#sce {
-    width   : calc( 50vw - 4px );
-}
-textarea#sop {
-    width   : calc( 50vw - 42px );
-}
-#figure {
-    width : 100%;
-}
-body {
-    margin-bottom : 42vh;
-}
+@import url("./style/zephyr.css");
 </style>
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
@@ -69,6 +40,9 @@ body {
 <hr>
 <blockquote>
 <p><a href="http://dave-omega/demo/web/zephyr/zephyr.html" title="Omega Edition">Omega</a>
+<a href="./notes/notes-menu.html">Notes</a>
+<a href="./zephyr-todo.html">To-Do</a>
+<a href="./../peaches/">Peaches</a>
 <a href="./../web-menu.html">Menu</a>
 <a href="./">File System</a></p>
 </blockquote>
@@ -399,8 +373,19 @@ function insert_text( ed, t ) {
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
+<script id="visit.js">
+function visit( url ) {
+    const a = elx( "A" );
+    a . href = ( url );
+    a .click();
+}
+</script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
 <script id="filter.js">
 function filter( o, rex ) {
+    o = arr( o );
     if ( rex = str( rex ) ) {
         rex = new RegExp( rex );
         const match =( s )=> ( rex.test( s ) );
@@ -519,6 +504,23 @@ gideon.status = function( key ) {
 };
 </script>
 
+<script id="gideon-modules.js">
+gideon.modules = function( rex, ed ) {
+    const q = ( 'SCRIPT[id]' );
+    const m = all( q );
+    let v =(
+        ( m )
+        . map( ( se ) => ( se.id ) )
+    );
+    v = filter( v, rex );
+    if ( ed ) {
+        ed . value = ( v ).join( "\n" );
+        return;
+    }
+    return ( v );
+};
+</script>
+
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
 <script id="jsom.js">
@@ -539,7 +541,7 @@ function jsom( o, rex, ed ) {
 <script id="main.js">
 function main( event ) {
     try {
-        doc . title = "Zephyr Graphics";
+        doc . title = "🌬️ Zephyr Graphics";
         init_figure();
         init_surface();
         init_theme();
