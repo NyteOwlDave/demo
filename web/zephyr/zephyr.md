@@ -1,34 +1,5 @@
 <style>
-textarea, canvas {
-	box-sizing : border-box;
-	display : inline-block;
-	margin  : 0;
-	border  : 1px dotted black;
-	outline : none;
-}
-canvas {
-	width   : calc( 100vw - 32px );
-}
-textarea {
-    font       : 12pt monospace;
-    padding    : 0.25ch 1.25ch;
-	resize     : none;
-	height     : 80vh;
-    tab-size   : 4;
-    overflow   : scroll;
-}
-textarea#sce {
-	width   : calc( 50vw - 4px );
-}
-textarea#sop {
-	width   : calc( 50vw - 42px );
-}
-#figure {
-    width : 100%;
-}
-body {
-	margin-bottom : 42vh;
-}
+@import url("./style/zephyr.css");
 </style>
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
@@ -391,6 +362,16 @@ function insert_text( ed, t ) {
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
+<script id="visit.js">
+function visit( url ) {
+    const a = elx( "A" );
+    a . href = ( url );
+    a .click();
+}
+</script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
 <script id="filter.js">
 function filter( o, rex ) {
     o = arr( o );
@@ -509,6 +490,23 @@ gideon.group = function( key ) {
 gideon.status = function( key ) {
     const q = ( '[status="${key}"]' );
     return all( q );
+};
+</script>
+
+<script id="gideon-modules.js">
+gideon.modules = function( rex, ed ) {
+    const q = ( 'SCRIPT[id]' );
+    const m = all( q );
+    let v =(
+        ( m )
+        . map( ( se ) => ( se.id ) )
+    );
+    v = filter( v, rex );
+    if ( ed ) {
+        ed . value = ( v ).join( "\n" );
+        return;
+    }
+    return ( v );
 };
 </script>
 

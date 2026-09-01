@@ -1,0 +1,40 @@
+
+/* zephyr.css */
+
+textarea, canvas {
+	box-sizing : border-box;
+	display : inline-block;
+	margin  : 0;
+	border  : 1px dotted black;
+	outline : none;
+}
+
+canvas {
+	width   : calc( 100vw - 32px );
+}
+
+textarea {
+    font       : 12pt monospace;
+    padding    : 0.25ch 1.25ch;
+	resize     : none;
+	height     : 80vh;
+    tab-size   : 4;
+    overflow   : scroll;
+}
+
+textarea#sce {
+	width   : calc( 50vw - 4px );
+}
+
+textarea#sop {
+	width   : calc( 50vw - 42px );
+}
+
+#figure {
+    width : 100%;
+}
+
+body {
+	margin-bottom : 42vh;
+}
+

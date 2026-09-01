@@ -21,6 +21,8 @@
 
 ----------------------------------------------------------------
 
+## Script #1
+
 <pre>
 
 blurt=(s)=>(sop.value=(s));
@@ -64,6 +66,31 @@ function assist( o, title ) {
 // blurt( assist.toString() )
 // blurt( "OK!" );
 assist( exec, "exec" );
+
+</pre>
+
+----------------------------------------------------------------
+
+## Script #2
+
+<pre>
+
+blurt=(s)=>(sop.value=s);
+/*
+mods = gideon.modules( "koffee" );
+mod = gid( "koffee.js" );
+blurt( mod.innerText );
+*/
+
+/*
+sop.title = "sop";
+sce.title = "sce";
+*/
+
+// seeker( 0, sop );
+visit( "zephyr-todo.html" );
+
+alert( "OK!" );
 
 </pre>
 
