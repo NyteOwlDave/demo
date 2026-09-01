@@ -18,16 +18,25 @@ textarea, canvas {
     box-sizing : border-box;
     display : inline-block;
     margin  : 0;
-    width   : calc( 100vw - 32px );
     border  : 1px dotted black;
     outline : none;
 }
+canvas {
+    width   : calc( 100vw - 32px );
+}
 textarea {
-    font : 12pt monospace;
-    padding : 0.25ch 1.25ch;
-    resize : vertical;
-    max-height : 80vh;
-    tab-size : 4;
+    font       : 12pt monospace;
+    padding    : 0.25ch 1.25ch;
+    resize     : none;
+    height     : 80vh;
+    tab-size   : 4;
+    overflow   : scroll;
+}
+textarea#sce {
+    width   : calc( 50vw - 4px );
+}
+textarea#sop {
+    width   : calc( 50vw - 42px );
 }
 #figure {
     width : 100%;
@@ -39,7 +48,7 @@ body {
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
-<div center>
+<div center title="ID = 'figure'">
   <img id="figure" src="http://dave-omega/demo/web/art/zephyr.png" />
 <!--
   <img id="figure" src="http://dave-omega/demo/web/art/snapshots/garcia/garcia-002-src.png" />
@@ -48,7 +57,8 @@ body {
 
 <hr>
 <div center>
-  <textarea id="sce"></textarea>
+  <textarea id="sce" wrap="off"></textarea>
+  <textarea id="sop" wrap="off"></textarea>
 </div>
 
 <hr>
@@ -63,21 +73,82 @@ body {
 <a href="./">File System</a></p>
 </blockquote>
 <hr>
-<script>
+<script group="prolog">
 ; iwm = Object.keys( window ).sort()
 </script>
 
-<script>
+<script group="prolog">
 ; doc = document
 </script>
 
-<script>
+<script group="prolog">
 ; cls =()=> console.clear()
+; agn =()=> location.reload();
 </script>
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
-<script>
+<script group="prolog">
+; str =( o )=> ( String( o || "" ).trim() )
+; arr =( o )=> ( Array.from( o || [] ) )
+; unq =( o )=> ( new Set( arr( o ) ) )
+; dct =(   )=> ( new Map() )
+</script>
+
+<script group="prolog">
+; gid =( i )=> ( doc.getElementById ( i ) )
+; elx =( t )=> ( doc.createElement  ( t ) )
+</script>
+
+<script group="prolog">
+; ale =( q, e )=> arr( ( e ).querySelectorAll( q ) )
+; ole =( q, e )=>    ( ( e ).querySelector   ( q ) )
+; all =( q    )=> ( ale( q, doc ) )
+; one =( q    )=> ( ole( q, doc ) )
+</script>
+
+<script group="prolog">
+; ssg = sessionStorage
+; stg = localStorage;
+; mem =( o )=> Object.keys( o || window ).sort()
+; dir =( o )=> mem( o || stg || {} )
+; tmp =( o )=> mem( o || ssg || {} )
+</script>
+
+<script group="prolog">
+; veer =( s )=> ( location.hostname = s );
+</script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script id="gadget-refs.js">
+const figure  = gid( "figure"  );
+const surface = gid( "surface" );
+const sce = gid( "sce" );
+const sip = gid( "sip" );
+</script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script id="prologs.js">
+function prologs( ed ) {
+    try {
+        const m = all( 'SCRIPT[group="prolog"]' );
+        const v = (
+            ( m )
+            . map( se => se.innerText )
+        );
+        return jsom( v, null, ed );
+    } catch ( e ) {
+        console.error ( e );
+        alert ( e );
+    }
+}
+</script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script id="koffee.js">
 function koffee( event ) {
     const kc = event.keyCode;
     if ( modkey( kc ) ) { return; }
@@ -192,45 +263,125 @@ color.reset = function( o ) {
 <script>
 stashed_scripts = ( `
 
-mem=o=>Object.keys(o).sort();
-show=o=>alert(mem(o).join("\\n"));
-
-color( "lemonchiffon", "midnightblue" );
-color( "black", "lemonchiffon", sce );
+PEACH_KEY = ( "zephyr-stashed-scripts" );
 
 function check_gems() {
    alert( exec.gems.size );
 };
 
-sce.saved = sce.value;
+function clear_gems() {
+   alert( exec.gems = new Set() );
+};
+
+function edit_gems( rex ) {
+    jsom( gems, rex, sop );
+};
+
+figure.stash();
+sce.stash();
+sop.stash();
 
 // alert( sce.value.length );
 // sce.value = exec.jimbo().join("\\n\\n");
 
-// figure.saved = figure.src;
-// figure.removeAttribute( "src" );
 // alert( figure.src );
-// figure.src = figure.saved;
+// assist( figure );
+// assist( sce );
+// assist( sop );
 
 // check_gems();
 // alert( surface.width );
 
+// starburst( 500  );
+// starfield( 1000 );
+
+alert( "Ready!" );
+
 ` );
 </script>
 
-<script>
-function init_editor( ed ) {
-    ed = ( ed || sce );
-    ed.resume = function() {
-        ed.value = stashed_scripts;
-    };
-    ed.insert = function ( t ) {
-        insert_text( ed, t );
-    };
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script id="init-surface.js">
+function init_surface() {
 }
 </script>
 
-<script>
+<script id="init-figure.js">
+function init_figure() {
+    const ge = figure;
+    ge.stash   =(   )=> ( figure.saved = figure.src );
+    ge.resume  =(   )=> ( figure.src = figure.saved );
+    ge.clear   =(   )=> ( figure.src = ( "" ) );
+    ge.request =( u )=> ( figure.src = ( u  ) );
+    ge.catalog =(   )=> ( mem( ge ) );
+    ge.inspect =(   )=> ( inspect( ge ) );
+    ge.assist  =(   )=> ( assist ( ge ) );
+}
+</script>
+
+<script id="init-editor.js">
+function init_editor( ed ) {
+    ed = ( ed || sce );
+    ed.begin =()=> { ed.value = stashed_scripts; };
+    ed.insert =( t )=> ( insert_text( ed, t ) );
+    ed.run  =()=> ( exec( ed.value ) );
+    ed.zoom =()=> ( zoom( ed ) );
+    ed.clear  =()=> ( ed.value = "" );
+    ed.resume =()=> ( ed.value = ed.saved );
+    ed.stash  =()=> ( ed.saved = ed.value );
+    ed.stash();
+    return ( ed );
+}
+</script>
+
+<script id="init-theme.js">
+function init_theme() {
+    color(
+     "lemonchiffon"
+    , "midnightblue"
+    );
+    color(
+      "black"
+    , "lemonchiffon"
+    , sce
+    );
+    color(
+      "black"
+    , "gray"
+    ,  sop
+    );
+}
+</script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script id="assist.js">
+function assist( o, title ) {
+    const t = ( str( title ) || "Members" );
+    const m = Array.from( o );
+    m . unshift( `[ ${t} ]\n\n` );
+    alert( m );
+}
+</script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script id="inspect.js">
+function inspect( o, title ) {
+    const t = ( str( title ) || "Members" );
+    const m = Array.from( o );
+    const c = console;
+    c.clear();
+    c.group( `[ ${t} ]\n\n` );
+    c.table( m );
+    c.groupEnd();
+}
+</script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script id="insert-text.js">
 function insert_text( ed, t ) {
     const n = t.length;
     const o = ed.value;
@@ -248,15 +399,161 @@ function insert_text( ed, t ) {
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
-<script>
-function main( event ) {
-    doc . title = "Zephyr Graphics";
-    init_editor( sce );
-    sce.resume();
+<script id="filter.js">
+function filter( o, rex ) {
+    if ( rex = str( rex ) ) {
+        rex = new RegExp( rex );
+        const match =( s )=> ( rex.test( s ) );
+        return ( o ).filter( match );
+    }
+    return ( o );
+};
+</script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script id="seeker.js">
+function seeker( rex, ed ) {
+    const m = (
+        mem()
+        . filter(
+            k => (! iwm.includes( k ) )
+        )
+    );
+    const v = filter( m, rex );
+    if ( ed ) {
+        ed.value = ( v.join( "\n" ) );
+        return;
+    }
+    return ( v );
+};
+</script>
+
+<script id="kahlan.js">
+function kahlan( rex, ed ) {
+    const m = (
+        mem()
+        . filter(
+            k => ( iwm.includes( k ) )
+        )
+    );
+    const v = filter( m, rex );
+    if ( ed ) {
+        ed.value = ( v.join( "\n" ) );
+        return;
+    }
+    return ( v );
+};
+</script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script id="zoom.js">
+function zoom( o ) {
+    try {
+        ( o ).requestFullscreen();
+        ( o ).focus();
+        return ( o );
+    } catch ( e ) {
+        console.error ( e );
+        alert  ( e );
+        return ( e );
+    }
+};
+</script>
+
+<script id="visible.js">
+function visible( ge ) {
+    return (
+        ! ( ge )
+        . classList
+        . contains( "hide" )
+    );
+};
+</script>
+
+<script id="hide.js">
+function hide( o ) {
+    ( o ).classList.add( "hide" );
+    return ( o );
+};
+</script>
+
+<script id="show.js">
+function show( o ) {
+    ( o ).classList.remove( "hide" );
+    return ( o );
+};
+</script>
+
+<script id="toggle.js">
+function toggle( o ) {
+    if ( visible( o ) ) {
+        return hide( o );
+    } else {
+        return show( o );
+    }
+};
+</script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script id="gideon.js">
+function gideon( type, index ) {
+    const m = all( type );
+    return ( ( m )[ index ] );
 }
 </script>
 
-<script>
+<script id="gideon-group.js">
+gideon.group = function( key ) {
+    const q = ( '[group="${key}"]' );
+    return all( q );
+};
+</script>
+
+<script id="gideon-status.js">
+gideon.status = function( key ) {
+    const q = ( '[status="${key}"]' );
+    return all( q );
+};
+</script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script id="jsom.js">
+function jsom( o, rex, ed ) {
+    const dash = String( "-" ).repeat( 62 );
+    const line = ( `\n|${dash}|\n` );
+    o = filter( o, rex ).join( line );
+    if ( ed ) {
+        ed . value = ( o );
+        return;
+    }
+    return ( o );
+}
+</script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script id="main.js">
+function main( event ) {
+    try {
+        doc . title = "Zephyr Graphics";
+        init_figure();
+        init_surface();
+        init_theme();
+        init_editor( sop );
+        init_editor( sce );
+        sce.begin();
+    } catch ( e ) {
+        console.error ( e );
+        alert( e );
+    }
+}
+</script>
+
+<script id="page-load.js">
 addEventListener( "load", main );
 </script>
 
