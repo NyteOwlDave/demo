@@ -161,12 +161,17 @@ function render() {
 [gfx-wiki]: <https://en.wikipedia.org/wiki/Computer_graphics>
 [web-gl]: <https://webglfundamentals.org/>
 
+[cloud-pad]: <https://texteditor.co/?id=drive-1cmolKg6ZCW-Nj8zArDwQkn0R5OWIR7am>
+[mdn]:       <https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API>
+[jsinfo]:    <https://javascript.info/>
+[sig-graph]: <https://dl.acm.org/>
 
 > [DES Shortcut](./des/lissajous.desktop)
 
 > [HUD API Notes](./../api/hud-api-notes.html)
 > [Core API Notes](./../api/core-api-notes.html)
 > [Rocket API Notes](./../api/rocket-api-notes.html)
+> [My Notepad](https://nyteowldave.github.io/notes/mynotepad.html)
 
 > [Palette Analyzer](./../palette-analyzer.html)
 > [Zephyr](./../zephyr/zephyr.html)
@@ -174,11 +179,16 @@ function render() {
 > [Graphics Universe][gfx-universe]
 > [BASIC Editions][basic-editions]
 
+> [Cloud Notepad][cloud-pad]
 > [Mark-Ed][mark-ed]
 > [QB64 Phoenix][qb64pe]
 > [WebGL][web-gl]
 > [YouTube][gfx-youtube]
+
+> [SIG GRAPH][sig-graph]
 > [Wikipedia][gfx-wiki]
+> [MDN][mdn]
+> [JS Info][jsinfo]
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
@@ -331,6 +341,9 @@ a, a:visited {
 
 <script id="doc.js">
 ; doc = document
+; stg = localStorage
+; ssg = sessionStorage
+; con = console
 </script>
 
 <script id="debug.js">
@@ -375,7 +388,7 @@ function main( event ) {
 main . modified = {
   host : "dave-tower"
 , date : "2026-SEP-01"
-, time : "07:42 pm"
+, time : "08:08 pm"
 , note : [
 "Viewer Methods & Better JS Script"
 ]
