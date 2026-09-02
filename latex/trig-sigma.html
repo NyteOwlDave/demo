@@ -1,0 +1,69 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<style type="text/css">
+td, th { border: 1px solid #c3c3c3; padding: 0 3px 0 3px; }
+table { border-collapse: collapse; }
+img { max-width: 100%; }
+</style>
+<meta name="generator" content="ReText 7.2.3">
+<title>trig-sigma</title>
+<style type="text/css">
+</style>
+
+<script>
+MathJax = {
+  options: {
+    renderActions: {
+      find: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+  }
+};
+</script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script></head>
+<body>
+<style>
+@import url("./../style/every-page.css")
+</style>
+
+<hr>
+<h1>Trig Function Sigma Notation</h1>
+<hr>
+<p>
+<script type="math/tex; mode=display">
+sin(x) = \Sigma_{n=0}^{\infty}
+\begin{bmatrix}
+\frac{\alpha} {\Delta}
+\end{bmatrix} \kappa
+</script>
+<script type="math/tex; mode=display"> \alpha = (-1)^n </script>
+<script type="math/tex; mode=display"> \Delta = (2n - 1)! </script>
+<script type="math/tex; mode=display"> \kappa = x^{2n+1} </script>
+</p>
+<hr>
+<p>
+<script type="math/tex; mode=display">
+cos(x) = \Sigma_{n=0}^{\infty}
+\begin{bmatrix}
+\frac{\alpha} {\Delta}
+\end{bmatrix} \kappa
+</script>
+<script type="math/tex; mode=display"> \alpha = (-1)^n </script>
+<script type="math/tex; mode=display"> \Delta = (2n)! </script>
+<script type="math/tex; mode=display"> \kappa = x^{2n} </script>
+</p>
+<hr>
+
+</body>
+</html>

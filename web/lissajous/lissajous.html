@@ -60,13 +60,20 @@ function render() {
    // ...
 }
 
+// VIEW (vip) : lissajous-viewer.js
+// EDIT (sce) : heds-up-editor.js
+
 ;
+; ( 0 ) && persist_viewer();
+; ( 0 ) && recover_viewer();
 ; ( 0 ) && hud.persist()
+; ( 0 ) && hud.recover()
 ; ( 1 ) && setup()
 ; ( 0 ) && render()
 ;
 
 "OK!";
+
 
 ` );
 </script>
@@ -304,6 +311,17 @@ function main( event ) {
 }
 </script>
 
+<script id="main-modified.js">
+main . modified = {
+  host : "dave-tower"
+, date : "2026-SEP-01"
+, time : "07:42 pm"
+, note : [
+"Viewer Methods & Better JS Script"
+]
+};
+</script>
+
 <script id="load-event.js">
 addEventListener( "load", main );
 </script>
@@ -451,13 +469,23 @@ function add_tex( url ) {
 
 <script id="init-viewer.js">
 function init_viewer() {
-   vip = one( "PRE" );
-   vip.id = "vip";
-   vip.storekey = "lissajous-viewer.js";
-   vip.setAttribute( "contenteditable", "true" );
-   vip.clear =()=> ( vip.innerText="" );
-   console.log( "Assigned ID to Viewer ( 'vip' )" );
-   return ( vip );
+    vip = one( "PRE" );
+    vip.id = "vip";
+    vip.storekey = "lissajous-viewer.js";
+    vip.setAttribute( "contenteditable", "true" );
+    vip.clear =()=> ( vip.innerText="" );
+    vip.stash = function() {
+        const s = vip.textContent
+        vip.saved = ( s || vip.saved || "" );
+        console.log( `Stashed "vip" content` );
+    };
+    vip.resume = function() {
+        const s = ( vip.saved || "" );
+        const t = ( vip.textContent );
+        vip.textContent = ( s || t );
+    };
+    console.log( "Assigned ID to Viewer ( 'vip' )" );
+    return ( vip );
 }
 </script>
 
@@ -484,6 +512,28 @@ function recover_viewer() {
    }
    vip.innerText = ( v );
    console.log( `Read "${k}" from Store` );
+}
+</script>
+
+<script id="view_nav_links.js">
+function view_nav_links() {
+    const vip = init_viewer();
+    vip.stash();
+    vip.innerText = nav_links;
+}
+</script>
+
+<script id="view_members.js">
+function view_catalog( o, sort ) {
+    const vip = init_viewer();
+    vip.stash();
+    o = ( o || localStorage );
+    if ( sort ) {
+        o = mem( o ).sort();
+    } else {
+        o = mem( o );
+    }
+    vip.innerText = ( o ).join( "\n" );
 }
 </script>
 
