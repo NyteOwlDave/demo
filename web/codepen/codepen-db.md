@@ -1,7 +1,8 @@
+<style>
+@import url("./../../style/every-page.css");
+</style>
 
-[codepen]: 
-<https://codepen.io/your-work>
-"Code Pen"
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
 [pen-001-001]: <./auto/> "pen-001-001"
 [pen-001-002]: <./auto/> "pen-001-002"
@@ -12,6 +13,8 @@
 [pen-001-007]: <./auto/> "pen-001-007"
 [pen-001-008]: <./auto/> "pen-001-008"
 [pen-001-009]: <./auto/> "pen-001-009"
+
+[pen-001-010]: <./auto/> "pen-001-010"
 
 [pen-002-001]: <./auto/> "pen-002-001"
 [pen-002-002]: <./auto/> "pen-002-002"
@@ -45,9 +48,12 @@
 [pen-004-009]: <./auto/> "pen-004-009"
 
 [pen-005-001]: <./auto/> "pen-005-001"
-<style>
-@import url("./../../style/every-page.css");
-</style>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+[codepen]: 
+<https://codepen.io/your-work>
+"Code Pen"
 
 ----------------------------------------------------------------
 
@@ -68,6 +74,9 @@ preview width test
 - [Bezier Text][pen-001-007]
 - [Quick Test][pen-001-008]
 - [Markdown Edit][pen-001-009]
+
+- [Zeek][pen-001-010]
+
 - [Dial of Destiny][pen-002-001]
 - [Sandbox][pen-002-002]
 - [Callbacks for Sci-Fi Geeks][pen-002-003]
@@ -115,6 +124,52 @@ I'd then like to use that information for a variety of tasks:
 - Interoperate With IndexedDB / PHP / MySQL / SQL Lite
 
 First however, I need the URL Addresses for __all__ `Pens`.
+
+----------------------------------------------------------------
+
+# Pen Key Table
+
+| Markdown Tag | Pen Key | Title                             |
+|--------------|---------|-----------------------------------|
+| pen-001-001  | jErLGxa | Hybrid Data List                  |
+| pen-001-002  | WbxjMQX | Hysteresis Demo                   |
+| pen-001-003  | KwdOodo | URL Composer (Earl)               |
+| pen-001-004  | RNWoveM | Drifter                           |
+| pen-001-005  | RNPVBBa | Chachi Math                       |
+| pen-001-006  | OPVXBqZ | Rimrod Texture Map                |
+| pen-001-007  | yyNOPqM | Bezier Text                       |
+| pen-001-008  | KwKpzVq | Quick Test                        |
+| pen-001-009  | JoPBNar | Markdown Edit                     |
+| pen-001-010  | vEKWZBB | Zeer                              |
+| pen-002-001  | zxOEMWw | Dial of Destiny                   |
+| pen-002-002  | KKOavWo | Sandbox                           |
+| pen-002-003  | WNVoowB | Callbacks for Sci-Fi Geeks        |
+| pen-002-004  | qBzqqeq | Pippen Home                       |
+| pen-002-005  | gONwmPb | Tripping With Trigons             |
+| pen-002-006  | PovZjVr | Dialog Adventures                 |
+| pen-002-007  | ExJmPZQ | LightGen                          |
+| pen-002-008  | LYXwZxB | Enter Phone Number                |
+| pen-002-009  | YzaMNJz | Eye Dropper API                   |
+| pen-003-001  | yLKRvmZ | CSS Light/Dark Mode               |
+| pen-003-101  | zYWmExm | Array Switch                      |
+| pen-003-002  | NWYqoBo | Snake Chasing Bugs                |
+| pen-003-003  | poLJbBr | Dodecahedron with Cubes           |
+| pen-003-004  | NWYPeaX | Line Intersection                 |
+| pen-003-005  | ZErNNBx | HTML Input Types                  |
+| pen-003-006  | QWQPPPv | Trig Functions                    |
+| pen-003-007  | QWQPNKm | Bug Fight!                        |
+| pen-003-008  | XWZQmJm | Old Fashioned Fire                |
+| pen-003-009  | rNJbBNo | Seven Segment Display             |
+| pen-004-001  | LYQJbao | Pie Chart                         |
+| pen-004-002  | QWQOWxO | Text Gradient                     |
+| pen-004-003  | bGEMLzz | Fractionary :D                    |
+| pen-004-004  | RwrQxaG | Tree View                         |
+| pen-004-005  | ExVJOyY | Canvas Text Block                 |
+| pen-004-006  | RwWaaVJ | Decoder                           |
+| pen-004-006  | YzPoxgM | KnockOut-1                        |
+| pen-004-008  | dyPQjME | Object Inspector                  |
+| pen-004-009  | KKwreGN | Hello!                            |
+| pen-005-001  | pending | Noteworthy                        |
 
 ----------------------------------------------------------------
 
