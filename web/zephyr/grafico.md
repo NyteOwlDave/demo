@@ -2,6 +2,12 @@
 @import url("https://nyteowldave.neocities.com/style.css");
 </style>
 
+<style>
+html {
+	background-image : url("http://dave-tower/art/bgi/bgi-retro-future.png");
+}
+</style>
+
 ----------------------------------------------------------------
 
 #Grafico 3D Plotter ~ Mimmo Derix
