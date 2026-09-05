@@ -1,3 +1,5 @@
+
+' REM ~ https://basicfusion.org/
 ' REM ~ https://www.edubasic.net/
 
 DIM SHARED index( 1 to 26, 1 to 3 ) as String
