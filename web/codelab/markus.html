@@ -12,7 +12,7 @@
 <script>
 ; doc = document
 </script>
-<script src="https://nyteowldave.github.io/std/gems/prolog-beta.js"></script>
+<script src="https://nyteowldave.github.io/std/api/gems/prolog-beta.js"></script>
 <script src="https://nyteowldave.github.io/std/api/core-api.js"></script>
 </head>
 <body>
@@ -40,7 +40,7 @@
   </script>
 <hr>  
   <div id="hop">
-  
+
 <title>Index of /</title>
 <h1>Index of /</h1>
 <table>
@@ -122,7 +122,7 @@
 <tr><th colspan="5"><hr></th></tr>
 </tbody></table>
 <address>Apache/2.4.52 (Ubuntu) Server at localhost Port 80</address>
-  
+
   </div>
 <hr>  
   <div>
@@ -135,7 +135,7 @@
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ --> 
   <script>
   hop.render = function( s ) {
- 	if ( "undefined" === typeof s ) {
+    if ( "undefined" === typeof s ) {
       s = this.innerText;
     }
     this.innerHTML = ( s );
@@ -144,7 +144,7 @@
   </script>
   <script>
   hop.reveal = function( s ) {
- 	if ( "undefined" === typeof s ) {
+    if ( "undefined" === typeof s ) {
       s = this.innerHTML;
     }
     this.innerText = ( s );
@@ -186,6 +186,12 @@
       <li>
         <a href="https://www.tutorialrepublic.com/codelab.php">Code Lab</a>
       </li>
+      <li>
+        <a href="http://dave-omega/demo/web/codelab/markus.html">Omega</a>
+      </li>
+      <li>
+        <a href="http://dave-tower/demo/web/codelab/markus.html">Tower</a>
+      </li>
     </ul>
     <hr>
     <style>
@@ -198,13 +204,13 @@
     </div>
     <script>
      function init_decal_menu( o ) {
-       	o = ( o || bookmark_menu );
-       	let m = ( o.textContent.trim().split( "|" ) );
-       	m = (
+        o = ( o || bookmark_menu );
+        let m = ( o.textContent.trim().split( "|" ) );
+        m = (
           ( m )
           . map( (s) => (s).trim() )
           . filter( (s)=>(s) )
-		);
+        );
         ( o ).innerHTML = "";
         ( m )
         . forEach(
@@ -213,7 +219,7 @@
             o . appendChild( be );
             be . textContent = ( k );
             be . onclick = function( e ) {
-              	zap( e.target.textContent );
+                zap( e.target.textContent );
             }
           }
         );
@@ -225,10 +231,10 @@
     </script>
   </fieldset>
   <script>
-  	function zap( key ) {
+    function zap( key ) {
     }
     action_map = {
-	  "✅" : "accept"
+      "✅" : "accept"
     , "❎" : "reject"
     , "⏮️" : "move_first"
     , "⏪" : "move_prev"
@@ -242,3 +248,4 @@
   </script>
 </body>
 </html>
+
