@@ -1,0 +1,250 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<style type="text/css">
+td, th { border: 1px solid #c3c3c3; padding: 0 3px 0 3px; }
+table { border-collapse: collapse; }
+img { max-width: 100%; }
+</style>
+<meta name="generator" content="ReText 7.2.3">
+<title>hud-app-template</title>
+<style type="text/css">
+</style>
+</head>
+<body>
+<style>
+@import url("https://nyteowldave.neocities.org/style.css");
+</style>
+
+<style>
+@import url("http://dave-omega/demo/style/sce-hud.css");
+</style>
+
+<hr>
+<h1>HUD App</h1>
+<blockquote>
+<p><a href="http://dave-omega/demo/web/templates/hud-app-template.html" title="Omega Edition">Primary</a>
+<a href="./">File System</a></p>
+</blockquote>
+<hr>
+<ul>
+<li><code>MyNotepad</code> should be available</li>
+<li><code>houdini</code> should be available</li>
+</ul>
+<hr>
+<h1>My Notepad Hints</h1>
+<blockquote>
+<p><a href="https://nyteowldave.github.io/" title="Source Code ~ Morpheus">Source Code</a>
+<a href="https://nyteowldave.github.io/" title="Morpheus">Provider</a>
+<a href="https://nyteowldave.github.io/notes/mynotepad.html" title="My Notepad Notes ~ Morpheus">Notes</a></p>
+</blockquote>
+<hr>
+<table>
+<thead>
+<tr>
+<th>Member</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>assist</td>
+<td></td>
+</tr>
+<tr>
+<td>bug_fixes</td>
+<td></td>
+</tr>
+<tr>
+<td>cdn</td>
+<td></td>
+</tr>
+<tr>
+<td>clone</td>
+<td></td>
+</tr>
+<tr>
+<td>dir</td>
+<td></td>
+</tr>
+<tr>
+<td>entries</td>
+<td></td>
+</tr>
+<tr>
+<td>entry</td>
+<td></td>
+</tr>
+<tr>
+<td>filter</td>
+<td></td>
+</tr>
+<tr>
+<td>indexOf</td>
+<td></td>
+</tr>
+<tr>
+<td>inspect</td>
+<td></td>
+</tr>
+<tr>
+<td>key</td>
+<td></td>
+</tr>
+<tr>
+<td>latest</td>
+<td></td>
+</tr>
+<tr>
+<td>manual</td>
+<td></td>
+</tr>
+<tr>
+<td>members</td>
+<td></td>
+</tr>
+<tr>
+<td>merge</td>
+<td></td>
+</tr>
+<tr>
+<td>notes</td>
+<td></td>
+</tr>
+<tr>
+<td>persist</td>
+<td></td>
+</tr>
+<tr>
+<td>persistable</td>
+<td></td>
+</tr>
+<tr>
+<td>read</td>
+<td></td>
+</tr>
+<tr>
+<td>recover</td>
+<td></td>
+</tr>
+<tr>
+<td>recoverable</td>
+<td></td>
+</tr>
+<tr>
+<td>remove</td>
+<td></td>
+</tr>
+<tr>
+<td>rename</td>
+<td></td>
+</tr>
+<tr>
+<td>stats</td>
+<td></td>
+</tr>
+<tr>
+<td>storekey</td>
+<td></td>
+</tr>
+<tr>
+<td>summarize</td>
+<td></td>
+</tr>
+<tr>
+<td>value</td>
+<td></td>
+</tr>
+<tr>
+<td>write</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h1>Houdini Hints</h1>
+<blockquote>
+<p><a href="http://dave-omega/demo/web/gems/houdini.js" title="Houdini Source Code ~ Omega">Source Code</a>
+<a href="http://dave-omega/demo/web/web-menu.html" title="Web Demo Menu ~ Omega">Provider</a>
+<a href="http://dave-omega/demo/web/gems/houdini-notes.html" title="Houdini Notes ~ Omega">Notes</a></p>
+</blockquote>
+<hr>
+<table>
+<thead>
+<tr>
+<th>Member</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>visible</td>
+<td>Verify Object is Visible</td>
+</tr>
+<tr>
+<td>show</td>
+<td>Show Object</td>
+</tr>
+<tr>
+<td>hide</td>
+<td>Hide Object</td>
+</tr>
+<tr>
+<td>toggle</td>
+<td>Toggle Object's Visibility</td>
+</tr>
+<tr>
+<td>zoom</td>
+<td>Request Full Screen Mode</td>
+</tr>
+<tr>
+<td>hints</td>
+<td>Display Object's Members</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2>Houdini Usage</h2>
+<ul>
+<li>Call <code>houdini( )</code></li>
+<li>Pass in some <strong>Gadget ID</strong> or <strong>Reference</strong></li>
+<li>The <strong>Houdini Methods</strong> will be attached to this <strong>Gadget</strong></li>
+</ul>
+<hr>
+<h1>My Notepad Hints</h1>
+<header id="messages"></header>
+
+<footer id="footer">
+  <input id="footer_input" onchange="perform(event)" />
+</footer>
+
+<textarea id="sce" class="hud hide" wrap="off">
+</textarea>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script>
+; iwm = Object.keys( window ).sort()
+</script>
+
+<script>
+;
+; doc = document
+; doc . title
+= doc . querySelector( "H1" )
+. textContent
+;
+</script>
+
+<script src="https://nyteowldave.github.io/std/api/gems/prolog-beta.js"></script>
+<script src="http://dave-omega/demo/web/api/hud.js"></script>
+<script src="http://dave-omega/demo/web/gems/interpreter-lite.js"></script>
+<script src="http://dave-omega/demo/web/gems/houdini.js"></script>
+
+<script>
+footer_input.value = "hud()";
+</script>
+
+</body>
+</html>
