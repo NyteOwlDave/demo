@@ -100,7 +100,10 @@ macro.lite = function( cmd ) {
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+;
+; console.log( `Loaded "interpreter-lite.js" Gem` )
+;
 
-console.log( `Loaded "interpreter-lite.js" Gem` );
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
