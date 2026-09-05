@@ -106,6 +106,7 @@
 
 ----------------------------------------------------------------
 
+# My Notepad Hints
 <header id="messages"></header>
 
 <footer id="footer">

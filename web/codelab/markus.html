@@ -24,6 +24,7 @@
   </pre>
 <hr> 
   <div> <button onclick="sip.run()">OK</button> </div>
+  <div> <button onclick="visit.notes()">Notes</button> </div>
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ --> 
   <script>
   sip.run = function() { window.eval( sip.innerText ) };
@@ -248,6 +249,18 @@
     , "➖"  : "remove"
     , "💾" : "save"
     , "📂" : "open"
+    };
+  </script>
+  <script>
+    function visit( u ) {
+        const d = document;
+        const a = doc.createElement( "A" );
+        a . href = ( u );
+        a . setAttribute( "target", u );
+        a . click();
+    }
+    visit.notes = function() {
+        visit( "./markus-bookius-notes.html" );
     };
   </script>
 </body>
