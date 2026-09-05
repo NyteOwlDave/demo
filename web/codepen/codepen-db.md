@@ -74,9 +74,7 @@ preview width test
 - [Bezier Text][pen-001-007]
 - [Quick Test][pen-001-008]
 - [Markdown Edit][pen-001-009]
-
 - [Zeek][pen-001-010]
-
 - [Dial of Destiny][pen-002-001]
 - [Sandbox][pen-002-002]
 - [Callbacks for Sci-Fi Geeks][pen-002-003]
