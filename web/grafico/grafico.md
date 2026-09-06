@@ -1,3 +1,5 @@
+<head> <link rel="icon" href="favicon.ico" /> </head>
+
 <style>
 @import url("https://nyteowldave.neocities.com/style.css");
 </style>
@@ -5,6 +7,9 @@
 <style>
 html {
 	background-image : url("http://dave-tower/art/bgi/bgi-retro-future.png");
+}
+fieldset {
+    margin : 20px;
 }
 </style>
 
@@ -15,9 +20,18 @@ html {
 ----------------------------------------------------------------
 
 <fieldset>
-<section> <h2>Editors</h2> </section>
-<section>
+<legend> <h2>Editors</h2> </legend>
+<section id="editor_section">
   <textarea id="sce" class="siox" wrap="off" locked></textarea>
+  <textarea id="sip_basic" class="siox" wrap="off" locked></textarea>
+  <textarea id="sip_js" class="siox" wrap="off" locked></textarea>
+</section>
+</fieldset>
+
+<fieldset>
+<legend> <h2>Surfaces</h2> </legend>
+<section id="surface_section">
+  <canvas id="surface"></canvas>
 </section>
 </fieldset>
 
@@ -195,13 +209,18 @@ End Sub
 
 <script>
 
-js_source = ( `` );
+js_source = ( `
+
+/* Grafic 3D Plotter */
+
+` );
 
 </script>
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
 <script>
-sce.value = basic_source;
+sip_basic.value = basic_source;
+sip_js.value    = js_source;
 </script>
 

@@ -1,9 +1,17 @@
+<head> <link rel="icon" href="favicon.ico" /> </head>
+
 <style>
 @import url("https://nyteowldave.neocities.org/style.css");
 </style>
 
 <style>
 @import url("http://dave-omega/demo/style/sce-hud.css");
+</style>
+
+<style>
+#footer_input {
+    width : calc( 100vw - 100px ) !important;
+}
 </style>
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
@@ -26,7 +34,7 @@
 "Grafico 3D Application"
 
 [basic]: 
-<./../../qb64pe/grafico/>
+<./../../qb64pe/grafico/grafico.html>
 "Grafico 3D BASIC Version"
 
 [me-omega]:
@@ -36,6 +44,10 @@
 ----------------------------------------------------------------
 
 # `☰` Grafico Menu
+
+<div center>
+  <img src="favicon.ico" /> 
+</div>
 
 > [`🔴` Primary][me-omega]
 > [`🔴` Grafico 3D][app]
@@ -79,6 +91,7 @@
 <script src="http://dave-omega/demo/web/api/hud.js"></script>
 <script src="http://dave-omega/demo/web/gems/interpreter-lite.js"></script>
 <script src="http://dave-omega/demo/web/gems/houdini.js"></script>
+<script src="http://dave-omega/demo/web/gems/replace-anchor-decals.js"></script>
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
@@ -89,37 +102,13 @@ footer_input.value = "hud()";
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
 <script>
-function replace_anchor_decals( verified ) {
-    const m = find_anchors_by_content( verified );
-    function replace( be ) {
-        let s = be.innerHTML;
-        be.innerHTML = s.replace( "🔴", "🟢" );
-    }
-    m.forEach( replace );
-}
-</script>
-
-<script>
-function find_anchors_by_content( list ) {
-    const strlwr =( s )=> ( str( s ).toLowerCase() );
-    const m = all( "A" );
-    const match =( be )=> {
-        let s = ( be.textContent );
-        s = s.replace( "🔴", ""  );
-        s = s.replace( "🟢", ""  );
-        return list.includes( strlwr( s ) );
-    };
-    list = list.map( strlwr );
-    return m.filter( match );
-}
-</script>
-
-<script>
 verified_buttons = [
   "Primary"
 , "Tick-Tick"
 , "Cloud Notepad"
 , "Express Lane"
+, "Grafico 3D"
+, "Grafico BASIC"
 ];
 </script>
 

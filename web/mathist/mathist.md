@@ -1,0 +1,247 @@
+<style>
+@import url("https://nyteowldave.neocities.org/style.css");
+</style>
+
+<!--
+@import url("http://dave-omega/demo/style/sce-hud.css");
+-->
+
+<style>
+#footer_input {
+    width : calc( 100vw - 100px ) !important;
+}
+</style>
+
+<style>
+.pane {
+    z-index    : 1000;
+    position   : fixed;
+    display    : inline-block;
+    box-sizing : border-box;
+    border     : 1px dashed gold;
+    outline    : none;
+    margin     : 0;
+    resize     : none;
+    overflow   : scroll;
+}
+</style>
+
+<style>
+.left {
+    top    : 0;
+    left   : 0;
+    min-height : calc( 100vh - 80px );
+    min-width  : calc( 50vw  - 42px );
+}
+</style>
+
+<style>
+.right {
+    top    : 0;
+    right  : 22px;
+    min-height : calc( 100vh - 80px );
+    min-width  : calc( 50vw  - 24px  );
+}
+</style>
+
+<style>
+.center {
+    overflow   : hidden;
+    z-index    : 555555;
+    top        : 0;
+    left       : calc( 50vw  - 41px );
+    min-height : calc( 100vh - 80px );
+    min-width  : calc( 42px );
+    background : #084208;
+    resize     : none;
+}
+</style>
+
+
+----------------------------------------------------------------
+
+<textarea class="pane left"  id="sce"></textarea>
+<textarea class="pane right" id="sop"></textarea>
+
+<div class="pane center" id="menu_panel">
+  <div>⏮️</div>
+  <div>⏪</div>
+  <div>⏩</div>
+  <div>⏭️</div>
+  <div>[E]</div>
+  <div>[F]</div>
+  <div>[G]</div>
+  <div>[H]</div>
+  <div>[I]</div>
+  <div>[J]</div>
+</div>
+
+----------------------------------------------------------------
+
+<header id="messages"></header>
+
+<footer id="footer">
+  <input id="footer_input" onchange="perform(event)" />
+</footer>
+
+----------------------------------------------------------------
+
+<script src="https://nyteowldave.github.io/std/api/gems/prolog-beta.js"></script>
+<script src="http://dave-omega/demo/web/gems/core-math.js"></script>
+
+<script>
+function main( event ) {
+    try {
+        read( "odd-number-series.js" );
+        suggest ( "run()" );
+    } catch ( e ) {
+        alert ( e );
+        console.error( e );
+    }
+}
+</script>
+
+<script>
+addEventListener( "load", main );
+</script>
+
+<script>
+function perform( event ) {
+    const ops = perform;
+    ops.error = "";
+    try {
+        const ev = event;
+        ( ev ).preventDefault();
+        ( ev ).stopPropagation();
+        ops.event = ( ev );
+        const sender = ( ev ).target;
+        run( sender );
+    } catch ( e ) {
+        message( e.message );
+        ops.error = ( e.message );
+        console.error( e );
+    }
+}
+</script>
+
+<script>
+function run( ed ) {
+    try {
+        ed = ( ed || sce );
+        window.eval( ed.value );
+    } catch ( e ) {
+        message( e.message );
+        console.error( e );
+    }
+}
+</script>
+
+<script>
+function suggest( s ) {
+    footer_input.value = str( s );
+}
+</script>
+
+<script>
+function message( s ) {
+    const ge = messages;
+    s = str( s );
+    ge.textContent = (
+           ( s )
+        || ( ge.textContent )
+    )
+    return ( s );
+}
+</script>
+
+<script>
+function read( id ) {
+    let se = gid( id );
+    if ( se ) {
+        if ( se instanceof HTMLTextAreaElement ) {
+            sce.value = se.value;
+        } else {
+            sce.value = se.innerText;
+        }
+    }
+    return ( se );
+}
+</script>
+
+<script>
+function write( id ) {
+    let se = gid( id );
+    if ( se ) {
+        if ( se instanceof HTMLTextAreaElement ) {
+            se.value = sce.value;
+        } else {
+            se.textContent = sce.value;
+        }
+    }
+    return ( se );
+}
+</script>
+
+<script>
+function report( o ) {
+    sop.value = prep( o );
+}
+</script>
+
+<script>
+function prep( o ) {
+    return ( o );
+}
+</script>
+
+<script id="odd-number-series.js">
+
+function find_odd_series( base ) {
+   answer = pow( base, 3 );
+   const attempt =( n )=> {
+      let sum = 0;
+      for ( let i = 0; i < base; i += 1 ) {
+          sum += n; n += 2;
+	      if ( sum > answer ) {
+    	      return ( 1 );
+      	  }
+      }
+      return sgn( sum - answer );
+   }
+   let n = 1;
+   let limit = 10000;
+   let result;
+   while ( limit-- > 0 ) {
+      result = attempt( n );
+      if ( result === 0 ) { break; }
+      if ( result >   0 ) {
+         throw new Error( "Exceeded Depth Limit" );
+      }
+      n += 2;
+   }
+   const values = [];
+   for ( let i=0; i<base; i +=1 ) {
+       values.push( n );
+       n += 2;
+   }
+   let rhs = values.join( " + " );
+   let lhs = ( `cube( ${base} )` );
+   let sum = values.reduce( (a,b)=>(a+b), 0 );
+   return [ lhs, rhs, sum ].join( " = " );
+}
+
+test_series = function( a=1, b=6 ) {
+    const lines = [];
+    while ( a <= b ) {
+       let s = find_odd_series( a );
+       lines.push( s );
+       a += 1;
+   }
+   return ( lines.join( "\n" ) );
+};
+
+;
+; ( 0 ) && report( test_series( 1, 9 ) )
+; ( 0 ) && report( "OK!" )
+
+</script>
