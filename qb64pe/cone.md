@@ -1,6 +1,8 @@
 <style>
 html, body {
 	font : 12pt verdana, sans-serif;
+	background : rgb(240,244,212);
+	color : midnightblue;
 }
 body {
 	padding : 10ch 15ch;
@@ -111,6 +113,25 @@ class ConeShape {
 ```
 
 # More ...
+
+<div center><code>
+
+|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
+
+</code></div>
+
+# Original Location
+
+This file was started in the `qb64pe` folder for
+the `Demos` Repository.
+
+It was moved to Demo Notes to be more easily located.
+
+<div center><code>
+
+|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
+
+</code></div>
 
 
 

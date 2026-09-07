@@ -1,0 +1,149 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<style type="text/css">
+td, th { border: 1px solid #c3c3c3; padding: 0 3px 0 3px; }
+table { border-collapse: collapse; }
+img { max-width: 100%; }
+</style>
+<meta name="generator" content="ReText 7.2.3">
+<title>cone</title>
+<style type="text/css">
+</style>
+</head>
+<body>
+<style>
+html, body {
+    font : 12pt verdana, sans-serif;
+    background : rgb(240,244,212);
+    color : midnightblue;
+}
+body {
+    padding : 10ch 15ch;
+}
+</style>
+
+<h1>Drawing a Cone</h1>
+<div>
+  <img src="./../web/art/fig/cone.png" />
+</div>
+
+<h1>Choose Dimensions</h1>
+<p>First, we defined the essential metrics:</p>
+<ul>
+<li>Radius at Base</li>
+<li>Height</li>
+</ul>
+<h1>Choose Facet Measures</h1>
+<p>This is adequate for the math. However, unless we ray tracing,
+we'll need some more metrics that describe a faceted convex
+solid 3D shape.</p>
+<ul>
+<li>Side (and Vertex) Count per Ring</li>
+<li>Number of Rings</li>
+</ul>
+<h2>Vertices and Rings</h2>
+<p>We define a ring as a regular polygon that roughly represents
+the circle that's formed when a plane slices the cone. For this
+to be a perfect circle rather than an ellipse, the plane's
+surface normal must be parallel to the cone's central axis.</p>
+<h2>Polygon vs. Circle</h2>
+<p>The reason for using a regular polygon is that circles are
+basically overkill when rendering faceted shapes. If you give
+the polygon enough vertices, it's practically indistinguishable
+from a circle.</p>
+<h1>Object Position and Orientation</h1>
+<p>There are more considerations we haven't mentioned yet. The first
+is how to we define the location of the shape in it's own
+native coordinate system. The most straight forward choice is
+to treat <code>( 0, 0, 0 )</code> as the center point of the cone's base
+circle. We then define our axes as follows:</p>
+<h1>Object Space</h1>
+<table>
+<thead>
+<tr>
+<th>Axis</th>
+<th>Direction</th>
+<th>Unit Vector</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>X</td>
+<td>Right</td>
+<td>( 1, 0, 0 )</td>
+</tr>
+<tr>
+<td>Y</td>
+<td>Up</td>
+<td>( 0, 1, 0 )</td>
+</tr>
+<tr>
+<td>Z</td>
+<td>Front</td>
+<td>( 0, 0, 1 )</td>
+</tr>
+</tbody>
+</table>
+<p>Defining our shape's "location" in it's own space along with
+the above Identity Matrix gives us the rest of the information
+we need to draw our cone in standard position. That is, with
+no additional transformation(s) applied.</p>
+<h1>Example</h1>
+<p>Show here is a basic example in JavaScript:</p>
+<h2>Essential Math</h2>
+<pre><code class="language-javascript">
+const int =( o )=&gt; Math.parseInt  ( o );
+const flt =( o )=&gt; Math.parseFloat( o );
+
+const min =( o )=&gt; Math.parseFloat( o );
+const max =( o )=&gt; Math.parseFloat( o );
+const mid =( o )=&gt; Math.parseFloat( o );
+
+const abs =( o )=&gt; Math.parseFloat( o );
+const sgn =( o )=&gt; Math.parseFloat( o );
+
+</code></pre>
+<h2>ConeShape Class</h2>
+<pre><code class="language-javascript">
+class ConeShape {
+    constructor( radius, height, rings, sides ) {
+        this.state  = {};
+        this.state.vert = [];   // Vertices
+        this.state.face = [];   // Facets
+        this.radius = radius;
+        this.height = height;
+        this.rings  = rings;
+        this.sides  = sides;
+    }
+    get radius() { return this.state.radius }
+    get height() { return this.state.height }
+    get rings() { return this.state.rings }
+    get sides() { return this.state.sides }
+    set radius( n ) { }
+    set height( n ) { }
+    set rings( n ) { }
+    set sides( n ) { }
+}
+
+</code></pre>
+<h1>More ...</h1>
+<div center><code>
+
+|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
+
+</code></div>
+
+<h1>Original Location</h1>
+<p>This file was started in the <code>qb64pe</code> folder for
+the <code>Demos</code> Repository.</p>
+<p>It was moved to Demo Notes to be more easily located.</p>
+<div center><code>
+
+|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
+
+</code></div>
+
+</body>
+</html>
