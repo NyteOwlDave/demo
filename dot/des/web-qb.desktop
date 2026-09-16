@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Web QB
+Type=Application
+Exec=xdg-open https://webqb.org
+Icon=/home/dave/Icons/logo/web-qb.png
+# web-qb.desktop
+[Dave]
+
+

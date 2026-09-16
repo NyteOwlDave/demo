@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Cortex BASIC
+Type=Application
+Exec=xdg-open https://app.cortexbasic.com/web-ide 
+Icon=/home/dave/Icons/logo/cortex-basic.png
+# cortex-basic.desktop
+[Dave]
+WEBP=https://app.cortexbasic.com/assets/cortex-logo.webp
+

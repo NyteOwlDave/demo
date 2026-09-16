@@ -1,0 +1,13 @@
+[Desktop Entry]
+
+Version=1.0
+Type=Application
+Terminal=false
+
+Name=QB64 Phoenix
+Exec=/home/dave/Apps/qb64pe/qb64pe
+Icon=/home/dave/Icons/logo/qb64pe.png
+
+# qb64pe.desktop
+
+

@@ -1,0 +1,6 @@
+[Desktop Entry]
+Name=TRS-80
+Exec=xdg-open https://app.trashbox80.com/
+Icon=/home/dave/Icons/tmp.png
+Type=Application
+# trs-80-emu.desktop
