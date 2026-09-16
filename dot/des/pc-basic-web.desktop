@@ -1,0 +1,8 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=PC-BASIC @ Ryzen
+Exec=firefox http://dave-ryzen/app/BASIC/PC-BASIC/
+Icon=/home/dave/Icons/basic.png
+Terminal=false
+

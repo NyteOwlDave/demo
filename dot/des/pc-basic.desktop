@@ -1,0 +1,8 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=PC-BASIC Desktop
+Exec=/home/dave/Mount/PC-BASIC/pcbasic/run-pcbasic.py
+Icon=/home/dave/Icons/basic-red.png
+Terminal=false
+
