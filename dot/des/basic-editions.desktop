@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=BASIC Editions
+Exec=xdg-open http://dave-omega/demo/notes/basic-editions.html
+Icon=/home/dave/Icons/logo/basic-editions.png
+Type=Application
+# basic-editions.desktop
+
