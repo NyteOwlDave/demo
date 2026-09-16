@@ -1,0 +1,27 @@
+
+/* balloon.css */
+
+.balloon {
+    animation : linear 0.3s hammer forwards;
+    position : fixed;
+    top   : 42px;
+    right : 80px;
+    padding : 2.2ch;
+    border-radius : 2.2ch;
+    background : rgb( 205, 255, 205 );
+    color : rgb( 0, 32, 10 );
+    font  : 14pt monospace;
+    box-shadow : 0 0 17px gold;
+}
+
+@keyframes hammer {
+    from {
+        transform : scale( 0.2 );
+        opacity : ( 0.2 );
+    }
+    to {
+        transform : scale( 1.0 );
+        opacity : ( 1.0 );
+    }
+}
+

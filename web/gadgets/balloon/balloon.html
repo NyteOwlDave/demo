@@ -1,0 +1,103 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<style type="text/css">
+td, th { border: 1px solid #c3c3c3; padding: 0 3px 0 3px; }
+table { border-collapse: collapse; }
+img { max-width: 100%; }
+</style>
+<link rel="stylesheet" type="text/css" href="balloon.css">
+<meta name="generator" content="ReText 7.2.3">
+<title>balloon</title>
+<style type="text/css">
+</style>
+</head>
+<body>
+<!-- [[ balloon.md ]] -->
+
+<hr>
+<h1>Balloon <code>🗨️</code> Gadget Demo</h1>
+<hr>
+<h3>What would you like the balloon to say?</h3>
+<div center>
+  <textarea id="sip" class="siox"></textarea>
+</div>
+
+<hr>
+<div center>
+  <button action="fly()" onclick="action(event)">Let it Rip!</button>
+</div>
+
+<hr>
+<h1>Downloads</h1>
+<blockquote>
+<p>Like this gadget? Want one of your very own? Download the
+files here:</p>
+</blockquote>
+<div center>
+ <a download="balloon.zip" href="./pubs/balloon.zip">balloon.zip</a>
+ <a download="balloon.md"  href="./pubs/balloon.md" >balloon.md</a>
+ <a download="balloon.js"  href="./pubs/balloon.js" >balloon.js</a>
+ <a download="balloon.css" href="./pubs/balloon.css">balloon.css</a>
+</div>
+
+<hr>
+<h1>Navigation</h1>
+<blockquote>
+<p><a href="./../gadgets-menu.html">Gadgets Menu</a>
+<a href="./../../jarvis-menu.html">Jarvis Menu</a></p>
+<p><a href="./tree.php">Folder Tree</a>
+<a href="./">File System</a></p>
+</blockquote>
+<hr>
+<style>
+@import url("http://dave-omega/app/jarvis/style/notes.css");
+@import url("./balloon.css");
+</style>
+
+<hr>
+<script>
+; iwm = Object.keys( window ).sort()
+</script>
+
+<script>
+; doc = document
+; doc . title = ( `Balloon Gadget Demo` )
+</script>
+
+<script>
+; str =( s )=> String( s || "" ).trim()
+; elx =( t )=> doc.createElement( t )
+</script>
+
+<script>
+const QUIET = ( `
+Nothing to say, eh?
+` );
+</script>
+
+<script>
+function fly() {
+    const s = str( sip.value );
+    balloon( s || QUIET );
+}
+</script>
+
+<script>
+function action( event ) {
+    try {
+        const sender = event.target;
+        const js = sender.getAttribute( "action" );
+        window.eval( js );
+    } catch ( e ) {
+        alert ( e );
+        throw ( e );
+    }
+}
+</script>
+
+<script src="./balloon.js"></script>
+
+</body>
+</html>
