@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=C64 Emulator
+Exec=xdg-open https://stigc.dk/c64/basic/
+Icon=/home/dave/Icons/logo/c64.png
+Type=Application
+# c64-emu.desktop
+
