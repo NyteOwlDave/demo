@@ -1,9 +1,11 @@
 
 /*
 	table-decal-stats.js
-	Web Demo API Modules
-*/
 
+	- [x] Jarvis API Modules
+	- [?] Web Demo API Modules
+	- [?] Morpheus API Modules
+*/
 
 // Write Cell Value
 function write_cell( table, row, column, value ) {
@@ -55,8 +57,8 @@ function find_column_cells( table, column ) {
     const m = find_rows( table );
     return (
         ( m )
-        . map( ( re ) => (
-            re.cells[ column ]
+        . map(
+			( re ) => ( re.cells[ column ] )
         )
     );
 }
@@ -115,8 +117,8 @@ function sum_values( cells ) {
 
 // Update Table Row and Column Decal Counts
 function update_table( table, decal ) {
-	let cells, sum, sums[], total=0;
-	let last_cell;
+	let cells, sum, total=0;
+	let first_cell, last_cell;
 	decal = str( decal );
 	const decal_match =( ce )=> (
 		str( ce.textContent ) === decal
@@ -131,29 +133,30 @@ function update_table( table, decal ) {
     const rows = find_rows( table );
 	if ( rows.length < 1 ) { return; }
 	const last_row = ( rows . pop() );
+	const bottom = Array.from( last_row.cells );
 	rows . forEach(
 		( re ) => {
 			cells = Array.from( re.cells );
-			last_cell = ( cells . pop() );
+			first_cell = ( cells . shift() );
+			last_cell  = ( cells . pop  () );
 			if ( cells . length > 0 ) {
 				sum = cells . reduce( decal_sum, 0 );
 				total += sum;
 			} else {
 				sum = 0;
 			}
-			sums . push( sum );
 			if ( last_cell ) {
-				last_cell.textContent = sum.toString();
+				last_cell . textContent = sum.toString();
 			}
 		}
 	);
-	cells = Array.from( last_row.cells );
-	last_cell = ( cells . pop() );
-	last_cell . textContent = total.toString();
-	const count = cells.length;
-	for ( let i = 0; i < count; i += 1 ) {
-		sum = ( sums[ i ] || 0 );
-		cells[ i ].textContent = sum.toString()
+	last_cell = ( bottom . pop() );
+	last_cell . textContent = ( total . toString() );
+	const count = ( bottom . length );
+	for ( let i = 1; i < count; i += 1 ) {
+		cells = find_column_cells( table, i );
+		sum = cells . reduce( decal_sum, 0 );
+		bottom[ i ] . textContent = ( sum . toString() );
 	}
 }
 
