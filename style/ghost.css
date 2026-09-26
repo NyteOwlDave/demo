@@ -1,0 +1,15 @@
+
+/*
+
+    ghost.css
+    Jarvis Styles
+	Offscreen, Transparent
+*/
+
+.ghost {
+	position : fixed;
+	opacity  : 0;
+	left     : -2000px;
+	width    : 2px;
+	height   : 2px;
+}
