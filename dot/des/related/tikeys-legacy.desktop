@@ -1,0 +1,21 @@
+[Desktop Entry]
+
+Version=1.0
+Type=Application
+Terminal=false
+
+Name=Reggie's TiKeys ~ Legacy
+Icon=/home/dave/Icons/doctype/tikey.png
+Exec=firefox http://dave-legacy/app/reggie/TiKeys/
+
+[NCS]
+
+Type=Template
+Filename=tikeys-legacy.desktop
+Volume=Templates
+
+# [Explore](./)
+# [Desktop](file:///home/dave/Desktop/)
+# [Templates](file:///home/dave/Templates/)
+
+

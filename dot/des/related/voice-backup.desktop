@@ -1,0 +1,17 @@
+[Desktop Entry]
+
+Version=1.0
+Type=Application
+Terminal=false
+
+Name=Voice Backup
+Icon=/home/dave/Icons/doctype/backups.png
+Exec=firefox https://notability.com/app/note/1d4696a3-2729-4951-960d-2bf0bb87c30a
+
+[NCS]
+Filename=voice-backup.desktop
+# [Explore](./)
+# [Desktop](file:///home/dave/Desktop/)
+# [Templates](file:///home/dave/Templates/)
+
+

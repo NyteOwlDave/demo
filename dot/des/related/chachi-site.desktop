@@ -1,0 +1,27 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=♨️ Chachi ~ Google Site
+Exec=firefox https://sites.google.com/view/chachi-calculator
+Icon=/home/dave/Icons/logo/chachi.png
+Terminal=false
+
+[Chachi]
+Version=1.0
+Type=Application
+Name=♨️ Chachi ~ Morpheus
+Exec=firefox https://nyteowldave.github.io/thalia/
+Icon=/home/dave/Icons/logo/chachi.png
+Terminal=false
+
+[Chachi G-Site]
+Version=1.0
+Type=Application
+Name=♨️ Chachi ~ Google Site
+Exec=firefox https://sites.google.com/view/chachi-calculator
+Icon=/home/dave/Icons/logo/chachi.png
+Terminal=false
+
+
+
+

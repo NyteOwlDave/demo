@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Zeddicus
+Exec=firefox https://sites.google.com/view/zeddicus/home
+Icon=/home/dave/Icons/logo/zeddicus.png
+Terminal=false
+
+[Zeddicus]
+Filename=zeddicus.desktop

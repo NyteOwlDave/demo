@@ -1,0 +1,21 @@
+[Desktop Entry]
+
+Version=1.0
+Type=Application
+Terminal=false
+
+Name=MySQL ~ JEFR
+Icon=/home/dave/Icons/logo/mysql.png
+Exec=firefox http://dave-legacy/jefr/menu/mysql.html
+
+[NCS]
+
+Type=Template
+Filename=jefr-mysql.desktop
+Volume=Templates
+
+# [Explore](./)
+# [Desktop](file:///home/dave/Desktop/)
+# [Templates](file:///home/dave/Templates/)
+
+

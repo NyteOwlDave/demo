@@ -1,0 +1,21 @@
+[Desktop Entry]
+
+Version=1.0
+Type=Application
+Terminal=false
+
+Name=NOW! ~ Legacy
+Icon=/home/dave/Icons/logo/now.png
+Exec=firefox http://dave-legacy/now!/
+
+[NCS]
+
+Type=Web Page
+Filename=now-legacy.desktop
+Volume=WWW/now
+
+# [Explore](./)
+# [Desktop](file:///home/dave/Desktop/)
+# [Templates](file:///home/dave/Templates/)
+
+

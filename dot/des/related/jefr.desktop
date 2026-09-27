@@ -1,0 +1,22 @@
+[Desktop Entry]
+
+Version=1.0
+Type=Application
+Terminal=false
+
+Name=JEFR
+Icon=/home/dave/Icons/logo/jefr.png
+Exec=firefox https://sites.google.com/view/jefr-ultimate/home
+
+[NCS]
+
+Type=Template
+Filename=jefr.desktop
+Volume=Templates
+
+# [Explore](./)
+# [Desktop](file:///home/dave/Desktop/)
+# [Templates](file:///home/dave/Templates/)
+# [Desktop](file:///home/dave/Mount/JFER/)
+
+

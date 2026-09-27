@@ -1,0 +1,21 @@
+[Desktop Entry]
+
+Version=1.0
+Type=Application
+Terminal=false
+
+Name=Manuscript Editor
+Icon=/home/dave/Icons/doctype/manuscript.png
+Exec=firefox http://dave-legacy/app/zed/toolkit/manuscript/editor.html
+
+[NCS]
+
+Type=Web App
+Filename=man-editor.desktop
+Volume=ZEDDICUS
+
+# [Explore](./)
+# [Desktop](file:///home/dave/Desktop/)
+# [Templates](file:///home/dave/Templates/)
+
+

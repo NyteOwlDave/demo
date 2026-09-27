@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Terminal=false
+Charset=utf-8
+Name=CSS Gen
+Exec=firefox http://dave-legacy/~/toolkit/css-gen.html
+Icon=/home/dave/Icons/doctype/css.png

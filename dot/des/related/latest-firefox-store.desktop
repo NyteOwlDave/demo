@@ -1,0 +1,19 @@
+[Desktop Entry]
+
+Version=1.0
+Type=Application
+Terminal=false
+
+Name=Latest Firefox Store
+Icon=/home/dave/Icons/doctype/manuscript.png
+Exec=firefox http://dave-legacy/app/thalia-v1/latest/firefox.json
+
+[NCS]
+
+Filename=latest-firefox-store.desktop
+
+# [Explore](./)
+# [Desktop](file:///home/dave/Desktop/)
+# [Templates](file:///home/dave/Templates/)
+
+

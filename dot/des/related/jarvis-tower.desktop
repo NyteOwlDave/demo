@@ -1,0 +1,14 @@
+[Desktop Entry]
+
+Type=Application
+Version=1
+Terminal=false
+
+Name=Jarvis ~ Tower
+Exec=firefox http://dave-tower/app/jarvis/jarvis-menu.html
+Icon=/home/dave/Jarvis/favicon.ico
+
+[NCS]
+group=Jarvis
+filename=jarvis-tower.desktop
+

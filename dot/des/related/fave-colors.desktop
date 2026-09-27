@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Dave's Fave Colors
+Exec=firefox http://dave-legacy/~/docs/color/
+Icon=/home/dave/Icons/doctype/color-swatch.png
+
+[NCS]
+# [Tilly's Docs](http://dave-legacy/~/docs/)

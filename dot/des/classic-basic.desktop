@@ -1,0 +1,19 @@
+[Desktop Entry]
+
+Version=1.0
+Type=Application
+Terminal=false
+
+Name=Classic BASIC
+Icon=/home/dave/Icons/logo/classic-basic.png
+Exec=firefox https://classicbasic.org/
+
+[NCS]
+
+Filename=classic-basic.desktop
+
+# [Explore](./)
+# [Desktop](file:///home/dave/Desktop/)
+# [Templates](file:///home/dave/Templates/)
+
+

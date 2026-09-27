@@ -1,0 +1,16 @@
+[Desktop Entry]
+
+Version=1.0
+Type=Application
+Terminal=false
+
+Name=Tilly's Friends
+Icon=/home/dave/Mount/~/friends/favicon.ico
+Exec=firefox http://dave-legacy/~/friends/
+
+[NCS]
+
+# [Explore](./)
+# [Desktop](file:///home/dave/Desktop/)
+# [Templates](file:///home/dave/Templates/)
+

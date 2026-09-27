@@ -1,0 +1,16 @@
+[Desktop Entry]
+
+Version=1.0
+Type=Application
+Terminal=false
+
+Name=Hot Rocket ~ Omega
+Exec=firefox http://dave-omega/std/app/retext/System%%2042/app/hot-rocket.html
+Icon=/home/dave/Icons/logo/rocky-real.png
+
+[NCS]
+
+# [Explore](./)
+# [Desktop](file:///home/dave/Desktop/)
+# [Templates](file:///home/dave/Templates/)
+

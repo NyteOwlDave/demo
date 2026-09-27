@@ -1,0 +1,8 @@
+[Desktop Entry]
+Encoding=UTF-8
+Version=1.0
+Type=Application
+Name=🌋 Vulcano
+Exec=firefox http://dave-legacy/_/%%5b%%5b%%20SORT%%20ME%%20%%5d%%5d/vulcano.html
+Icon=/home/dave/Icons/logo/vulcano.png
+Terminal=false

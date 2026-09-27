@@ -1,0 +1,19 @@
+[Desktop Entry]
+
+Version=1.0
+Type=Application
+Terminal=false
+
+Name=Jangle Sheet
+Icon=/home/dave/Icons/logo/jangle.png
+Exec=firefox http://tiny.cc/jangle-sheet
+
+[NCS]
+
+Filename=jangle-sheet.desktop
+
+# [Explore](./)
+# [Desktop](file:///home/dave/Desktop/)
+# [Templates](file:///home/dave/Templates/)
+# [Sheena](file:///home/dave/Mount/SHEENA/)
+

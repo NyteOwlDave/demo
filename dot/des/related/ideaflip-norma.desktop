@@ -1,0 +1,19 @@
+[Desktop Entry]
+
+Version=1.0
+Type=Application
+Terminal=false
+
+Name=Norma ~ Ideaflip
+Icon=/home/dave/Icons/logo/norma-ideaflip.png
+Exec=firefox https://ideaflip.com/b/spemehnsg2uq/
+
+[NCS]
+
+Filename=ideaflip-norma.desktop
+
+# [Explore](./)
+# [Desktop](file:///home/dave/Desktop/)
+# [Templates](file:///home/dave/Templates/)
+
+

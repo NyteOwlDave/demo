@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Terminal=false
+Type=Application
+Name=Dave's Notes
+Exec=firefox http://tiny.cc/daves-notes
+Icon=/home/dave/Icons/logo/daves-notes.png
+
+[NCS]
+# [Explore](./)

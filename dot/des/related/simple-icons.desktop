@@ -1,0 +1,19 @@
+[Desktop Entry]
+
+Version=1.0
+Type=Application
+Terminal=false
+
+Name=Siimple Icons
+Icon=/home/dave/Icons/logo/simple-icons.png
+Exec=firefox https://siimple.josemi.xyz/icons/
+
+[NCS]
+
+Filename=simple-icons.desktop
+
+# [Explore](./)
+# [Desktop](file:///home/dave/Desktop/)
+# [Templates](file:///home/dave/Templates/)
+
+

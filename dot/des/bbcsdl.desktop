@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=BBC BASIC
+Comment=BBC BASIC for Linux
+Icon=/home/dave/Mount/BBC-BASIC/bbc256x.png
+Exec="/home/dave/Mount/BBC-BASIC/bbcsdl"
+Type=Application
+Encoding=UTF-8
+Terminal=false
+Categories=None;

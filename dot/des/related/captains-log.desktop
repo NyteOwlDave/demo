@@ -1,0 +1,19 @@
+[Desktop Entry]
+
+Version=1.0
+Type=Application
+Terminal=false
+
+Name=Captain's Log
+Icon=/home/dave/Icons/logo/captains-log.png
+Exec=firefox https://sites.google.com/view/morning-swill/captains-log
+
+[NCS]
+
+Filename=captains-log.desktop
+
+# [Explore](./)
+# [Desktop](file:///home/dave/Desktop/)
+# [Templates](file:///home/dave/Templates/)
+
+

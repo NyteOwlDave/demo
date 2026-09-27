@@ -1,0 +1,56 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=♨️ Morpheus
+Exec=firefox https://nyteowldave.github.io/
+Icon=/home/dave/Icons/logo/morpheus.png
+Terminal=false
+
+[Morpheus]
+Version=1.0
+Type=Application
+Name=♨️ Morpheus
+Exec=firefox https://nyteowldave.github.io/
+Icon=/home/dave/Icons/logo/morpheus.png
+Terminal=false
+
+[Thalia]
+Version=1.0
+Type=Application
+Name=♨️ Thalia ~ Morpheus
+Exec=firefox https://nyteowldave.github.io/thalia/thalia.html
+Icon=/home/dave/Icons/logo/thalia.png
+Terminal=false
+
+[Chachi]
+Version=1.0
+Type=Application
+Name=♨️ Chachi ~ Morpheus
+Exec=firefox https://nyteowldave.github.io/thalia/
+Icon=/home/dave/Icons/logo/chachi.png
+Terminal=false
+
+[TiGG]
+Version=1.0
+Type=Application
+Name=♨️ TiGG ~ Morpheus
+Exec=firefox https://nyteowldave.github.io/tigg/
+Icon=/home/dave/Icons/logo/tigg.png
+Terminal=false
+
+[Third Party]
+Version=1.0
+Type=Application
+Name=♨️ Third Party Content ~ Morpheus
+Exec=firefox https://nyteowldave.github.io/cdn/third-party.html
+Icon=/home/dave/Icons/cdn.png
+Terminal=false
+
+[Design Icons]
+Version=1.0
+Type=Application
+Name=♨️ Design Icons
+Exec=firefox https://nyteowldave.github.io/dev-icons/main.html
+Icon=/home/dave/Icons/icon-set.png
+Terminal=false
+

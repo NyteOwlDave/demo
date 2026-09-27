@@ -1,0 +1,14 @@
+[Desktop Entry]
+
+Version=1.0
+Type=Application
+Terminal=false
+
+Name=MathJax Demo ~ Legacy
+Icon=/home/dave/Icons/logo/mathjax.png
+Exec=firefox http://dave-legacy/math/latex/mathjax-test.html
+
+[NCS]
+
+Filename=mathjax-demo.desktop
+

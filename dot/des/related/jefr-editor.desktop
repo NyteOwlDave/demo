@@ -1,0 +1,21 @@
+[Desktop Entry]
+
+Version=1.0
+Type=Application
+Terminal=false
+
+Name=JEFR Editor ~ Asus
+Icon=/home/dave/Icons/doctype/editor.png
+Exec=firefox http://dave-jefr/editor.html
+
+[NCS]
+
+Type=Template
+Filename=jefr-editor.desktop
+Volume=Templates
+
+# [Explore](./)
+# [Desktop](file:///home/dave/Desktop/)
+# [Templates](file:///home/dave/Templates/)
+
+

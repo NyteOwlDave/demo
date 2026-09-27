@@ -1,0 +1,12 @@
+[Desktop Entry]
+
+Type=Application
+Terminal=false
+Name=Handwritten Notes
+Exec=firefox https://whiteboard.cloud.microsoft/me/whiteboards/9e9bf941-3263-409d-882f-df1e262c7d48
+Icon=/home/dave/Icons/logo/elmer.png
+
+[NCS]
+
+Filename=handwritten-notes.desktop
+

@@ -1,0 +1,21 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Hysteresis
+#Exec=firefox https://codepen.io/NyteOwlDave/full/WbxjMQX
+Exec=firefox http://dave-ryzen/hysteresis/app.html
+Icon=/home/dave/Icons/logo/hysteresis.png
+Terminal=false
+
+[Hysteresis]
+Filename=hysteresis.desktop
+
+[Zeddicus]
+Version=1.0
+Type=Application
+Name=Zeddicus
+Exec=firefox https://sites.google.com/view/zeddicus/home
+Icon=/home/dave/Icons/logo/zeddicus.png
+Terminal=false
+# zeddicus.desktop
+

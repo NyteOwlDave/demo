@@ -1,0 +1,16 @@
+[Desktop Entry]
+
+Version=1.0
+Type=Application
+Terminal=false
+
+Name=Apes of Tarzan
+Exec=firefox http://dave-omega/app/apes/apes.html
+Icon=/home/dave/Mount/APES/favicon.ico
+
+[NCS]
+
+# [Desktop](file:///home/dave/Desktop/)
+# [Templates](file:///home/dave/Templates/)
+# [Explore](./)
+

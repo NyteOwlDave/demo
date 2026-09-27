@@ -1,0 +1,16 @@
+[Desktop Entry]
+
+Version=1.0
+Type=Application
+Terminal=false
+
+Name=Zed Lite ~ Jefr
+Icon=/home/dave/Icons/logo/zed.png
+Exec=firefox http://dave-legacy/jefr/toolkit/zed-lite.html
+
+[NCS]
+Filename=zed-lite.desktop
+# [Explore](./)
+# [Desktop](file:///home/dave/Desktop/)
+# [Templates](file:///home/dave/Templates/)
+

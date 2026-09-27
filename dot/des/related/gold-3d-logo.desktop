@@ -1,0 +1,19 @@
+[Desktop Entry]
+
+Version=1.0
+Type=Application
+Terminal=false
+
+Name=Gold 3D Logo
+Icon=/home/dave/Icons/logo/gold-logo.png
+Exec=firefox https://www.textstudio.com/logo/golden-3d-text-261
+
+[NCS]
+
+Filename=gold-3d-logo.desktop
+
+# [Explore](./)
+# [Desktop](file:///home/dave/Desktop/)
+# [Templates](file:///home/dave/Templates/)
+
+

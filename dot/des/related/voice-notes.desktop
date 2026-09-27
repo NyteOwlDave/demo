@@ -1,0 +1,19 @@
+[Desktop Entry]
+
+Version=1.0
+Type=Application
+Terminal=false
+
+Name=Voice Notes
+Icon=/home/dave/Icons/logo/google.voice.png
+Exec=firefox https://voice.google.com/u/0/messages
+
+[NCS]
+
+Filename=voice-notes.desktop
+
+# [Explore](./)
+# [Desktop](file:///home/dave/Desktop/)
+# [Templates](file:///home/dave/Templates/)
+
+

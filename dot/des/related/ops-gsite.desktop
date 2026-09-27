@@ -1,0 +1,19 @@
+[Desktop Entry]
+
+Version=1.0
+Type=Application
+Terminal=false
+
+Name=Operations
+Icon=/home/dave/Icons/ops.png
+Exec=firefox https://sites.google.com/view/ncs-pending/operations
+
+[NCS]
+
+Filename=ops-gsite.desktop
+
+# [Explore](./)
+# [Desktop](file:///home/dave/Desktop/)
+# [Templates](file:///home/dave/Templates/)
+
+

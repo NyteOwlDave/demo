@@ -1,0 +1,19 @@
+[Desktop Entry]
+
+Version=1.0
+Type=Application
+Terminal=false
+
+Name=Grok ~ X
+Icon=/home/dave/Icons/logo/grok.png
+Exec=firefox https://x.com/i/grok
+
+[NCS]
+
+Filename=grok-x.desktop
+
+# [Explore](./)
+# [Desktop](file:///home/dave/Desktop/)
+# [Templates](file:///home/dave/Templates/)
+
+

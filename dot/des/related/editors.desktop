@@ -1,0 +1,20 @@
+[Desktop Entry]
+
+Version=1.0
+Type=Application
+Terminal=false
+
+Name=Editors
+Icon=/home/dave/Icons/logo/editors.png
+Exec=firefox https://sites.google.com/view/morning-swill/links/editors
+
+[NCS]
+
+Type=Google Site
+Filename=editors.desktop
+Volume=Desktop
+
+# [Explore](./)
+# [Desktop](file:///home/dave/Desktop/)
+# [Templates](file:///home/dave/Templates/)
+

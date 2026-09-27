@@ -1,0 +1,8 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Kindle Reader
+Exec=firefox https://read.amazon.com/kindle-library
+Icon=/home/dave/Icons/logo/kindle.png
+Terminal=false
+# kindle.desktop

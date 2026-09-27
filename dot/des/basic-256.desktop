@@ -1,0 +1,8 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Terminal=false
+Name=BASIC 256
+Icon=/home/dave/Icons/logo/basic-256.png
+Exec=firefox https://run.basic256.org/
+

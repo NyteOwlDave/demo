@@ -1,0 +1,19 @@
+[Desktop Entry]
+
+Version=1.0
+Type=Application
+Terminal=false
+
+Name=Concept Doc Links
+Icon=/home/dave/Icons/logo/des.png
+Exec=firefox https://docs.google.com/document/d/16PtuusqBBHQ1ULdJEEvHi3MIu29S1qE1Jpuo5zFhYIE/edit?tab=t.ag8yxts2djx6
+
+[NCS]
+
+Filename=gdoc-links.desktop
+
+# [Explore](./)
+# [Desktop](file:///home/dave/Desktop/)
+# [Templates](file:///home/dave/Templates/)
+
+

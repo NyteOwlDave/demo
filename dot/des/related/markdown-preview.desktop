@@ -1,0 +1,21 @@
+[Desktop Entry]
+
+Version=1.0
+Type=Application
+Terminal=false
+
+Name=Markdown Live Preview
+Icon=/home/dave/Icons/doctype/md.png
+Exec=firefox https://markdownlivepreview.com/
+
+[NCS]
+
+Type=Web Page
+Filename=markdown-preview.desktop
+Volume=Templates
+
+# [Explore](./)
+# [Desktop](file:///home/dave/Desktop/)
+# [Templates](file:///home/dave/Templates/)
+
+

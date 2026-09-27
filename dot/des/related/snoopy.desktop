@@ -1,0 +1,7 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Terminal=false
+Name=Snoopy Snippets
+Exec=firefox http://192.168.1.3/shares/workspace/Snoopy/snippets/
+Icon=/home/dave/Icons/logo/snoopy.png

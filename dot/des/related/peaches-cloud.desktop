@@ -1,0 +1,19 @@
+[Desktop Entry]
+
+Version=1.0
+Type=Application
+Terminal=false
+
+Name=Peaches Cloud Store
+Icon=/home/dave/Icons/doctype/peaches.png
+Exec=firefox https://drive.google.com/drive/folders/1xkM7jZ-xO8M87ElATUa_OrArtlGLTsYC
+
+[NCS]
+
+Filename=peaches-cloud.desktop
+
+# [Explore](./)
+# [Desktop](file:///home/dave/Desktop/)
+# [Templates](file:///home/dave/Templates/)
+
+	

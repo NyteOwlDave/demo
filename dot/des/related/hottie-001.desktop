@@ -1,0 +1,16 @@
+[Desktop Entry]
+
+Version=1.0
+Type=Application
+Terminal=false
+
+Name=Hottie 002
+Icon=/home/dave/Icons/logo/hottie-002.png
+Exec=firefox http://dave-legacy/app/hottie/hottie-002.html
+
+[NCS]
+
+Filename=hottie-002.desktop
+
+
+

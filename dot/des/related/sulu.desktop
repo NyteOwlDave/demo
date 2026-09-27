@@ -1,0 +1,16 @@
+[Desktop Entry]
+
+Version=1.0
+Type=Application
+Terminal=false
+
+Name=Sulu 2.0 ~ Ryzen
+Exec=firefox http://dave-ryzen/nav/sulu.html
+Icon=/home/dave/Icons/logo/sulu.png
+
+[NCS]
+
+# [Explore](./)
+# [Desktop](file:///home/dave/Desktop/)
+# [Templates](file:///home/dave/Templates/)
+
