@@ -1,0 +1,144 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<style type="text/css">
+td, th { border: 1px solid #c3c3c3; padding: 0 3px 0 3px; }
+table { border-collapse: collapse; }
+img { max-width: 100%; }
+</style>
+<meta name="generator" content="ReText 7.2.3">
+<title>server-setup</title>
+<style type="text/css">
+</style>
+</head>
+<body>
+<style>
+@import url("https://nyteowldave.neocities.org/style.css");
+@import url("https://nyteowldave.github.io/std/style/ghost.css");
+</style>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<h1 id="_T_"> WebRTC 📡 Demo </h1>
+
+<blockquote>
+<p><a href="http://dave-legacy/app/demo/web/web-rtc/server-setup.html" title="Omega Edition"><code>🔗</code> Omega</a>
+<a href="./"><code>🔗</code> File System</a></p>
+<p><a href="./related-links.html"><code>🔗</code> Related Links</a></p>
+</blockquote>
+<hr>
+<h2><code>🧙</code> Node Server Setup ~ Example #2</h2>
+<hr>
+<pre>
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// server.js (Node)
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// # Ensure the Node.js WebSocket Package is Installed
+// > npm install ws
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// + Gemini Chat
+// @ https://gemini.google.com/app/648a3941355c7570
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// PORT : 8282
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+const WebSocket = require('ws');
+
+// Listen on port 8080 across all network interfaces (LAN accessible)
+const wss = new WebSocket.Server({ port: 8282 });
+
+wss.on('connection', (ws) => {
+  console.log('New client connected.');
+
+  ws.on('message', (message) => {
+    // Relay the signaling data (offers, answers, ICE candidates) to all other peers
+    wss.clients.forEach((client) => {
+      if (client !== ws && client.readyState === WebSocket.OPEN) {
+        client.send(message.toString());
+      }
+    });
+  });
+
+  ws.on('close', () => {
+    console.log('Client disconnected.');
+  });
+});
+
+console.log('WebRTC signaling server running on port 8080...');
+
+</pre>
+
+<hr>
+<h2><code>🧙</code> Signaling Server ~ Example #1</h2>
+<hr>
+<pre>
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// server-simple.js (Node)
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// # Ensure the Node.js WebSocket Package is Installed
+// > npm install ws
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// + Gemini Chat
+// @ https://gemini.google.com/app/648a3941355c7570
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// PORT : 8282
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+// Example conceptual Node.js signaling server snippet
+const WebSocket = require('ws');
+const wss = new WebSocket.Server({ port: 8282 }); // See Client
+
+wss.on('connection', (ws) => {
+  ws.on('message', (message) => {
+    // Broadcast incoming signaling data to all other connected clients
+    wss.clients.forEach((client) => {
+      if (client !== ws && client.readyState === WebSocket.OPEN) {
+        client.send(message);
+      }
+    });
+  });
+});
+
+</pre>
+
+<hr>
+<h2><code>🧙</code> Install <code>WebSockets</code> for <code>Node.js</code></h2>
+<hr>
+<h3>Bash <code>🖥️</code> Console</h3>
+<pre>
+
+&gt; npm install ws
+
+</pre>
+
+<hr>
+<h2><code>🧙</code> Start Server</h2>
+<hr>
+<h3>Bash <code>🖥️</code> Console</h3>
+<pre>
+
+&gt; node server.js
+
+</pre>
+
+<hr>
+<h1>Source <code>📄</code> Files</h1>
+<hr>
+<blockquote>
+<p><a href="http://dave-legacy/app/demo/web/web-rtc/server-setup.md" title="MD ~ Omega Edition"><code>📄</code> Markdown Page</a></p>
+</blockquote>
+<hr>
+<script>
+; doc = document
+; doc . title = ( _T_.textContent ).trim()
+</script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+</body>
+</html>

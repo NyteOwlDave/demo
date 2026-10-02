@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width" />
+
+<title>Buddy Page</title>
+
+<style>
+@import url("./channel-demo.css");
+</style>
+
+</head>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<body>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<h1> Buddy Page </h1>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<div class="output">
+  <div id="messages"> ( pending ) </div>
+</div>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<footer id="footer">
+  <a href="https://developer.mozilla.org/en-US/docs/Web/API/Channel_Messaging_API">MDN</a>
+  <a href="https://github.com/mdn/dom-examples/blob/main/channel-messaging-basic/page2.html">GitHub Repo</a>
+</footer>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script>
+const output = document.querySelector( ".output" );
+</script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script>
+function blurt( msg ) {
+    messages.innerText = ( msg );
+}
+</script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script>
+function send( port, msg ) {
+    port.postMessage( msg );
+}
+</script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script>
+function receive( event ) {
+    const ports = ( event . ports );
+    if ( ports . length < 1 ) {
+        blurt( "No ports detected by receiver!" );
+        return;
+    }
+    blurt( event . data );
+    const msg  = random_reply();
+    const port = ( ports[ 0 ] );
+    send( port , msg ); // Port Provided by Sender
+}
+</script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script>
+window . addEventListener( "message", receive );
+</script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script>
+
+reply_last = 0;
+
+replies = [
+  [ `"Message received, sir!" ~ Jarvis` ]
+, [ "Cool!"                      ]
+, [ "Huh?"                       ]
+, [ "Yup"                        ]
+, [ "No way, dude!"              ]
+, [ "K"                          ]
+, [ "Say again?"                 ]
+, [ "Why not?"                   ]
+, [ "Right?"                     ]
+, [ "Boring!"                    ]
+, [ "WOW!"                       ]
+, [ "How about some pizza?"      ]
+, [ "My cat's on the keyboard!"  ]
+];
+
+function random_reply() {
+    const int =( n )=> Math.floor( n );
+    const rnd =( k )=> int( k * Math.random() );
+    const count = replies . length;
+    let n = rnd( count );
+    if ( n === reply_last ) {
+        n = rnd( count );
+    }
+    reply_last = ( n );
+    return ( replies[ n ] );
+};
+
+</script>
+
+</body>
+
+</html>
+
+

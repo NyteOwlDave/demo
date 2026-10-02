@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+<title>WebRTC LAN P2P Test</title>
+<style>
+@import url("https://nyteowldave.neocities.org/style.css");
+@import url("https://nyteowldave.github.io/std/style/ghost.css");
+</style>
+<style>
+* { box-sizing : border-box; }
+html, body {
+    text-align : center;
+}
+pre {
+    border-top-left-radius : 2ch;
+}
+</style>
+</head>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<body>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<h2>WebRTC LAN Messaging</h2>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<div>
+    <button id="startBtn">Start Connection (Caller)</button>
+</div>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<div style="margin-top: 10px;">
+    <input type="text" id="messageInput" placeholder="Type a message..." disabled>
+    <button id="sendBtn" disabled>Send</button>
+</div>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<h3> Log </h3>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<pre id="log"></pre>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<footer>
+    <a href="https://gemini.google.com/app/648a3941355c7570">Gemini</a>
+</footer>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script>
+; iwm = Object.keys( window ).sort()
+</script>
+
+<script>
+/*
+
+    Configuration using public Google STUN
+    (optional/helpful even on LAN)
+
+    NOTE : mDNS/LAN discovery usually handles it
+
+*/
+const rtcConfig = {
+    iceServers: [ { urls: 'stun:stun.l.google.com:19302' } ]
+};
+</script>
+
+<script>
+/*
+  [[ UPDATE THIS WITH THE LAN IP OF YOUR SIGNALING SERVER ]]
+*/
+const wsx = {};
+wsx . host  = ( "dave-omega" );
+wsx . port  = ( 8282 );
+wsx . storekey = ( "web-rtc-server.json" );
+</script>
+
+<script>
+wsx . url =()=> ( `ws://${wsx.host}:${wsx.port}` );
+</script>
+
+<script>
+wsx . persist = function() {
+    const s = localStorage;
+    const k = wsx.storekey;
+    const v = jst( wsx );
+    s . setItem( k, v );
+    console.log( `Wrote "${k}" to Store` );
+};
+</script>
+
+<script>
+wsx . recover = function() {
+    function persist( event ) {
+        wsx . persist();
+    }
+    if (! wsx.listens ) {
+        wsx.listens = ( true );
+        addEventListener( "beforeunload", persist() );
+    }
+    const s = localStorage;
+    const k = wsx.storekey;
+    const v = str( s.getItem( k ) );
+    if ( v ) {
+        const o = jso( v );
+        const host = str( o.host );
+        if ( host ) { wsx.host = host; }
+        const port = parseInt( o.port  );
+        if ( isFinite( port ) ) {
+            wsx.port = port;
+        }
+    } else {
+        persist();
+    }
+};
+
+</script>
+
+<script>
+; doc = document
+</script>
+
+<script>
+; gid =( i )=> ( doc.getElementById( i ) )
+; str =( o )=> String( o || "" ).trim();
+</script>
+
+<script>
+; jst =( o )=> JSON.stringify( o, null, 2 )
+; jso =( t )=> JSON.parse( t )
+</script>
+
+<script>
+;
+; message_log = gid( 'log' )
+;
+</script>
+
+<script>
+; wsx . recover();
+</script>
+
+<script>
+; signalingServerUrl = wsx.url()
+; ws = new WebSocket( signalingServerUrl )
+</script>
+
+<script>
+function log( msg ) {
+    const ge = ( message_log );
+    ge . textContent += ( `🧝 ` + msg + '\n' );
+    ge . scrollTop = ( ge . scrollHeight );
+    return ( ge );
+}
+</script>
+
+<script>
+let pc;
+let dataChannel;
+</script>
+
+<script>
+ws.onopen = () => log('Connected to signaling server.');
+ws.onmessage = async (event) => {
+    const data = JSON.parse(event.data);
+
+    if (!pc) createPeerConnection();
+
+    if (data.sdp) {
+        await pc.setRemoteDescription(new RTCSessionDescription(data.sdp));
+        if (data.sdp.type === 'offer') {
+            const answer = await pc.createAnswer();
+            await pc.setLocalDescription(answer);
+            ws.send(JSON.stringify({ sdp: pc.localDescription }));
+            log('Sent answer to peer.');
+        }
+    } else if (data.candidate) {
+        try {
+            await pc.addIceCandidate(new RTCIceCandidate(data.candidate));
+        } catch (e) {
+            console.error('Error adding received ice candidate', e);
+        }
+    }
+};
+</script>
+
+<script>
+function createPeerConnection() {
+    pc = new RTCPeerConnection(rtcConfig);
+
+    pc.onicecandidate = (event) => {
+        if (event.candidate) {
+            ws.send(JSON.stringify({ candidate: event.candidate }));
+        }
+    };
+
+    // If we are the receiver, listen for the data channel
+    pc.ondatachannel = (event) => {
+        dataChannel = event.channel;
+        setupDataChannel();
+        log('Data channel received from peer!');
+    };
+}
+</script>
+
+<script>
+// Caller side: Create channel and offer
+document.getElementById('startBtn').onclick = async () => {
+    createPeerConnection();
+
+    dataChannel = pc.createDataChannel('chat');
+    setupDataChannel();
+
+    const offer = await pc.createOffer();
+    await pc.setLocalDescription(offer);
+    ws.send(JSON.stringify({ sdp: pc.localDescription }));
+    log('Created and sent offer.');
+};
+</script>
+
+<script>
+function setupDataChannel() {
+    dataChannel.onopen = () => {
+        log('Data Channel OPEN! P2P link established.');
+        document.getElementById('messageInput').disabled = false;
+        document.getElementById('sendBtn').disabled = false;
+    };
+    dataChannel.onclose = () => log('Data Channel closed.');
+    dataChannel.onmessage = (event) => {
+        log(`[Peer says]: ${event.data}`);
+    };
+}
+</script>
+
+<script>
+function get_channel_state() {
+    const ch = dataChannel;
+    return ( ch . readyState );
+}
+function is_channel_open() {
+    const st = get_channel_state();
+    return ( st === "open" );
+}
+function is_channel_closed() {
+    return (! is_channel_open() );
+}
+</script>
+
+<script>
+document.getElementById('sendBtn').onclick = () => {
+    const ch = dataChannel;
+    if ( is_channel_closed() ) {
+        log( "Channel is Closed" );
+        return;
+    }
+    const ge = document.getElementById( 'messageInput' );
+    const msg = read_prompt();
+    if ( msg ) {
+        ch . send( msg );
+        log( `[Me]: ${msg}` );
+        ge . value = '';
+    }
+};
+</script>
+
+<script>
+function read_prompt() {
+    const ge = gid( 'messageInput' );
+    return ( ge . value ).trim();
+}
+</script>
+
+<script>
+function suggest( s ) {
+    const ge = gid( 'messageInput' );
+    ge . value = str( s );
+    return ( ge );
+}
+</script>
+
+</body>
+</html>

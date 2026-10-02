@@ -1,0 +1,113 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<style type="text/css">
+td, th { border: 1px solid #c3c3c3; padding: 0 3px 0 3px; }
+table { border-collapse: collapse; }
+img { max-width: 100%; }
+</style>
+<meta name="generator" content="ReText 7.2.3">
+<title>ip-port-notes</title>
+<style type="text/css">
+</style>
+</head>
+<body>
+<style>
+@import url("https://nyteowldave.neocities.org/style.css");
+@import url("https://nyteowldave.github.io/std/style/ghost.css");
+</style>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<h1 id="_T_"> IP Port Notes </h1>
+
+<hr>
+<blockquote>
+<p><a href="http://dave-omega/demo/web/web-rtc/ip-port-notes.html" title="Omega Edition"><code>🔗</code> Omega</a>
+<a href="./"><code>🔗</code> File System</a></p>
+<p><a href="./related-links.html"><code>🔗</code> Related Links</a></p>
+</blockquote>
+<hr>
+<h1>Port Assignments</h1>
+<hr>
+<table>
+<thead>
+<tr>
+<th>Port</th>
+<th>Used By</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>3478</td>
+<td>COTURN ~ Dave Omega (IP 155)</td>
+</tr>
+<tr>
+<td>3478</td>
+<td>listening-port (config file)</td>
+</tr>
+<tr>
+<td>5349</td>
+<td>tls-listening-port (config file)</td>
+</tr>
+<tr>
+<td>8282</td>
+<td>WebSockets and Web RTC</td>
+</tr>
+<tr>
+<td>19302</td>
+<td>stun:stun.l.google.com</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h1>Config Files</h1>
+<hr>
+<table>
+<thead>
+<tr>
+<th>Owner</th>
+<th>File Location</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ubuntu TURN Server</td>
+<td>/etc/turnserver.conf</td>
+<td>(1) (2)</td>
+</tr>
+<tr>
+<td>COTURN Service</td>
+<td>/etc/default/coturn</td>
+<td>(1) (2)</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><strong>NOTES</strong></h3>
+<ul>
+<li>(1) ~ Edit with <code>nano</code> editor</li>
+<li>(2) ~ Requires <code>sudo</code> password</li>
+</ul>
+<hr>
+<pre>
+
+&gt; sudo nano /etc/turnserver.conf
+&gt; sudo nano /etc/default/coturn
+
+</pre>
+
+<hr>
+<script>
+; doc = document
+; doc . title = ( _T_.textContent ).trim()
+</script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+</body>
+</html>

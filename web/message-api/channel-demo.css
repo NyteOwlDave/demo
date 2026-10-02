@@ -1,0 +1,62 @@
+
+@import url("https://nyteowldave.neocities.org/style.css");
+@import url("https://nyteowldave.github.io/std/style/ghost.css");
+
+* {
+    box-sizing : border-box;
+}
+
+html, body {
+    text-align : center;
+}
+
+iframe {
+    border-radius: 1em;
+    border : 2px dotted gold;
+}
+
+.input  ,
+.output {
+    text-align    : left;
+    border-radius : 3em;
+}
+
+.output {
+    color      : midnightblue;
+    background : lemonchiffon;
+    padding    : 0.15ch 1.2ch;
+}
+
+.input {
+    color      : midnightblue;
+    background : mintcream;
+    padding    : 0.15ch 1.0ch;
+}
+
+
+#messages ,
+#message_input {
+    border     : 1px solid transparent;
+    width      : calc( 100% - 60px );
+    font       : 14pt monospace;
+    margin     : 0;
+    outline    : none;
+    background : inherit;
+    color      : inherit;
+}
+
+.dot {
+    display          : inline-block;
+    background-color : black;
+    color            : white;
+    border-radius    : 100%;
+    width            : 42px;
+    height           : 42px;
+    line-height      : 42px;
+    text-align       : center;
+}
+
+header a ,
+footer a {
+    background-color : midnightblue !important;
+}

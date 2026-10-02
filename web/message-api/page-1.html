@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width" />
+
+<title>Channel Demo</title>
+
+<style>
+@import url("./channel-demo.css");
+</style>
+
+</head>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<body>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<h1> Channel Messaging API Demo </h1>
+
+<header id="header">
+  <a href="http://dave-omega/demo/web/message-api/page-1.html"> Home </a>
+  <a href="http://dave-omega/demo/web/message-api/page-2.html"> Buddy Page </a>
+  <a href="http://dave-omega/app/chatter/chatter.html"> Chatter </a>
+  <a href="./"> File System </a>
+  <a href="https://developer.mozilla.org/en-US/docs/Web/API/Channel_Messaging_API"> MDN </a>
+  <a href="https://github.com/mdn/dom-examples/blob/main/channel-messaging-basic/page1.html"> GitHub Repo </a>
+</header>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<div class="output">
+   <div id="messages"> (pending) </div>
+   <div class="dot">📥</div>
+</div>
+
+<hr>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<div class="input">
+   <input id="message_input" onchange="post_message(event)" />
+   <div class="dot">📤</div>
+</div>
+
+<hr>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<iframe src="page-2.html" width="640" height="480"></iframe>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script>
+; doc = document
+</script>
+
+<script>
+; one =( q )=> ( doc . querySelector( q ) )
+</script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script>
+; ports = {};
+; ports . transmit = ( null )
+; ports . receive  = ( null )
+</script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script>
+const output  = one( ".output" );
+const iframe  = one( "iframe"  );
+</script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script>
+function crashed( e ) {
+    console . error ( e );
+    window  . alert ( e );
+}
+</script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script>
+function post_message( event ) {
+    try {
+        const sender = event.target;
+        send( sender.value );
+        // alert( sender . value );
+    } catch ( e ) {
+        crashed( e );
+    }
+}
+</script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script>
+function frame_loaded() {
+
+    blurt( "Loading ..." );
+
+    // Say Hello to Partner
+    send( "Dave Says Hello!" );
+
+}
+</script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script>
+// Wait for the iframe to load
+iframe . addEventListener( "load", frame_loaded );
+</script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script>
+function listen( port ) {
+    ( port ) . onmessage = ( receive );
+}
+</script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script>
+// Handle Received Message
+function receive( event ) {
+    blurt( event . data );
+}
+</script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script>
+function send( msg ) {
+    // MUST CREATE NEW CHANNEL WHEN USING IFRAME!!!
+    const channel = new MessageChannel();
+    // Transmit using Port #2
+    ports . transmit = ( channel . port2 );
+    // Receive using Port #1
+    ports . receive  = ( channel . port1 );
+    // Listen for Received Messages
+    listen( ports . receive );
+    ; ( iframe )
+    . contentWindow
+    . postMessage( msg, "*", [ ports . transmit ] );
+}
+</script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script>
+function blurt( msg ) {
+    messages . innerText = ( msg );
+}
+</script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+</body>
+
+</html>
