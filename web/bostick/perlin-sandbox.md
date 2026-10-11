@@ -13,34 +13,60 @@
 
 ----------------------------------------------------------------
 
-```
+## QB64 Phoenix
 
-globalAlpha# = 0.05
+----------------------------------------------------------------
 
-Sub Frame( px% )
-    For i% = 0 to ( SH / 6 ) - 1
-      x# = px%;
-      y# = SH * Rnd
-      n# = Perlin#( x# * period#, y# * period# )
-      c& = MakeColor( n# )
-      m% = 0
-      while ( ( y >= 0 ) AND ( y <= height ) AND ( m% < length% ) )
-        n# = Perlin#( x# * period#, y# * period# )
-        x2# = x# + Cos( n# * 14 );
-        y2# = y# + Sin( n# * 14 );
-        LINE (x#,y#)-(x2#,y2#), , c&
-        m% = m% + 1
-      wend
-    }
-    yield context.canvas;
-End Sub
+```basic
 
-Sub Animate()
-    Frame x%
-    x% = ( x% + 1 ) MOD SW
-    IF INKEY$ = CHR$(27) THEN RETURN
-End Sub
+Function MakeColor&( n# )
+	h =	n * 600 - 200
+	s = 100
+	l = ( 800 * n * n * n )
+	r = 
+End Function
 
 ```
 
 ----------------------------------------------------------------
+
+## JavaScript
+
+----------------------------------------------------------------
+
+```javascript
+
+function hsl_to_rgb( h, s, l ) {
+
+    function _rgb( r, g, b, m ) {
+        r = floor( ( r + m ) * 255 );
+        g = floor( ( g + m ) * 255 );
+        b = floor( ( b + m ) * 255 );
+        return { r, g, b };
+    }
+
+    h = abs( h % 360 );
+    l = l / 100;
+    s = s / 100;
+
+    const c = (1 −abs( 2 * l - 1 ) ) * s;
+
+    const ka = ( h / 2 ) % 2;
+    const kb = abs( ka - 1 );
+    const kc = ( 1 - kb );
+    const x = c * kc;
+    const m = l - c / 2;
+
+    if ( h < 60  ) { return _rgb( c, x, 0, m ); }
+    if ( h < 120 ) { return _rgb( x, c, 0, m ); }
+    if ( h < 180 ) { return _rgb( 0, c, x, m ); }
+    if ( h < 240 ) { return _rgb( 0, X, c, m ); }
+    if ( h < 300 ) { return _rgb( x, 0, c, m ); }
+    else           { return _rgb( c, 0, x, m ); }
+
+}
+
+```
+
+----------------------------------------------------------------
+
