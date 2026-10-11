@@ -1,0 +1,96 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<style type="text/css">
+td, th { border: 1px solid #c3c3c3; padding: 0 3px 0 3px; }
+table { border-collapse: collapse; }
+img { max-width: 100%; }
+</style>
+<meta name="generator" content="ReText 7.2.3">
+<title>pavillion</title>
+<style type="text/css">
+</style>
+
+<script>
+MathJax = {
+  options: {
+    renderActions: {
+      find: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+  }
+};
+</script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script></head>
+<body>
+<style>
+@import url("https://nyteowldave.neocities.com/style.css");
+@import url("https://nyteowldave.github.io/std/style/ghost.css");
+</style>
+
+<style>
+* { box-sizing : border-box; }
+</style>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<hr>
+<h1 id="_T_"> Particle Mesh </h1>
+
+<hr>
+<blockquote>
+<p><a href="http://dave-omega/demo/web/bostick/bostick-menu.html" title="Omega Edition">Omega</a>
+<a href="./">File System</a></p>
+</blockquote>
+<hr>
+<h2>Pavillion 3D Demo</h2>
+<hr>
+<blockquote>
+<p>Plug this equation into <a href="https://grapher.mathpix.com/">MathPix 3D</a> to see the
+<a href="./art/pavillion.png">pavillion shape</a>.</p>
+</blockquote>
+<hr>
+<p>
+<script type="math/tex; mode=display">
+z = 2 - 0.05 \cdot {x^2} \cdot {y^2}
+</script>
+</p>
+<hr>
+<h2>Parametric Particle Equation</h2>
+<hr>
+<blockquote>
+<p>This is the original equation, discovered on FB Reels. It 
+draws a <strong>particle mesh</strong> with animated waves.</p>
+</blockquote>
+<hr>
+<ul>
+<li><code>t</code> is time (sec)</li>
+<li><code>g</code> is gravitation acceleration (m/sec^2)</li>
+<li><code>h</code> is resting height of particle plane</li>
+</ul>
+<hr>
+<p>
+<script type="math/tex; mode=display">
+z(t) = h - 0.5 \cdot g \cdot t^2
+</script>
+</p>
+<hr>
+<blockquote>
+<p>You can <a href="https://www.facebook.com/share/r/1FovjHdwKw/" title="Math With Muza">see the animation here</a>.</p>
+</blockquote>
+<hr>
+
+</body>
+</html>
