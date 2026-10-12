@@ -14,4 +14,17 @@ PEACH_CAS = ( `Tower ~ FireFox ~ Tower` );
 ; hud . jot( "Stored Peach" )
 ;
 
+function zoom_surface() {
+   hud.zoom( gid( "surface" ) );
+};
+
+;
+; ( 0 ) && plot.example( 0 )
+; ( 0 ) && plot.example( 1 )
+; ( 0 ) && plot.example( 2 )
+; ( 0 ) && plot.example( 3 )
+; ( 0 ) && blurt( "OK!" )
+; ( 1 ) && blurt( "Ready!" )
+;
+
 
