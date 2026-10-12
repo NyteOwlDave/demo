@@ -1,0 +1,326 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<style type="text/css">
+td, th { border: 1px solid #c3c3c3; padding: 0 3px 0 3px; }
+table { border-collapse: collapse; }
+img { max-width: 100%; }
+</style>
+<meta name="generator" content="ReText 7.2.3">
+<title>integral-curves</title>
+<style type="text/css">
+</style>
+
+<script>
+MathJax = {
+  options: {
+    renderActions: {
+      find: [10, function (doc) {
+        for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+          const display = !!node.type.match(/; *mode=display/);
+          const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+          const text = document.createTextNode('');
+          node.parentNode.replaceChild(text, node);
+          math.start = {node: text, delim: '', n: 0};
+          math.end = {node: text, delim: '', n: 0};
+          doc.math.push(math);
+        }
+      }, '']
+    }
+  }
+};
+</script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script></head>
+<body>
+<style>
+@import url("https://nyteowldave.neocities.com/style.css");
+@import url("https://nyteowldave.github.io/std/style/ghost.css");
+</style>
+
+<style>
+* { box-sizing : border-box; }
+</style>
+
+<style>
+#surface {
+    width      : 800px;
+    height     : 600px;
+    background : black;
+    color      : mintcream;
+    border     : 1px dashed gold;
+}
+</style>
+
+<style>
+#footer_input {
+    width : calc( 100vw - 160px ) !important;
+}
+</style>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<h1 id="_T_"> Integral Curves </h1>
+
+<hr>
+<blockquote>
+<p><a href="http://dave-tower/demo/latex/area/integral-curves.html" title="Tower Edition">Tower</a>
+<a href="http://dave-omega/demo/latex/area/integral-curves.html" title="Omega Edition">Omega</a></p>
+<p><a href="./../area-menu.html">Area Menu</a>
+<a href="./../../web/peaches/math/">Math Peaches</a></p>
+<p><a href="./">File System</a></p>
+</blockquote>
+<hr>
+<h1> Gaussian </h1>
+
+<hr>
+<p>
+<script type="math/tex; mode=display">
+\int_{-\infty}^{+\infty} { e^{-{x^2}} } dx = \sqrt{\pi}
+</script>
+</p>
+<hr>
+<h3> JavaScript </h3>
+
+<pre><code>f =(x)=&gt; 1 / exp( x*x );
+</code></pre>
+<hr>
+<h1> Lorentzian </h1>
+
+<hr>
+<p>
+<script type="math/tex; mode=display">
+\int_{-\infty}^{+\infty} { \frac {1} { x^2 + 1 } } dx = \pi
+</script>
+</p>
+<hr>
+<h3> JavaScript </h3>
+
+<pre><code>f =(x)=&gt; 1 / ( x * x + 1 );
+</code></pre>
+<hr>
+<h1> Sine </h1>
+
+<hr>
+<p>
+<script type="math/tex; mode=display">
+\int_{-\infty}^{+\infty} { \frac { \sin { (x) } } { x } } dx = \pi
+</script>
+</p>
+<hr>
+<h3> JavaScript </h3>
+
+<pre><code>f =(x)=&gt; sin( x ) / x;
+</code></pre>
+<hr>
+<h1> Damped Cosine </h1>
+
+<hr>
+<p>
+<script type="math/tex; mode=display">
+\int_{-\infty}^{+\infty}
+{ \frac { \cos { (x) } } { 1 + {x^2} } }
+dx = \frac { \pi } { e }
+</script>
+</p>
+<hr>
+<h3> JavaScript </h3>
+
+<pre><code>f =(x)=&gt; cos( x ) / ( 1 * x * x );
+</code></pre>
+<hr>
+<h1>Diagram</h1>
+<div center>
+    <img src="./art/integral-curves.png" />
+</div>
+
+<hr>
+<h1>Plot</h1>
+<div center>
+    <canvas id="surface"></canvas>
+</div>
+
+<hr>
+<header id="messages"></header>
+<footer id="footer">
+ <input id="footer_input" wide onchange="perform(event)" />
+</footer>
+
+<hr>
+<script>
+; iwm = Object.keys( window ).sort()
+</script>
+
+<script>
+; doc = ( document )
+; doc . title = ( _T_.textContent ).trim()
+</script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script src="https://nyteowldave.github.io/std/api/gems/prolog-beta.js"></script>
+<script src="https://nyteowldave.github.io/std/api/gems/interpreter-lite.js"></script>
+<script src="https://nyteowldave.github.io/std/api/install.js"></script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script src="https://nyteowldave.github.io/chachi/api/math.js"></script>
+<script src="https://nyteowldave.github.io/chachi/api/mathplus.js"></script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script src="https://nyteowldave.github.io/std/api/bluto/message-ops.js"></script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script src="https://nyteowldave.github.io/std/api/bluto/gems/acquire.js"></script>
+<script src="https://nyteowldave.github.io/std/api/bluto/gems/docify.js"></script>
+<script src="https://nyteowldave.github.io/std/api/bluto/gems/suggestions.js"></script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script>
+;
+; _fn = []
+; _fn[ 0 ] =(x)=> ( 1 / exp( x * x  ) )
+; _fn[ 1 ] =(x)=> ( 1 / ( x * x + 1 ) )
+; _fn[ 2 ] =(x)=> ( sin( x ) / x )
+; _fn[ 3 ] =(x)=> ( cos( x ) / ( 1 * x * x ) )
+;
+</script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script>
+function main( event ) {
+    try {
+        plot . xctr   = 0;
+        plot . yctr   = 400;
+        plot . xscale = 1.0;
+        plot . yscale = Math.floor( plot . yctr * 0.95 );
+        blurt( "Ready for Action!" );
+    } catch ( e ) {
+        bummer ( e );
+    }
+};
+
+addEventListener( "load", main );
+</script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script>
+function plot( fn, lo, hi, steps ) {
+    try {
+        _plot( fn, lo, hi, steps );
+    } catch ( e ) {
+        bummer( e );
+    }
+}
+</script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script>
+;
+; plot.xctr   = 0
+; plot.yctr   = 400
+; plot.xscale = 1.0
+; plot.yscale = 1.0
+;
+; srf = ( null )
+; gfx = ( null )
+;
+</script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script>
+function _plot( fn, lo, hi, steps ) {
+    const gfx = plot . graphics();
+
+    fn = ( fn || _fn[ 0 ] );
+    lo = ( lo || 0   );
+    hi = ( hi || 800 );
+    const gap = ( hi - lo );
+
+    steps     = ( steps || ( gap / 3 ) );
+    const dx  = ( gap / steps );
+
+    plot . clear( gfx );
+
+    gfx . lineWidth   = dx * 0.9;
+    gfx . strokeStyle = "mintcream";
+    for ( let x = lo; x < hi; x += dx ) {
+        let y = fn( x );
+        plot.vline( x, y, gfx );
+    };
+}
+</script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script>
+plot.graphics = function() {
+    if ( null === srf ) {
+        srf = gid( "surface" );
+        srf . width  = 800;
+        srf . height = 600;
+    }
+    gfx = srf . getContext( "2d" );
+    gfx . strokeStyle = ( gfx . strokeStyle || "mintcream" );
+    return ( gfx );
+};
+</script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script>
+plot.clear = function( gfx ) {
+    const srf = gfx.canvas;
+    const w = srf . width;
+    const h = srf . height;
+    gfx . clearRect( 0, 0, w, h );
+    return ( gfx );
+}
+</script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script>
+plot.vline = function( x, y, gfx ) {
+    const kx = plot . xscale;
+    const ky = plot . yscale;
+    const xo = plot . xctr;
+    const yo = plot . yctr;
+    y *= ky;
+    x = xo + x * kx;
+    console.debug( { x, y } );
+    gfx = ( gfx || plot.graphics() );
+    gfx . beginPath();
+    gfx . moveTo( x, yo     );
+    gfx . lineTo( x, yo - y );
+    gfx . stroke();
+};
+</script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script>
+plot.example = function( index ) {
+    const i  = parseInt( index );
+    const fn = _fn[ i ];
+    if (! fn ) {
+        alert( "Example Index is Out of Bounds" );
+        return;
+    }
+    plot( fn );
+};
+</script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+</body>
+</html>

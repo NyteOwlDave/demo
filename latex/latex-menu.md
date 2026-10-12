@@ -1,5 +1,14 @@
 <head> <link rel="icon" href="./favicon.ico" /> </head>
 
+<style>
+@import url("https://nyteowldave.neocities.com/style.css");
+@import url("https://nyteowldave.github.io/std/style/ghost.css");
+</style>
+
+<style>
+* { box-sizing : border-box; }
+</style>
+
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
 [cairo]:
@@ -48,23 +57,58 @@
 
 ## Navigation
 
+----------------------------------------------------------------
+
+### Menu
+
 > [Area Menu](./area/area-menu.html)
 > [Limits Menu](./limits/limits-menu.html)
 > [Demo Menu](./../demo-menu.html)
 
-> [Folder Tree](./tree.php)
-> [File System](./)
+----------------------------------------------------------------
 
-### Workspaces
+### Page
 
-> [area](./area/)
-> [limits](./limits/)
+> [Pavillion](./pavillion/pavillion.html)
+> [Rose](./rose/rose.html)
+> [Vec-Line](./vec-line.html)
 
 ----------------------------------------------------------------
 
-<style>
-@import url("./../style/every-page.css");
-</style>
+### Workspace
+
+> [area](./area/)
+> [limits](./limits/)
+> [pavillion](./pavillion/)
+> [rose](./rose/)
+> [vec-line](./vec-line/)
+
+----------------------------------------------------------------
+
+### Explore
+
+> [Folder Tree](./tree.php)
+> [File System](./)
+
+----------------------------------------------------------------
+
+# Assets
+
+----------------------------------------------------------------
+
+## Demo
+
+> [Demo Styles](./../style/)
+
+----------------------------------------------------------------
+
+## Web Demo
+
+> [Demo API Modules](./../web/api/)
+> [Demo Gems](./../web/gems/)
+> [Demo Peaches](./../web/peaches/)
+
+----------------------------------------------------------------
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 

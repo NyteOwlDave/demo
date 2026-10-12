@@ -16,7 +16,7 @@
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
 [me-omega]:
-<http://dave-omega/demo/web/bostick/bostick-menu.html>
+<http://dave-omega/demo/web/3p/bostick/bostick-menu.html>
 "Omega Edition"
 
 ----------------------------------------------------------------

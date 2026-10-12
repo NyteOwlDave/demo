@@ -17,8 +17,12 @@
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
+[me-tower]:
+<http://dave-tower/demo/latex/pavillion/pavillion.html>
+"Tower Edition"
+
 [me-omega]:
-<http://dave-omega/demo/web/bostick/bostick-menu.html>
+<http://dave-omega/demo/latex/pavillion/pavillion.html>
 "Omega Edition"
 
 ----------------------------------------------------------------
@@ -27,6 +31,7 @@
 
 ----------------------------------------------------------------
 
+> [Tower][me-tower]
 > [Omega][me-omega]
 > [File System](./)
 
@@ -37,7 +42,7 @@
 ----------------------------------------------------------------
 
 > Plug this equation into [MathPix 3D][mpx] to see the
-> [pavillion shape](./art/pavillion.png).
+> [pavillion shape](./art/pavillion-3d.png).
 
 ----------------------------------------------------------------
 
@@ -51,7 +56,7 @@ $$
 
 ----------------------------------------------------------------
 
-> This is the original equation, discovered on FB Reels. It 
+> This is the original equation, discovered on FB Reels. It
 > draws a __particle mesh__ with animated waves.
 
 ----------------------------------------------------------------
@@ -68,7 +73,22 @@ $$
 
 ----------------------------------------------------------------
 
-> You can [see the animation here][anim-muza].
+> You can [see the animation here][anim-muza],
+> or [see the screenshot here](./art/particle-waves.png).
 
 ----------------------------------------------------------------
+
+# Related Links
+
+> [Latex Menu](./../latex-menu.html)
+
+----------------------------------------------------------------
+
+<script>
+; doc = ( document )
+; doc . title = ( _T_.textContent ).trim()
+</script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
 

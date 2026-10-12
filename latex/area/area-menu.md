@@ -1,12 +1,29 @@
 <head> <link rel="icon" href="./favicon.ico" /> </head>
 
-----------------------------------------------------------------
+<style>
+@import url("https://nyteowldave.neocities.com/style.css");
+@import url("https://nyteowldave.github.io/std/style/ghost.css");
+</style>
 
-# Area Menu
+<style>
+* { box-sizing : border-box; }
+</style>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+[me-tower]: <http://dave-tower/demo/latex/area/area-menu.html> "Tower Edition"
+[me-omega]: <http://dave-omega/demo/latex/area/area-menu.html> "Omega Edition"
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<h1 id="_T_"> Area Menu </h1>
 
 > ( `Latex Demos` )
 
 ----------------------------------------------------------------
+
+> [Tower][me-tower]
+> [Omega][me-omega]
 
 > [Latex Menu](./../latex-menu.html)
 
@@ -15,56 +32,38 @@
 
 ----------------------------------------------------------------
 
-<style>
-@import url("./../../style/every-page.css");
-</style>
+# Pages
 
-<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+----------------------------------------------------------------
 
-<script>
-; iwm = Object.keys( window ).sort()
-</script>
+- [2026-AUG-15-A](./2026-AUG-15-A.html)
+- [Integral Curves](./integral-curves.html)
 
-<script>
-; prolog = {}
-; prolog . title = ( `Area Menu` )
-</script>
+----------------------------------------------------------------
 
-<script>
-; cls =()=> console.clear()
-; agn =()=> location.reload()
-</script>
+# Assets
+
+----------------------------------------------------------------
+
+## Demo
+
+> [Demo Styles](./../../style/)
+
+----------------------------------------------------------------
+
+## Web Demo
+
+> [Demo API Modules](./../../web/api/)
+> [Demo Gems](./../../web/gems/)
+> [Demo Peaches](./../../web/peaches/)
+
+----------------------------------------------------------------
 
 <script>
 ; doc = document
+; doc . title = ( _T_.textContent ).trim()
 </script>
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
-<script>
-function main( event ) {
-    try {
-		doc . title = ( prolog . title );
-    } catch ( e ) {
-        alert ( e )
-        throw ( e )
-    }
-}
-</script>
-
-<script>
-addEventListener( "load", main );
-</script>
-
-<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-
-<script>
-function params() {
-	return (
-		new URISearchParams( location.search )
-	);
-}
-</script>
-
-<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
