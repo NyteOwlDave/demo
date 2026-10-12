@@ -139,6 +139,27 @@ f =(x)=> cos( x ) / ( 1 * x * x );
 
 ----------------------------------------------------------------
 
+| Var   | Value     | Type    | Description       |
+|-------|-----------|---------|-------------------|
+| fn    | <input /> | String  | Callback Function |
+| lo    | <input /> | Real    | Lower X Bound     |
+| hi    | <input /> | Real    | Upper X Bound     |
+| steps | <input /> | Natural | Number of Samples |
+| ox    | <input /> | Real    | Origin X          |
+| oy    | <input /> | Real    | Origin Y          |
+| sx    | <input /> | Real    | Scale X           |
+| sy    | <input /> | Real    | Scale Y           |
+
+----------------------------------------------------------------
+
+<div center>
+  <button id="btn-accept">Accept</button>
+  <button id="btn-cancel">Cancel</button>
+  <button id="btn-reset">Reset</button>
+</div>
+
+----------------------------------------------------------------
+
 <header id="messages"></header>
 <footer id="footer">
  <input id="footer_input" wide onchange="perform(event)" />
@@ -153,6 +174,10 @@ f =(x)=> cos( x ) / ( 1 * x * x );
 <script>
 ; doc = ( document )
 ; doc . title = ( _T_.textContent ).trim()
+</script>
+
+<script>
+; gid =( i )=> ( doc.getElementById( i ) )
 </script>
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
@@ -179,6 +204,14 @@ f =(x)=> cos( x ) / ( 1 * x * x );
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
 <script>
+const btn_accept = gid( "btn-accept" );
+const btn_cancel = gid( "btn-cancel" );
+const btn_reset  = gid( "btn-reset"  );
+</script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script>
 ;
 ; _fn = []
 ; _fn[ 0 ] =(x)=> ( 1 / exp( x * x  ) )
@@ -193,10 +226,14 @@ f =(x)=> cos( x ) / ( 1 * x * x );
 <script>
 function main( event ) {
 	try {
+		btn_accept . onclick = do_accept;
+		btn_cancel . onclick = do_cancel;
+		btn_reset  . onclick = do_reset;
 		plot . xctr   = 0;
 		plot . yctr   = 400;
 		plot . xscale = 1.0;
 		plot . yscale = Math.floor( plot . yctr * 0.95 );
+		form . reset();
 		blurt( "Ready for Action!" );
 	} catch ( e ) {
 		bummer ( e );
@@ -222,10 +259,12 @@ function plot( fn, lo, hi, steps ) {
 
 <script>
 ;
-; plot.xctr   = 0
-; plot.yctr   = 400
-; plot.xscale = 1.0
-; plot.yscale = 1.0
+; plot . xctr   = 0
+; plot . yctr   = 400
+; plot . xscale = 1.0
+; plot . yscale = 1.0
+;
+; plot . examples = _fn
 ;
 ; srf = ( null )
 ; gfx = ( null )
@@ -319,3 +358,189 @@ plot.example = function( index ) {
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
+<script>
+form = function() {
+	const id = "frm-params";
+	let te = gid( id );
+	if ( te ) { return ( te ); }
+	te = ( all( "TABLE" )[ 0 ] );
+	te . id = ( id );
+	return ( te );
+}
+</script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script>
+form . values = {
+  fn    : "( x )"
+, lo    : 0
+, hi    : 800
+, steps : 800
+, ox    : plot.xctr
+, oy    : plot.yctr
+, sx    : plot.xscale
+, sy    : plot.yscale
+};
+</script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script>
+form.rows = function() {
+	const te = form();
+	const be = te.tBodies[ 0 ];
+	return arr( be . rows );
+};
+form.input = function( re ) {
+	const ce = re.cells[ 1 ];
+	return ce . querySelector( "INPUT" );
+};
+form.varname = function( re ) {
+	const ce = re.cells[ 0 ];
+	return str( ce . textContent );
+};
+</script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script>
+
+form . clear = function() {
+	const ops = form;
+	const o = {};
+    o . fn    = "(0)";
+	o . lo    = 0;
+	o . hi    = 0;
+	o . steps = 0;
+	o . ox    = 0;
+	o . oy    = 0;
+	o . sx    = 0;
+	o . sy    = 0;
+	ops . write( o );
+};
+
+form . reset = function() {
+	const ops = form;
+	return ops . write( ops . values );
+};
+
+form . write = function( o ) {
+	const ops = form;
+	const wr =( re )=> {
+		const k = form . varname( re );
+		const v = ( o[ k ] );
+		switch( k ) {
+		case "fn" :
+			ops . write . value( re , v );
+			return;
+		case "steps" :
+			ops . write . int( re , v );
+			return;
+		default :
+			ops . write . real( re , v );
+			return;
+		}
+	};
+	const m = ops . rows();
+	m . forEach( wr );
+	return ( ops );
+};
+
+form . read = function() {
+	const ops = form;
+	const o = {};
+	const rd =( re )=> {
+		const k = form . varname( re );
+		let v;
+		switch( k ) {
+		case "fn" :
+			v = ops . read . value( re );
+			break;
+		case "steps" :
+			v = ops . read . int( re );
+			break;
+		default :
+			v = ops . read . real( re );
+			break;
+		}
+		o[ k ] = v;
+	};
+	const m = ops . rows();
+	m . forEach( rd );
+	return ( ops );
+};
+
+form . write . value = function( re, value ) {
+	const ops = form;
+	const ie = ops . input( re );
+	ie . value = str( value );
+	return ( ie );
+};
+
+form . write . int = function( re, value ) {
+	const ops = form;
+	const ie = ops . input( re );
+	const n = parseInt( str( value ) || 0 );
+	ie . value = ( n );
+	return ( ie );
+};
+
+form . write . real = function( re, value ) {
+	const ops = form;
+	const ie = ops . input( re );
+	const n = parseFloat( str( value ) || 0 );
+	ie . value = ( n ? n : "0.0" );
+	return ( ie );
+};
+
+form . read . value = function( re ) {
+	const ops = form;
+	const ie = ops . input( re );
+	return ( str( ie . value ) );
+};
+
+form . read . int = function( re ) {
+	const ops = form;
+	const ie = ops . input( re );
+	const n = parseInt( str( ie . value ) || 0 );
+	return ( n );
+};
+
+form . read . real = function( re ) {
+	const ops = form;
+	const ie = ops . input( re );
+	const n = parseFloat( str( ie . value ) || 0 );
+	return ( n );
+};
+
+</script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script>
+function do_incomplete( s ) {
+	dangit( `Incomplete : ${s}` );
+};
+function do_accept( event ) {
+	try {
+		do_incomplete( "do_accept()" )
+	} catch ( e ) {
+		bummer( e );
+	}
+};
+function do_cancel( event ) {
+	try {
+		do_incomplete( "do_clear()" )
+	} catch ( e ) {
+		bummer( e );
+	}
+};
+function do_reset( event ) {
+	try {
+		do_incomplete( "do_reset()" )
+	} catch ( e ) {
+		bummer( e );
+	}
+};
+</script>
