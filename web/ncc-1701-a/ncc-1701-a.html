@@ -1,0 +1,193 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<style type="text/css">
+td, th { border: 1px solid #c3c3c3; padding: 0 3px 0 3px; }
+table { border-collapse: collapse; }
+img { max-width: 100%; }
+</style>
+<meta name="generator" content="ReText 7.2.3">
+<title>ncc-1701-a</title>
+<style type="text/css">
+</style>
+</head>
+<body>
+<p><head> <link rel="icon" href="./favicon.ico"/> </head></p>
+<style>
+@import url("https://nyteowldave.neocities.com/style.css");
+</style>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<style>
+html {
+    background-image : url("./paper.png");
+    background-size: auto 100%;
+    background-repeat-y: repeat;
+    background-position: top;
+}
+.container {
+    background-repeat-y: repeat;
+    background-position: top;
+    background-size: 100%;
+}
+body {
+    margin-bottom : 3000px;
+}
+#footer_input {
+    width : calc( 100vw - 240px ) !important;
+}
+[dot] {
+    display : inline-block;
+    min-width  : 3.5ch;
+    max-width  : 3.5ch;
+    min-height : 3.5ch;
+    max-height : 3.5ch;
+    line-height : 3.5ch;
+    border-radius : 100%;
+    background  : black;
+    color       : lemonchiffon;
+    text-align  : center;
+    padding     : 0px;
+    user-select : none;
+    outline     : none;
+    cursor      : pointer;
+    opacity     : 0.42;
+}
+[dot]:hover {
+    opacity     : 1.0;
+}
+</style>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<header id="messages"></header>
+
+<footer id="footer">
+  <input id="footer_input" onchange="perform(event)" />
+  <span onclick="zap(event)" dot="hud()"     > ◩ </span>
+  <span onclick="zap(event)" dot="home()"    > 🏠 </span>
+  <span onclick="zap(event)" dot="assist()"  > 🧙 </span>
+  <span onclick="zap(event)" dot="bgi.help()"> 📔 </span>
+</footer>
+
+<textarea id="sce" class="hud hide"></textarea>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script>
+; doc = ( document )
+; doc . title = ( `NCC-1701-A` )
+</script>
+
+<script>
+; gid =( i )=> ( doc.getElementById( i ) )
+; elx =( t )=> ( doc.createElement ( t ) )
+</script>
+
+<script>
+; wop =( u )=> ( window.open( u, u ) )
+; psk =( p, s, k )=> ( [ p, s, k ].join( "/" ) )
+; ksp =( k, s, p )=> psk( p, s, k )
+</script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script>
+function bgi( url ) {
+    const roo = doc . firstElementChild;
+    const st = roo.style
+    st . backgroundImage = [ `url("`, `")` ].join( url );
+}
+bgi.help = function() {
+    const p = "https://developer.mozilla.org";
+    const s = "en-US/docs/Web/CSS/Reference/Properties";
+    const k = "background";
+    const u = psk( p, s, k );
+    visit( u );
+};
+</script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script>
+function perform( event ) {
+    try {
+        window.eval( event.target.value );
+    } catch ( e ) {
+        console . error( e );
+        window  . alert( e );
+    }
+}
+</script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script>
+function zap( event ) {
+    try {
+        const sender = event.target;
+        const js = sender.getAttribute( "dot" );
+        window.eval( js );
+    } catch ( e ) {
+        console . error( e );
+        window  . alert( e );
+    }
+}
+</script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script>
+function visit( u ) {
+    if ( null === localStorage ) {
+        const a = elx( "A" );
+        a . href = ( u );
+        a . click();
+    } else {
+        return wop( u );
+    }
+}
+
+</script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script>
+
+function home() {
+    const p = "http://dave-tower";
+    const s = "demo/web/ncc-1701-a";
+    const k = "ncc-1701-a.html";
+    const u = psk( p, s, k );
+    visit( u );
+}
+
+</script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script>
+
+function assist() {
+    // visit( "./assist.html" );
+    visit( "./" );
+}
+
+</script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<script>
+
+function hud() {
+    sce.classList.toggle( "hide" );
+}
+
+</script>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+</body>
+</html>
