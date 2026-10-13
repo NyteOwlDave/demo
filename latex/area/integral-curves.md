@@ -1,3 +1,5 @@
+<head> <link rel="icon" href="./icons/integral.png" /> </head>
+
 <style>
 @import url("https://nyteowldave.neocities.com/style.css");
 @import url("https://nyteowldave.github.io/std/style/ghost.css");
