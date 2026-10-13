@@ -10,7 +10,7 @@
 - [x] Google App Scripts
 - [x] Omega Store Downloads
 
-### Updated ~ 2026-SEP-23 ~ Omega
+### Updated ~ 2026-OCT-12 ~ Omega
 
 */
 
@@ -33,7 +33,7 @@ function hud( show ) {
 ;
 ; hud.title    = ( "Heads-Up Editor" )
 ; hud.tikey    = ( "8e314b66-9e0c-11f1-b5f8-e3977ca2d89c" )
-; hud.updated  = ( "2026-SEP-23" )
+; hud.updated  = ( "2026-OCT-12" )
 ; hud.storekey = ( "heads-up-editor.js" )
 ; hud.template = ( "http://dave-omega/demo/web/gadgets/hud-app.html" )
 ; hud.cnames = [ "hide", "swapped", "siox" ]
@@ -263,6 +263,33 @@ hud.recover = function( key, session ) {
         hud.message( `Read "${key}" from Store` );
     }
 }
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
+hud.recover.hash = function() {
+    const ed = hud.editor();
+    let v, k = location.hash;
+    let o = sessionStorage;
+    if ( k.startsWith( "#" ) ) {
+        k = k.slice( 1 );
+        v = ( o . getItem( k ) );
+        if ( null !== v ) {
+            ed . value = ( v );
+            hud.jot( "Recovered Session Entry" );
+            return;
+        }
+        o = localStorage;
+        v = ( o . getItem( k ) );
+        if ( null !== v ) {
+            ed . value = ( v );
+            hud.jot( "Recovered Store Entry" );
+            return;
+        }
+        hud.jot( "No Entry Detected" );
+    } else {
+        hud.jot( "No Hash Key Detected" );
+    }
+};
 
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
@@ -626,19 +653,7 @@ hud.wop =( u )=> ( window.open( u, u ) );
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
 hud.members.added = [
-  "hud.editor.init"
-, "hud.jat"
-, "hud.members.docify"
-, "hud.members.edit"
-, "hud.members.view"
-, "hud.members.list"
-, "hud.members.droplist"
-, "hud.members.datalist"
-, "hud.memo.show"
-, "hud.memo.hide"
-, "hud.memo.swapped"
-, "hud.providers"
-, "hud.wop"
+  "hud.recover.hash"
 ];
 
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
