@@ -1,0 +1,31 @@
+
+/* bugfight.css */
+
+@import url("http://dave-tower/app/morpheus/owl/owl.css");
+
+* {
+    margin     : 0px;
+    color      : white;
+	box-sizing : border-box;
+}
+
+body { padding: 30px; }
+
+html ,
+body ,
+main ,
+section {
+    background : black !important;
+}
+
+button {
+    width: 2em;
+    height: 2em;
+    font-size: large;
+    font-weight: 900;
+    color: black;
+    background: lightgreen;
+    cursor: pointer;
+	margin : 8px 4px;
+}
+
